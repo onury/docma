@@ -101,7 +101,7 @@ Docma.fromFile(configFile)
         <td><code>String</code></td>
         <td><code>""</code></td>
         <td>
-            Title of the HTML document. (Sets the value of the <code><title></code> element.)
+            Title of the HTML document. (Sets the value of the <code>&lt;title&gt;</code> element.)
         </td>
     </tr>
     <tr>
