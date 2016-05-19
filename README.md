@@ -310,7 +310,7 @@ Docma templates should have a `docma.template.json` in the root of the template.
         <td><code>Array</code></td>
         <td><code>undefined</code></td>
         <td>
-            Name of the main HTML file which is the entry point of the template.
+            List of files or directories to be ignored. <a href="https://github.com/isaacs/node-glob">Globs</a> allowed.
         </td>
     </tr>
     <tr>

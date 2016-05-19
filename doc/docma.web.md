@@ -36,42 +36,56 @@ Provides template specific data with the following properties:
         <td><b>Description</b></td>
     </tr>
     <tr>
-        <td><b><code>template.<b>name</b></code></b></td>
+        <td><code>template.<b>name</b></code></td>
         <td><code>String</code></td>
         <td>
-            Name of the Docma template (which is originally set in the `docma.template.json` file).
+            Name of the Docma template (which is originally set in the <code>docma.template.json</code> file).
         </td>
     </tr>
     <tr>
-        <td><b><code>template.<b>version</b></code></b></td>
+        <td><code>template.<b>version</b></code></td>
         <td><code>String</code></td>
         <td>
-            Version of the Docma template (which is originally set in the `docma.template.json` file).
+            Version of the Docma template (which is originally set in the <code>docma.template.json</code> file).
         </td>
     </tr>
     <tr>
-        <td><b><code>template.<b>author</b></code></b></td>
+        <td><code>template.<b>author</b></code></td>
         <td><code>String</code></td>
         <td>
-            Author information for the Docma template (which is originally set in the `docma.template.json` file).
+            Author information for the Docma template (which is originally set in the <code>docma.template.json</code> file).
         </td>
     </tr>
     <tr>
-        <td><b><code>template.<b>license</b></code></b></td>
+        <td><code>template.<b>license</b></code></td>
         <td><code>String</code></td>
         <td>
-            License information for the Docma template (which is originally set in the `docma.template.json` file).
+            License information for the Docma template (which is originally set in the <code>docma.template.json</code> file).
         </td>
     </tr>
     <tr>
-        <td><b><code>template.<b>title</b></code></b></td>
+        <td><code>template.<b>document</b></code></td>
         <td><code>String</code></td>
         <td>
-            Document title (which is originally set in the build process).
+            Document configuration (which is originally set in the build process).
         </td>
     </tr>
     <tr>
-        <td><b><code>template.<b>options</b></code></b></td>
+        <td>↳<code>template.document.<b>title</b></code></td>
+        <td><code>String</code></td>
+        <td>
+            Document title.
+        </td>
+    </tr>
+    <tr>
+        <td>↳<code>template.document.<b>meta</b></code></td>
+        <td><code>Array</code></td>
+        <td>
+            Array of arbitrary objects set for document meta (tags).
+        </td>
+    </tr>
+    <tr>
+        <td><code>template.<b>options</b></code></td>
         <td><code>Object</code></td>
         <td>
             Docma template options (which is originally set in the build process).
