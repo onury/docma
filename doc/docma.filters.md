@@ -64,7 +64,7 @@ As well as the Dust.js built-in filters, Docma includes pre-defined filters for 
         <td><code>String</code></td>
         <td><b><code>$pt</code></b></td>
         <td>
-            Converts ticks to HTML code tags.
+            Converts ticks to HTML code tags.<br />
             Also available as <code>docma.utils.parseTicks(string)</code>
         </td>
     </tr>
@@ -72,7 +72,7 @@ As well as the Dust.js built-in filters, Docma includes pre-defined filters for 
         <td><code>String</code></td>
         <td><b><code>$pnl</code></b></td>
         <td>
-            Converts new lines to HTML paragraphs.
+            Converts new lines to HTML paragraphs.<br />
             Also available as <code>docma.utils.parseNewLines(string)</code>
         </td>
     </tr>
@@ -80,7 +80,7 @@ As well as the Dust.js built-in filters, Docma includes pre-defined filters for 
         <td><code>String</code></td>
         <td><b><code>$pl</code></b></td>
         <td>
-            Converts JSDoc <code>@link</code> directives to HTML anchor tags.
+            Converts JSDoc <code>@link</code> directives to HTML anchor tags.<br />
             Also available as <code>docma.utils.parseLinks(string)</code>
         </td>
     </tr>
@@ -88,7 +88,7 @@ As well as the Dust.js built-in filters, Docma includes pre-defined filters for 
         <td><code>String</code></td>
         <td><b><code>$tl</code></b></td>
         <td>
-            Removes leading spaces and dashes.
+            Removes leading spaces and dashes.<br />
             Also available as <code>docma.utils.trimLeft(string)</code>
         </td>
     </tr>
@@ -96,7 +96,7 @@ As well as the Dust.js built-in filters, Docma includes pre-defined filters for 
         <td><code>String</code></td>
         <td><b><code>$p</code></b></td>
         <td>
-            Applies <code>$tl|$pnl|$pt|$pl</code> filters combined.
+            Applies <code>$tl|$pnl|$pt|$pl</code> filters combined.<br />
             Also available as <code>docma.utils.parse(string)</code>
         </td>
     </tr>
@@ -104,7 +104,7 @@ As well as the Dust.js built-in filters, Docma includes pre-defined filters for 
         <td><code>String</code></td>
         <td><b><code>$nt</code></b></td>
         <td>
-            Normalizes the number of spaces/tabs to multiples of 2 spaces, in the beginning of each line.
+            Normalizes the number of spaces/tabs to multiples of 2 spaces, in the beginning of each line.<br />
             Also available as <code>docma.utils.normalizeTabs(string)</code>
         </td>
     </tr>
@@ -133,7 +133,7 @@ As well as the Dust.js built-in filters, Docma includes pre-defined filters for 
         <td><code>Object</code><br />(symbol)</td>
         <td><b><code>$id</code></b></td>
         <td>
-            Returns a readable id for the symbol. Useful for anchor bookmarks.
+            Returns a readable id for the symbol. Useful for anchor bookmarks.<br />
             e.g. <code>&lt;a href="#{.|$id}"&gt;{longname}&lt;/a&gt;</code>
         </td>
     </tr>
