@@ -1,0 +1,740 @@
+[
+  {
+    "comment": "/**\n     *  Wagon class.\n     *  @type {Wagon}\n     */",
+    "meta": {
+      "range": [
+        21544,
+        21563
+      ],
+      "filename": "wagon.js",
+      "lineno": 598,
+      "path": "../build/code",
+      "code": {
+        "id": "astnode100001362",
+        "name": "wagon.Wagon",
+        "type": "Identifier",
+        "funcscope": "<anonymous>",
+        "value": "Wagon",
+        "paramnames": []
+      }
+    },
+    "description": "Wagon class.",
+    "type": {
+      "names": [
+        "Wagon"
+      ]
+    },
+    "name": "Wagon",
+    "longname": "<anonymous>~wagon.Wagon",
+    "kind": "member",
+    "memberof": "<anonymous>~wagon",
+    "scope": "static"
+  },
+  {
+    "comment": "/**\n     *  Defines and adds a member to the built object.\n     *  This is the main method to define a member with all possible\n     *  configurations. Other methods like `.chain()`, `.proto()`, `.static()`,\n     *  etc are actually pre-configured shorthand versions of this method.\n     *\n     *  @chainable\n     *  @alias Wagon#add\n     *\n     *  @param {String} name - Member name to be assigned.\n     *  @param {Object} [options] - Member definition options.\n     *      @param {String|Array} [options.scope=[\"instance\", \"static\"]] -\n     *      Scope(s) of the member. Possible values are: `\"instance\"` and\n     *      `\"static\"`. When you define both, it means an instance member that\n     *      should also be accessible as a static member. For a method member;\n     *      no `this` keyword should be used within the function body; or\n     *      this will throw if `strict` config is enabled.\n     *      @param {Boolean} [options.chainable=true] - Whether the member is\n     *      chainable and should return the object itself (`this`). Only method\n     *      members can be chainable.\n     *      @param {Boolean} [options.stateful=false] - For instance methods\n     *      only. Whether the internal state/value (i.e. exposed by `.value`)\n     *      should be set to the returned result of the defined method.\n     *      @param {Boolean} [options.peculate=false] - Affects instance\n     *      methods only. Whether the first argument of the defined method\n     *      member should be treated as the internal value/state when the\n     *      instance version of this method is created. For example, if you set\n     *      `peculate` to `true` and define a method called `multiply`:\n     *      `function (value, y) { return value * y; }`\n     *      The final object can do this:\n     *      `yourLib(5).multiply(2).value // —> 10`\n     *      See that the instance version of the `multiply` method takes 1 argument instead of 2.\n     *  @param {Function} member - Static version of the method member.\n     *  If adding a property, set this to a value.\n     *\n     *  @returns {Object} - `Wagon` instance (self).\n     */",
+    "meta": {
+      "range": [
+        10064,
+        14654
+      ],
+      "filename": "wagon.js",
+      "lineno": 270,
+      "path": "../build/code",
+      "code": {
+        "id": "astnode100000452",
+        "name": "Wagon.prototype.define",
+        "type": "FunctionExpression",
+        "funcscope": "<anonymous>",
+        "paramnames": [
+          "name",
+          "options",
+          "member"
+        ]
+      },
+      "vars": {
+        "$this": "<anonymous>~Wagon#add~$this",
+        "multiple": "<anonymous>~Wagon#add~multiple",
+        "member": "<anonymous>~Wagon#add~member",
+        "options": "<anonymous>~Wagon#add~options",
+        "options.scope": "<anonymous>~Wagon#add~options.scope",
+        "multiMembers": "<anonymous>~Wagon#add~multiMembers",
+        "": null,
+        "fn": "<anonymous>~Wagon#add~fn",
+        "isMethod": "<anonymous>~Wagon#add~isMethod",
+        "isInstance": "<anonymous>~Wagon#add~isInstance",
+        "isStatic": "<anonymous>~Wagon#add~isStatic",
+        "$this.Intermediate.prototype[undefined]": "<anonymous>~Wagon#add~$this.Intermediate#[undefined]",
+        "$this.Intermediate[undefined]": "<anonymous>~Wagon#add~$this.Intermediate[undefined]"
+      }
+    },
+    "description": "Defines and adds a member to the built object.\n This is the main method to define a member with all possible\n configurations. Other methods like `.chain()`, `.proto()`, `.static()`,\n etc are actually pre-configured shorthand versions of this method.",
+    "tags": [
+      {
+        "originalTitle": "chainable",
+        "title": "chainable",
+        "text": ""
+      }
+    ],
+    "alias": "Wagon#add",
+    "params": [
+      {
+        "type": {
+          "names": [
+            "String"
+          ]
+        },
+        "description": "Member name to be assigned.",
+        "name": "name"
+      },
+      {
+        "type": {
+          "names": [
+            "Object"
+          ]
+        },
+        "optional": true,
+        "description": "Member definition options.",
+        "name": "options"
+      },
+      {
+        "type": {
+          "names": [
+            "String",
+            "Array"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": "[\"instance\", \"static\"]",
+        "description": "Scope(s) of the member. Possible values are: `\"instance\"` and\n     `\"static\"`. When you define both, it means an instance member that\n     should also be accessible as a static member. For a method member;\n     no `this` keyword should be used within the function body; or\n     this will throw if `strict` config is enabled.",
+        "name": "options.scope"
+      },
+      {
+        "type": {
+          "names": [
+            "Boolean"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": true,
+        "description": "Whether the member is\n     chainable and should return the object itself (`this`). Only method\n     members can be chainable.",
+        "name": "options.chainable"
+      },
+      {
+        "type": {
+          "names": [
+            "Boolean"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": false,
+        "description": "For instance methods\n     only. Whether the internal state/value (i.e. exposed by `.value`)\n     should be set to the returned result of the defined method.",
+        "name": "options.stateful"
+      },
+      {
+        "type": {
+          "names": [
+            "Boolean"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": false,
+        "description": "Affects instance\n     methods only. Whether the first argument of the defined method\n     member should be treated as the internal value/state when the\n     instance version of this method is created. For example, if you set\n     `peculate` to `true` and define a method called `multiply`:\n     `function (value, y) { return value * y; }`\n     The final object can do this:\n     `yourLib(5).multiply(2).value // —> 10`\n     See that the instance version of the `multiply` method takes 1 argument instead of 2.",
+        "name": "options.peculate"
+      },
+      {
+        "type": {
+          "names": [
+            "function"
+          ]
+        },
+        "description": "Static version of the method member.\n If adding a property, set this to a value.",
+        "name": "member"
+      }
+    ],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "Object"
+          ]
+        },
+        "description": "- `Wagon` instance (self)."
+      }
+    ],
+    "name": "add",
+    "longname": "<anonymous>~Wagon#add",
+    "kind": "function",
+    "memberof": "<anonymous>~Wagon",
+    "scope": "instance"
+  },
+  {
+    "comment": "/**\n     *  Defines a chainable instance method and assigns it to the built object's\n     *  prototype. Also assigns the static version of the same method to the\n     *  built object itself.\n     *\n     *  The instance version peculates the first argument of the defined method.\n     *  In other words, internal value/state is used instead of the first\n     *  argument in the function definition; so the instance version will have\n     *  one less argument.\n     *\n     *  This method is actually a pre-configured shorthand of the `.define()`\n     *  method. You cannot define a static member with this method since properties\n     *  cannot be chainable.\n     *\n     *  @alias Wagon#chainable\n     *  @chainable\n     *\n     *  @param {String} name - Method name to be assigned.\n     *  @param {Object} [options] - Member definition options.\n     *  @param {Function} method - Static definition of the method member.\n     *\n     *  @returns {Object} - `Wagon` instance (self).\n     */",
+    "meta": {
+      "range": [
+        15760,
+        16480
+      ],
+      "filename": "wagon.js",
+      "lineno": 417,
+      "path": "../build/code",
+      "code": {
+        "id": "astnode100001008",
+        "name": "Wagon.prototype.chain",
+        "type": "FunctionExpression",
+        "funcscope": "<anonymous>",
+        "paramnames": [
+          "name",
+          "options",
+          "method"
+        ]
+      },
+      "vars": {
+        "multiple": "<anonymous>~Wagon#chainable~multiple",
+        "method": "<anonymous>~Wagon#chainable~method",
+        "options": "<anonymous>~Wagon#chainable~options",
+        "options.chainable": "<anonymous>~Wagon#chainable~options.chainable"
+      }
+    },
+    "description": "Defines a chainable instance method and assigns it to the built object's\n prototype. Also assigns the static version of the same method to the\n built object itself.\n\n The instance version peculates the first argument of the defined method.\n In other words, internal value/state is used instead of the first\n argument in the function definition; so the instance version will have\n one less argument.\n\n This method is actually a pre-configured shorthand of the `.define()`\n method. You cannot define a static member with this method since properties\n cannot be chainable.",
+    "alias": "Wagon#chainable",
+    "tags": [
+      {
+        "originalTitle": "chainable",
+        "title": "chainable",
+        "text": ""
+      }
+    ],
+    "params": [
+      {
+        "type": {
+          "names": [
+            "String"
+          ]
+        },
+        "description": "Method name to be assigned.",
+        "name": "name"
+      },
+      {
+        "type": {
+          "names": [
+            "Object"
+          ]
+        },
+        "optional": true,
+        "description": "Member definition options.",
+        "name": "options"
+      },
+      {
+        "type": {
+          "names": [
+            "function"
+          ]
+        },
+        "description": "Static definition of the method member.",
+        "name": "method"
+      }
+    ],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "Object"
+          ]
+        },
+        "description": "- `Wagon` instance (self)."
+      }
+    ],
+    "name": "chainable",
+    "longname": "<anonymous>~Wagon#chainable",
+    "kind": "function",
+    "memberof": "<anonymous>~Wagon",
+    "scope": "instance"
+  },
+  {
+    "comment": "/**\n     *  Defines an instance member (method or property) and assigns it to the\n     *  built object's prototype.\n     *\n     *  This method is actually a pre-configured shorthand of the `.define()`\n     *  method.\n     *\n     *  @alias Wagon#instance\n     *  @chainable\n     *\n     *  @param {String} name - Method name to be assigned.\n     *  @param {Object} [options] - Member definition options.\n     *  @param {*} member - Either a function definition or a value.\n     *\n     *  @returns {Object} - `Wagon` instance (self).\n     */",
+    "meta": {
+      "range": [
+        17155,
+        17869
+      ],
+      "filename": "wagon.js",
+      "lineno": 460,
+      "path": "../build/code",
+      "code": {
+        "id": "astnode100001101",
+        "name": "Wagon.prototype.proto",
+        "type": "FunctionExpression",
+        "funcscope": "<anonymous>",
+        "paramnames": [
+          "name",
+          "options",
+          "member"
+        ]
+      },
+      "vars": {
+        "multiple": "<anonymous>~Wagon#instance~multiple",
+        "member": "<anonymous>~Wagon#instance~member",
+        "options": "<anonymous>~Wagon#instance~options",
+        "options.scope": "<anonymous>~Wagon#instance~options.scope"
+      }
+    },
+    "description": "Defines an instance member (method or property) and assigns it to the\n built object's prototype.\n\n This method is actually a pre-configured shorthand of the `.define()`\n method.",
+    "alias": "Wagon#instance",
+    "tags": [
+      {
+        "originalTitle": "chainable",
+        "title": "chainable",
+        "text": ""
+      }
+    ],
+    "params": [
+      {
+        "type": {
+          "names": [
+            "String"
+          ]
+        },
+        "description": "Method name to be assigned.",
+        "name": "name"
+      },
+      {
+        "type": {
+          "names": [
+            "Object"
+          ]
+        },
+        "optional": true,
+        "description": "Member definition options.",
+        "name": "options"
+      },
+      {
+        "type": {
+          "names": [
+            "*"
+          ]
+        },
+        "description": "Either a function definition or a value.",
+        "name": "member"
+      }
+    ],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "Object"
+          ]
+        },
+        "description": "- `Wagon` instance (self)."
+      }
+    ],
+    "name": "instance",
+    "longname": "<anonymous>~Wagon#instance",
+    "kind": "function",
+    "memberof": "<anonymous>~Wagon",
+    "scope": "instance"
+  },
+  {
+    "comment": "/**\n     *  Utility for easily building special classes, libraries with static\n     *  and chainable instance methods.\n     *\n     *  This is an initilizer function, not a constructor so you don't need to\n     *  use `new` keyword.\n     *\n     *  @global\n     *\n     *  @param {String} [name=\"\"] - The constructor name for the built object.\n     *  @param {Object} [config] - `Wagon` configurations.\n     *\n     *  @returns {Object} - A new `Wagon` instance.\n     *\n     *  @example\n     *  var calc = wagon('Calc')\n     *     .chain('multiply', function (x, y) {\n     *         return x * y;\n     *     })\n     *     .chain('divide', function (x, y) {\n     *         return x / y;\n     *     })\n     *     .chain('add', function (x, y) {\n     *         return x + y;\n     *     })\n     *     .chain('subtract', function (x, y) {\n     *         return x - y;\n     *     })\n     *     .create();\n     *\n     *  // Now you can do this:\n     *  calc(5).multiply(4).divide(2).add(5).subtract(1).value; // instance chain\n     *\n     *  // Also this:\n     *  var value = calc.multiply(5, 4);  // static usage\n     */",
+    "meta": {
+      "range": [
+        21401,
+        21479
+      ],
+      "filename": "wagon.js",
+      "lineno": 590,
+      "path": "../build/code",
+      "code": {
+        "id": "astnode100001351",
+        "name": "wagon",
+        "type": "FunctionDeclaration",
+        "paramnames": [
+          "name",
+          "options"
+        ]
+      }
+    },
+    "description": "Utility for easily building special classes, libraries with static\n and chainable instance methods.\n\n This is an initilizer function, not a constructor so you don't need to\n use `new` keyword.",
+    "scope": "global",
+    "params": [
+      {
+        "type": {
+          "names": [
+            "String"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": "\"\"",
+        "description": "The constructor name for the built object.",
+        "name": "name"
+      },
+      {
+        "type": {
+          "names": [
+            "Object"
+          ]
+        },
+        "optional": true,
+        "description": "`Wagon` configurations.",
+        "name": "config"
+      }
+    ],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "Object"
+          ]
+        },
+        "description": "- A new `Wagon` instance."
+      }
+    ],
+    "examples": [
+      "var calc = wagon('Calc')\n    .chain('multiply', function (x, y) {\n        return x * y;\n    })\n    .chain('divide', function (x, y) {\n        return x / y;\n    })\n    .chain('add', function (x, y) {\n        return x + y;\n    })\n    .chain('subtract', function (x, y) {\n        return x - y;\n    })\n    .create();\n\n // Now you can do this:\n calc(5).multiply(4).divide(2).add(5).subtract(1).value; // instance chain\n\n // Also this:\n var value = calc.multiply(5, 4);  // static usage"
+    ],
+    "name": "wagon",
+    "longname": "wagon",
+    "kind": "function",
+    "$members": [
+      {
+        "comment": "/**\n     *  Initializes a new instance of `Wagon`.\n     *\n     *  @class\n     *  @memberof wagon\n     *\n     *  @param {String} [name=\"\"] - The constructor name for the built object.\n     *  @param {Object} [config] - `Wagon` configurations. You can also set this\n     *  via `.config()` instance method.\n     *  \t@param {Boolean} [strict=true] - Whether to check and throw on\n     *  \tinvalid assignments. This is only active at define-time, not when\n     *  \tthe defined members are called.\n     *  \t@param {String} [stateProp=\"value\"] - The name of the non-enumerable\n     *  \tproperty that keeps the state within the built object. i.e. through\n     *  \tout the chainable methods. This can be used in the built object like this:\n     *  \t`yourCalc(5).multiply(3).value` —> rename by setting `stateProp`.\n     *  \t@param {*} [defaultValue] - Default value for the initial state.\n     *  \tThis is used when the built object is initialized without a\n     *  \tparameter or `undefined` as the first parameter.\n     *  \te.g. `yourLib().value // —> default value`\n     *  \t@param {Boolean} [allowRedefine=false] - Whether to allow an already\n     *  \tdefined member to be re-defined (overwritten) except for `stateProp`\n     *  \tvalue. If set to `false`, it will throw even if `strict` config is\n     *  \tdisabled.\n     *  \t@param {Boolean} [ensureNamedMethods=false] - Whether to ensure\n     *  \tassigned methods have the defined name, if not declared. Note that\n     *  \tthis leads to use of `new Function` constructor (in ES strict mode).\n     *\n     *  @returns {Object} - A new `Wagon` instance.\n     */",
+        "meta": {
+          "range": [
+            6535,
+            6898
+          ],
+          "filename": "wagon.js",
+          "lineno": 192,
+          "path": "../build/code",
+          "code": {
+            "id": "astnode100000312",
+            "name": "Wagon",
+            "type": "FunctionDeclaration",
+            "paramnames": [
+              "name",
+              "config"
+            ]
+          },
+          "vars": {
+            "config": "wagon.Wagon~config",
+            "name": "wagon.Wagon~name",
+            "this.Intermediate": "wagon.Wagon#Intermediate"
+          }
+        },
+        "description": "Initializes a new instance of `Wagon`.",
+        "kind": "class",
+        "memberof": "wagon",
+        "params": [
+          {
+            "type": {
+              "names": [
+                "String"
+              ]
+            },
+            "optional": true,
+            "defaultvalue": "\"\"",
+            "description": "The constructor name for the built object.",
+            "name": "name"
+          },
+          {
+            "type": {
+              "names": [
+                "Object"
+              ]
+            },
+            "optional": true,
+            "description": "`Wagon` configurations. You can also set this\n via `.config()` instance method.",
+            "name": "config"
+          },
+          {
+            "type": {
+              "names": [
+                "Boolean"
+              ]
+            },
+            "optional": true,
+            "defaultvalue": true,
+            "description": "Whether to check and throw on\n \tinvalid assignments. This is only active at define-time, not when\n \tthe defined members are called.",
+            "name": "strict"
+          },
+          {
+            "type": {
+              "names": [
+                "String"
+              ]
+            },
+            "optional": true,
+            "defaultvalue": "\"value\"",
+            "description": "The name of the non-enumerable\n \tproperty that keeps the state within the built object. i.e. through\n \tout the chainable methods. This can be used in the built object like this:\n \t`yourCalc(5).multiply(3).value` —> rename by setting `stateProp`.",
+            "name": "stateProp"
+          },
+          {
+            "type": {
+              "names": [
+                "*"
+              ]
+            },
+            "optional": true,
+            "description": "Default value for the initial state.\n \tThis is used when the built object is initialized without a\n \tparameter or `undefined` as the first parameter.\n \te.g. `yourLib().value // —> default value`",
+            "name": "defaultValue"
+          },
+          {
+            "type": {
+              "names": [
+                "Boolean"
+              ]
+            },
+            "optional": true,
+            "defaultvalue": false,
+            "description": "Whether to allow an already\n \tdefined member to be re-defined (overwritten) except for `stateProp`\n \tvalue. If set to `false`, it will throw even if `strict` config is\n \tdisabled.",
+            "name": "allowRedefine"
+          },
+          {
+            "type": {
+              "names": [
+                "Boolean"
+              ]
+            },
+            "optional": true,
+            "defaultvalue": false,
+            "description": "Whether to ensure\n \tassigned methods have the defined name, if not declared. Note that\n \tthis leads to use of `new Function` constructor (in ES strict mode).",
+            "name": "ensureNamedMethods"
+          }
+        ],
+        "returns": [
+          {
+            "type": {
+              "names": [
+                "Object"
+              ]
+            },
+            "description": "- A new `Wagon` instance."
+          }
+        ],
+        "name": "Wagon",
+        "longname": "wagon.Wagon",
+        "scope": "static",
+        "$members": [
+          {
+            "comment": "/**\n     *  Sets or gets the `Wagon` instance configuration.\n     *\n     *  @param {Object} options - `Wagon` configuration options.\n     *\n     *  @returns {Object} - If `options` argument is set, updates the\n     *  configuration and returns the `Wagon` instance (self). If `options` is\n     *  omitted, returns the current configuration.\n     */",
+            "meta": {
+              "range": [
+                7257,
+                7914
+              ],
+              "filename": "wagon.js",
+              "lineno": 214,
+              "path": "../build/code",
+              "code": {
+                "id": "astnode100000365",
+                "name": "Wagon.prototype.config",
+                "type": "FunctionExpression",
+                "funcscope": "<anonymous>",
+                "paramnames": [
+                  "options"
+                ]
+              },
+              "vars": {
+                "opts": "wagon.Wagon#config~opts",
+                "this._options": "wagon.Wagon#_options",
+                "imOpts": "wagon.Wagon#config~imOpts",
+                "this.Intermediate": "wagon.Wagon#Intermediate"
+              }
+            },
+            "description": "Sets or gets the `Wagon` instance configuration.",
+            "params": [
+              {
+                "type": {
+                  "names": [
+                    "Object"
+                  ]
+                },
+                "description": "`Wagon` configuration options.",
+                "name": "options"
+              }
+            ],
+            "returns": [
+              {
+                "type": {
+                  "names": [
+                    "Object"
+                  ]
+                },
+                "description": "- If `options` argument is set, updates the\n configuration and returns the `Wagon` instance (self). If `options` is\n omitted, returns the current configuration."
+              }
+            ],
+            "name": "config",
+            "longname": "wagon.Wagon#config",
+            "kind": "function",
+            "memberof": "wagon.Wagon",
+            "scope": "instance"
+          },
+          {
+            "comment": "/**\n     *  Final method to be called to end the build chain. This will create and\n     *  return an initializer function that initiates an intermediate object\n     *  which has all the defined members.\n     *\n     *  @returns {Function} - Initializer function. This is not a constructor so\n     *  you don't need to use `new` keyword.\n     */",
+            "meta": {
+              "range": [
+                19929,
+                20173
+              ],
+              "filename": "wagon.js",
+              "lineno": 542,
+              "path": "../build/code",
+              "code": {
+                "id": "astnode100001316",
+                "name": "Wagon.prototype.create",
+                "type": "FunctionExpression",
+                "funcscope": "<anonymous>",
+                "paramnames": []
+              },
+              "vars": {
+                "$this": "wagon.Wagon#create~$this",
+                "": null
+              }
+            },
+            "description": "Final method to be called to end the build chain. This will create and\n return an initializer function that initiates an intermediate object\n which has all the defined members.",
+            "returns": [
+              {
+                "type": {
+                  "names": [
+                    "function"
+                  ]
+                },
+                "description": "- Initializer function. This is not a constructor so\n you don't need to use `new` keyword."
+              }
+            ],
+            "name": "create",
+            "longname": "wagon.Wagon#create",
+            "kind": "function",
+            "memberof": "wagon.Wagon",
+            "scope": "instance"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "comment": "/**\n         *  Initializes a new instance of `Intermediate` class that's being\n         *  built by Wagon, internally.\n         *  @constructs Wagon#Intermediate\n         *  @inner\n         *\n         *  @param {*} [value=(Wagon#config().defaultValue)] - The value or\n         *  state to be carried out through the chain.\n         */",
+    "meta": {
+      "range": [
+        3746,
+        4074
+      ],
+      "filename": "wagon.js",
+      "lineno": 123,
+      "path": "../build/code",
+      "code": {
+        "id": "astnode100000207",
+        "name": "Intermediate",
+        "type": "FunctionExpression"
+      },
+      "vars": {
+        "this.__state_value": "Wagon#Intermediate#__state_value",
+        "": null
+      }
+    },
+    "description": "Initializes a new instance of `Intermediate` class that's being\n built by Wagon, internally.",
+    "alias": "Wagon#Intermediate",
+    "kind": "class",
+    "scope": "instance",
+    "params": [
+      {
+        "type": {
+          "names": [
+            "*"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": "(Wagon#config().defaultValue)",
+        "description": "The value or\n state to be carried out through the chain.",
+        "name": "value"
+      }
+    ],
+    "name": "Intermediate",
+    "longname": "Wagon#Intermediate",
+    "memberof": "Wagon"
+  },
+  {
+    "comment": "/**\n     *  Defines an static member (method or property) and assigns it to the\n     *  built object itself.\n     *\n     *  This method is actually a pre-configured shorthand of the `.define()`\n     *  method.\n     *\n     *  @memberof Wagon\n     *  @instance\n     *  @chainable\n     *\n     *  @param {String} name - Method name to be assigned.\n     *  @param {Object} [options] - Member definition options.\n     *  @param {*} member - Either a function definition or a value.\n     *\n     *  @returns {Object} - `Wagon` instance (self).\n     */",
+    "meta": {
+      "range": [
+        18548,
+        19574
+      ],
+      "filename": "wagon.js",
+      "lineno": 505,
+      "path": "../build/code",
+      "code": {
+        "id": "astnode100001193",
+        "name": "Wagon.prototype.static",
+        "type": "FunctionExpression",
+        "funcscope": "<anonymous>",
+        "paramnames": [
+          "name",
+          "options",
+          "member"
+        ]
+      },
+      "vars": {
+        "multiple": "Wagon#static~multiple",
+        "member": "Wagon#static~member",
+        "options": "Wagon#static~options",
+        "options.scope": "Wagon#static~options.scope",
+        "options.chainable": "Wagon#static~options.chainable",
+        "options.peculate": "Wagon#static~options.peculate",
+        "options.stateful": "Wagon#static~options.stateful"
+      }
+    },
+    "description": "Defines an static member (method or property) and assigns it to the\n built object itself.\n\n This method is actually a pre-configured shorthand of the `.define()`\n method.",
+    "memberof": "Wagon",
+    "scope": "instance",
+    "tags": [
+      {
+        "originalTitle": "chainable",
+        "title": "chainable",
+        "text": ""
+      }
+    ],
+    "params": [
+      {
+        "type": {
+          "names": [
+            "String"
+          ]
+        },
+        "description": "Method name to be assigned.",
+        "name": "name"
+      },
+      {
+        "type": {
+          "names": [
+            "Object"
+          ]
+        },
+        "optional": true,
+        "description": "Member definition options.",
+        "name": "options"
+      },
+      {
+        "type": {
+          "names": [
+            "*"
+          ]
+        },
+        "description": "Either a function definition or a value.",
+        "name": "member"
+      }
+    ],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "Object"
+          ]
+        },
+        "description": "- `Wagon` instance (self)."
+      }
+    ],
+    "name": "static",
+    "longname": "Wagon#static",
+    "kind": "function"
+  }
+]

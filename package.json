@@ -1,0 +1,58 @@
+{
+  "name": "docma",
+  "version": "0.5.0",
+  "description": "A powerful API documentation generator with a cool template engine.",
+  "license": "MIT",
+  "author": {
+    "name": "Onur Yıldırım",
+    "email": "onur@cutepilot.com"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "homepage": "https://github.com/onury/docma#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onury/docma.git"
+  },
+  "bugs": {
+    "url": "https://github.com/onury/docma/issues"
+  },
+  "keywords": [
+    "doc",
+    "jsdoc",
+    "document",
+    "documentation",
+    "api",
+    "source",
+    "code",
+    "javascript",
+    "node",
+    "dustjs",
+    "generate",
+    "build",
+    "dogma"
+  ],
+  "dependencies": {
+    "bluebird": "^3.3.4",
+    "dustjs-linkedin": "^2.7.2",
+    "fs-extra": "^0.26.5",
+    "glob": "^7.0.3",
+    "jsdoc-x": "^1.0.0",
+    "jsdom": "^9.1.0",
+    "less": "^2.6.1",
+    "less-plugin-clean-css": "^1.5.1",
+    "lodash": "^4.6.1",
+    "strip-json-comments": "^2.0.1",
+    "uglify-js": "^2.6.2"
+  },
+  "devDependencies": {
+    "eslint": "^2.4.0",
+    "eslint-config-xo": "^0.12.0",
+    "grunt": "^0.4.5",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-jasmine-nodejs": "^1.5.1",
+    "matchdep": "^1.0.1"
+  }
+}

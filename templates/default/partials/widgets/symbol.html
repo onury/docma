@@ -1,0 +1,125 @@
+<div id="{.|$id}" class="symbol-container">
+
+    <div class="symbol-heading">
+        <div class="symbol">
+            <a href="#{.|$id}">
+                <span class="glyphicon glyphicon-link color-gray-light" aria-hidden="true"></span>
+                <code class="symbol-name">{.|s|$longname_params}</code>
+                <span class="symbol-sep">{.|$type_sep}</span>
+                <code class="symbol-type">{.|$type}</code>
+            </a>
+
+            {.|s|$tags}
+        </div>
+
+        {?augments}
+            <p class="space-left-sm">
+                <b>Extends:</b> {.|s|$extends}
+            </p>
+        {/augments}
+
+        {?alias}
+            <p class="space-left-sm">
+                <b>Alias:</b> <code>{alias|s|$dot_prop}</code>
+            </p>
+        {/alias}
+    </div>
+
+    <div class="symbol-definition">
+        {.|s|$desc}
+
+        {?classdesc}
+            <table>
+                {?version}
+                <tr>
+                    <td><b>Version:</b>&nbsp;&nbsp;&nbsp;</td><td>{version|s}</td>
+                </tr>
+                {/version}
+
+                {?copyright}
+                <tr>
+                    <td><b>Copyright:</b>&nbsp;&nbsp;&nbsp;</td><td>{copyright|s}</td>
+                </tr>
+                {/copyright}
+
+                {?author}
+                <tr>
+                    <td><b>Author:</b>&nbsp;&nbsp;&nbsp;</td><td>{author|s|$author}</td>
+                </tr>
+                {/author}
+
+                {?license}
+                <tr>
+                    <td><b>License:</b>&nbsp;&nbsp;&nbsp;</td><td>{license|s}</td>
+                </tr>
+                {/license}
+            </table>
+        {/classdesc}
+
+        {?see}
+        <br />
+        <p>
+            <b>See</b>
+            {@gt key=see.length value=1}
+                <ul>
+                {#see}<li>{.|s|$pl}</li>{/see}
+                </ul>
+            {:else}
+                {#see}&nbsp;{.|s|$pl}{/see}
+            {/gt}
+        </p>
+        {/see}
+
+        <!--  don't list params for class declarations since we already list
+        constructor and its params separately, if this is a class declaration.  -->
+        {@eq key=meta.code.type value="ClassDeclaration"}
+        {:else}
+            {>"params":./}
+        {/eq}
+
+        {?returns}
+            <b>Returns:</b>
+            <p class="pad-left">
+                {.|s|$returns}
+            </p>
+        {/returns}
+
+        {?exceptions}
+            <b>Throws:</b>
+            <p class="pad-left">
+                {.|s|$exceptions}
+            </p>
+        {/exceptions}
+
+        <!-- if this is an enumeration symbol, list the members in a table -->
+        {?isEnum}
+            {>"enums":./}
+        {/isEnum}
+
+        {?examples}
+            <p><b>Example</b></p>
+            {#examples}
+            <pre><code class="js">{.|$nt}</code></pre>
+            {/examples}
+        {/examples}
+    </div>
+
+</div>
+<hr />
+
+<!--  don't list params for class declarations since we already list
+constructor and its params separately, if this is a class declaration.  -->
+{@eq key=meta.code.type value="ClassDeclaration"}
+    {?$constructor}
+        {>"symbol":$constructor/}
+    {/$constructor}
+{/eq}
+
+<!-- if not an enumeration symbol -->
+{?isEnum}
+{:else}
+    <!-- recurse as symbol section -->
+    {#$members}
+        {>"symbol":./}
+    {/$members}
+{/isEnum}
