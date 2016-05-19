@@ -379,7 +379,7 @@ These HTML files under `<template>/partials` are pre-compiled into Javascript an
 
 When you build the documentation with your template, a `docma-web.js` will be generated (and linked in your main HTML); which is the core engine for the documentation web app. This will include everything the app needs such as the documentation data, compiled partials, dustjs engine, etc... (Note that the size of this script depends especially on the generated documentation data.)
 
-See [Docma Web API](docs/docma.web.md).
+See [Docma Web API](https://github.com/onury/docma/blob/master/doc/docma.web.md).
 
 #### Custom Scripts
 
