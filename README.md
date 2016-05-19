@@ -66,7 +66,7 @@ Docma.fromFile(configFile)
         <td><code><b>src</b></code></td>
         <td><code>String|Array</code></td>
         <td></td>
-        <td>Required. One or more file/directory paths to be processed. This also accepts a <a href="https://github.com/isaacs/node-glob">Glob</a> string or array of globs. e.g. <code>./src/\*\*/\*.js</code> will produce an array of all .js files under <code>./src</code> directory and sub-directories.</td>
+        <td>Required. One or more file/directory paths to be processed. This also accepts a <a href="https://github.com/isaacs/node-glob">Glob</a> string or array of globs. e.g. `./src/**/*.js` will produce an array of all .js files under <code>./src</code> directory and sub-directories.</td>
     </tr>
     <tr>
         <td><code><b>dest</b></code></td>
