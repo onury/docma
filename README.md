@@ -118,14 +118,14 @@ Docma.fromFile(configFile)
         <td><code>undefined</code></td>
         <td>
             Options to be passed to the template.
-            If any option is omitted in the build, default values within the `docma.template.json` configuration file of the template are used.
+            If any option is omitted in the build, default values within the <code>docma.template.json</code> configuration file of the template are used.
         </td>
     </tr>
     <tr>
         <td><code><b>dump</b></code></td>
         <td><code>Boolean</code></td>
         <td><code>false</code></td>
-        <td>Set to <code>true</code> to output a JSON file from the documentation data. This will create a `documentation.json` file within the root of the output directory.</td>
+        <td>Set to <code>true</code> to output a JSON file from the documentation data. This will create a <code>documentation.json</code> file within the root of the output directory.</td>
     </tr>
     <tr>
         <td><code><b>jsdoc</b></code></td>
