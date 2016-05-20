@@ -380,4 +380,4 @@ Provides utility methods for validation and parsing documentation output and sym
 </table>
 
 
-[docma-filters]:https://github.com/onury/docma/blob/master/doc/docma.web.md
+[docma-filters]:https://github.com/onury/docma/blob/master/doc/docma.filters.md
