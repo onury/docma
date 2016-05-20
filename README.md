@@ -26,7 +26,7 @@ Docma is a dev-tool written in Node.js to easily generate beautiful HTML documen
     + [Initializing the Template (Web App)](#initializing-the-template-web-app)
     + [CSS & Less](#css-and-less)
     + [Other Files](#other-files)
-    + [Docma Default Templte](#docma-default-templte)
+    + [Docma Default Templte](#docma-default-template)
 - [Parsed Documentation](parsed-documentation)
 - [Change-Log](change-log)
 - [License](license)
