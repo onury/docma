@@ -93,6 +93,14 @@ Linked labels that build the navigation bar on the top of the document. Each ite
         </td>
     </tr>
     <tr>
+        <td><code><b>target</b></code></td>
+        <td><code>String</code></td>
+        <td><code>undefined</code></td>
+        <td>
+            Sets the anchor target option. e.g. <code>"&#x5F;blank"</code> to open the link in new/blank page.
+        </td>
+    </tr>
+    <tr>
         <td><code><b>iconClass</b></code></td>
         <td><code>String</code></td>
         <td><code>undefined</code></td>
@@ -105,7 +113,7 @@ Linked labels that build the navigation bar on the top of the document. Each ite
         <td><code>Array</code></td>
         <td><code>undefined</code></td>
         <td>
-            Sub-items for this navigation item. You can use <code>label</code> and <code>href</code> options. You can also use an additional <code>separator</code> option, which places a horizontal line within the submenu. e.g. <code>{ separator: true }</code>.
+            Sub-items for this navigation item. You can use <code>label</code>, <code>href</code> and <code>target</code> options. You can also use an additional <code>separator</code> option, which places a horizontal line within the submenu. e.g. <code>{ separator: true }</code>.
         </td>
     </tr>
 </table>
@@ -156,9 +164,10 @@ var buildConfig = {
                 },
                 {
                     label: "GitHub",
-                    href: "demos.html",
-                    iconClass: "https://github.com/<user>/<repo>"
-                },
+                    href: "https://github.com/<user>/<repo>",
+                    target: "_blank",
+                    iconClass: "ico-md ico-github"
+                }
             ]
         },
         // Template main document settings

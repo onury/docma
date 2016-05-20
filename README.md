@@ -26,6 +26,7 @@ Docma is a dev-tool written in Node.js to easily generate beautiful HTML documen
     + [Initializing the Template (Web App)](#initializing-the-template-web-app)
     + [CSS & Less](#css-and-less)
     + [Other Files](#other-files)
+    + [Docma Default Templte](#docma-default-templte)
 - [Parsed Documentation](parsed-documentation)
 - [Change-Log](change-log)
 - [License](license)
@@ -415,6 +416,10 @@ You can also include less files in your template. Main less file(s) to be compil
 #### Other Files
 
 You can include any custom files anywhere in your template. They will be copied over into the output directory. If you need to include a file in the template but don't want it to be in the generated output; define it in the `docma.template.json` file, within the `ignore` setting.
+
+#### Docma Default Template
+
+Using the default template is straight forward. Just set `buildConfig.template.path` to `"default"` or omit it. You can check out the source of the [default template][default-template] to see a detailed example of how a template is structured and configured.
 
 ## Parsed Documentation
 
