@@ -7,7 +7,7 @@
     "main": "index.html",
     // Template default options.
     "options": {
-        "title": "Documentation 2",
+        "title": "Documentation",
         "sidebar": true,
         "collapsed": false,
         "search": true,

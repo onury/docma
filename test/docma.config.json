@@ -17,12 +17,6 @@
                     "href": ""
                 },
                 {
-                    "label": "Test",
-                    "target": "_blank"
-                },
-                {
-                },
-                {
                     "iconClass": "ico-mouse-pointer",
                     "label": "Demos &amp; Examples",
                     "href": "index.html"
@@ -41,7 +35,8 @@
                 {
                     "iconClass": "ico-md ico-github",
                     "label": "GitHub",
-                    "href": "https://github.com/onury/docma"
+                    "href": "https://github.com/onury/docma",
+                    "target": "_blank"
                 }
             ]
         }

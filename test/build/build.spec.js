@@ -1,8 +1,7 @@
 (function () {
 
     // dep modules
-    var _ = require('lodash'),
-        fs = require('fs-extra'),
+    var fs = require('fs-extra'),
         path = require('path');
 
     // own modules
@@ -29,12 +28,6 @@
                                 href: ''
                             },
                             {
-                                label: 'Test',
-                                target: '_blank'
-                            },
-                            {
-                            },
-                            {
                                 iconClass: 'ico-mouse-pointer',
                                 label: 'Demos &amp; Examples',
                                 href: 'index.html'
@@ -53,7 +46,8 @@
                             {
                                 iconClass: 'ico-md ico-github',
                                 label: 'GitHub',
-                                href: 'https://github.com/onury/docma'
+                                href: 'https://github.com/onury/docma',
+                                target: "_blank"
                             }
                         ]
                     }
@@ -76,10 +70,7 @@
                 // boolean or name of the json file
                 dump: true,
                 src: [
-                    // './test/code/code.js',
-                    // './test/code/task-timer.js'
-                    // './test/code/**/*.js'
-                    './test/code/wagon.js'
+                    './test/code/**/*.js'
                 ],
                 dest: './test/doc'
             };
@@ -87,8 +78,8 @@
         // beforeAll(function () {});
 
         it('should have created directory', function (done) {
-            var docma = new Docma(config);
-            docma.build()
+            Docma.create(config)
+                .build()
                 .then(function (success) {
                     expect(success).toEqual(true);
                 })
