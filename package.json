@@ -1,6 +1,6 @@
 {
   "name": "docma",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "A powerful API documentation generator with a cool template engine.",
   "license": "MIT",
   "author": {
