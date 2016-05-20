@@ -4,7 +4,7 @@
 
 Docma also includes the `dust-core` in the generated output; and the `dust` object can be globally accessed within the template (web app).
 
-See [Docma (Dust) Filters](docs/docma.filters.md).
+See [Docma (Dust) Filters][docma-filters].
 
 ### Docma-Web Core
 When you build the documentation with a template, `docma-web.js` will be generated (and linked in the main HTML); which is the core engine for the documentation web app. This will include everything the app needs such as the documentation data, compiled partials, dustjs engine, etc... (Note that the size of this script depends especially on the generated documentation data.)
@@ -378,3 +378,6 @@ Provides utility methods for validation and parsing documentation output and sym
         </td>
     </tr>
 </table>
+
+
+[docma-filters]:https://github.com/onury/docma/blob/master/doc/docma.web.md
