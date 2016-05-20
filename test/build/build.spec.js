@@ -13,10 +13,10 @@
                 template: {
                     path: 'default',
                     document: {
-                        title: 'TEST TITLE'
+                        title: 'My Lib API Documantation'
                     },
                     options: {
-                        title: 'Wagon',
+                        title: 'My Lib',
                         sidebar: true,
                         collapsed: false,
                         search: true,

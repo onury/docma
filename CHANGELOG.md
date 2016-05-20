@@ -1,7 +1,8 @@
 ## Docma Change-Log
 
-- **v0.5.1** Pre-Release (2015-05-20)
+- **v0.5.2** Pre-Release (2015-05-20)
     + Updated default template.
+    + Updated dependencies.
     + Clean-up.
 
     ---
