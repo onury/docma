@@ -1,6 +1,13 @@
 
 # Docma
 
+![npm](https://img.shields.io/npm/v/docma.svg)
+![release](https://img.shields.io/github/release/onury/docma.svg)
+![dependencies](https://david-dm.org/onury/docma.svg)
+![license](http://img.shields.io/npm/l/docma.svg)
+
+> © 2016, Onur Yıldırım (@onury). MIT License.
+
 A powerful API documentation generator with a cool template engine.  
 
 Docma is a dev-tool written in Node.js to easily generate beautiful HTML documentation from your JS source files. It parses JSDoc comments into a Javascript object and builds a web app from the given template. The documentation data is then passed to the styled template within the global `docma` object.

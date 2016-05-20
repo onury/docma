@@ -35,7 +35,6 @@
                             {
                                 iconClass: 'ico-md ico-download',
                                 label: 'Download',
-                                href: 'index.html',
                                 items: [
                                     { label: 'First', href: 'index.html' },
                                     { label: 'Second', href: 'index.html' },

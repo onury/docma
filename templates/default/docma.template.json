@@ -25,6 +25,7 @@
     "ignore": [
         "js/app.js",
         "less/**",
-        "*.md"
+        "*.md",
+        "LICENSE"
     ]
 }
