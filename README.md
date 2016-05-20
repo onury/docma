@@ -237,7 +237,7 @@ Docma.fromFile(configFile)
 
 ## Docma Templates
 
-Docma templates are essentially web files that mainly make use of [Dust.js][dustjs] internally.
+Docma templates are essentially web files that mainly make use of [Dust.js][dustjs] internally. You can check out the [default template][default-template] for the structure and how partials are used.
 
 ### Template Structure
 
@@ -379,7 +379,7 @@ These HTML files under `<template>/partials` are pre-compiled into Javascript an
 
 When you build the documentation with your template, a `docma-web.js` will be generated (and linked in your main HTML); which is the core engine for the documentation web app. This will include everything the app needs such as the documentation data, compiled partials, dustjs engine, etc... (Note that the size of this script depends especially on the generated documentation data.)
 
-See [Docma Web API](https://github.com/onury/docma/blob/master/doc/docma.web.md).
+See [Docma Web API][docma-web-api].
 
 #### Custom Scripts
 
@@ -425,4 +425,6 @@ MIT. You don't have to include any copyright notice in your templates but I'd ap
 
 
 [jsdoc-x]:https://github.com/onury/jsdoc-x
+[default-template]:https://github.com/onury/docma/tree/master/templates/default
+[docma-web-api]:https://github.com/onury/docma/blob/master/doc/docma.web.md
 [dustjs]: http://www.dustjs.com
