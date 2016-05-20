@@ -138,3 +138,8 @@ As well as the Dust.js built-in filters, Docma includes pre-defined filters for 
         </td>
     </tr>
 </table>
+
+←— [Docma documentation][docma].
+
+
+[docma]:https://github.com/onury/docma

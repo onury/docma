@@ -379,5 +379,7 @@ Provides utility methods for validation and parsing documentation output and sym
     </tr>
 </table>
 
+←— [Docma documentation][docma].
 
+[docma]:https://github.com/onury/docma
 [docma-filters]:https://github.com/onury/docma/blob/master/doc/docma.filters.md
