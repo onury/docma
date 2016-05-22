@@ -8,7 +8,7 @@
 
 > © 2016, Onur Yıldırım (@onury). MIT License.
 
-A powerful API documentation generator with a cool template engine.  
+A powerful JSDoc documentation generator with a cool template engine.  
 
 Docma is a dev-tool written in Node.js to easily generate beautiful HTML documentation from your JS source files. It parses JSDoc comments into a Javascript object and builds a web app from the given template. The documentation data is then passed to the styled template within the global `docma` object.
 

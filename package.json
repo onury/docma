@@ -1,7 +1,7 @@
 {
   "name": "docma",
   "version": "0.5.3",
-  "description": "A powerful API documentation generator with a cool template engine.",
+  "description": "A powerful JSDoc documentation generator with a cool template engine.",
   "license": "MIT",
   "author": {
     "name": "Onur Yıldırım",
