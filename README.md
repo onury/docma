@@ -27,10 +27,10 @@ Docma is a dev-tool written in Node.js to easily generate beautiful HTML documen
     + [CSS & Less](#css-and-less)
     + [Other Files](#other-files)
     + [Docma Default Template](#docma-default-template)
-- [Parsed Documentation](parsed-documentation)
-- [Change-Log](change-log)
-- [License](license)
-- [Related Modules](related-modules)
+- [Parsed Documentation](#parsed-documentation)
+- [Change-Log](#change-log)
+- [License](#license)
+- [Related Modules](#related-modules)
 
 ### Installation
 ```shell
