@@ -30,6 +30,7 @@ Docma is a dev-tool written in Node.js to easily generate beautiful HTML documen
 - [Parsed Documentation](parsed-documentation)
 - [Change-Log](change-log)
 - [License](license)
+- [Related Modules](related-modules)
 
 ### Installation
 ```shell
@@ -435,8 +436,15 @@ See [CHANGELOG.md](CHANGELOG.md).
 
 MIT. You don't have to include any copyright notice in your templates but I'd appreciate if you let people know about this tool so we can read better documentations.
 
+## Related Modules
+
+- [grunt-docma][grunt-docma] — Grunt task for Docma.
+- [jsdoc-x][jsdoc-x] — Parser for outputting a Javascript object from documented code via JSDoc's explain (-X) command.
+- [dustjs][dustjs-github] — Asynchronous Javascript templating for the browser and server.
 
 [jsdoc-x]:https://github.com/onury/jsdoc-x
 [default-template]:https://github.com/onury/docma/tree/master/templates/default
 [docma-web-api]:https://github.com/onury/docma/blob/master/doc/docma.web.md
 [dustjs]: http://www.dustjs.com
+[dustjs-github]: https://github.com/linkedin/dustjs
+[grunt-docma]:https://github.com/onury/grunt-docma
