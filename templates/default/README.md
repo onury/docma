@@ -68,7 +68,7 @@ Template specific options that can be used while building your documentation wit
         <td><code>Array</code></td>
         <td><code>[]</code></td>
         <td>
-            List of navigation items. See [Navigation Items](#navigation-items) below.
+            List of navigation items. See <a href="#navigation-items">Navigation Items</a> below.
         </td>
     </tr>
 </table>
@@ -138,6 +138,7 @@ var buildConfig = {
             title: "My Library",
             sidebar: true,
             collapsed: false,
+            badges: true,
             search: true,
             navbar: true,
             navItems: [
