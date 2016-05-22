@@ -19,6 +19,7 @@
                         title: 'My Lib',
                         sidebar: true,
                         collapsed: false,
+                        badges: true,
                         search: true,
                         navbar: true,
                         navItems: [

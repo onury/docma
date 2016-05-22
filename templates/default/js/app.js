@@ -170,7 +170,9 @@
         if (!symbol) return symbolName;
         var id = dust.filters.$id(symbol),
             keywords = docma.utils.getKeywords(symbol),
-            badge = _getSymbolBadge(symbol),
+            badge = docma.template.options.badges
+                ? _getSymbolBadge(symbol)
+                : '• ',
             name = dust.filters.$dot_prop(symbolName);
         return '<a href="#' + id + '" class="sidebar-item" data-keywords="' + keywords + '">' + badge + name + '</a>';
     };

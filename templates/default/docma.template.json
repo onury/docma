@@ -1,7 +1,7 @@
 {
     "name": "Docma Default Template",
     "author": "Onur Yıldırım (onur@cutepilot.com)",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": "MIT",
     // Main HTML file
     "main": "index.html",
@@ -10,6 +10,7 @@
         "title": "Documentation",
         "sidebar": true,
         "collapsed": false,
+        "badges": true,
         "search": true,
         "navbar": true,
         "navItems": []

@@ -1,5 +1,9 @@
 ## Docma Change-Log
 
+- **v0.5.4** Pre-Release (2015-05-22)
+    + `docma.template.json` is no more copied over to the output.
+    + Added default template option `badges`.
+
 - **v0.5.3** Pre-Release (2015-05-22)
     + Fixed docma-web file paths.
 

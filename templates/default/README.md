@@ -40,6 +40,14 @@ Template specific options that can be used while building your documentation wit
         </td>
     </tr>
     <tr>
+        <td><code><b>badges</b></code></td>
+        <td><code>Boolean</code></td>
+        <td><code>true</code></td>
+        <td>
+            Whether to show symbol badges (that indicate member type and symbol scope) within the sidebar.
+        </td>
+    </tr>
+    <tr>
         <td><code><b>search</b></code></td>
         <td><code>Boolean</code></td>
         <td><code>true</code></td>
