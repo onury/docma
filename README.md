@@ -81,7 +81,7 @@ Docma.fromFile(configFile)
         <td><code><b>dest</b></code></td>
         <td><code>String</code></td>
         <td></td>
-        <td>Required. Destination output directory path.</td>
+        <td>Required. Destination output directory path. **CAUTION:** This directory will be emptied before the build. Make sure you set this to a correct path.</td>
     </tr>
     <tr>
         <td><code><b>template</b></code></td>

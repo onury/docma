@@ -70,7 +70,8 @@
                 // boolean or name of the json file
                 dump: true,
                 src: [
-                    './test/code/**/*.js'
+                    // './test/code/**/*.js'
+                    './test/code/src/lib/**/*.js'
                 ],
                 dest: './test/doc'
             };
