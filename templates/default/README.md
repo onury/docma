@@ -52,7 +52,7 @@ Template specific options that can be used while building your documentation wit
         <td><code>Boolean</code></td>
         <td><code>true</code></td>
         <td>
-            Whether to enable the search box within the sidebar. For this to be visible, `sidebar` should be enabled.
+            Whether to enable the search box within the sidebar. For this to be visible, <code>sidebar</code> should be enabled.
         </td>
     </tr>
     <tr>
