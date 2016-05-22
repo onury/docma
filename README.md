@@ -403,7 +403,7 @@ docma.ready(function (err) {
         console.log(err);
         return;
     }
-    // initialize the template here
+    // initialize your code here
 })
 ```
 
