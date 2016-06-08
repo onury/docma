@@ -21,7 +21,7 @@ module.exports = function (grunt) {
                 useHelpers: false,
                 random: false,
                 seed: null,
-                defaultTimeout: null, // defaults to 5000
+                defaultTimeout: 10000, // defaults to 5000
                 stopOnFailure: false,
                 traceFatal: true,
                 reporters: {

@@ -2,9 +2,9 @@
 @import "bs-variables.less";
 @import "sidebar.less";
 @import "icomoon.less";
+@import "highlight-onedark.less";
 
-@import url("https://fonts.googleapis.com/css?family=Archivo+Narrow:400,700,400italic");
-// @import url("https://fonts.googleapis.com/css?family=Oswald:400");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,400italic");
 @import url("https://fonts.googleapis.com/css?family=Fira+Mono:400");
 
 body, html {
@@ -50,16 +50,46 @@ hr {
     margin: 14px 0 11px 0;
 }
 
+.h1, .h2, .h3, h1, h2, h3 {
+    margin-top: 34px;
+}
+.h4, .h5, .h6, h4, h5, h6 {
+    margin-top: 20px;
+}
+
+// nested list fix
+// ul,
+// ol {
+//   ul,
+//   ol {
+//     margin-bottom: 12px !important;
+//   }
+// }
+
+td > p {
+    margin: 0;
+}
+
 div {
     border: 0 none !important;
+}
+
+blockquote {
+    padding: 6px 12px;
+    font-size: 1em;
+}
+
+.container-boxed {
+    width: 970px !important;
 }
 
 pre {
     padding: 0;
     margin: 0;
+    margin-bottom: 10px;
     border: 0 none;
     background-color: transparent;
-    font-size: @font-size-xsmall;
+    font-size: ceil(@font-size-small * 1.06);
     code {
         padding: 15px 25px !important;
         &.options {
@@ -69,11 +99,12 @@ pre {
 }
 
 code {
+    font-size: 82% !important;
     background-color: @light-base;
     color: @gray-base;
 }
 
-@symbol-font-size: ceil((@font-size-base * 1.12));
+@symbol-font-size: ceil(@font-size-base * 1.2);
 .symbol {
     font-size: @symbol-font-size;
     & a {
@@ -120,23 +151,6 @@ code.symbol-type {
     background-color: transparent;
 }
 
-.space-left-sm {
-    margin-left: 15px;
-}
-.space-left, .space-left-md {
-    margin-left: 25px;
-}
-.pad-left-sm {
-    padding-left: 15px;
-}
-.pad-left, .pad-left-md {
-    padding-left: 25px;
-}
-
-.vertical-middle {
-    vertical-align: middle;
-}
-
 .symbol-container {
     // when a bookmark is clicked, the symbol title will be hidden under the top
     // nav-bar. this will prevent that.
@@ -155,26 +169,14 @@ code.symbol-type {
 }
 
 .boxed {
-    font-size: @font-size-small;
+    display: inline-block;
+    font-size: @font-size-xsmall;
     letter-spacing: 0.07em;
     color: #fff;
     padding: 3px 4px;
     border-radius: @border-radius-small;
-    margin-right: 5px;
-    background-color: darken(@gray-lighter, 5%);
-}
-
-.symbol-badge {
-    display: inline-block;
-    color: #fff;
-    font-size: 11px;
-    width: 20px;
-    height: 20px;
-    line-height: 21px;
-    text-align: center;
-    text-indent: 0;
-    border-radius: 20px;
-    margin-right: 7px;
+    margin: -2px 5px 0 0;
+    vertical-align: middle;
     background-color: darken(@gray-lighter, 5%);
 }
 
@@ -245,6 +247,23 @@ code.symbol-type {
 
 // mixins
 
+.space-left-sm {
+    margin-left: 15px;
+}
+.space-left, .space-left-md {
+    margin-left: 25px;
+}
+.pad-left-sm {
+    padding-left: 15px;
+}
+.pad-left, .pad-left-md {
+    padding-left: 25px;
+}
+
+.vertical-middle {
+    vertical-align: middle;
+}
+
 .pointer { cursor: pointer !important; }
 
 .color-white { color: #fff !important; }
@@ -259,6 +278,7 @@ code.symbol-type {
 .color-orange { color: #d16e43 !important; }
 .color-light { color: @gray-light !important; }
 .color-pink { color: #ff6fbc !important; }
+.color-brown { color: #80460f !important; }
 
 .color-gray-base     { color: @gray-base !important; }
 .color-gray-darkest  { color: @gray-darkest !important; }
@@ -277,10 +297,14 @@ code.symbol-type {
 .bg-warning, .bg-yellow { background-color: @brand-warning !important; }
 .bg-danger, .bg-red { background-color: @brand-danger !important; }
 .bg-purple { background-color: #996599 !important; }
-.bg-orange { background-color: #d16e43 !important; }
+.bg-orange { background-color: #ef8a23 !important; }
 .bg-light { background-color: @gray-light !important; }
 .bg-ice { background-color: #9cbed3 !important; }
 .bg-pink { background-color: #ff6fbc !important; }
+.bg-brown { background-color: #80460f !important; }
+.bg-gray { background-color: @gray !important; }
+.bg-gray-dark { background-color: @gray-dark !important; }
+.bg-gray-darker { background-color: @gray-darker !important; }
 
 
 .opacity-full { .opacity(1); }
@@ -292,12 +316,19 @@ code.symbol-type {
 
 .space-bottom-xs { margin-bottom: 5px !important; }
 
+// e.g. #rotate(-45deg)
+#rotate(@angle) {
+    -webkit-transform: rotate(@angle);
+    -moz-transform: rotate(@angle);
+    -ms-transform: rotate(@angle);
+    -o-transform: rotate(@angle);
+    transform: rotate(@angle);
+}
 
 // --------------------------
 
 .docma-info {
     display: inline-block;
-    margin-left: 30px;
     font-size: @font-size-small;
     font-style: italic;
     letter-spacing: 0.07em;

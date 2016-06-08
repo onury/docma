@@ -56,9 +56,19 @@
         // "relativePath": path.join(__dirname, "/code"),
         "filter": null
     },
-    // create an extra json file
-    // boolean or name of the json file
-    "dump": true,
+    "debug": true,
+    // markdown options
+    "markdown": {
+        "gfm": true,
+        "tables": true,
+        "breaks": false,
+        "pedantic": false,
+        "sanitize": true,
+        "smartLists": true,
+        "smartypants": false,
+        "tasks": true,
+        "emoji": true
+    },
     "src": [
         // "./test/code/**/*.js"
         "./test/code/wagon.js"

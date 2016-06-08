@@ -1,84 +1,177 @@
 (function () {
 
+    // core modules
+    var path = require('path');
+
     // dep modules
-    var fs = require('fs-extra'),
-        path = require('path');
+    // var fs = require('fs-extra');
 
     // own modules
     var Docma = require('../../index');
 
+    function getNavItems(routing) {
+        function route(name, type) {
+            name = name || '';
+            type = type || 'content';
+            if (routing === 'path') {
+                if (type === 'api') return './api' + (name ? '/' + name : '');
+                return './' + name;
+            }
+            return './?' + type + (name ? '=' + name : '');
+        }
+        return [
+            {
+                iconClass: 'ico-mouse-pointer',
+                label: 'Guide',
+                items: [
+                    { label: 'Home', href: './' },
+                    { label: 'Guide', href: route('guide') },
+                    // { label: 'Building Documentation', href: './' },
+                    // { label: 'Build Configuration', href: './' },
+                    { separator: true },
+                    { label: 'Docma Default Template', href: route('default-template') },
+                    { separator: true },
+                    { label: 'Creating Docma Templates', href: route('templates') },
+                    { label: 'Docma Web Core', href: route('docma-web') },
+                    { label: 'Docma Filters', href: route('docma-filters') }
+                ]
+            },
+            {
+                iconClass: 'ico-book',
+                label: 'API Reference',
+                items: [
+                    { label: 'Docma Web API', href: route('docma-web', 'api') },
+                    { label: 'Docma Web Utils', href: route('docma-web-utils', 'api') },
+                    { label: 'Test (src)', href: route('src', 'api') },
+                    { separator: true },
+                    { label: 'API Not Found', href: route('foo', 'api') },
+                    { separator: true },
+                    { label: 'Default', href: route('', 'api') },
+                    { label: '_def_', href: route('_def_', 'api') }
+                ]
+            },
+            {
+                iconClass: 'ico-md ico-download',
+                label: 'Download',
+                items: [
+                    { label: 'Change Log', href: route('changelog') },
+                    { label: 'Markdown Test', href: route('md-test') },
+                    { separator: true },
+                    { label: 'index.html', href: 'index.html' }, // or ./index.html
+                    { separator: true },
+                    { label: 'Content Not Found', href: route('bar') }
+                ]
+            },
+            {
+                iconClass: 'ico-md ico-github',
+                label: 'GitHub',
+                href: 'https://github.com/onury/docma',
+                target: "_blank"
+            }
+        ];
+    }
+
     describe('build', function () {
-        var doc,
-            config = {
-                template: {
-                    path: 'default',
-                    document: {
-                        title: 'My Lib API Documantation'
-                    },
-                    options: {
-                        title: 'My Lib',
-                        sidebar: true,
-                        collapsed: false,
-                        badges: true,
-                        search: true,
-                        navbar: true,
-                        navItems: [
-                            {
-                                iconClass: 'ico-book',
-                                label: 'Documentation',
-                                href: ''
-                            },
-                            {
-                                iconClass: 'ico-mouse-pointer',
-                                label: 'Demos &amp; Examples',
-                                href: 'index.html'
-                            },
-                            {
-                                iconClass: 'ico-md ico-download',
-                                label: 'Download',
-                                items: [
-                                    { label: 'First', href: 'index.html' },
-                                    { label: 'Second', href: 'index.html' },
-                                    { separator: true },
-                                    { label: 'Third', href: 'index.html' }
-                                ]
-                            },
-                            {
-                                iconClass: 'ico-md ico-github',
-                                label: 'GitHub',
-                                href: 'https://github.com/onury/docma',
-                                target: "_blank"
-                            }
-                        ]
-                    }
+        var config = {
+            debug: 4,
+            jsdoc: {
+                encoding: 'utf8',
+                recurse: false,
+                pedantic: false,
+                access: null, // ['private'],
+                package: null,
+                module: true,
+                undocumented: false,
+                undescribed: false,
+                hierarchy: true,
+                sort: "grouped",
+                relativePath: path.join(__dirname, '/code'),
+                filter: null
+            },
+            // markdown options
+            markdown: {
+                gfm: true,
+                tables: true,
+                breaks: false,
+                pedantic: false,
+                sanitize: false,
+                smartLists: true,
+                smartypants: false,
+                tasks: true,
+                emoji: true
+            },
+            app: {
+                title: 'Docma Documentation',
+                meta: null,
+                base: '/javascript/docma/test/output', // overwritten in specs
+                entrance: 'content:guide',
+                routing: 'path', // overwritten in specs
+                server: 'apache' // overwritten in specs
+            },
+            template: {
+                path: 'default',
+                options: {
+                    title: 'Docma',
+                    sidebar: true,
+                    collapsed: false,
+                    badges: true,
+                    search: true,
+                    navbar: true,
+                    navItems: []
+                }
+            },
+            src: [
+                './test/input/md-test.md',
+                // './test/input/**/*.js',
+                './test/input/code.js',
+                {
+                    'docma-web': [
+                        './lib/web/core.js',
+                        './lib/web/core.*.js',
+                        '!./lib/web/core.utils.js'
+                    ],
+                    'docma-web-utils': './lib/web/core.utils.js'
                 },
-                jsdoc: {
-                    encoding: 'utf8',
-                    recurse: false,
-                    pedantic: false,
-                    access: null, // ['private'],
-                    package: null,
-                    module: true,
-                    undocumented: false,
-                    undescribed: false,
-                    hierarchy: true,
-                    sort: "grouped",
-                    relativePath: path.join(__dirname, '/code'),
-                    filter: null
+                {
+                    'src': [
+                        './test/input/private/core/*.js',
+                        './test/input/src/lib/*.js'
+                    ],
+                    'priv': './test/input/private/*.js'
                 },
-                // create an extra json file
-                // boolean or name of the json file
-                dump: true,
-                src: [
-                    // './test/code/**/*.js'
-                    './test/code/src/lib/**/*.js'
-                ],
-                dest: './test/doc'
-            };
+                './doc/**/*.md',
+                { 'guide': './README.md' }, // renamed markdown
+                './CHANGELOG.md'
+            ],
+            dest: './test/output' // overwritten in specs
+        };
 
         // beforeAll(function () {});
 
-        it('should have created directory', function (done) {
+        fit('should build with query-routing', function (done) {
+            config.app.routing = 'query';
+            config.template.options.navItems = getNavItems(config.app.routing);
+            config.dest = 'test/output/query-routing';
+            config.app.base = '/javascript/docma/' + config.dest;
+
+            Docma.create(config)
+                .build()
+                .then(function (success) {
+                    expect(success).toEqual(true);
+                })
+                .catch(function (err) {
+                    expect(Boolean(err)).toEqual(false);
+                    console.log(err.stack || err);
+                })
+                .finally(done);
+        });
+
+        it('should build with path-routing (for GitHub)', function (done) {
+            config.app.routing = 'path';
+            config.app.server = 'github';
+            config.template.options.navItems = getNavItems(config.app.routing);
+            config.dest = 'test/output/path-routing';
+            config.app.base = '/javascript/docma/' + config.dest;
             Docma.create(config)
                 .build()
                 .then(function (success) {

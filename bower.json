@@ -1,0 +1,21 @@
+{
+  "name": "docma",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib/web/components/",
+    "backup",
+    "doc",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.4",
+    "dustjs-linkedin": "^2.7.2",
+    "dustjs-helpers": "^1.7.3",
+    "page": "visionmedia/page.js#^1.7.1",
+    "eventEmitter": "^5.0.0"
+  }
+}

@@ -1,0 +1,71 @@
+// Size the emoji according to the surrounding text: This will make sure emoji
+// derive their width and height from the font-size of the text they're shown
+// with. It also adds just a little bit of space before and after each emoji,
+// and pulls them upwards a little bit for better optical alignment.
+// https://github.com/twitter/twemoji#inline-styles
+img.docma {
+    display: inline-block;
+    border: 0 none;
+
+    &.emoji,
+    &.emoji-sm,
+    &.emoji-1x {
+        height: 1em;
+        width: 1em;
+        margin: 0 .05em 0 .1em;
+        vertical-align: -0.1em;
+    }
+
+    &.emoji-md {
+        height: 1.33em;
+        width: 1.33em;
+        margin: 0 0.0665em 0 0.133em;
+        vertical-align: -0.133em;
+    }
+
+    &.emoji-lg {
+        height: 1.66em;
+        width: 1.66em;
+        margin: 0 0.083em 0 0.166em;
+        vertical-align: -0.166em;
+    }
+
+    .emoji-2x {
+        height: 2em;
+        width: 2em;
+        margin: 0 0.1em 0 0.2em;
+        vertical-align: -0.2em;
+    }
+
+    .emoji-3x {
+        height: 3em;
+        width: 3em;
+        margin: 0 0.15em 0 0.3em;
+        vertical-align: -0.3em;
+    }
+
+    .emoji-4x {
+        height: 4em;
+        width: 4em;
+        margin: 0 0.2em 0 0.4em;
+        vertical-align: -0.4em;
+    }
+
+    .emoji-5x {
+        height: 5em;
+        width: 5em;
+        margin: 0 0.25em 0 0.5em;
+        vertical-align: -0.5em;
+    }
+}
+
+ul.docma.task-list {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+
+    & > li.docma.task-item {
+        padding-left: 0;
+        margin-left: 0;
+    }
+}

@@ -75,13 +75,22 @@
         {@eq key=meta.code.type value="ClassDeclaration"}
         {:else}
             {>"params":./}
+            {?isEnum}{:else}
+                {>"properties":./}
+            {/isEnum}
         {/eq}
 
         {?returns}
-            <b>Returns:</b>
-            <p class="pad-left">
-                {.|s|$returns}
-            </p>
+            {@gt key=returns.length value="1" type="number"}
+                <b>Returns:</b>
+                <p class="pad-left">
+                    {.|s|$returns}
+                </p>
+            {:else}
+                <p>
+                    <b>Returns:</b>&nbsp;&nbsp;{.|s|$returns}
+                </p>
+            {/gt}
         {/returns}
 
         {?exceptions}
@@ -99,7 +108,7 @@
         {?examples}
             <p><b>Example</b></p>
             {#examples}
-            <pre><code class="js">{.|$nt}</code></pre>
+            <pre><code>{.|$nt}</code></pre>
             {/examples}
         {/examples}
     </div>

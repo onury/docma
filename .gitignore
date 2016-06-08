@@ -1,8 +1,10 @@
-backup
-wiki
-node_modules
+backup/
+wiki/
+doc/
+node_modules/
+lib/web/components/
+tmp/
+test/input/private/
+test/output/
 npm-debug.log
-tmp
 TODO.md
-test/code/private
-test/doc

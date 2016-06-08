@@ -1,4 +1,3 @@
-
 # Docma
 
 ![npm](https://img.shields.io/npm/v/docma.svg)
@@ -8,44 +7,54 @@
 
 > © 2016, Onur Yıldırım (@onury). MIT License.
 
-A powerful JSDoc documentation generator with a cool template engine.  
+A powerful tool to easily generate beautiful HTML documentation from Javascript ([JSDoc][jsdoc]) and [Markdown][markdown] files.
 
-Docma is a dev-tool written in Node.js to easily generate beautiful HTML documentation from your JS source files. It parses JSDoc comments into a Javascript object and builds a web app from the given template. The documentation data is then passed to the styled template within the global `docma` object.
+### Features
+
+- Parse **JSDoc** documentation and **Markdown** files.
+- Build a cool **SPA** (Single Page Application) from parsed files.
+- Generate multiple/separate API documentations by grouping JS files.
+- Path or Query-string based app routing.
+- Non-opinionated engine, built-in template with cool opinions. :sunglasses:
+- Supports custom templates.
+- Works great with **GitHub Pages**.
+- Extremely configurable and debuggable.
+- Well documented. :point_up:
 
 ### Table of Contents
+
 - [Installation](#installation)
 - [Building Documentation](#building-documentation)
     + [Build Configuration](#build-configuration)
+    + [Parsed Output](#parsed-output)
 - [Docma Templates](#docma-templates)
-    + [Template Structure](#template-structure)
-    + [Template Configuration](#template-configuration)
-    + [HTML](#html)
-    + [Partials](#partials)
-    + [Docma-Web Core](#docma-web-core)
-    + [Custom Scripts](#custom-scripts)
-    + [Initializing the Template (Web App)](#initializing-the-template-web-app)
-    + [CSS & Less](#css-and-less)
-    + [Other Files](#other-files)
-    + [Docma Default Template](#docma-default-template)
-- [Parsed Documentation](#parsed-documentation)
 - [Change-Log](#change-log)
 - [License](#license)
 - [Related Modules](#related-modules)
 
 ### Installation
-```shell
+
+```sh
 npm i docma --save-dev
 ```
 
 ### Building Documentation
+
+Once you create the configuration object (or file), building documentation is pretty simple.
 
 ```js
 var Docma = require('docma');
 ```
 Either by passing a configuration object.
 ```js
-// Docma.create(config) >> equivalent to >> new Docma(config)
-Docma.create(config)
+var config = {
+    src: [
+        './code/**/*.js',
+        './README.md'
+    ],
+    dest: './output/doc'
+};
+Docma.create(config) // equivalent to >> new Docma(config)
     .build()
     .catch(function (error) {
         console.log(error);
@@ -64,6 +73,8 @@ Docma.fromFile(configFile)
 
 #### Build Configuration
 
+Docma is very configurable 👏 but, you're only required to define very few options such as the source files (`src`) and the destination directory (`dest`) for a simple build.
+
 <table>
     <tr>
         <td><b>Option</b></td>
@@ -73,21 +84,81 @@ Docma.fromFile(configFile)
     </tr>
     <tr>
         <td><code><b>src</b></code></td>
-        <td><code>String|Array</code></td>
+        <td><code>String|Array|Object</code></td>
         <td></td>
-        <td>Required. One or more file/directory paths to be processed. This also accepts a <a href="https://github.com/isaacs/node-glob">Glob</a> string or array of globs. e.g. <code>./src/&#x2A;&#x2A;/&#x2A;.js</code> will produce an array of all .js files under <code>./src</code> directory and sub-directories.</td>
+        <td>
+            Required. One or more file/directory paths to be processed. This also accepts <a href="https://github.com/isaacs/node-glob">Glob</a> strings or array of globs. e.g. <code>./src/&#x2A;&#x2A;/&#x2A;.js</code> will produce an array of all <code>.js</code> files under <code>./src</code> directory and sub-directories.
+        </td>
     </tr>
     <tr>
         <td><code><b>dest</b></code></td>
         <td><code>String</code></td>
         <td></td>
-        <td>Required. Destination output directory path. **CAUTION:** This directory will be emptied before the build. Make sure you set this to a correct path.</td>
+        <td>Required. Destination output directory path. <b>CAUTION:</b> This directory will be emptied before the build. Make sure you set this to a correct path.</td>
+    </tr>
+    <tr>
+        <td><code><b>debug</b></code></td>
+        <td><code>Boolean</code></td>
+        <td><code>false</code></td>
+        <td>
+        If enabled, Javascript files are not minified, compiled less files are not compressed. Additionally, a <code>documentation.json</code> file (that includes the documentation data) is created within the root of the output directory, for investigation.
+        </td>
+    </tr>
+    <tr>
+        <td>↳<code>template.<b>app</b></code></td>
+        <td><code>Object</code></td>
+        <td><code>undefined</code></td>
+        <td>
+            Configuration for the generated web application.
+        </td>
+    </tr>
+    <tr>
+        <td>↳<code>template.app.<b>entrance</b></code></td>
+        <td><code>String</code></td>
+        <td><code>""</code></td>
+        <td>
+            Since you can include other HTML content in the output, other than the generated (JSDoc) documentation content; you can define which content should be loaded and displayed when the web app is first entered via the main file; i.e. <code>/index.html</code>. To set this to the documentation page (generated from JSDoc) either omit this option or set to <code>"doc"</code>. For other content, set this to the name of the HTML file placed within the <code>&lt;dest&gt;/content</code> directory, without the extension <code>.html</code>. For example, if you've included a markdown <code>README.md</code> file in the <code>src</code> array, this will be converted to HTML and generated as <code>&lt;dest&gt;/content/readme.html</code>. In order to set this as the <code>entrance</code>, set this option to <code>"readme"</code> (in lowercase).
+        </td>
+    </tr>
+    <tr>
+        <td><code><b>app</b></code></td>
+        <td><code>Object</code></td>
+        <td><code>undefined</code></td>
+        <td>
+            Configuration for the generated SPA (Single Page Application).
+        </td>
+    </tr>
+    <tr>
+        <td>↳<code>app.<b>title</b></code></td>
+        <td><code>String</code></td>
+        <td><code>""</code></td>
+        <td>
+            Title of the main HTML document of the generated web app. (Sets the value of the <code>&lt;title&gt;</code> element.)
+        </td>
+    </tr>
+    <tr>
+        <td>↳<code>app.<b>meta</b></code></td>
+        <td><code>Array|Object</code></td>
+        <td><code>undefined</code></td>
+        <td>
+            One or more meta elements to be set for the main HTML document of the generated web app. Set arbitrary object(s) for each meta element to be added. e.g. <code>[{ charset: "utf-8"}, { name: "robots", "content": "index, follow" }]</code>
+        </td>
+    </tr>
+    <tr>
+        <td>↳<code>app.<b>base</b></code></td>
+        <td><code>String</code></td>
+        <td><code>"/"</code></td>
+        <td>
+            Sets the base path of the generated web app. For example if the app will operate within `/doc/*` set the base path to `"/doc"`.
+        </td>
     </tr>
     <tr>
         <td><code><b>template</b></code></td>
         <td><code>Object</code></td>
         <td><code>undefined</code></td>
-        <td>Template specific configuration.</td>
+        <td>
+            SPA template configuration.
+        </td>
     </tr>
     <tr>
         <td>↳<code>template.<b>path</b></code></td>
@@ -98,30 +169,6 @@ Docma.fromFile(configFile)
         </td>
     </tr>
     <tr>
-        <td>↳<code>template.<b>document</b></code></td>
-        <td><code>Object</code></td>
-        <td><code>undefined</code></td>
-        <td>
-            Configuration to be applied to the main HTML document of the output.
-        </td>
-    </tr>
-    <tr>
-        <td>↳<code>template.document.<b>title</b></code></td>
-        <td><code>String</code></td>
-        <td><code>""</code></td>
-        <td>
-            Title of the HTML document. (Sets the value of the <code>&lt;title&gt;</code> element.)
-        </td>
-    </tr>
-    <tr>
-        <td>↳<code>template.document.<b>meta</b></code></td>
-        <td><code>Array|Object</code></td>
-        <td><code>undefined</code></td>
-        <td>
-            One or more meta elements to be set for the main HTML document. Set arbitrary object(s) for each meta element to be added. e.g. <code>[{ charset: "utf-8"}, { name: "robots", "content": "index, follow" }]</code>
-        </td>
-    </tr>
-    <tr>
         <td>↳<code>template.<b>options</b></code></td>
         <td><code>Object</code></td>
         <td><code>undefined</code></td>
@@ -129,12 +176,6 @@ Docma.fromFile(configFile)
             Options to be passed to the template.
             If any option is omitted in the build, default values within the <code>docma.template.json</code> configuration file of the template are used.
         </td>
-    </tr>
-    <tr>
-        <td><code><b>dump</b></code></td>
-        <td><code>Boolean</code></td>
-        <td><code>false</code></td>
-        <td>Set to <code>true</code> to output a JSON file from the documentation data. This will create a <code>documentation.json</code> file within the root of the output directory.</td>
     </tr>
     <tr>
         <td><code><b>jsdoc</b></code></td>
@@ -242,191 +283,90 @@ Docma.fromFile(configFile)
             Specifies whether to sort the documentation symbols. For alphabetic sort, set to <code>true</code> or <code>"alphabetic"</code>. To additionally group by scope (static/instance) set to <code>"grouped"</code>. Set to <code>false</code> to disable.
         </td>
     </tr>
-</table>
-
-## Docma Templates
-
-Docma templates are essentially web files that mainly make use of [Dust.js][dustjs] internally. You can check out the [default template][default-template] for the structure and how partials are used.
-
-### Template Structure
-
-```
-/template                      Required
-    ├─ docma.template.json       ✔︎      Template configuration.
-    ├─ index.html                ✔︎      Main entry point. (defined in docma.template.json)
-    ├─ /partials                 ✔︎      Partials to be compiled.
-    │      └─ docma-main.html    ✔︎      Main partial file.
-    ├─ /js
-    ├─ /css
-    ├─ /less
-    ├─ ...
-    :
-```
-
-### Template Configuration
-
-Docma templates should have a `docma.template.json` in the root of the template. This file defines template specific settings such as name of the template, version, the main entry point, document settings, ignored files, etc... This object can be accessed via `docma.template.options` within the template.
-
-<table>
     <tr>
-        <td><b>Config</b></td>
-        <td><b>Type</b></td>
-        <td><b>Default</b></td>
-        <td><b>Description</b></td>
-    </tr>
-    <tr>
-        <td><code><b>name</b></code></td>
-        <td><code>String</code></td>
-        <td></td>
-        <td>
-            Required. Name of the template.
-        </td>
-    </tr>
-    <tr>
-        <td><code><b>version</b></code></td>
-        <td><code>String</code></td>
-        <td><code>"1.0.0"</code></td>
-        <td>
-            Version of the template. (<a href="http://semver.org/">semver</a>).
-        </td>
-    </tr>
-    <tr>
-        <td><code><b>author</b></code></td>
-        <td><code>String</code></td>
-        <td></td>
-        <td>
-            Required. Author information.
-        </td>
-    </tr>
-    <tr>
-        <td><code><b>license</b></code></td>
-        <td><code>String</code></td>
-        <td></td>
-        <td>
-            Required. Name of the license. e.g. <code>"MIT"</code>
-        </td>
-    </tr>
-    <tr>
-        <td><code><b>main</b></code></td>
-        <td><code>String</code></td>
-        <td><code>"index.html"</code></td>
-        <td>
-            Name of the main HTML file which is the entry point of the template.
-        </td>
-    </tr>
-    <tr>
-        <td><code><b>ignore</b></code></td>
-        <td><code>Array</code></td>
-        <td><code>undefined</code></td>
-        <td>
-            List of files or directories to be ignored. <a href="https://github.com/isaacs/node-glob">Globs</a> allowed.
-        </td>
-    </tr>
-    <tr>
-        <td><code><b>compile</b></code></td>
+        <td><code><b>markdown</b></code></td>
         <td><code>Object</code></td>
         <td><code>undefined</code></td>
+        <td>Markdown parse options.</td>
+    </tr>
+    <tr>
+        <td>↳<code>markdown.<b>gfm</b></code></td>
+        <td><code>Boolean</code></td>
+        <td><code>true</code></td>
         <td>
-            Hash-map for files to be compiled. Each key should be a relative path to template directory and each value should be a relative path to output directory (including the file name). Currently only Javascript and Less files are supported. e.g. <code>{ "js/main.js": "js/main.min.js", "less/app.less": "css/app.css" }</code>.
+            Whether to enable <a href="https://help.github.com/categories/writing-on-github">GitHub flavored markdown</a>.
         </td>
     </tr>
     <tr>
-        <td><code><b>options</b></code></td>
-        <td><code>Object</code></td>
-        <td><code>undefined</code></td>
+        <td>↳<code>markdown.<b>tables</b></code></td>
+        <td><code>Boolean</code></td>
+        <td><code>true</code></td>
         <td>
-            Template default options. This object will be merged with the template options defined at build-time.
+            Whether to enable enable GFM <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#tables">tables</a>.
+            This option requires the <code>gfm</code> option to be <code>true</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>↳<code>markdown.<b>breaks</b></code></td>
+        <td><code>Boolean</code></td>
+        <td><code>false</code></td>
+        <td>
+            Whether to enable enable GFM <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/#paragraphs-and-line-breaks">line breaks</a>.
+            This option requires the <code>gfm</code> option to be <code>true</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>↳<code>markdown.<b>pedantic</b></code></td>
+        <td><code>Boolean</code></td>
+        <td><code>false</code></td>
+        <td>
+            Whether to conform with obscure parts of <code>markdown.pl</code> as much as possible.
+            Don't fix any of the original markdown bugs or poor behavior.
+        </td>
+    </tr>
+    <tr>
+        <td>↳<code>markdown.<b>sanitize</b></code></td>
+        <td><code>Boolean</code></td>
+        <td><code>false</code></td>
+        <td>
+            Whether to use smarter list behavior than the original markdown.
+            May eventually be default with the old behavior moved into <code>pedantic</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>↳<code>markdown.<b>smartypants</b></code></td>
+        <td><code>Boolean</code></td>
+        <td><code>false</code></td>
+        <td>
+            Whether to use "smart" typographic punctuation for things like quotes and dashes.
+        </td>
+    </tr>
+    <tr>
+        <td>↳<code>markdown.<b>tasks</b></code></td>
+        <td><code>Boolean</code></td>
+        <td><code>true</code></td>
+        <td>
+            Whether to parse GitHub style task markdown (e.g. <code>&#x2D; [x] task</code>) into checkbox elements. Also, list is marked with <code>class="docma task-list"</code> and each item is marked with <code>class="docma task-item"</code> attributes.
+        </td>
+    </tr>
+    <tr>
+        <td>↳<code>markdown.<b>emoji</b></code></td>
+        <td><code>Boolean</code></td>
+        <td><code>true</code></td>
+        <td>
+            If set to <code>true</code>, emoji shortcuts (e.g. <code>&#x3A;smiley&#x3A;</code>) are parsed into <code>&lt;img /&gt;</code> elements with <a href="http://twitter.github.io/twemoji">twemoji</a> SVG URLs (and <code>class="docma emoji"</code> attribute).
         </td>
     </tr>
 </table>
 
-Note that `docma.template.json` does not include any build configuration. This only configures the template.
+## Parsed Output
 
-#### HTML
-
-`<template>/index.html` is the default entry point (main file) of the generated documentation. It should not include any Dust templates, but can of course include other custom HTML.
-
-It should also include a `<div id="docma-main"></div>` which all the Dust templates will be compiled into. If you don't define this element, it will be created and dynamically appended to the body of the document.
-
-Note that `index.html` is the default name of the entry point. You can customize this (name) in `docma.template.json`.
-
-Example main file (`index.html`):
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-</head>
-<body>
-    <div id="docma-main"></div>
-    <div id="my-footer"></div>
-</body>
-</html>
-```
-
-An empty body would also be valid but we want the footer to come after _docma-main_ element. So it's explicitly defined.
-
-Also, note that **title** of the document is not set. Since this is a template, title will be defined at build time and `<title>` element will be automatically added to the output document. See [Build Configuration](#build-configuration).
-
-#### Partials
-
-Put all [Dust.js][dustjs] partials in `<template>/partials` directory. You should name your main partial as `docma-main.html` which will be compiled into `<div id="docma-main"></div>` in your main HTML.
-
-A simple example for `docma-main.html` partial:
-```html
-{#documentation}
-    <h4 id="{.|$id}">{longname}</h4>
-    <p>{description}</p>
-{/documentation}
-```
-
-You can have sub directories within `<template>/partials` but all HTML files in these directories will be treated as if they were at the same level (under `<template>/partials` directory). For example, if you have a template at `<template>/partials/widgets/menu.html`, you should still include it like this: `{>"menu"/}` not `{>"widgets/menu"/}` or `{>"partials/widgets/menu"/}`. That's why all partials should have unique names.
-
-These HTML files under `<template>/partials` are pre-compiled into Javascript and will be included as Dust JS templates. (Note that this directory will not be copied over to output directory.)
-
-#### Docma-Web Core
-
-When you build the documentation with your template, a `docma-web.js` will be generated (and linked in your main HTML); which is the core engine for the documentation web app. This will include everything the app needs such as the documentation data, compiled partials, dustjs engine, etc... (Note that the size of this script depends especially on the generated documentation data.)
-
-See [Docma Web API][docma-web-api].
-
-#### Custom Scripts
-
-You have full control over the main HTML file so you can include any Javascript files in it. Docma web core will always be prepended before your scripts; so that you can safely access the global `docma` object.
-
-#### Initializing the Template (Web App)
-
-In order to make sure you execute some script after Docma is ready (and compiled partials are rendered), use the `.ready()` method of the global `docma` object.
-```js
-// run this in any js file in the browser
-docma.ready(function (err) {
-    if (err) {
-        console.log(err);
-        return;
-    }
-    // initialize your code here
-})
-```
-
-#### CSS & Less
-
-You can include any `.css` files, anywhere in your template. Since you have control over the main HTML file, you can link any stylesheet in it. As a convention, it's recommended that you place all `.css` files under `<template>/css`.
-
-You can also include less files in your template. Main less file(s) to be compiled, should be defined in `docma.template.json`.
-
-#### Other Files
-
-You can include any custom files anywhere in your template. They will be copied over into the output directory. If you need to include a file in the template but don't want it to be in the generated output; define it in the `docma.template.json` file, within the `ignore` setting.
-
-#### Docma Default Template
-
-Using the default template is straight-forward. Just set `buildConfig.template.path` to `"default"` or omit it. You can check out the source of the [default template][default-template] to see a detailed example of how a template is structured and configured.
-
-## Parsed Documentation
-
-To investigate the parsed JSDoc documentation, enable the `dump` option that will create a `documentation.json` file within the root of the output directory.
+To investigate the parsed JSDoc output, enable the `debug` option that will create a `documentation.json` file within the root of the output directory.
 
 If you have a problem with the parsed documentation data, open an issue @ [jsdoc-x][jsdoc-x]. _(I'm the author.)_
+
+For markdown output issues (that are not related with style), you can open an issue @ [marked][marked].
+
 
 ## Change-Log
 
@@ -434,17 +374,26 @@ See [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
-MIT. You don't have to include any copyright notice in your templates but I'd appreciate if you let people know about this tool so we can read better documentations.
+MIT. You don't have to include any copyright notice in your documentation output or templates but I'd appreciate if you let people know about this tool so we can read better documentations.
+
+Emoji shortcuts used in source markdown files are parsed into [twemoji][twemoji]. Graphics licensed under [CC-BY 4.0][cc-by-4].
 
 ## Related Modules
 
 - [grunt-docma][grunt-docma] — Grunt task for Docma.
 - [jsdoc-x][jsdoc-x] — Parser for outputting a Javascript object from documented code via JSDoc's explain (-X) command.
+- [marked][marked] — A full-featured markdown parser and compiler, written in JavaScript. Built for speed.
 - [dustjs][dustjs-github] — Asynchronous Javascript templating for the browser and server.
 
+
+[jsdoc]:http://http://usejsdoc.org
+[markdown]:https://daringfireball.net/projects/markdown
 [jsdoc-x]:https://github.com/onury/jsdoc-x
+[marked]:https://github.com/chjj/marked
 [default-template]:https://github.com/onury/docma/tree/master/templates/default
 [docma-web-api]:https://github.com/onury/docma/blob/master/doc/docma.web.md
 [dustjs]: http://www.dustjs.com
 [dustjs-github]: https://github.com/linkedin/dustjs
 [grunt-docma]:https://github.com/onury/grunt-docma
+[twemoji]:https://github.com/twitter/twemoji
+[cc-by-4]:https://creativecommons.org/licenses/by/4.0

@@ -1,0 +1,9 @@
+{
+  "directory": "lib/web/components/",
+  "timeout": 120000,
+  "color": true,
+  "registry": {
+    "register": "http://localhost:8000",
+    "publish": "http://localhost:8000"
+  }
+}

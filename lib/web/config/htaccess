@@ -1,0 +1,51 @@
+# DOCMA APACHE CONFIG
+# https://github.com/onury/docma
+
+# -------------------------------------
+#   INDEX
+# -------------------------------------
+
+# Don't show directory listings for URLs which map to a directory.
+Options -Indexes
+
+# Follow symbolic links in this directory.
+Options +FollowSymLinks
+
+# Set the default directory index file.
+# This is defined by docma.template.json configuration file.
+DirectoryIndex %{DOCMA_MAIN}
+
+# -------------------------------------
+#   CHARSET & ENCODING
+# -------------------------------------
+
+AddDefaultCharset UTF-8
+
+# -------------------------------------
+#   URL REWRITE
+# -------------------------------------
+
+<IfModule mod_rewrite.c>
+
+    RewriteEngine On
+
+    # Base is defined by docma.template.app.base setting at build-time.
+    RewriteBase "%{DOCMA_BASE}"
+
+    # [R]edirect index.html to base with (N)o-(C)ase and as [L]ast rule
+    RewriteRule "^%{DOCMA_MAIN_ESC}$" "%{DOCMA_BASE}" [R,NC,L]
+
+    # Don't do anything for already existing files:
+    # ---------------------------------------------
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule "^.+$" - [L]
+
+    # Redirect specific URLs to base by proxy:
+    # --------------------------------------------------
+    # Because of the Proxy (P) option, the url will remain the same while redirected to base.
+    # Docma Single Page Application (SPA) will take care of the rest via page.js
+    # [R]edirect anything to base with (N)o-(C)ase, (N)o-(E)scaping, by [P]roxy as [L]ast rule
+    RewriteRule "^.+$" "%{DOCMA_BASE}" [R,NC,NE,P,L]
+
+</IfModule>

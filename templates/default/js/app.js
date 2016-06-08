@@ -11,36 +11,29 @@
     function _getSymbolBadge(symbol) {
         if (!symbol) return '';
 
-        if (docma.utils.isClass(symbol)) {
-            return '<span class="symbol-badge bg-green" title="Class">C</span>';
+        function html(cls, title, str) {
+            return '<div class="item-badge" title="' + title + '">'
+                + '<div class="badge-label">' + str + '</div>'
+                + '<div class="badge-shape ' + cls + '"></div>'
+                + '</div>';
         }
-        if (docma.utils.isNamespace(symbol)) {
-            return '<span class="symbol-badge bg-red" title="Namespace">N</span>';
-        }
-        if (docma.utils.isModule(symbol)) {
-            return '<span class="symbol-badge bg-pink" title="Module">M</span>';
-        }
-        if (docma.utils.isEnum(symbol)) {
-            return '<span class="symbol-badge bg-purple" title="Enum">E</span>';
-        }
+
+        if (docma.utils.isClass(symbol)) return html('diamond bg-green', 'Class', 'C');
+        if (docma.utils.isNamespace(symbol)) return html('diamond bg-red', 'Namespace', 'N');
+        if (docma.utils.isModule(symbol)) return html('diamond bg-pink', 'Module', 'M');
+        if (docma.utils.isEnum(symbol)) return html('square bg-purple', 'Enum', 'E');
         if (docma.utils.isGlobal(symbol)) {
-            if (docma.utils.isMethod(symbol)) {
-                return '<span class="symbol-badge bg-accent" title="Global Function">G</span>';
-            }
-            return '<span class="symbol-badge bg-orange" title="Global Object">G</span>';
+            if (docma.utils.isMethod(symbol)) return html('diamond bg-accent', 'Global Function', 'G');
+            return html('diamond bg-red', 'Global Object', 'G');
         }
-        if (docma.utils.isStaticMethod(symbol)) {
-            return '<span class="symbol-badge bg-accent" title="Static Method">M</span>';
+        if (docma.utils.isInner(symbol)) {
+            if (docma.utils.isMethod(symbol)) return html('circle bg-gray-dark', 'Inner Method', 'M');
+            return html('circle bg-gray-dark', 'Inner', 'I');
         }
-        if (docma.utils.isInstanceMethod(symbol)) {
-            return '<span class="symbol-badge bg-cyan" title="Instance Method">M</span>';
-        }
-        if (docma.utils.isStaticProperty(symbol)) {
-            return '<span class="symbol-badge bg-orange" title="Static Property">P</span>';
-        }
-        if (docma.utils.isInstanceProperty(symbol)) {
-            return '<span class="symbol-badge bg-yellow" title="Instance Property">P</span>';
-        }
+        if (docma.utils.isStaticProperty(symbol)) return html('square bg-orange', 'Static Property', 'P');
+        if (docma.utils.isInstanceProperty(symbol)) return html('circle bg-yellow', 'Instance Property', 'P');
+        if (docma.utils.isStaticMethod(symbol)) return html('square bg-accent', 'Static Method', 'M');
+        if (docma.utils.isInstanceMethod(symbol)) return html('circle bg-cyan', 'Instance Method', 'M');
         return '';
     }
 
@@ -96,12 +89,12 @@
     dust.filters.$longname = function (symbol) {
         if (typeof symbol === 'string') return symbol;
         var nw = docma.utils.isConstructor(symbol) ? 'new ' : '';
-        return nw + docma.utils.getFullName(symbol);
+        return nw + symbol.$longname; // docma.utils.getFullName(symbol);
     };
 
     dust.filters.$longname_params = function (symbol) {
         var isCon = docma.utils.isConstructor(symbol),
-            longName = docma.utils.getFullName(symbol);
+            longName = symbol.$longname; // docma.utils.getFullName(symbol);
         if (symbol.kind === 'function' || isCon) {
             var defVal = '',
                 nw = isCon ? 'new ' : '',
@@ -143,21 +136,25 @@
     // symbol. We also add other properties such as .readonly or
     // kind=namespace as tags.
     dust.filters.$tags = function (symbol) {
-        var open = '<span class="boxed vertical-middle bg-ice opacity-xl">',
-            open2 = '<span class="boxed vertical-middle">',
+        var open = '<span class="boxed vertical-middle bg-ice opacity-full">',
+            open2 = '<span class="boxed vertical-middle bg-brown opacity-sm">',
+            open3 = '<span class="boxed vertical-middle">',
             close = '</span>',
             tagBoxes = [];
 
+        if (docma.utils.isGlobal(symbol) && !docma.utils.isConstructor(symbol)) {
+            tagBoxes.push(open + 'global' + close);
+        }
         if (docma.utils.isNamespace(symbol)) {
             tagBoxes.push(open + 'namespace' + close);
         }
         if (docma.utils.isReadOnly(symbol)) {
-            tagBoxes.push(open2 + 'readonly' + close);
+            tagBoxes.push(open3 + 'readonly' + close);
         }
 
         var tags = Array.isArray(symbol) ? symbol : symbol.tags || [],
             tagTitles = tags.map(function (tag) {
-                return open + tag.originalTitle + close;
+                return open2 + tag.originalTitle + close;
             });
         tagBoxes = tagBoxes.concat(tagTitles);
         if (tagBoxes.length) return '&nbsp;&nbsp;' + tagBoxes.join('&nbsp;');
@@ -173,7 +170,7 @@
             badge = docma.template.options.badges
                 ? _getSymbolBadge(symbol)
                 : '• ',
-            name = dust.filters.$dot_prop(symbolName);
+            name = '<span class="item-label">' + dust.filters.$dot_prop(symbolName) + '</span>';
         return '<a href="#' + id + '" class="sidebar-item" data-keywords="' + keywords + '">' + badge + name + '</a>';
     };
 
@@ -187,52 +184,44 @@
         useBR: false
     });
 
-    docma.ready(function (err) {
-        if (err) console.log(err);
+    var menuItems, btnClean, txtSearch;
+
+    function filterMenuItems() {
+        var search = txtSearch.val().trim().toLowerCase();
+        if (search === '') {
+            menuItems.show();
+            btnClean.hide();
+            return;
+        }
+        btnClean.show();
+        var keywords;
+        menuItems.each(function () {
+            keywords = $(this).attr('data-keywords');
+            if (keywords.indexOf(search) < 0) {
+                $(this).hide();
+            } else {
+                $(this).show();
+            }
+        });
+    }
+
+    // for sidebar items
+    var minFontSize = 10,
+        maxFontSize = 14;
+    function setFontSize($el) {
+        var f = maxFontSize;
+        while ($el.width() > 215 && f >= minFontSize) {
+            f--;
+            $el.css('font-size', f + 'px');
+        }
+    }
+
+    docma.on('render', function (currentRoute) {
 
         $('[data-toggle="tooltip"]').tooltip({
             container: 'body',
             placement: 'bottom'
         });
-
-        var menuItems, btnClean, txtSearch;
-
-        function filterMenuItems() {
-            var search = txtSearch.val().trim().toLowerCase();
-            if (search === '') {
-                menuItems.show();
-                btnClean.hide();
-                return;
-            }
-            btnClean.show();
-            var keywords;
-            menuItems.each(function () {
-                keywords = $(this).attr('data-keywords');
-                if (keywords.indexOf(search) < 0) {
-                    $(this).hide();
-                } else {
-                    $(this).show();
-                }
-            });
-        }
-
-        if (docma.template.options.search) {
-            menuItems = $('ul.sidebar-nav .sidebar-item');
-            btnClean = $('.sidebar-search-clean');
-            txtSearch = $('#txt-search');
-
-            btnClean.hide();
-            txtSearch.on('keyup', filterMenuItems);
-            txtSearch.on('change', filterMenuItems);
-
-            btnClean.on('click', function () {
-                txtSearch.val('').focus();
-                menuItems.show();
-                btnClean.hide();
-            });
-        } else {
-            $('.sidebar-nav').css('top', '65px');
-        }
 
         if (!docma.template.options.navbar) {
             // remove the gap created for navbar
@@ -247,7 +236,33 @@
             });
         }
 
-        var contentRow = $('#page-content-wrapper').find('.row').first();
+        if (docma.currentRoute && docma.currentRoute.type === 'api') {
+            if (docma.template.options.search) {
+                menuItems = $('ul.sidebar-nav .sidebar-item');
+                btnClean = $('.sidebar-search-clean');
+                txtSearch = $('#txt-search');
+
+                btnClean.hide();
+                txtSearch.on('keyup', filterMenuItems);
+                txtSearch.on('change', filterMenuItems);
+
+                btnClean.on('click', function () {
+                    txtSearch.val('').focus();
+                    menuItems.show();
+                    btnClean.hide();
+                });
+            } else {
+                $('.sidebar-nav').css('top', '65px');
+            }
+
+            // Adjust font-size of each sidebar item's label so that they are
+            // not cropped.
+            $('.sidebar-nav .item-label').each(function () {
+                setFontSize($(this));
+            });
+        }
+
+        var pageContentRow = $('#page-content-wrapper').find('.row').first();
         if (docma.template.options.sidebar) {
             if (docma.template.options.collapsed) {
                 $('#wrapper').addClass("toggled");
@@ -260,8 +275,8 @@
                 if (!docma.template.options.navbar) {
                     var marginLeft = $('#wrapper').hasClass('toggled')
                         ? '+=30px' : '-=30px';
-                    // contentRow.css('margin-left', marginLeft);
-                    contentRow.animate({
+                    // pageContentRow.css('margin-left', marginLeft);
+                    pageContentRow.animate({
                         'margin-left': marginLeft
                     }, 300);
                 }
@@ -271,11 +286,43 @@
             $('#wrapper').addClass("toggled");
         }
 
+        var brandMargin = 50,
+            brandHPadding = 15;
+        // For the JSDoc API documentation, our template partials already have
+        // styles. So we'll style only some type of elements in other HTML
+        // content.
+        if (!docma.currentRoute || docma.currentRoute.type !== 'api') {
+            // We'll add the template's modified bootstrap table classes
+            $('table').addClass('table table-striped table-bordered');
+
+            // code blocks in markdown files (e.g. ```js) are converted into
+            // <code class="lang-js">. we'll add classes for hljs for proper
+            // highlighting. e.g. for javascript, hljs requires class="js". So
+            // this will be class="lang-js js".
+
+            // this seems unnecessary. somehow, hljs detects it.
+            // $("code[class^='lang-']").each(function () {
+            //     var cls = $(this).attr('class'),
+            //         m = cls.match(/lang\-([^ ]+)/)[1];
+            //     if (m) $(this).addClass(m);
+            // });
+
+            // also adjust navbar-brand margin
+            brandMargin = 0;
+            brandHPadding = 0;
+        }
+        $('.navbar-brand').css({
+            'margin-left': brandMargin + 'px',
+            'padding-left': brandHPadding + 'px',
+            'padding-right': brandHPadding + 'px'
+        });
+
         // Syntax-Highlight code examples
         var examples = $('#docma-main pre > code');
         examples.each(function (i, block) {
             hljs.highlightBlock(block);
         });
+
     });
 
 })();

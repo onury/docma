@@ -1,12 +1,6 @@
-{?template.options.sidebar}
-<div class="sidebar-toggle">
-    <span class="glyphicon glyphicon-menu-hamburger"></span>
-</div>
-{/template.options.sidebar}
-
 {?template.options.navbar}
     <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
+        <div class="{?boxed}container container-boxed{:else}container-fluid{/boxed}">
             <div class="nav navbar-left nav-left">
                 <div class="navbar-brand">
                     <b>{template.options.title}</b>
