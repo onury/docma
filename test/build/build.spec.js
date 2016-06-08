@@ -40,7 +40,8 @@
                 iconClass: 'ico-book',
                 label: 'API Reference',
                 items: [
-                    { label: 'Docma Web API', href: route('docma-web', 'api') },
+                    { label: 'Docma (Builder) API', href: route('docma', 'api') },
+                    { label: 'Docma (Web) API', href: route('docma-web', 'api') },
                     { label: 'Docma Web Utils', href: route('docma-web-utils', 'api') },
                     { label: 'Test (src)', href: route('src', 'api') },
                     { separator: true },
@@ -125,6 +126,7 @@
                 // './test/input/**/*.js',
                 './test/input/code.js',
                 {
+                    'docma': './lib/docma.js',
                     'docma-web': [
                         './lib/web/core.js',
                         './lib/web/core.*.js',
@@ -148,14 +150,14 @@
 
         // beforeAll(function () {});
 
-        fit('should build with query-routing', function (done) {
+        it('should build with query-routing', function (done) {
             config.app.routing = 'query';
             config.template.options.navItems = getNavItems(config.app.routing);
             config.dest = 'test/output/query-routing';
             config.app.base = '/javascript/docma/' + config.dest;
 
-            Docma.create(config)
-                .build()
+            Docma.create()
+                .build(config)
                 .then(function (success) {
                     expect(success).toEqual(true);
                 })
@@ -172,8 +174,21 @@
             config.template.options.navItems = getNavItems(config.app.routing);
             config.dest = 'test/output/path-routing';
             config.app.base = '/javascript/docma/' + config.dest;
-            Docma.create(config)
-                .build()
+            Docma.create()
+                .build(config)
+                .then(function (success) {
+                    expect(success).toEqual(true);
+                })
+                .catch(function (err) {
+                    expect(Boolean(err)).toEqual(false);
+                    console.log(err.stack || err);
+                })
+                .finally(done);
+        });
+
+        fit('should build docma documentation', function (done) {
+            Docma.create()
+                .build('./doc/docma.config.json')
                 .then(function (success) {
                     expect(success).toEqual(true);
                 })
