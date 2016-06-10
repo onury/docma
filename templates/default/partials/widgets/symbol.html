@@ -57,7 +57,6 @@
         {/classdesc}
 
         {?see}
-        <br />
         <p>
             <b>See</b>
             {@gt key=see.length value=1}
@@ -68,6 +67,7 @@
                 {#see}&nbsp;{.|s|$pl}{/see}
             {/gt}
         </p>
+        <br />
         {/see}
 
         <!--  don't list params for class declarations since we already list
@@ -94,10 +94,16 @@
         {/returns}
 
         {?exceptions}
-            <b>Throws:</b>
-            <p class="pad-left">
-                {.|s|$exceptions}
-            </p>
+            {@gt key=exceptions.length value="1" type="number"}
+                <b>Throws:</b>
+                <p class="pad-left">
+                    {.|s|$exceptions}
+                </p>
+            {:else}
+                <p>
+                    <b>Throws:</b>&nbsp;&nbsp;{.|s|$exceptions}
+                </p>
+            {/gt}
         {/exceptions}
 
         <!-- if this is an enumeration symbol, list the members in a table -->

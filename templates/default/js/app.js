@@ -41,138 +41,123 @@
     // CUSTOM DUST FILTERS
     // ---------------------------
 
-    dust.filters.$dot_prop = function (name) {
-        var re = /(.*)([\.#~]\w+)/g,
-            match = re.exec(name);
-        if (!match) {
-            return '<b>' + name + '</b>';
-        }
-        return '<span class="color-gray">' + match[1] + '</span>' + match[2];
-    };
-
-    dust.filters.$author = function (symbol) {
-        var authors = Array.isArray(symbol) ? symbol : (symbol.author || []);
-        return authors.join(', ');
-    };
-
-    dust.filters.$type = function (symbol) {
-        if (docma.utils.isConstructor(symbol)) return '';
-        if (symbol.kind === 'function') {
-            var returnTypes = docma.utils.getReturnTypes(symbol);
-            return returnTypes ? returnTypes : '';
-        }
-        var types = docma.utils.getTypes(symbol);
-        return types ? types : '';
-    };
-
-    dust.filters.$type_sep = function (symbol) {
-        if (docma.utils.isConstructor(symbol)) return '';
-        if (symbol.kind === 'function') return '⇒';
-        if (symbol.kind === 'class') return ':';
-        if (!symbol.type && !symbol.returns) return '';
-        return ':';
-    };
-
-    // dust.filters.$param_type = function (param) {
-    //     var types = docma.utils.getTypes(param);
-    //     return types ? types : '';
-    // };
-
-    dust.filters.$param_desc = function (param) {
-        var str = !param.optional
-            ? '<span class="boxed bg-red">Required</span>&nbsp;'
-            : '';
-        str += param.description;
-        return docma.utils.parse(str);
-    };
-
-    dust.filters.$longname = function (symbol) {
-        if (typeof symbol === 'string') return symbol;
-        var nw = docma.utils.isConstructor(symbol) ? 'new ' : '';
-        return nw + symbol.$longname; // docma.utils.getFullName(symbol);
-    };
-
-    dust.filters.$longname_params = function (symbol) {
-        var isCon = docma.utils.isConstructor(symbol),
-            longName = symbol.$longname; // docma.utils.getFullName(symbol);
-        if (symbol.kind === 'function' || isCon) {
-            var defVal = '',
-                nw = isCon ? 'new ' : '',
-                name = nw + longName + '(';
-            if (Array.isArray(symbol.params)) {
-                var params = symbol.params.reduce(function (memo, param) {
-                    // ignore params such as options.property
-                    if (param.name.indexOf('.') === -1) {
-                        defVal = param.optional // param.hasOwnProperty('defaultvalue')
-                            ? '<span class="def-val">=' + (param.defaultvalue || 'undefined') + '</span>'
-                            : '';
-                        memo.push(param.name + defVal);
-                    }
-                    return memo;
-                }, []).join(', ');
-                name += params;
+    docma
+        .addFilter('$dot_prop', function (name) {
+            var re = /(.*)([\.#~]\w+)/g,
+                match = re.exec(name);
+            if (!match) {
+                return '<b>' + name + '</b>';
             }
-            return name + ')';
-        }
-        return longName;
-    };
+            return '<span class="color-gray">' + match[1] + '</span>' + match[2];
+        })
+        .addFilter('$author', function (symbol) {
+            var authors = Array.isArray(symbol) ? symbol : (symbol.author || []);
+            return authors.join(', ');
+        })
+        .addFilter('$type', function (symbol) {
+            if (docma.utils.isConstructor(symbol)) return '';
+            if (symbol.kind === 'function') {
+                var returnTypes = docma.utils.getReturnTypes(symbol);
+                return returnTypes ? returnTypes : '';
+            }
+            var types = docma.utils.getTypes(symbol);
+            return types ? types : '';
+        })
+        .addFilter('$type_sep', function (symbol) {
+            if (docma.utils.isConstructor(symbol)) return '';
+            if (symbol.kind === 'function') return '⇒';
+            if (symbol.kind === 'class') return ':';
+            if (!symbol.type && !symbol.returns) return '';
+            return ':';
+        })
+        .addFilter('$param_desc', function (param) {
+            var str = !param.optional
+                ? '<span class="boxed bg-red">Required</span>&nbsp;'
+                : '';
+            str += param.description;
+            return docma.utils.parse(str);
+        })
+        .addFilter('$longname', function (symbol) {
+            if (typeof symbol === 'string') return symbol;
+            var nw = docma.utils.isConstructor(symbol) ? 'new ' : '';
+            return nw + symbol.$longname; // docma.utils.getFullName(symbol);
+        })
+        .addFilter('$longname_params', function (symbol) {
+            var isCon = docma.utils.isConstructor(symbol),
+                longName = symbol.$longname; // docma.utils.getFullName(symbol);
+            if (symbol.kind === 'function' || isCon) {
+                var defVal = '',
+                    nw = isCon ? 'new ' : '',
+                    name = nw + longName + '(';
+                if (Array.isArray(symbol.params)) {
+                    var params = symbol.params.reduce(function (memo, param) {
+                        // ignore params such as options.property
+                        if (param.name.indexOf('.') === -1) {
+                            defVal = param.optional // param.hasOwnProperty('defaultvalue')
+                                ? '<span class="def-val">=' + (param.defaultvalue || 'undefined') + '</span>'
+                                : '';
+                            memo.push(param.name + defVal);
+                        }
+                        return memo;
+                    }, []).join(', ');
+                    name += params;
+                }
+                return name + ')';
+            }
+            return longName;
+        })
+        .addFilter('$extends', function (symbol) {
+            var ext = Array.isArray(symbol) ? symbol : symbol.augments;
+            return docma.utils.listType(ext);
+        })
+        .addFilter('$returns', function (symbol) {
+            var returns = Array.isArray(symbol) ? symbol : symbol.returns;
+            return docma.utils.listTypeDesc(returns);
+        })
+        .addFilter('$exceptions', function (symbol) {
+            var exceptions = Array.isArray(symbol) ? symbol : symbol.exceptions;
+            return docma.utils.listTypeDesc(exceptions);
+        })
+        // non-standard JSDoc directives are stored in .tags property of a
+        // symbol. We also add other properties such as .readonly or
+        // kind=namespace as tags.
+        .addFilter('$tags', function (symbol) {
+            var open = '<span class="boxed vertical-middle bg-ice opacity-full">',
+                open2 = '<span class="boxed vertical-middle bg-brown opacity-sm">',
+                open3 = '<span class="boxed vertical-middle">',
+                close = '</span>',
+                tagBoxes = [];
 
-    dust.filters.$extends = function (symbol) {
-        var ext = Array.isArray(symbol) ? symbol : symbol.augments;
-        return docma.utils.listType(ext);
-    };
+            if (docma.utils.isGlobal(symbol) && !docma.utils.isConstructor(symbol)) {
+                tagBoxes.push(open + 'global' + close);
+            }
+            if (docma.utils.isNamespace(symbol)) {
+                tagBoxes.push(open + 'namespace' + close);
+            }
+            if (docma.utils.isReadOnly(symbol)) {
+                tagBoxes.push(open3 + 'readonly' + close);
+            }
 
-    dust.filters.$returns = function (symbol) {
-        var returns = Array.isArray(symbol) ? symbol : symbol.returns;
-        return docma.utils.listTypeDesc(returns);
-    };
-
-    dust.filters.$exceptions = function (symbol) {
-        var exceptions = Array.isArray(symbol) ? symbol : symbol.exceptions;
-        return docma.utils.listTypeDesc(exceptions);
-    };
-
-    // non-standard JSDoc directives are stored in .tags property of a
-    // symbol. We also add other properties such as .readonly or
-    // kind=namespace as tags.
-    dust.filters.$tags = function (symbol) {
-        var open = '<span class="boxed vertical-middle bg-ice opacity-full">',
-            open2 = '<span class="boxed vertical-middle bg-brown opacity-sm">',
-            open3 = '<span class="boxed vertical-middle">',
-            close = '</span>',
-            tagBoxes = [];
-
-        if (docma.utils.isGlobal(symbol) && !docma.utils.isConstructor(symbol)) {
-            tagBoxes.push(open + 'global' + close);
-        }
-        if (docma.utils.isNamespace(symbol)) {
-            tagBoxes.push(open + 'namespace' + close);
-        }
-        if (docma.utils.isReadOnly(symbol)) {
-            tagBoxes.push(open3 + 'readonly' + close);
-        }
-
-        var tags = Array.isArray(symbol) ? symbol : symbol.tags || [],
-            tagTitles = tags.map(function (tag) {
-                return open2 + tag.originalTitle + close;
-            });
-        tagBoxes = tagBoxes.concat(tagTitles);
-        if (tagBoxes.length) return '&nbsp;&nbsp;' + tagBoxes.join('&nbsp;');
-        return '';
-    };
-
-    dust.filters.$menuitem = function (symbolName) {
-        var docs = docma.documentation,
-            symbol = docma.utils.getSymbolByName(docs, symbolName);
-        if (!symbol) return symbolName;
-        var id = dust.filters.$id(symbol),
-            keywords = docma.utils.getKeywords(symbol),
-            badge = docma.template.options.badges
-                ? _getSymbolBadge(symbol)
-                : '• ',
-            name = '<span class="item-label">' + dust.filters.$dot_prop(symbolName) + '</span>';
-        return '<a href="#' + id + '" class="sidebar-item" data-keywords="' + keywords + '">' + badge + name + '</a>';
-    };
+            var tags = Array.isArray(symbol) ? symbol : symbol.tags || [],
+                tagTitles = tags.map(function (tag) {
+                    return open2 + tag.originalTitle + close;
+                });
+            tagBoxes = tagBoxes.concat(tagTitles);
+            if (tagBoxes.length) return '&nbsp;&nbsp;' + tagBoxes.join('&nbsp;');
+            return '';
+        })
+        .addFilter('$menuitem', function (symbolName) {
+            var docs = docma.documentation,
+                symbol = docma.utils.getSymbolByName(docs, symbolName);
+            if (!symbol) return symbolName;
+            var id = dust.filters.$id(symbol),
+                keywords = docma.utils.getKeywords(symbol),
+                badge = docma.template.options.badges
+                    ? _getSymbolBadge(symbol)
+                    : '• ',
+                name = '<span class="item-label">' + dust.filters.$dot_prop(symbolName) + '</span>';
+            return '<a href="#' + id + '" class="sidebar-item" data-keywords="' + keywords + '">' + badge + name + '</a>';
+        });
 
     // ---------------------------
     // INITIALIZATION

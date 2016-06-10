@@ -74,7 +74,7 @@
 
     describe('build', function () {
         var config = {
-            debug: 4,
+            debug: 5,
             jsdoc: {
                 encoding: 'utf8',
                 recurse: false,
@@ -85,7 +85,7 @@
                 undocumented: false,
                 undescribed: false,
                 hierarchy: true,
-                sort: "grouped",
+                sort: true, // "grouped",
                 relativePath: path.join(__dirname, '/code'),
                 filter: null
             },
@@ -155,7 +155,6 @@
             config.template.options.navItems = getNavItems(config.app.routing);
             config.dest = 'test/output/query-routing';
             config.app.base = '/javascript/docma/' + config.dest;
-
             Docma.create()
                 .build(config)
                 .then(function (success) {

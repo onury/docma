@@ -1,7 +1,7 @@
 ## Docma Change-Log
 ---
 
-#### **v1.0.0** Release (2015-06-06)
+#### **v1.0.0** Release (2015-06-11)
 
 - <p>**Docma** (Builder):</p>
     + Convert markdown files to HTML. See documentation.
