@@ -23,7 +23,7 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 
 ...like this:
 
-[![Docma Screenshot][screenshot]][docma-docs]
+[![Docma Screenshot][screenshot]][docma-doc]
 
 ### Installation
 
