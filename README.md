@@ -23,8 +23,7 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 
 ...like this:
 
-![Docma Screenshot][screenshot]
-
+[![Docma Screenshot][screenshot]][docma-docs]
 
 ### Installation
 
@@ -44,7 +43,7 @@ Read [Docma documentation][docma-doc], built with Docma, for a Docma demo... ;)
 - [dustjs][dustjs-github] — Asynchronous Javascript templating for the browser and server.
 
 
-[screenshot]:https://raw.github.com/onury/geolocator/master/docma-screen.jpg
+[screenshot]:https://raw.github.com/onury/docma/master/docma-screen.jpg
 [docma-doc]:https://onury.github.io/docma
 [jsdoc]:http://http://usejsdoc.org
 [markdown]:https://daringfireball.net/projects/markdown
