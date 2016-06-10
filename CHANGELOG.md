@@ -4,6 +4,7 @@
 #### **v1.0.1** Release (2015-06-11)
 
 - Fixed missing web components.
+- David reports marked as [insecure dependency](https://david-dm.org/onury/docma). This is [already](https://nodesecurity.io/advisories/marked_content-injection) [reported](https://github.com/chjj/marked/pull/592).
 
 #### **v1.0.0** Release (2015-06-11)
 
