@@ -2,7 +2,7 @@ backup/
 wiki/
 doc/
 node_modules/
-lib/web/components/
+bower_components/
 tmp/
 test/input/private/
 test/output/

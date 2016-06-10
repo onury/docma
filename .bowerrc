@@ -1,5 +1,5 @@
 {
-  "directory": "lib/web/components/",
+  "directory": "bower_components/",
   "timeout": 120000,
   "color": true,
   "registry": {

@@ -1,6 +1,10 @@
 ## Docma Change-Log
 ---
 
+#### **v1.0.1** Release (2015-06-11)
+
+- Fixed missing web components.
+
 #### **v1.0.0** Release (2015-06-11)
 
 - <p>**Docma** (Builder):</p>

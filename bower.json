@@ -5,7 +5,6 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "lib/web/components/",
     "backup",
     "doc",
     "test",
