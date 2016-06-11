@@ -28,7 +28,7 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 ### Installation
 
 ```sh
-npm i docma --save-dev
+npm i docma
 ```
 
 ### Documentation
