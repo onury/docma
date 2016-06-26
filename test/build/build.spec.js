@@ -33,7 +33,10 @@
                     { separator: true },
                     { label: 'Creating Docma Templates', href: route('templates') },
                     { label: 'Docma Web Core', href: route('docma-web') },
-                    { label: 'Docma Filters', href: route('docma-filters') }
+                    { label: 'Docma Filters', href: route('docma-filters') },
+                    { separator: true },
+                    { label: 'HTML Page', href: route('page') },
+                    { label: 'iFrame Page', href: route('iframe') }
                 ]
             },
             {
@@ -143,14 +146,18 @@
                 },
                 './doc/**/*.md',
                 { 'guide': './README.md' }, // renamed markdown
-                './CHANGELOG.md'
+                './CHANGELOG.md',
+                {
+                    'page': './test/input/html-test.html',
+                    'iframe': './test/input/iframe-test.html'
+                }
             ],
             dest: './test/output' // overwritten in specs
         };
 
         // beforeAll(function () {});
 
-        it('should build with query-routing', function (done) {
+        fit('should build with query-routing', function (done) {
             config.app.routing = 'query';
             config.template.options.navItems = getNavItems(config.app.routing);
             config.dest = 'test/output/query-routing';
@@ -185,7 +192,7 @@
                 .finally(done);
         });
 
-        fit('should build docma documentation', function (done) {
+        it('should build docma documentation', function (done) {
             Docma.create()
                 .build('./doc/docma.config.json')
                 .then(function (success) {
