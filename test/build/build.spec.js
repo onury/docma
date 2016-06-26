@@ -157,7 +157,7 @@
 
         // beforeAll(function () {});
 
-        fit('should build with query-routing', function (done) {
+        it('should build with query-routing', function (done) {
             config.app.routing = 'query';
             config.template.options.navItems = getNavItems(config.app.routing);
             config.dest = 'test/output/query-routing';
@@ -192,7 +192,7 @@
                 .finally(done);
         });
 
-        it('should build docma documentation', function (done) {
+        fit('should build docma documentation', function (done) {
             Docma.create()
                 .build('./doc/docma.config.json')
                 .then(function (success) {
