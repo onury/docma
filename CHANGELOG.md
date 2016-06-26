@@ -4,9 +4,6 @@
 #### **v1.0.3** Release (2015-06-27)
 
 - Added HTML source file support. You can include HTML files together with JS and markdown files while building your documentation.
-
-#### **v1.0.2** Release (2015-06-17)
-
 - Default Template: Removed YAML syntax highlighting support because of incorrect auto-detection. Opened an issue [here](https://github.com/isagalaev/highlight.js/issues/1213).
 
 #### **v1.0.1** Release (2015-06-11)
