@@ -1,6 +1,10 @@
 ## Docma Change-Log
 ---
 
+#### **v1.1.1** Release (2016-08-13)
+
+    - Fixed an anchor/linking issue which prevented some browsers (such as Safari) to navigate properly.
+
 #### **v1.1.0** Release (2016-08-12)
 
 - <p>**Docma** (Builder):</p>
