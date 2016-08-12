@@ -1,7 +1,7 @@
 ## Docma Change-Log
 ---
 
-#### **v1.1.0** Release (2015-08-12)
+#### **v1.1.0** Release (2016-08-12)
 
 - <p>**Docma** (Builder):</p>
     + Constructors would still show up in the documentation even though `@private` is set. Fixed by `jsdoc-x`.
@@ -13,17 +13,17 @@
     + An access badge is shown next to symbol name, if symbol has `private` or `protected` access.
     + Clean up.
 
-#### **v1.0.3** Release (2015-06-27)
+#### **v1.0.3** Release (2016-06-27)
 
 - **Docma** (Builder): Added HTML source file support. You can include HTML files together with JS and markdown files while building your documentation.
 - **Default Template**: Removed YAML syntax highlighting support because of incorrect auto-detection. Opened an issue [here](https://github.com/isagalaev/highlight.js/issues/1213).
 
-#### **v1.0.1** Release (2015-06-11)
+#### **v1.0.1** Release (2016-06-11)
 
 - Fixed missing web components.
 - David considers [marked][marked] as [insecure dependency][docma-david]. This is [already](https://nodesecurity.io/advisories/marked_content-injection) [reported](https://github.com/chjj/marked/pull/592).
 
-#### **v1.0.0** Release (2015-06-11)
+#### **v1.0.0** Release (2016-06-11)
 
 - <p>**Docma** (Builder):</p>
     + Convert markdown files to HTML. See documentation.
@@ -73,20 +73,20 @@
 
 ---
 
-#### **v0.5.4** Pre-Release (2015-05-22)
+#### **v0.5.4** Pre-Release (2016-05-22)
 
 - `docma.template.json` is no more copied over to the output.
 - Added default template option `badges:Boolean`.
 
 ---
 
-#### **v0.5.3** Pre-Release (2015-05-22)
+#### **v0.5.3** Pre-Release (2016-05-22)
 
 - Fixed docma-web file paths.
 
 ---
 
-#### **v0.5.2** Pre-Release (2015-05-20)
+#### **v0.5.2** Pre-Release (2016-05-20)
 
 - Updated default template.
 - Updated dependencies.
@@ -94,7 +94,7 @@
 
 ---
 
-#### **v0.5.0** Pre-Release (2015-05-11)
+#### **v0.5.0** Pre-Release (2016-05-11)
 
 - Initial (pre) release.
 - Parse JSDoc documentation.
