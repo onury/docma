@@ -48,6 +48,8 @@
                     { label: 'Docma Web Utils', href: route('docma-web-utils', 'api') },
                     { label: 'Test (src)', href: route('src', 'api') },
                     { separator: true },
+                    { label: 'Test (re)', href: route('re', 'api') },
+                    { separator: true },
                     { label: 'API Not Found', href: route('foo', 'api') },
                     { separator: true },
                     { label: 'Default', href: route('', 'api') },
@@ -77,12 +79,12 @@
 
     describe('build', function () {
         var config = {
-            debug: 5,
+            debug: 16,
             jsdoc: {
                 encoding: 'utf8',
                 recurse: false,
                 pedantic: false,
-                access: null, // ['private'],
+                access: ['public', 'protected'], // null, // ['private'],
                 package: null,
                 module: true,
                 undocumented: false,
@@ -142,7 +144,8 @@
                         './test/input/private/core/*.js',
                         './test/input/src/lib/*.js'
                     ],
-                    'priv': './test/input/private/*.js'
+                    'priv': './test/input/private/*.js',
+                    're': './test/input/private/re.js'
                 },
                 './doc/**/*.md',
                 { 'guide': './README.md' }, // renamed markdown
@@ -161,7 +164,7 @@
             config.app.routing = 'query';
             config.template.options.navItems = getNavItems(config.app.routing);
             config.dest = 'test/output/query-routing';
-            config.app.base = '/javascript/docma/' + config.dest;
+            config.app.base = '/'; // '/javascript/docma/' + config.dest;
             Docma.create()
                 .build(config)
                 .then(function (success) {
