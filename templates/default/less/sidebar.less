@@ -14,12 +14,12 @@ input[type=search] {
 /* Sidebar Header Styles - OY */
 
 .sidebar-header {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     width: @sidebar-width;
     background-color: @dark;
-    z-index: 9999;
+    // z-index: 9999;
 
     & > .sidebar-title {
         position: relative;
@@ -198,7 +198,7 @@ input[type=search] {
     width: 0;
     height: 100%;
     margin-left: -@sidebar-width;
-    overflow-y: auto;
+    overflow-y: hidden; // auto;  #MODIFIED
     background-color: @dark;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -216,6 +216,7 @@ input[type=search] {
     width: 100%;
     position: absolute;
     padding: 0 15px 15px 15px;
+    background: #fff;
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -225,9 +226,17 @@ input[type=search] {
 
 /* Sidebar Styles */
 
+// #MODIFIED (ADDED)
+.sidebar-nav-container {
+    position: relative;
+    height: 100%;
+    padding-bottom: 150px; // required for the top space and full height
+    overflow-y: auto;
+}
+
 .sidebar-nav {
-    position: absolute;
-    top: 125px; /* OY */
+    position: relative;
+    // top: 125px; /* OY */
     width: @sidebar-width;
     margin: 0;
     padding: 0;

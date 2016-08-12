@@ -12,11 +12,13 @@
     {/template.options.search}
 </div>
 
-<ul class="sidebar-nav">
-    {#symbols}
-        <li>
-            <!-- a.sidebar-item -->
-            {.|s|$menuitem}
-        </li>
-    {/symbols}
-</ul>
+<div class="sidebar-nav-container">
+    <ul class="sidebar-nav">
+        {#symbols}
+            <li>
+                <!-- a.sidebar-item -->
+                {.|s|$menuitem}
+            </li>
+        {/symbols}
+    </ul>
+</div>
