@@ -118,18 +118,22 @@
             var exceptions = Array.isArray(symbol) ? symbol : symbol.exceptions;
             return docma.utils.listTypeDesc(exceptions);
         })
-        // non-standard JSDoc directives are stored in .tags property of a
-        // symbol. We also add other properties such as .readonly or
-        // kind=namespace as tags.
+        // non-standard JSDoc directives are stored in `.tags` property of a
+        // symbol. We also add other properties such as .access (if not public),
+        // `.readonly` or `.kind=namespace` as tags.
         .addFilter('$tags', function (symbol) {
             var open = '<span class="boxed vertical-middle bg-ice opacity-full">',
-                open2 = '<span class="boxed vertical-middle bg-brown opacity-sm">',
+                open2 = '<span class="boxed vertical-middle bg-ice-mid opacity-full">',
                 open3 = '<span class="boxed vertical-middle">',
+                open4 = '<span class="boxed vertical-middle bg-ice-dark opacity-full">',
                 close = '</span>',
                 tagBoxes = [];
 
             if (docma.utils.isGlobal(symbol) && !docma.utils.isConstructor(symbol)) {
                 tagBoxes.push(open + 'global' + close);
+            }
+            if (docma.utils.isPublic(symbol) === false) {
+                tagBoxes.push(open4 + symbol.access + close);
             }
             if (docma.utils.isNamespace(symbol)) {
                 tagBoxes.push(open + 'namespace' + close);
@@ -250,9 +254,9 @@
         var pageContentRow = $('#page-content-wrapper').find('.row').first();
         if (docma.template.options.sidebar) {
             if (docma.template.options.collapsed) {
-                $('#wrapper').addClass("toggled");
+                $('#wrapper').addClass('toggled');
             }
-            $(".sidebar-toggle").click(function (event) {
+            $('.sidebar-toggle').click(function (event) {
                 event.preventDefault();
                 $('#wrapper').toggleClass('toggled');
                 // add some extra spacing if navbar is disabled; to prevent top
@@ -268,7 +272,7 @@
             });
         } else {
             // collapse the sidebar since it's disabled
-            $('#wrapper').addClass("toggled");
+            $('#wrapper').addClass('toggled');
         }
 
         var brandMargin = 50,
