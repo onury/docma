@@ -1,10 +1,22 @@
 ## Docma Change-Log
 ---
 
+#### **v1.1.0** Release (2015-08-12)
+
+- <p>**Docma** (Builder):</p>
+    + Constructors would still show up in the documentation even though `@private` is set. Fixed by `jsdoc-x`.
+    + Updated dependencies to their latest versions.
+    + Minor revisions.
+
+- <p>**Default Template**:</p>
+    + Fixed sidebar header/search position when sidebar is collapsed.
+    + An access badge is shown next to symbol name, if symbol has `private` or `protected` access.
+    + Clean up.
+
 #### **v1.0.3** Release (2015-06-27)
 
-- Added HTML source file support. You can include HTML files together with JS and markdown files while building your documentation.
-- Default Template: Removed YAML syntax highlighting support because of incorrect auto-detection. Opened an issue [here](https://github.com/isagalaev/highlight.js/issues/1213).
+- **Docma** (Builder): Added HTML source file support. You can include HTML files together with JS and markdown files while building your documentation.
+- **Default Template**: Removed YAML syntax highlighting support because of incorrect auto-detection. Opened an issue [here](https://github.com/isagalaev/highlight.js/issues/1213).
 
 #### **v1.0.1** Release (2015-06-11)
 
