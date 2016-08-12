@@ -72,4 +72,9 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test-build', ['jasmine_nodejs:build']);
     grunt.registerTask('default', ['watch']);
+
+    // Test Server:
+    // cd test/output/query-routing
+    // python -m SimpleHTTPServer 9000
+    // open http://localhost:9000
 };
