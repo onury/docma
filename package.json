@@ -11,6 +11,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "docma": "./cli.js"
+  },
   "homepage": "https://github.com/onury/docma#readme",
   "repository": {
     "type": "git",

@@ -35,6 +35,14 @@ npm i docma
 
 Read [Docma documentation][docma-doc], built with Docma, for a Docma demo... ;)
 
+### CLI
+
+```sh
+npm i -g docma
+docma [input ...] -o [output] # input files and output directory
+docma -f [config.json] # json config
+```
+
 ### Related Modules
 
 - [grunt-docma][grunt-docma] — Grunt task for Docma.
