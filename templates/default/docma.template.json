@@ -1,7 +1,7 @@
 {
     "name": "Docma Default Template",
     "author": "Onur Yıldırım (onur@cutepilot.com)",
-    "version": "1.4.0",
+    "version": "1.4.2",
     "license": "MIT",
     // Main HTML file
     "main": "index.html",
