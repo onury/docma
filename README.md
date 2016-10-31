@@ -7,11 +7,11 @@
 
 > © 2016, Onur Yıldırım (@onury). MIT License.
 
-A powerful tool to easily generate beautiful HTML documentation from Javascript ([JSDoc][jsdoc]) and [Markdown][markdown] files.
+A powerful tool to easily generate beautiful HTML documentation from Javascript ([JSDoc][jsdoc]), [Markdown][markdown] and HTML files.
 
 ### Features
 
-- Parse **JSDoc** documentation and **Markdown** files.
+- Parse **JSDoc** documentation, **Markdown** and **HTML** files.
 - Build a cool **SPA** (Single Page Application) from parsed files.
 - Generate multiple/separate API documentations by grouping JS files.
 - Path or Query-string based app routing.
@@ -28,7 +28,7 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 ### Installation
 
 ```sh
-npm i docma
+npm i docma -g
 ```
 
 ### Documentation
