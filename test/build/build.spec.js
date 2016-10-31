@@ -72,7 +72,7 @@
                 iconClass: 'ico-md ico-github',
                 label: 'GitHub',
                 href: 'https://github.com/onury/docma',
-                target: "_blank"
+                target: '_blank'
             }
         ];
     }
