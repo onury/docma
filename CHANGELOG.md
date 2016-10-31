@@ -1,6 +1,14 @@
 ## Docma Change-Log
 ---
 
+#### **v1.2.0** Release (2016-10-31)
+
+- <p>**Docma CLI**:</p>
+    + Added CLI (command-line interface). Supports `config`, `src`, `dest` and all `debug` options.
+
+- <p>**Default Template**:</p>
+    + Updated (one-dark) highlighting styles.
+
 #### **v1.1.1** Release (2016-08-13)
 
 - Fixed an anchor/linking issue which prevented some browsers (such as Safari) to navigate properly.
