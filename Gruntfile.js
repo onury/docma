@@ -77,4 +77,5 @@ module.exports = function (grunt) {
     // cd test/output/query-routing
     // python -m SimpleHTTPServer 9000
     // open http://localhost:9000
+    // !! Mind the base path !!
 };
