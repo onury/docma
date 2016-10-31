@@ -1,6 +1,7 @@
 backup/
 wiki/
 doc/
+docs/
 node_modules/
 bower_components/
 tmp/
@@ -8,3 +9,4 @@ test/input/private/
 test/output/
 npm-debug.log
 TODO.md
+.DS_Store
