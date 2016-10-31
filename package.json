@@ -1,13 +1,23 @@
 {
   "name": "docma",
   "version": "1.1.1",
-  "description": "A powerful dev-tool to easily generate beautiful HTML documentation from Javascript (JSDoc) and Markdown files.",
+  "description": "A powerful dev-tool to easily generate beautiful HTML documentation from Javascript (JSDoc), Markdown and HTML files.",
   "license": "MIT",
   "author": {
     "name": "Onur Yıldırım",
     "email": "onur@cutepilot.com"
   },
   "main": "index.js",
+  "files": [
+    "index.js",
+    "lib",
+    "bin",
+    "templates",
+    "LICENSE"
+  ],
+  "bin": {
+    "docma": "bin/docma.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -37,6 +47,7 @@
   "dependencies": {
     "bluebird": "^3.4.1",
     "chalk": "^1.1.3",
+    "commander": "^2.9.0",
     "dustjs-linkedin": "^2.7.3",
     "easy-table": "^1.0.0",
     "fs-extra": "^0.30.0",
@@ -48,11 +59,12 @@
     "lodash": "^4.15.0",
     "marked": "^0.3.6",
     "strip-json-comments": "^2.0.1",
-    "uglify-js": "^2.7.0"
+    "uglify-js": "^2.7.0",
+    "yargs": "^6.3.0"
   },
   "devDependencies": {
     "eslint": "^3.3.0",
-    "eslint-config-xo": "^0.15.3",
+    "eslint-config-xo": "^0.17.0",
     "grunt": "^1.0.1",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-jasmine-nodejs": "^1.5.3",
