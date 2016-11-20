@@ -153,5 +153,5 @@ Promise.resolve()
         return Docma.create().build(config);
     })
     .catch(error => {
-        console.log(chalk.red(error.stack || error));
+        console.log(chalk.red(error.message || error));
     });
