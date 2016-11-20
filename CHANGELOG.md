@@ -1,12 +1,28 @@
 ## Docma Change-Log
 ---
 
+#### **v1.3.0** Release (2016-11-21)
+
+- <p><b>Docma</b> (Builder):</p>
+    + Added case-sensitive routing option. `buildConfig.app.routing` accepts either a `String` (`"query"` or `"path"` as before) or now, an `Object`. e.g. `{ type: "query", caseSensitive: true }`. This also fixes [issue #3](https://github.com/onury/docma/issues/3).
+    + Updated dependencies to their latest versions.
+    + Minor code revisions.
+
+- <p><b>Docma Web Core</b>:</p>
+    + Extended support for parsing back-ticks in documentation. Added triple back-tick support for multiline code blocks (<code>&#x60;&#x60;&#x60;</code>).
+    + Improved `docma.utils.normalizeTabs()` method. Deep indents in JSDoc comments/descriptions are also normalized.
+    + Better `<pre></pre>` support within JSDoc descriptions.
+
+- <p><b>Default Template</b>:</p>
+    + Symbols with return type parameters (such as `Promise<Array>`) are now escaped and parsed properly. Fixes [issue #4](https://github.com/onury/docma/issues/4).
+    + Boolean symbol parameters' default values are now parsed properly. Fixes [issue #5](https://github.com/onury/docma/issues/5).
+
 #### **v1.2.0** Release (2016-10-31)
 
-- <p>**Docma CLI**:</p>
+- <p><b>Docma CLI</b>:</p>
     + Added CLI (command-line interface). Supports `config`, `src`, `dest` and all `debug` options.
 
-- <p>**Default Template**:</p>
+- <p><b>Default Template</b>:</p>
     + Updated (one-dark) highlighting styles.
 
 #### **v1.1.1** Release (2016-08-13)
@@ -15,12 +31,12 @@
 
 #### **v1.1.0** Release (2016-08-12)
 
-- <p>**Docma** (Builder):</p>
+- <p><b>Docma</b> (Builder):</p>
     + Constructors would still show up in the documentation even though `@private` is set. Fixed by `jsdoc-x`.
     + Updated dependencies to their latest versions.
     + Minor revisions.
 
-- <p>**Default Template**:</p>
+- <p><b>Default Template</b>:</p>
     + Fixed sidebar header/search position when sidebar is collapsed.
     + An access badge is shown next to symbol name, if symbol has `private` or `protected` access.
     + Clean up.
@@ -37,7 +53,7 @@
 
 #### **v1.0.0** Release (2016-06-11)
 
-- <p>**Docma** (Builder):</p>
+- <p><b>Docma</b> (Builder):</p>
     + Convert markdown files to HTML. See documentation.
     + Added `.markdown:Object` build configuration options. (Same as `marked` module options).
     + Added `.markdown.tasks:Boolean` option for parsing GitHub-like markdown tasks.
@@ -53,7 +69,7 @@
     + Rename routes generated markdown files (names). See `.src` build option.
     + Added negated glob support (that excludes the paths) for the `src` build option.
 
-- <p>**Docma Web Core**:</p>
+- <p><b>Docma Web Core</b>:</p>
     + Added client-side routing support for the SPA with paths (e.g. `/api`) or query-strings (e.g. `?content=api`). Configured via `.app.routing:String` option. Set to `"path"` or `"query"`. Uses page.js internally.
     + Implemented `EventEmitter`.
     + _BREAKING CHANGE_: Dropped `docma.ready()` method. Use `docma.on('ready', listener)` that's only triggered once on every page load or `docma.on('render', listener)` triggered when each content is rendered. Also see `docma.on('route', listener)` triggered when SPA route is changed.
@@ -64,7 +80,7 @@
     + Added new methods to `docma.utils` such as `getCodeName(symbol)`, `getFullName(symbol)`, etc...
     + If `debug >= 3`, web app will also output logs.
 
-- <p>**Default Template**:</p>
+- <p><b>Default Template</b>:</p>
     + Better layout for HTML files converted from markdown.
     + Fixed documentation of `@property` JSDoc tags.
     + Updated default template structure.
