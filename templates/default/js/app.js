@@ -86,17 +86,19 @@
             var isCon = docma.utils.isConstructor(symbol),
                 longName = symbol.$longname; // docma.utils.getFullName(symbol);
             if (symbol.kind === 'function' || isCon) {
-                var defVal = '',
+                var defVal,
+                    defValHtml = '',
                     nw = isCon ? 'new ' : '',
                     name = nw + longName + '(';
                 if (Array.isArray(symbol.params)) {
                     var params = symbol.params.reduce(function (memo, param) {
-                        // ignore params such as options.property
+                        // ignore params such as options.<property>
                         if (param.name.indexOf('.') === -1) {
-                            defVal = param.optional // param.hasOwnProperty('defaultvalue')
-                                ? '<span class="def-val">=' + (param.defaultvalue || 'undefined') + '</span>'
+                            defVal = param.hasOwnProperty('defaultvalue') ? String(param.defaultvalue) : 'undefined';
+                            defValHtml = param.optional
+                                ? '<span class="def-val">=' + defVal + '</span>'
                                 : '';
-                            memo.push(param.name + defVal);
+                            memo.push(param.name + defValHtml);
                         }
                         return memo;
                     }, []).join(', ');
