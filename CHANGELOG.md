@@ -1,7 +1,6 @@
 ## Docma Change-Log
----
 
-#### **v1.3.0** Release (2016-11-21)
+#### **v1.3.0** Release (2016-11-23)
 
 - <p><b>Docma</b> (Builder):</p>
     + Added case-sensitive routing option. `buildConfig.app.routing` accepts either a `String` (`"query"` or `"path"` as before) or now, an `Object`. e.g. `{ type: "query", caseSensitive: true }`. This also fixes [issue #3](https://github.com/onury/docma/issues/3).
