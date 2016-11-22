@@ -4,6 +4,7 @@
 ![release](https://img.shields.io/github/release/onury/docma.svg)
 ![dependencies](https://david-dm.org/onury/docma.svg)
 ![license](http://img.shields.io/npm/l/docma.svg)
+![maintained](https://img.shields.io/maintenance/yes/2016.svg)
 
 > © 2016, Onur Yıldırım (@onury). MIT License.
 
@@ -18,6 +19,7 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 - Non-opinionated engine, built-in template with cool opinions. :sunglasses:
 - Supports custom templates.
 - Works great with **GitHub Pages**.
+- Build via API or CLI.
 - Extremely configurable and debuggable.
 - Well documented. :point_up:
 
