@@ -43,7 +43,7 @@
 
     docma
         .addFilter('$dot_prop', function (name) {
-            var re = /(.*)([\.#~]\w+)/g,
+            var re = /(.*)([.#~]\w+)/g,
                 match = re.exec(name);
             if (!match) {
                 return '<b>' + name + '</b>';
@@ -205,6 +205,10 @@
             f--;
             $el.css('font-size', f + 'px');
         }
+    }
+
+    if (!docma.template.options.title) {
+        docma.template.options.title = docma.app.title || 'Documentation';
     }
 
     docma.on('render', function (currentRoute) {
