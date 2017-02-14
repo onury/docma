@@ -78,4 +78,10 @@ module.exports = function (grunt) {
     // python -m SimpleHTTPServer 9000
     // open http://localhost:9000
     // !! Mind the base path !!
+
+    // run docma for specific tests (e.g. issues):
+    // node ./bin/docma -c ./test/issue-10/docma.config.json -d ./test/issue-10/docs
+    // cd ./test/issue-10/docs
+    // python -m SimpleHTTPServer 9001
+    // open http://localhost:9001
 };
