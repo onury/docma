@@ -11,10 +11,10 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "^2.2.4",
-    "dustjs-linkedin": "^2.7.2",
+    "jquery": "^3.1.1",
+    "dustjs-linkedin": "^2.7.5",
     "dustjs-helpers": "^1.7.3",
-    "page": "visionmedia/page.js#^1.7.1",
-    "eventEmitter": "^5.0.0"
+    "page": "^1.7.1",
+    "eventEmitter": "^5.1.0"
   }
 }
