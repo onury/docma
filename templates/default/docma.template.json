@@ -1,0 +1,32 @@
+{
+    "name": "Docma Default Template",
+    "author": "Onur Yıldırım (onur@cutepilot.com)",
+    "version": "1.5.0",
+    "license": "MIT",
+    // Main HTML file
+    "main": "index.html",
+    // Template default options.
+    "options": {
+        "title": "",
+        "sidebar": true,
+        "collapsed": false,
+        "badges": true,
+        "search": true,
+        "navbar": true,
+        "navItems": []
+    },
+    // files to be compiled
+    "compile": {
+        // JS files to be minified
+        "js/app.js": "js/app.min.js",
+        // Less files to be compiled
+        "less/styles.less": "css/styles.css"
+    },
+    // Ignored files/dirs
+    "ignore": [
+        "js/app.js",
+        "less/**",
+        "*.md",
+        "LICENSE"
+    ]
+}
