@@ -116,16 +116,29 @@ function updateConfig(config) {
 
     // DEBUG OPTIONS
 
-    config.debug = 0;
-    if (!argv.quite) config.debug = 1; // node logs
+    var debug = 0;
 
     if (argv.debug) {
-        config.debug |= 30;
+        debug |= 31;
     } else {
-        if (argv['web-logs']) config.debug |= 2;
-        if (argv.verbose) config.debug |= 4;
-        if (argv.nomin) config.debug |= 8;
-        if (argv['jd-out']) config.debug |= 16;
+        if (argv['web-logs']) debug |= 2;
+        if (argv.verbose) debug |= 4;
+        if (argv.nomin) debug |= 8;
+        if (argv['jd-out']) debug |= 16;
+    }
+
+    if (debug > 0) {
+        config.debug = debug;
+    } else {
+        config.debug = typeof config.debug === 'boolean'
+            ? (config.debug ? 31 : 1)
+            : (typeof config.debug === 'number' ? config.debug : 1);
+    }
+
+    if (argv.quite) {
+        config.debug &= ~1; // unset node logs
+    } else {
+        if (config.debug & 1 === 0) config.debug = 1;
     }
 
     return config;
