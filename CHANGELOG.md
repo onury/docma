@@ -1,5 +1,23 @@
 ## Docma Change-Log
 
+#### **v1.4.0** Release (2017-02-13)
+
+- <p><b>Docma</b> (Builder):</p>
+    + Fixed incorrect routing when routing method is set to `"path"`.
+    + If `app.entrance` is not set in build configuration, it now defaults to `"api"`.
+    + If `app.server` is not set in build configuration, it now defaults to `"static"`. (`"static"` is similar to `"github"` which generates static HTML files.)
+
+- <p><b>Docma CLI</b>:</p>
+    + Respecting debug option in config file. If no debug options are set in the command-line arguments (such as `--debug`, `--quite`, `--nomin`, `--jd-out`, `--verbose`, `--web-logs`); the bitwise debug value from the config file is used, if set.
+
+- <p><b>Docma Web Core</b>:</p>
+    + Fixed `.split()` error for `null` (404) routes.
+    + Updated web dependencies to latest versions.
+
+- <p><b>Default Template</b>:</p>
+    + Fixed a style issue where sidebar would not scroll all the way to the bottom in Firefox. Fixes [issue #8](https://github.com/onury/docma/issues/8).
+    + If `template.title` is omitted, `app.title` is used. (Defaults to `"Documentation"` if not set).
+
 #### **v1.3.0** Release (2016-11-23)
 
 - <p><b>Docma</b> (Builder):</p>
