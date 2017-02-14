@@ -6,7 +6,7 @@
 ![license](http://img.shields.io/npm/l/docma.svg)
 ![maintained](https://img.shields.io/maintenance/yes/2017.svg)
 
-> © 2016, Onur Yıldırım (@onury). MIT License.
+> © 2017, Onur Yıldırım (@onury). MIT License.
 
 A powerful tool to easily generate beautiful HTML documentation from Javascript ([JSDoc][jsdoc]), [Markdown][markdown] and HTML files.
 
