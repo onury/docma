@@ -4,7 +4,7 @@
 ![release](https://img.shields.io/github/release/onury/docma.svg)
 ![dependencies](https://david-dm.org/onury/docma.svg)
 ![license](http://img.shields.io/npm/l/docma.svg)
-![maintained](https://img.shields.io/maintenance/yes/2016.svg)
+![maintained](https://img.shields.io/maintenance/yes/2017.svg)
 
 > © 2016, Onur Yıldırım (@onury). MIT License.
 
