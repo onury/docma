@@ -230,8 +230,13 @@ input[type=search] {
 .sidebar-nav-container {
     position: relative;
     height: 100%;
-    padding-bottom: 150px; // required for the top space and full height
+    // padding-bottom: 150px; // using .sidebar-nav-space instead for firefox support
     overflow-y: auto;
+}
+
+// required for the top space and full height
+.sidebar-nav-space {
+    height: 150px;
 }
 
 .sidebar-nav {
@@ -265,6 +270,7 @@ input[type=search] {
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
     text-decoration: none;
+    outline: 0 none;
 }
 
 .sidebar-nav > .sidebar-brand {
