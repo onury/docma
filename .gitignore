@@ -7,6 +7,7 @@ bower_components/
 tmp/
 test/input/private/
 test/output/
+test/issue-*/
 npm-debug.log
 TODO.md
 .DS_Store

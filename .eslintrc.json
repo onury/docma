@@ -34,6 +34,7 @@
         "padded-blocks": 0,
         "no-negated-condition": 0,
         "quote-props": 0,
-        "no-lonely-if": 0
+        "no-lonely-if": 0,
+        "no-prototype-builtins": 0
     }
 }
