@@ -1,6 +1,6 @@
 {
   "name": "docma",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "A powerful dev-tool to easily generate beautiful HTML documentation from Javascript (JSDoc), Markdown and HTML files.",
   "license": "MIT",
   "author": {
