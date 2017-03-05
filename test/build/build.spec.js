@@ -92,7 +92,12 @@
                 hierarchy: true,
                 sort: true, // "grouped",
                 relativePath: path.join(__dirname, '/code'),
-                filter: null
+                filter: null,
+                allowUnknownTags: true,
+                dictionaries: ['jsdoc', 'closure'],
+                includePattern: '.+\\.js(doc|x)?$',
+                excludePattern: '(^|\\/|\\\\)_',
+                plugins: []
             },
             // markdown options
             markdown: {
