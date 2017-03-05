@@ -4,7 +4,7 @@
         "encoding": "utf8",
         "recurse": false,
         "pedantic": false,
-        "access": null, // ['private'],
+        "access": null,
         "package": null,
         "module": true,
         "undocumented": false,
@@ -12,7 +12,9 @@
         "hierarchy": true,
         "sort": "alphabetic",
         "relativePath": null,
-        "filter": null
+        "filter": null,
+        "allowUnknownTags": true,
+        "plugins": []
     },
     "markdown": {
         "gfm": true,
