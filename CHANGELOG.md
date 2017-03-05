@@ -1,5 +1,11 @@
 ## Docma Change-Log
 
+#### **v1.4.5** Release (2017-03-05)
+
+- <p><b>Docma</b> (Builder):</p>
+    + Added build config options: `jsdoc.allowUnknownTags`, `jsdoc.dictionaries`, `jsdoc.includePattern`, `jsdoc.excludePattern` (`jsdoc-x` feature).
+    + Added [JSDoc plugin](http://usejsdoc.org/about-plugins.html) support via the new `jsdoc.plugins` option (`jsdoc-x` feature).
+
 #### **v1.4.0** Release (2017-02-13)
 
 - <p><b>Docma</b> (Builder):</p>
