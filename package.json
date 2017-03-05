@@ -19,7 +19,7 @@
     "docma": "bin/docma.js"
   },
   "scripts": {
-    "docs": "./bin/docma.js -c ./docma.config.json",
+    "docs": "node bin/docma -c ./docma.config.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "homepage": "https://github.com/onury/docma#readme",
