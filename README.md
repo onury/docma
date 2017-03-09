@@ -33,9 +33,28 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 npm i docma -g
 ```
 
+### Programmatic Usage
+
+```js
+    var Docma = require('docma');
+    Docma.create()
+        .build(config)
+        .then(function (success) {
+            console.log('Documentation is built successfully.');
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+```
+
+### Command-Line Usage
+```shell
+    docma -c path/to/docma.config.json -d path/to/destination
+```
+
 ### Documentation
 
-Read [Docma documentation][docma-doc], built with Docma, for a Docma demo... ;)
+Read [**Docma documentation**][docma-doc], built with Docma, for a Docma demo... ;)
 
 ### Related Modules
 

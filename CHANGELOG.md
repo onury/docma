@@ -3,7 +3,7 @@
 #### **v1.4.7** Release (2017-03-09)
 
 - <p><b>Docma</b> (Builder):</p>
-    + Respecting `jsdoc.includePattern` build config when filtering files.
+    + Respecting `jsdoc.includePattern` build config when filtering files..
     + When `jsdoc.hierarchy` option is enabled, sorting would change. Fixed.
 
 #### **v1.4.5** Release (2017-03-05)
