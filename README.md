@@ -46,11 +46,13 @@ npm i docma -g
             console.log(error);
         });
 ```
+See <a href="https://onury.github.io/docma/?api=docma#Docma~BuildConfiguration">Build configuration</a>.
 
 ### Command-Line Usage
 ```shell
     docma -c path/to/docma.config.json -d path/to/destination
 ```
+See <a href="https://onury.github.io/docma/?content=docma-cli">Docma CLI reference</a>.
 
 ### Documentation
 
