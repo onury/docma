@@ -1,23 +1,39 @@
 ## Docma Change-Log
 
+#### **v1.5.0** Release (2017-03-10)
+
+- <p><b>Docma</b> (Builder):</p>
+    + Added `config.jsdoc.ignored:Boolean` option which specifies whether to include documentation symbols marked with `@ignore` tag.
+- <p><b>Docma Web Core</b>:</p>
+    + Empty lines would be stripped out from `@example` content. Fixed.
+    + Better auto-indention for code in comments.
+    + Improved `$val` filter.
+- <p><b>Default Template</b>:</p>
+    + Improved sidebar design.
+    + Added template option `outline`, which determines the outline style of the sidebar symbols list. (`"flat"` or `"tree"`). See [documentation](https://onury.github.io/docma/?content=default-template) and [this example](https://onury.github.io/accesscontrol/?api=ac) for `outline` set to `"tree"`.
+    + Added template option `symbolMeta` which specifies whether to add meta information at the end of each symbol documentation such as code file name and line number. Default is `false`.
+    + `Type.<T>` is now represented as `Type<T>`.
+    + Default string values are now represented in quotes.
+    + Added `static` badge for static members, `deprecated` badge for deprecated symbols.
+
 #### **v1.4.7** Release (2017-03-09)
 
 - <p><b>Docma</b> (Builder):</p>
-    + Respecting `jsdoc.includePattern` build config when filtering files..
-    + When `jsdoc.hierarchy` option is enabled, sorting would change. Fixed.
+    + Respecting `config.jsdoc.includePattern` build config when filtering files..
+    + When `config.jsdoc.hierarchy` option is enabled, sorting would change. Fixed.
 
 #### **v1.4.5** Release (2017-03-05)
 
 - <p><b>Docma</b> (Builder):</p>
-    + Added build config options: `jsdoc.allowUnknownTags`, `jsdoc.dictionaries`, `jsdoc.includePattern`, `jsdoc.excludePattern` (`jsdoc-x` feature).
-    + Added [JSDoc plugin](http://usejsdoc.org/about-plugins.html) support via the new `jsdoc.plugins` option (`jsdoc-x` feature).
+    + Added build config options: `config.jsdoc.allowUnknownTags`, `config.jsdoc.dictionaries`, `config.jsdoc.includePattern`, `config.jsdoc.excludePattern` (`jsdoc-x` feature).
+    + Added [JSDoc plugin](http://usejsdoc.org/about-plugins.html) support via the new `config.jsdoc.plugins` option (`jsdoc-x` feature).
 
 #### **v1.4.0** Release (2017-02-13)
 
 - <p><b>Docma</b> (Builder):</p>
     + Fixed incorrect routing when routing method is set to `"path"`.
-    + If `app.entrance` is not set in build configuration, it now defaults to `"api"`.
-    + If `app.server` is not set in build configuration, it now defaults to `"static"`. (`"static"` is similar to `"github"` which generates static HTML files.)
+    + If `config.app.entrance` is not set in build configuration, it now defaults to `"api"`.
+    + If `config.app.server` is not set in build configuration, it now defaults to `"static"`. (`"static"` is similar to `"github"` which generates static HTML files.)
 
 - <p><b>Docma CLI</b>:</p>
     + Respecting debug option in config file. If no debug options are set in the command-line arguments (such as `--debug`, `--quite`, `--nomin`, `--jd-out`, `--verbose`, `--web-logs`); the bitwise debug value from the config file is used, if set.
@@ -28,12 +44,12 @@
 
 - <p><b>Default Template</b>:</p>
     + Fixed a style issue where sidebar would not scroll all the way to the bottom in Firefox. Fixes [issue #8](https://github.com/onury/docma/issues/8).
-    + If `template.title` is omitted, `app.title` is used. (Defaults to `"Documentation"` if not set).
+    + If `config.template.title` is omitted, `config.app.title` is used. (Defaults to `"Documentation"` if not set).
 
 #### **v1.3.0** Release (2016-11-23)
 
 - <p><b>Docma</b> (Builder):</p>
-    + Added case-sensitive routing option. `buildConfig.app.routing` accepts either a `String` (`"query"` or `"path"` as before) or now, an `Object`. e.g. `{ type: "query", caseSensitive: true }`. This also fixes [issue #3](https://github.com/onury/docma/issues/3).
+    + Added case-sensitive routing option. `config.app.routing` accepts either a `String` (`"query"` or `"path"` as before) or now, an `Object`. e.g. `{ type: "query", caseSensitive: true }`. This also fixes [issue #3](https://github.com/onury/docma/issues/3).
     + Updated dependencies to their latest versions.
     + Minor code revisions.
 
