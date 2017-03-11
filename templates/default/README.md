@@ -1,6 +1,6 @@
 ## Docma Default Template
 
-> © 2016, Onur Yıldırım (@onury). MIT License.
+> © 2017, Onur Yıldırım (@onury). MIT License.
 
 The default template for [Docma][docma] documentation builder; with a side-bar symbols menu, search and navigation features; and a beautiful layout.
 
