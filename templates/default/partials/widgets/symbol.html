@@ -4,120 +4,131 @@
         <div class="symbol">
             <a href="#{.|$id}">
                 <span class="glyphicon glyphicon-link color-gray-light" aria-hidden="true"></span>
-                <code class="symbol-name">{.|s|$longname_params}</code>
-                <span class="symbol-sep">{.|$type_sep}</span>
-                <code class="symbol-type">{.|$type}</code>
+                <code class="symbol-name">{symbol|s|$longname_params}</code>
+                <span class="symbol-sep">{symbol|$type_sep}</span>
+                <code class="symbol-type">{symbol|$type}</code>
             </a>
 
-            {.|s|$tags}
+            {symbol|s|$tags}
         </div>
 
-        {?augments}
+        {?symbol.augments}
             <p class="space-left-sm">
-                <b>Extends:</b> {.|s|$extends}
+                <b>Extends:</b> {symbol|s|$extends}
             </p>
-        {/augments}
+        {/symbol.augments}
 
-        {?alias}
+        {?symbol.alias}
         <p class="space-left-sm">
-            <b>Alias:</b> <code>{alias|s|$dot_prop}</code>&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>Alias:</b> <code>{symbol.alias|s|$dot_prop}</code>
         </p>
-        {/alias}
+        {/symbol.alias}
 
     </div>
 
     <div class="symbol-definition">
-        {.|s|$desc}
-
-        {?classdesc}
+        {?symbol.classdesc}
             <table>
-                {?version}
+                {?symbol.version}
                 <tr>
-                    <td><b>Version:</b>&nbsp;&nbsp;&nbsp;</td><td>{version|s}</td>
+                    <td><b>Version:</b>&nbsp;&nbsp;&nbsp;</td><td>{symbol.version|s}</td>
                 </tr>
-                {/version}
+                {/symbol.version}
 
-                {?copyright}
+                {?symbol.copyright}
                 <tr>
-                    <td><b>Copyright:</b>&nbsp;&nbsp;&nbsp;</td><td>{copyright|s}</td>
+                    <td><b>Copyright:</b>&nbsp;&nbsp;&nbsp;</td><td>{symbol.copyright|s}</td>
                 </tr>
-                {/copyright}
+                {/symbol.copyright}
 
-                {?author}
+                {?symbol.author}
                 <tr>
-                    <td><b>Author:</b>&nbsp;&nbsp;&nbsp;</td><td>{author|s|$author}</td>
+                    <td><b>Author:</b>&nbsp;&nbsp;&nbsp;</td><td>{symbol.author|s|$author}</td>
                 </tr>
-                {/author}
+                {/symbol.author}
 
-                {?license}
+                {?symbol.license}
                 <tr>
-                    <td><b>License:</b>&nbsp;&nbsp;&nbsp;</td><td>{license|s}</td>
+                    <td><b>License:</b>&nbsp;&nbsp;&nbsp;</td><td>{symbol.license|s}</td>
                 </tr>
-                {/license}
+                {/symbol.license}
             </table>
-        {/classdesc}
+            <br />
+        {/symbol.classdesc}
 
-        {?see}
+        {symbol|s|$desc}
+
+        {?symbol.see}
         <p>
             <b>See</b>
-            {@gt key=see.length value=1}
+            {@gt key=symbol.see.length value=1}
                 <ul>
-                {#see}<li>{.|s|$pl}</li>{/see}
+                {#symbol.see}<li>{.|s|$pl}</li>{/symbol.see}
                 </ul>
             {:else}
-                {#see}&nbsp;{.|s|$pl}{/see}
+                {#symbol.see}&nbsp;{.|s|$pl}{/symbol.see}
             {/gt}
         </p>
         <br />
-        {/see}
+        {/symbol.see}
 
         <!--  don't list params for class declarations since we already list
         constructor and its params separately, if this is a class declaration.  -->
-        {@eq key=meta.code.type value="ClassDeclaration"}
+        {@eq key=symbol.meta.code.type value="ClassDeclaration"}
         {:else}
-            {>"params":./}
-            {?isEnum}{:else}
-                {>"properties":./}
-            {/isEnum}
+            {>"params":symbol/}
+            {?symbol.isEnum}{:else}
+                {>"properties":symbol/}
+            {/symbol.isEnum}
         {/eq}
 
-        {?returns}
-            {@gt key=returns.length value="1" type="number"}
+        {?symbol.returns}
+            {@gt key=symbol.returns.length value="1" type="number"}
                 <b>Returns:</b>
                 <p class="pad-left">
-                    {.|s|$returns}
+                    {symbol|s|$returns}
                 </p>
             {:else}
                 <p>
-                    <b>Returns:</b>&nbsp;&nbsp;{.|s|$returns}
+                    <b>Returns:</b>&nbsp;&nbsp;{symbol|s|$returns}
                 </p>
             {/gt}
-        {/returns}
+        {/symbol.returns}
 
-        {?exceptions}
-            {@gt key=exceptions.length value="1" type="number"}
+        {?symbol.exceptions}
+            {@gt key=symbol.exceptions.length value="1" type="number"}
                 <b>Throws:</b>
                 <p class="pad-left">
-                    {.|s|$exceptions}
+                    {symbol|s|$exceptions}
                 </p>
             {:else}
                 <p>
-                    <b>Throws:</b>&nbsp;&nbsp;{.|s|$exceptions}
+                    <b>Throws:</b>&nbsp;&nbsp;{symbol|s|$exceptions}
                 </p>
             {/gt}
-        {/exceptions}
+        {/symbol.exceptions}
 
         <!-- if this is an enumeration symbol, list the members in a table -->
-        {?isEnum}
-            {>"enums":./}
-        {/isEnum}
+        {?symbol.isEnum}
+            {>"enums":symbol/}
+        {/symbol.isEnum}
 
-        {?examples}
+        {?symbol.examples}
             <p><b>Example</b></p>
-            {#examples}
+            {#symbol.examples}
             <pre><code>{.|$nt}</code></pre>
-            {/examples}
-        {/examples}
+            {/symbol.examples}
+        {/symbol.examples}
+
+        {?template.options.symbolMeta}
+        {?symbol.meta.lineno}
+        <p class="symbol-meta">
+            {?symbol.meta.filename}<b>File:</b> {symbol.meta.filename}&nbsp;&nbsp;{/symbol.meta.filename}
+            {?symbol.meta.lineno}<b>Line:</b> {symbol.meta.lineno}&nbsp;&nbsp;{/symbol.meta.lineno}
+        </p>
+        {/symbol.meta.lineno}
+        {/template.options.symbolMeta}
+
     </div>
 
 </div>
@@ -125,17 +136,17 @@
 
 <!--  don't list params for class declarations since we already list
 constructor and its params separately, if this is a class declaration.  -->
-{@eq key=meta.code.type value="ClassDeclaration"}
-    {?$constructor}
-        {>"symbol":$constructor/}
-    {/$constructor}
+{@eq key=symbol.meta.code.type value="ClassDeclaration"}
+    {?symbol.$constructor}
+        {>"symbol" symbol=symbol.$constructor template=template/}
+    {/symbol.$constructor}
 {/eq}
 
 <!-- if not an enumeration symbol -->
-{?isEnum}
+{?symbol.isEnum}
 {:else}
     <!-- recurse as symbol section -->
-    {#$members}
-        {>"symbol":./}
-    {/$members}
-{/isEnum}
+    {#symbol.$members}
+        {>"symbol" symbol=. template=template/}
+    {/symbol.$members}
+{/symbol.isEnum}
