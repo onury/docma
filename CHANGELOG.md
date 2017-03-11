@@ -1,5 +1,10 @@
 ## Docma Change-Log
 
+#### **v1.5.1** Release (2017-03-11)
+
+- <p><b>Docma Web Core</b>:</p>
+    + Fix `slice` error for non-string default value.
+
 #### **v1.5.0** Release (2017-03-10)
 
 - <p><b>Docma</b> (Builder):</p>
