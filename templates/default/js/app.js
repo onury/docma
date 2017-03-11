@@ -37,18 +37,38 @@
         return '';
     }
 
+    function _colorOperators(str) {
+        return str.replace(/[.#~:]/g, '<span class="color-blue">$&</span>');
+    }
+
+    function _indentGetMenuItem(id, badge, symbolName, keywords) {
+        var ops = /[.#~:]/,
+            levels = symbolName.split(ops),
+            last = levels[levels.length - 1],
+            marginLeft = (levels.length - 1) * 20;
+        last = symbolName.slice(-(last.length + 1)); // with operator
+        return '<a href="#' + id + '" class="sidebar-item" data-keywords="' + keywords + '">'
+            + '<span class="inline-block" style="margin-left:' + marginLeft + 'px">'
+            + badge + '<span class="item-label">' + _colorOperators(last) + '</span>'
+            + '</span>'
+            + '</a>';
+    }
+
     // ---------------------------
     // CUSTOM DUST FILTERS
     // ---------------------------
 
     docma
+        .addFilter('$color_ops', function (name) {
+            return _colorOperators(name);
+        })
         .addFilter('$dot_prop', function (name) {
-            var re = /(.*)([.#~]\w+)/g,
+            var re = /(.*)([.#~:]\w+)/g,
                 match = re.exec(name);
             if (!match) {
                 return '<b>' + name + '</b>';
             }
-            return '<span class="color-gray">' + match[1] + '</span>' + match[2];
+            return '<span class="color-gray">' + _colorOperators(match[1]) + '</span>' + _colorOperators(match[2]);
         })
         .addFilter('$author', function (symbol) {
             var authors = Array.isArray(symbol) ? symbol : (symbol.author || []);
@@ -84,7 +104,7 @@
         })
         .addFilter('$longname_params', function (symbol) {
             var isCon = docma.utils.isConstructor(symbol),
-                longName = symbol.$longname; // docma.utils.getFullName(symbol);
+                longName = _colorOperators(symbol.$longname); // docma.utils.getFullName(symbol);
             if (symbol.kind === 'function' || isCon) {
                 var defVal,
                     defValHtml = '',
@@ -128,11 +148,19 @@
                 open2 = '<span class="boxed vertical-middle bg-ice-mid opacity-full">',
                 open3 = '<span class="boxed vertical-middle">',
                 open4 = '<span class="boxed vertical-middle bg-ice-dark opacity-full">',
+                open5 = '<span class="boxed vertical-middle bg-blue opacity-full">',
+                open6 = '<span class="boxed vertical-middle bg-warning color-brown opacity-full">',
                 close = '</span>',
                 tagBoxes = [];
 
+            if (docma.utils.isDeprecated(symbol)) {
+                tagBoxes.push(open6 + 'deprecated' + close);
+            }
             if (docma.utils.isGlobal(symbol) && !docma.utils.isConstructor(symbol)) {
                 tagBoxes.push(open + 'global' + close);
+            }
+            if (docma.utils.isStatic(symbol)) {
+                tagBoxes.push(open5 + 'static' + close);
             }
             if (docma.utils.isPublic(symbol) === false) {
                 tagBoxes.push(open4 + symbol.access + close);
@@ -160,9 +188,15 @@
                 keywords = docma.utils.getKeywords(symbol),
                 badge = docma.template.options.badges
                     ? _getSymbolBadge(symbol)
-                    : '• ',
-                name = '<span class="item-label">' + dust.filters.$dot_prop(symbolName) + '</span>';
+                    : '• ';
+
+            if (docma.template.options.outline === 'tree') {
+                return _indentGetMenuItem(id, badge, symbolName, keywords);
+            }
+            // docma.template.options.outline === 'flat'
+            var name = '<span class="item-label">' + dust.filters.$dot_prop(symbolName) + '</span>';
             return '<a href="#' + id + '" class="sidebar-item" data-keywords="' + keywords + '">' + badge + name + '</a>';
+
         });
 
     // ---------------------------
