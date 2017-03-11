@@ -1,5 +1,5 @@
 {
-    "debug": 1,
+    "debug": 5,
     "jsdoc": {
         "encoding": "utf8",
         "recurse": false,
@@ -9,6 +9,7 @@
         "module": true,
         "undocumented": false,
         "undescribed": false,
+        "ignored": false,
         "hierarchy": true,
         "sort": "alphabetic",
         "relativePath": null,
@@ -41,7 +42,9 @@
             "title": "Docma",
             "sidebar": true,
             "collapsed": false,
+            "outline": "flat",
             "badges": true,
+            "symbolMeta": false,
             "search": true,
             "navbar": true,
             "navItems": [
