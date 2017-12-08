@@ -6,7 +6,7 @@
     + **Fixed** `$ is not a function` error on Windows. PR [#23](https://github.com/onury/docma/pull/23) by [@warpdesign](https://github.com/warpdesign).
     + **Fixed** some typos in documentation. PRs [#13](https://github.com/onury/docma/pull/13), [#17](https://github.com/onury/docma/pull/17).
     
-_**Note**: For this release, dependencies are NOT updated on purpose. They introduce too many breaking changes. In **v2** (WIP, to be released) many things has changed and improved._
+_**Note**: For this release, some dependencies (such as `jsdoc-x`, `jsdom`) are NOT updated on purpose 'cause they introduce breaking changes. In **v2** (WIP, to be released) these will be updated and many things will be improved._
 
 ### v1.5.1 (2017-03-11)
 
