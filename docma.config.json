@@ -116,5 +116,5 @@
             "guide": "./doc/HOME.md"
         }
     ],
-    "dest": "../../onury.github.io/docma"
+    "dest": "../onury.github.io/docma"
 }
