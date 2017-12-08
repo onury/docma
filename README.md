@@ -60,7 +60,6 @@ Read [**Docma documentation**][docma-doc], built with Docma, for a Docma demo...
 
 ### Related Modules
 
-- [grunt-docma][grunt-docma] — Grunt task for Docma.
 - [jsdoc-x][jsdoc-x] — Parser for outputting a Javascript object from documented code via JSDoc's explain (-X) command.
 - [marked][marked] — A full-featured markdown parser and compiler, written in JavaScript. Built for speed.
 - [dustjs][dustjs-github] — Asynchronous Javascript templating for the browser and server.
