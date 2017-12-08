@@ -46,13 +46,13 @@ npm i docma -g
             console.log(error);
         });
 ```
-See <a href="https://onury.github.io/docma/?api=docma#Docma~BuildConfiguration">Build configuration</a>.
+See <a href="https://onury.io/docma/?api=docma#Docma~BuildConfiguration">Build configuration</a>.
 
 ### Command-Line Usage
 ```shell
     docma -c path/to/docma.config.json -d path/to/destination
 ```
-See <a href="https://onury.github.io/docma/?content=docma-cli">Docma CLI reference</a>.
+See <a href="https://onury.io/docma/?content=docma-cli">Docma CLI reference</a>.
 
 ### Documentation
 
@@ -67,7 +67,7 @@ Read [**Docma documentation**][docma-doc], built with Docma, for a Docma demo...
 
 
 [screenshot]:https://raw.github.com/onury/docma/master/docma-screen.jpg
-[docma-doc]:https://onury.github.io/docma
+[docma-doc]:https://onury.io/docma
 [jsdoc]:http://usejsdoc.org
 [markdown]:https://daringfireball.net/projects/markdown
 [jsdoc-x]:https://github.com/onury/jsdoc-x
