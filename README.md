@@ -68,7 +68,7 @@ Read [**Docma documentation**][docma-doc], built with Docma, for a Docma demo...
 
 [screenshot]:https://raw.github.com/onury/docma/master/docma-screen.jpg
 [docma-doc]:https://onury.github.io/docma
-[jsdoc]:http://http://usejsdoc.org
+[jsdoc]:http://usejsdoc.org
 [markdown]:https://daringfireball.net/projects/markdown
 [jsdoc-x]:https://github.com/onury/jsdoc-x
 [marked]:https://github.com/chjj/marked
