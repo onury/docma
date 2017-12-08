@@ -2,6 +2,7 @@ backup/
 wiki/
 doc/
 docs/
+design/
 node_modules/
 bower_components/
 tmp/
