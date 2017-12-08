@@ -146,11 +146,9 @@
                 },
                 {
                     'src': [
-                        './test/input/private/core/*.js',
                         './test/input/src/lib/*.js'
                     ],
-                    'priv': './test/input/private/*.js',
-                    're': './test/input/private/re.js'
+                    're': './test/input/other/re.js'
                 },
                 './doc/**/*.md',
                 { 'guide': './README.md' }, // renamed markdown
