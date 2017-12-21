@@ -3,6 +3,7 @@
 ### v1.5.3 (2017-21-09)
 
 - <p><b>Docma Web Core</b>:</p>
+
     + **Fixed** a parser issue where carriage return (CR) of Windows newlines (CRLF) were removed. Fixes [#28](https://github.com/onury/docma/issues/28).
 
 ### v1.5.2 (2017-12-09)
