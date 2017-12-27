@@ -50,15 +50,11 @@ See <a href="https://onury.io/docma/?content=docma-cli">Docma CLI reference</a>.
 ### Programmatic Usage
 
 ```js
-    var Docma = require('docma');
+    const Docma = require('docma');
     Docma.create()
         .build(config)
-        .then(function (success) {
-            console.log('Documentation is built successfully.');
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+        .then(success => console.log('Documentation is built successfully.'))
+        .catch(error => console.log(error));
 ```
 See <a href="https://onury.io/docma/?api=docma#Docma~BuildConfiguration">Build configuration</a>.
 
