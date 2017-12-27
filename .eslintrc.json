@@ -10,22 +10,23 @@
     "env": {
         "es6": true,
         "node": true,
-        "browser": true,
-        "jasmine": true
+        "browser": false,
+        "jest": true
     },
-    "plugins": [
-
-    ],
+    "plugins": [],
     "globals": {
         "document": false,
         "navigator": false,
         "window": false,
-        "google": false
+        "google": false,
+        "jest": true
     },
+
+    // see .eslintignore for additional config
+
     "extends": "xo",
-    // "extends": "eslint:recommended",
     "rules": {
-        "indent": [2, 4, {"SwitchCase": 1}],
+        "indent": [2, 4, { "SwitchCase": 1 }],
         "curly": [2, "multi-line", "consistent"],
         "one-var": 0,
         "no-unused-vars": 1,
@@ -36,6 +37,26 @@
         "quote-props": 0,
         "no-lonely-if": 0,
         "no-prototype-builtins": 0,
-        "capitalized-comments": 0
+        "capitalized-comments": 0,
+
+        // embrace ES2015
+
+        "arrow-parens": [2, "as-needed"],
+        "arrow-spacing": [2, { "before": true, "after": true }],
+        "constructor-super": 2,
+        "generator-star-spacing": [2, { "before": true, "after": true }],
+        "no-class-assign": 2,
+        "no-const-assign": 2,
+        "no-dupe-class-members": 2,
+        "no-this-before-super": 2,
+        "no-var": 2,
+        "object-shorthand": 2,
+        "prefer-arrow-callback": 1,
+        "prefer-const": 2,
+        "prefer-spread": 2,
+        "prefer-reflect": 0,
+        "prefer-template": 1,
+        "require-yield": 2,
+        "lines-between-class-members": 0
     }
 }
