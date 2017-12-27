@@ -8,9 +8,9 @@
 ![license](http://img.shields.io/npm/l/docma.svg)
 ---
 
-## v2 Branch — WIP
+## v2 Branch — W.I.P.
 
-This is v2 branch, a work in progress. You can download/clone and use this version for experimental purposes until this becomes the master. For latest stable version, use the [current master branch](https://github.com/onury/docma).
+_This is v2 branch, a work in progress. You can download/clone and use this version for experimental purposes until this becomes the master. For latest stable version, use the [current master branch](https://github.com/onury/docma)._
 
 ---
 
