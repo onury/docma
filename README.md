@@ -1,5 +1,6 @@
-# Docma
+<p align="center"><img width="200" height="200" src="https://raw.github.com/onury/docma/v2/docma-logo.png" /></p>
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 ![npm](https://img.shields.io/npm/v/docma.svg)
 ![release](https://img.shields.io/github/release/onury/docma.svg)
 ![dependencies](https://david-dm.org/onury/docma.svg)
