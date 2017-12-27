@@ -1,5 +1,37 @@
 ## Docma Change-Log
 
+### v2.0.0 (NOT RELEASED YET - v2 branch)
+
+_This is a WIP. New items will be added to the changes below._
+
+- <p><b>Breaking Changes</b>:</p>
+
+    + Due to `jsdom` dependency upgrade, Docma v2+ requires Node.js v6 or newer.
+
+- <p><b>Docma</b> (Builder):</p>
+
+    + **Added** support for documenting code with **ES2015** syntax. (JSDoc and jsdoc-x dep. update.) Fixes [#18](https://github.com/onury/docma/issues/18).
+    + **Fixed** an issue where images in HTML (generated from markdown) would overflow out of page. Now, limiting the image width to `100%` of parent container while keeping the aspect ratio.
+    + **Fixed** an issue where compiled template scripts were altered when full-debug is enabled.
+    + **Fixed** an issue with redirecting a page when the routing method is set to `"path"`.
+    + **Improved** markdown parser. Both `<h1 />` and `<h2 />` tags are now followed with a `<hr/>`, like on GitHub.
+    + **Added** `config.markdown.bookmarks` option (`Boolean|String`) which automatically adds bookmark links to headings. Default: `false`.
+    + **Updated** builder/core dependencies to their latest versions.
+    + Now, displaying gzipped size of generated (docma-web) script, in addition to minified size.
+    + **Migrated** all code to ES2015.
+
+- <p><b>Docma CLI</b>:</p>
+
+    + **Added** static mock server for serving / testing the generated SPA; e.g.  
+    `docma serve [spa-path]`. See [CLI documentation][docma-cli] for detailed information.
+    + **Revision**: CLI will now auto-check for `docma.config.json` file in the current working directory if `-c` option is omitted.
+
+- <p><b>Docma Web Core</b>:</p>
+
+    + **Fixed** an issue where URI encoded characters after hash (`#`) would break the bookmark link. e.g. when navigated to `#MyClass%7EInnerObject` instead of `#MyClass~InnerObject`.
+    + **Fixed** an issue with `docma.utils.getLongName()`, occured after JSDoc core upgrade.
+    + **Updated** web-core dependencies.
+
 ### v1.5.3 (2017-12-21)
 
 - <p><b>Docma Web Core</b>:</p>
