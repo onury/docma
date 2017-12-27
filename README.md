@@ -8,6 +8,12 @@
 
 > © 2017-2018, Onur Yıldırım (@onury). MIT License.
 
+## v2 Branch — WIP
+
+This is v2 branch, a work in progress. You can donwload/clone and use this version for experimental purposes until this becomes the master. For latest stable version, use the current master branch.
+
+---
+
 A powerful tool to easily generate beautiful HTML documentation from Javascript ([JSDoc][jsdoc]), [Markdown][markdown] and HTML files.
 
 ### Features
@@ -33,6 +39,12 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 npm i docma -g
 ```
 
+### Command-Line Usage
+```shell
+    docma -c path/to/docma.config.json -d path/to/destination
+```
+See <a href="https://onury.io/docma/?content=docma-cli">Docma CLI reference</a>.
+
 ### Programmatic Usage
 
 ```js
@@ -47,12 +59,6 @@ npm i docma -g
         });
 ```
 See <a href="https://onury.io/docma/?api=docma#Docma~BuildConfiguration">Build configuration</a>.
-
-### Command-Line Usage
-```shell
-    docma -c path/to/docma.config.json -d path/to/destination
-```
-See <a href="https://onury.io/docma/?content=docma-cli">Docma CLI reference</a>.
 
 ### Documentation
 
