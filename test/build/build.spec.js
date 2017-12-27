@@ -198,7 +198,7 @@
                 .finally(done);
         });
 
-        xit('should build docma documentation', function (done) {
+        fit('should build docma documentation', function (done) {
             Docma.create()
                 .build('./docma.config.json')
                 .then(function (success) {
