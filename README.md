@@ -1,13 +1,13 @@
 <p align="center"><img width="200" height="200" src="https://raw.github.com/onury/docma/v2/docma-logo.png" /></p>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 ![npm](https://img.shields.io/npm/v/docma.svg)
 ![release](https://img.shields.io/github/release/onury/docma.svg)
 ![dependencies](https://david-dm.org/onury/docma.svg)
 ![license](http://img.shields.io/npm/l/docma.svg)
 ![maintained](https://img.shields.io/maintenance/yes/2017.svg)
 
-> © 2017-2018, Onur Yıldırım (@onury). MIT License.
+> © 2018, Onur Yıldırım ([@onury](https://github.com/onury)). MIT License.
 
 ## v2 Branch — WIP
 
