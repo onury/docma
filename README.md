@@ -6,14 +6,15 @@
 ![dependencies](https://david-dm.org/onury/docma.svg)
 ![maintained](https://img.shields.io/maintenance/yes/2017.svg)
 ![license](http://img.shields.io/npm/l/docma.svg)
-
-> © 2018, Onur Yıldırım ([@onury](https://github.com/onury)). MIT License.
+---
 
 ## v2 Branch — WIP
 
 This is v2 branch, a work in progress. You can download/clone and use this version for experimental purposes until this becomes the master. For latest stable version, use the [current master branch](https://github.com/onury/docma).
 
 ---
+
+> © 2018, Onur Yıldırım ([@onury](https://github.com/onury)). MIT License.
 
 A powerful tool to easily generate beautiful HTML documentation from Javascript ([JSDoc][jsdoc]), [Markdown][markdown] and HTML files.
 
