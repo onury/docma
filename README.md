@@ -10,7 +10,7 @@
 
 ## v2 Branch — WIP
 
-This is v2 branch, a work in progress. You can donwload/clone and use this version for experimental purposes until this becomes the master. For latest stable version, use the current master branch.
+This is v2 branch, a work in progress. You can download/clone and use this version for experimental purposes until this becomes the master. For latest stable version, use the [current master branch](https://github.com/onury/docma).
 
 ---
 
