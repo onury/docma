@@ -1,36 +1,50 @@
 #!/usr/bin/env node
 
+/* eslint prefer-template:0 */
+
 'use strict';
 
+// core modules
+const path = require('path');
+
 // dep modules
-const yargs = require('yargs'),
-    _ = require('lodash'),
-    Promise = require('bluebird'),
-    chalk = require('chalk');
+const yargs = require('yargs');
+const _ = require('lodash');
+const fs = require('fs-extra');
+const chalk = require('chalk');
 
 // own modules
-const Docma = require('../lib/docma'),
-    pkg = require('../package.json'),
-    utils = require('../lib/utils');
+const Docma = require('../lib/docma');
+const serve = require('./serve');
+const pkg = require('../package.json');
+const utils = require('../lib/utils');
 
 // --------------------------------
 // CLI SETUP
 // --------------------------------
 
 const examples = 'Examples:\n\n'
-    + '    Build documentation with a config.json file:\n'
+    + '  * Build documentation with a Docma configuration (JSON) file:\n'
     + chalk.white('      docma -c path/to/docma.config.json')
-    + '\n    Output to a different directory:\n'
+    + '\n  * If a docma.config.json exists in the current directory, simply:\n'
+    + chalk.white('      docma')
+    + '\n  * Output to a different directory:\n'
     + chalk.white('      docma -c path/to/docma.config.json -d path/to/docs')
-    + '\n    Define source files (instead of the ones defined in the config file):\n'
+    + '\n  * Re-define source files (ignore the ones defined in the config file):\n'
     + chalk.white('      docma -c path/to/docma.config.json -s path/to/lib-1.js -s path/to/lib-2.js')
-    + '\n    Define name-grouped source files:\n'
-    + chalk.white('      docma -c path/to/docma.config.json -s mylib:path/to/lib-1.js -s mylib:path/to/lib-2.js');
+    + '\n  * Define name-grouped source files:\n'
+    + chalk.white('      docma -c path/to/docma.config.json -s mylib:path/to/lib-1.js -s mylib:path/to/lib-2.js')
+    + '\n  * Serve generated SPA at the default port (9000):\n'
+    + chalk.white('      docma serve /path/to/docs')
+    + '\n  * Configure a custom port and serve:\n'
+    + chalk.white('      docma serve /path/to/docs -p 8080');
 
 const info = '\n\n'
     + chalk.yellow('Docma Repo ') + '@ ' + chalk.blue('https://github.com/onury/docma')
     + '\n'
-    + chalk.yellow('Docma Docs ') + '@ ' + chalk.blue('https://onury.github.io/docma');
+    + chalk.yellow('Docma Docs ') + '@ ' + chalk.blue('http://onury.io/docma')
+    + '\n'
+    + chalk.yellow('Docma CLI ') + ' @ ' + chalk.blue('http://onury.io/docma/?content=docma-cli');
 
 console.log();
 
@@ -82,6 +96,13 @@ const argv = yargs
         type: 'boolean',
         description: '(Debug) Disable build logs for the Node console.'
     })
+    .command('serve [spaPath]', 'start mock-server for the SPA')
+    .option('p', {
+        alias: 'port',
+        describe: 'Port number to bind the mock-server on.',
+        type: 'number',
+        default: 9000
+    })
     .wrap(80)
     // .locale('en')
     .epilog(examples + info)
@@ -96,9 +117,8 @@ function updateConfig(config) {
     config = config || {};
     if (argv.src && argv.src.length) {
         config.src = [];
-        let s,
-            p,
-            named = {};
+        let s, p;
+        const named = {};
         _.each(argv.src, item => {
             s = item.split(':');
             if (s.length > 1) {
@@ -116,7 +136,7 @@ function updateConfig(config) {
 
     // DEBUG OPTIONS
 
-    var debug = 0;
+    let debug = 0;
 
     if (argv.debug) {
         debug |= 31;
@@ -148,23 +168,45 @@ function updateConfig(config) {
 // PROGRAM ROUTINE
 // --------------------------------
 
-// if no commands/options are set, display help info.
-if (!process.argv.slice(2).length) {
-    yargs.showHelp();
-    process.exit(0);
-}
-
 // console.log(argv);
 
-Promise.resolve()
-    .then(() => {
-        if (!argv.config) return {};
-        return utils.json.read(argv.config);
-    })
-    .then(config => {
-        config = updateConfig(config);
-        return Docma.create().build(config);
-    })
-    .catch(error => {
-        console.log(chalk.red(error.message || error));
+const cmds = argv._ || [];
+// checking for `serve` command
+if (cmds.indexOf('serve') >= 0) {
+    serve(argv.spaPath, {
+        port: argv.port,
+        quite: argv.quite
     });
+} else {
+    const isConfigSet = Boolean(argv.config);
+    const configFile = isConfigSet
+        ? argv.config
+        : path.join(process.cwd(), 'docma.config.json');
+
+    fs.pathExists(configFile)
+        .then(exists => {
+            if (!exists) {
+                // throw only if -c option is set initially and file does not
+                // exist
+                if (isConfigSet) {
+                    throw new Error(`Config file "${configFile}" does not exist`);
+                }
+                // if `docma` is run with no options/commands,
+                // we'll display help.
+                if (!process.argv.slice(2).length) {
+                    yargs.showHelp();
+                    process.exit(0);
+                }
+                // otherwise we'll use empty config
+                return {};
+            }
+            return utils.json.read(configFile);
+        })
+        .then(config => {
+            config = updateConfig(config);
+            return Docma.create().build(config);
+        })
+        .catch(error => {
+            console.error(chalk.red(error.stack || error));
+        });
+}
