@@ -30,6 +30,7 @@ _This is a WIP. New items will be added to the changes below._
 
     + **Fixed** an issue where URI encoded characters after hash (`#`) would break the bookmark link. e.g. when navigated to `#MyClass%7EInnerObject` instead of `#MyClass~InnerObject`.
     + **Fixed** an issue with `docma.utils.getLongName()`, occured after JSDoc core upgrade.
+    + **Added** utility methods `docma.utils.getCodeTags()`, `docma.utils.getFormattedTypeList()`. Fixes [#33](https://github.com/onury/docma/issues/33). 
     + **Updated** web-core dependencies.
 
 ### v1.5.3 (2017-12-21)
