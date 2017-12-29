@@ -11,6 +11,7 @@ _This is a WIP. New items will be added to the changes below._
 - <p><b>Docma</b> (Builder):</p>
 
     + **Added** support for documenting code with **ES2015** syntax. (JSDoc and jsdoc-x dep. update.) Fixes [#18](https://github.com/onury/docma/issues/18).
+    + **Added** ability to copy defined asset files/directories to build directory; so you can use/link to non-source, static asset files (such as images, PDFs, favicons, etc). See [build configuration][build-config]. Fixes [#29](https://github.com/onury/docma/issues/29).
     + **Fixed** an issue where images in HTML (generated from markdown) would overflow out of page. Now, limiting the image width to `100%` of parent container while keeping the aspect ratio.
     + **Fixed** an issue where compiled template scripts were altered when full-debug is enabled.
     + **Fixed** an issue with redirecting a page when the routing method is set to `"path"`.
@@ -252,3 +253,4 @@ _This is a WIP. New items will be added to the changes below._
 [marked]:https://github.com/chjj/marked
 [docma-david]:https://david-dm.org/onury/docma
 [docma-cli]:https://onury.io/docma/?content=docma-cli
+[build-config]:https://onury.io/docma/?api=docma#Docma~BuildConfiguration
