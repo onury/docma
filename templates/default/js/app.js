@@ -130,15 +130,15 @@
         })
         .addFilter('$extends', function (symbol) {
             var ext = Array.isArray(symbol) ? symbol : symbol.augments;
-            return docma.utils.listType(ext);
+            return docma.utils.getCodeTags(ext, ', ');
         })
         .addFilter('$returns', function (symbol) {
             var returns = Array.isArray(symbol) ? symbol : symbol.returns;
-            return docma.utils.listTypeDesc(returns);
+            return docma.utils.getFormattedTypeList(returns);
         })
         .addFilter('$exceptions', function (symbol) {
             var exceptions = Array.isArray(symbol) ? symbol : symbol.exceptions;
-            return docma.utils.listTypeDesc(exceptions);
+            return docma.utils.getFormattedTypeList(exceptions);
         })
         // non-standard JSDoc directives are stored in `.tags` property of a
         // symbol. We also add other properties such as .access (if not public),
