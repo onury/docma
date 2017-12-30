@@ -39,17 +39,32 @@ module.exports = (spaPath, options) => {
     if (!pathIsSet && fs.pathExistsSync(docmaConfigPath)) {
         console.info(chalk.gray(`» Found docma.config.json @ ${servePath}`));
         console.info(chalk.gray(`  I will attempt to serve the configured destination.`));
-        console.info(chalk.gray(`  Provide a path (e.g. "./") to force serve target directory...`));
+        console.info(chalk.gray(`  Provide a path (e.g. "./") to force serve target directory...\n`));
         const conf = utils.json.readSync(docmaConfigPath);
         if (conf && typeof conf.dest === 'string') {
             servePath = path.resolve(docmaPath, conf.dest);
+            if (conf.app && typeof conf.app.base === 'string') {
+                servePath = utils.path.parentOfBase(servePath, conf.app.base);
+            }
         }
+    }
+
+    function logRequest(req, res) {
+        let sColor = 'green';
+        if (res.statusCode >= 400) sColor = 'yellow';
+        if (res.statusCode >= 500) sColor = 'red';
+        console.log(
+            chalk.white(req.method.toUpperCase()),
+            chalk.gray(req.url),
+            chalk.white('•'),
+            chalk[sColor](res.statusCode)
+        );
     }
 
     console.info(chalk.cyan(`Starting server @ path: ${servePath}`));
     const serve = serveStatic(servePath, { index: indexFiles });
     const server = http.createServer((req, res) => {
-        if (!options.quite) console.log(chalk.gray(req.method.toUpperCase(), req.url));
+        if (!options.quite) logRequest(req, res);
         serve(req, res, finalhandler(req, res));
     });
 
