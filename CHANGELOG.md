@@ -23,7 +23,7 @@ _This is a WIP. New items will be added to the changes below._
 
 - <p><b>Docma CLI</b>:</p>
 
-    + **Added** static mock server for serving / testing the generated SPA. i.e. `docma serve [spa-path]`.  
+    + **Added** static mock server for serving / testing the generated SPA. i.e. `docma serve`.  
     See [CLI documentation][docma-cli] for detailed information.
     + **Revision**: CLI will now auto-check for `docma.config.json` file in the current working directory if `-c` option is omitted.
 
