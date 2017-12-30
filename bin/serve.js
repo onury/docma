@@ -1,5 +1,9 @@
 'use strict';
 
+// -------------------------
+// Docma CLI `serve` command
+// -------------------------
+
 // core modules
 const http = require('http');
 const path = require('path');

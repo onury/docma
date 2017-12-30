@@ -2,6 +2,10 @@
 
 /* eslint prefer-template:0 */
 
+// --------------------------
+// DOCMA CLI
+// --------------------------
+
 'use strict';
 
 // core modules
@@ -19,9 +23,9 @@ const serve = require('./serve');
 const pkg = require('../package.json');
 const utils = require('../lib/utils');
 
-// --------------------------------
+// --------------------------
 // CLI SETUP
-// --------------------------------
+// --------------------------
 
 const examples = 'Examples:\n\n'
     + '  * Build documentation with a Docma configuration (JSON) file:\n'
@@ -109,9 +113,9 @@ const argv = yargs
     .showHelpOnFail(false, 'Run with --help for available options.')
     .argv;
 
-// --------------------------------
+// --------------------------
 // PROGRAM HELPERS
-// --------------------------------
+// --------------------------
 
 function updateConfig(config) {
     config = config || {};
@@ -164,9 +168,9 @@ function updateConfig(config) {
     return config;
 }
 
-// --------------------------------
+// --------------------------
 // PROGRAM ROUTINE
-// --------------------------------
+// --------------------------
 
 // console.log(argv);
 
