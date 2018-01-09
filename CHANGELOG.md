@@ -10,15 +10,17 @@ _This is a WIP. New items will be added to the changes below._
 
 - <p><b>Docma</b> (Builder):</p>
 
-    + **Added** support for documenting code with **ES2015** syntax. (JSDoc and jsdoc-x dep. update.) Fixes [#18](https://github.com/onury/docma/issues/18).
+    + **Added** support for documenting code with **ES2015** syntax. (JSDoc and jsdoc-x dep. update.) Fixes [#18](https://github.com/onury/docma/issues/18) & [#21](https://github.com/onury/docma/issues/21).
     + **Added** ability to copy defined asset files/directories to build directory; so you can use/link to non-source, static asset files (such as images, PDFs, favicons, etc). See [build configuration][build-config]. Fixes [#29](https://github.com/onury/docma/issues/29).
     + **Fixed** an issue where images in HTML (generated from markdown) would overflow out of page. Now, limiting the image width to `100%` of parent container while keeping the aspect ratio.
     + **Fixed** an issue where compiled template scripts were altered when full-debug is enabled.
     + **Fixed** an issue with redirecting a page when the routing method is set to `"path"`.
     + **Improved** markdown parser. Both `<h1 />` and `<h2 />` tags are now followed with a `<hr/>`, like on GitHub.
     + **Added** `config.markdown.bookmarks` option (`Boolean|String`) which automatically adds bookmark links to headings. Default: `false`.
+    + **Added** pre-build and post-build process support for Docma templates. See [Docma Templates documentation](https://onury.io/docma/?content=templates).
+    + **Added** Docma compatibility version check for Docma templates.
+    + **Added** build statistics logs to console output. Now, displaying gzipped size of generated (docma-web) script, in addition to minified size.
     + **Updated** builder/core dependencies to their latest versions.
-    + Now, displaying gzipped size of generated (docma-web) script, in addition to minified size.
     + **Migrated** all code to ES2015.
 
 - <p><b>Docma CLI</b>:</p>
@@ -32,7 +34,31 @@ _This is a WIP. New items will be added to the changes below._
     + **Fixed** an issue where URI encoded characters after hash (`#`) would break the bookmark link. e.g. when navigated to `#MyClass%7EInnerObject` instead of `#MyClass~InnerObject`.
     + **Fixed** an issue with `docma.utils.getLongName()`, occured after JSDoc core upgrade.
     + **Added** utility methods `docma.utils.getCodeTags()`, `docma.utils.getFormattedTypeList()`. Fixes [#33](https://github.com/onury/docma/issues/33). 
+    + **Added** utility methods `docma.utils.trimNewLines()`. This also has a dust filter `$tnl`.
     + **Updated** web-core dependencies.
+
+- <p><b>Default Template - Zebra</b> (v2.0.0):</p>
+
+    + **Breaking Change** Removed icomoon selection of icons (and `ico-` prefix). Added FontAwsome (v5) and SVG icons support.
+    + Default template finally has a name :) - Zebra.
+    + **Added** support for `@example <caption>Title</caption>`. Fixes [issue #14](https://github.com/onury/docma/issues/14). 
+    + **Added** `toolbar` (`boolean`) template option that toggles a tiny toolbar below the search box, for switching symbol list outline or quick-filtering symbols by symbol-kind. Enabled by default.
+    + **Added** `animations` (`boolean`) template option that specifies whether animations are enabled for sidebar and listed symbols.
+    + **Improved** symbol listing. Also; when search is active, outline is temporarily set to `"flat"` so that you see the parent of the symbol. When search box is cleaned, it's set back to the initial template setting. (e.g. `"tree"` if set).
+    + **Improved** `@example` outputs. If there are multiple examples for a symbol, they will be numbered now.
+    + **Added** support for `@hideconstructor` tag. Fixes [issue #21](https://github.com/onury/docma/issues/21).
+    + **Added** support for collapsing child members of symbols. Added `collapseSymbols` (`boolean`) template option. Fixes [issue #26](https://github.com/onury/docma/issues/26). 
+    + **Fixed** some spacing issues with class descriptions. Empty tables are auto-removed now.
+    + **Fixed** an issue where the constructor would be incorrectly marked as alias by JSDoc core.
+    + **Improved** nested bullet list spacing, for better readability.
+    + **Fixed** an anchor/bookmark issue with multiple symbols having the same id.
+    + Sub-symbols that are listed in a table, will not wrap to new line anymore.
+    + **Fixed** an issue where the (heading) title would be hidden under the nav-bar when navigated via a local bookmark on a page, generated from a markdown file. Also improved spacing for headings.
+    + **Fixed** an issue where sidebar scrollbars were not fully visible.
+    + **Fixed** some issues with navbar margins when sidebar is disabled.
+    + **Improved** responsive layout. On small screens, sidebar auto-collapses; top navbar turns into hamburger menu.
+    + **Removed** bootstrap dependencies (css and js) which dramatically reduces the size of the generated SPA.
+    + **Improved** `.badges` template option (default: `true`). Now also accepts a string value for custom bullets instead of badges.
 
 ### v1.5.3 (2017-12-21)
 
