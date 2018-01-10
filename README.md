@@ -28,7 +28,7 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 - Path or Query-string based app routing.
 - Non-opinionated engine, built-in template with cool opinions. :sunglasses:
 - Supports custom templates.
-- Works great with **GitHub Pages**.
+- Works great with **GitHub Pages**, Amazon **S3**, Nginx, Apache, etc...
 - Build via API or CLI.
 - Extremely configurable and debuggable.
 - Well documented. :point_up:
