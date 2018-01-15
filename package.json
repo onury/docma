@@ -23,7 +23,7 @@
     "node": ">=6"
   },
   "scripts": {
-    "docs": "node bin/docma -c ./docma.config.json",
+    "docs": "node bin/docma",
     "test": "jest --verbose --no-cache"
   },
   "jest": {
