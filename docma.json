@@ -1,5 +1,5 @@
 {
-    "debug": 5,
+    "debug": 31,
     "jsdoc": {
         "encoding": "utf8",
         "recurse": false,
@@ -33,14 +33,18 @@
         "title": "Docma Documentation",
         "meta": null,
         "base": "/docma",
-        "entrance": "content:guide",
+        "entrance": "content:home",
         "routing": "query",
         "server": "github"
     },
     "template": {
-        "path": "default",
+        "path": "zebra",
         "options": {
-            "title": "Docma",
+            "title": "<a href=\"/docma\">Docma</a>",
+            "logo": {
+                "dark": "img/docma-logo-dark.png",
+                "light": "img/docma-logo-light.png"
+            },
             "sidebar": true,
             "collapsed": false,
             "outline": "flat",
@@ -50,7 +54,7 @@
             "navbar": true,
             "navItems": [
                 {
-                    "iconClass": "ico-book",
+                    "iconClass": "fas fa-book",
                     "label": "Building Docs",
                     "items": [
                         { "label": "Guide", "href": "./" },
@@ -62,7 +66,7 @@
                     ]
                 },
                 {
-                    "iconClass": "ico-mouse-pointer",
+                    "iconClass": "fas fa-puzzle-piece",
                     "label": "Templates",
                     "items": [
                         { "label": "Docma Default Template", "href": "?content=default-template" },
@@ -74,23 +78,41 @@
                     ]
                 },
                 {
-                    "iconClass": "ico-md ico-download",
+                    "iconClass": "fas fa-cloud-download-alt",
                     "label": "Download",
-                    "href": "index.html",
                     "items": [
-                        { "label": "<code>npm i docma -g</code>" },
+                        {
+                            "label": "<code>npm i docma -g</code>",
+                            "href": "https://www.npmjs.com/package/docma",
+                            "target": "_blank"
+                        },
                         {
                             "label": "Docma Releases",
                             "href": "https://github.com/onury/docma/releases",
                             "target": "_blank"
                         },
                         { "separator": true },
-                        { "label": "Change Log", "href": "?content=changelog" }
+                        {
+                            "label": "Change Log",
+                            "href": "?content=changelog"
+                        }
                     ]
                 },
                 {
-                    "iconClass": "ico-md ico-github",
+                    "iconClass": "fab fa-github",
                     "label": "GitHub",
+                    "href": "https://github.com/onury/docma",
+                    "target": "_blank"
+                },
+                {
+                    "iconClass": "ico-md ico-github",
+                    "label": "Test Item",
+                    "href": "https://github.com/onury/docma",
+                    "target": "_blank"
+                },
+                {
+                    "iconClass": "ico-md ico-github",
+                    "label": "More",
                     "href": "https://github.com/onury/docma",
                     "target": "_blank"
                 }
@@ -98,7 +120,8 @@
         }
     },
     "src": [
-        // grouped JS API documnetation
+        // API sources
+        // grouped JS API documentation
         {
             "docma": "./lib/docma.js",
             "docma-web": [
@@ -108,14 +131,21 @@
             ],
             "docma-web-utils": "./lib/web/core.utils.js"
         },
+        // Content sources
         // markdown
         "./CHANGELOG.md",
         "./doc/**/*.md",
-        "./test/input/md-test.md",
         // renamed markdown
         {
-            "guide": "./doc/HOME.md"
+            "guide": "./doc/readme-modified.md"
+        },
+        // html files
+        {
+            "home": "./doc/front.html"
         }
     ],
+    "assets": {
+        "/img": ["./doc/img/*.*"]
+    },
     "dest": "../onury.github.io/docma"
 }
