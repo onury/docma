@@ -1,72 +1,87 @@
 ## Docma Change-Log
 
-### v2.0.0 (NOT RELEASED YET - v2 branch)
+## v2.0.0 (NOT RELEASED YET - v2 branch)
 
 _This is a WIP. New items will be added to the changes below._
 
-- <p><b>Breaking Changes</b>:</p>
+- <p><b>BREAKING CHANGES</b>:</p>
 
-    + Due to `jsdom` dependency upgrade, Docma v2+ requires Node.js v6 or newer.
+    + Due to several upgrades (such as `jsdom`), Docma v2+ requires Node.js v6 or newer.
+    + Docma templates are now npm modules. (Docma still comes with an updated, built-in default template.)
+        + Templates designed for Docma v1.x will not work with Docma v2.x. 
+        + **For template authors only**: `docma.template.json` file that defines the template build and configuration options is dropped in favor of template module main file or `package.json`. There are several other improvements. See updated documentation on [Creating Docma Templates](http://onury.io/docma/?content=templates).
 
 - <p><b>Docma</b> (Builder):</p>
 
     + **Added** support for documenting code with **ES2015** syntax. (JSDoc and jsdoc-x dep. update.) Fixes [#18](https://github.com/onury/docma/issues/18) & [#21](https://github.com/onury/docma/issues/21).
-    + **Added** ability to copy defined asset files/directories to build directory; so you can use/link to non-source, static asset files (such as images, PDFs, favicons, etc). See [build configuration][build-config]. Fixes [#29](https://github.com/onury/docma/issues/29).
-    + **Fixed** an issue where images in HTML (generated from markdown) would overflow out of page. Now, limiting the image width to `100%` of parent container while keeping the aspect ratio.
+    + **Added** `assets` build configuration which provides ability to copy defined asset files/directories to build directory; so you can use/link to non-source, static asset files (such as images, PDFs, etc). See [build configuration][build-config]. Fixes [#29](https://github.com/onury/docma/issues/29).
+    + **Fixed** an issue where the builder would not check for duplicate route names with the same route type (and silently overwrite the generated content file).
     + **Fixed** an issue where compiled template scripts were altered when full-debug is enabled.
     + **Fixed** an issue with redirecting a page when the routing method is set to `"path"`.
+    + **Fixed** an issue with images in HTML (generated from markdown) that would overflow out of page. Now, limiting the image width to `100%` of parent container while keeping the aspect ratio.
     + **Improved** markdown parser. Both `<h1 />` and `<h2 />` tags are now followed with a `<hr/>`, like on GitHub.
-    + **Added** `config.markdown.bookmarks` option (`Boolean|String`) which automatically adds bookmark links to headings. Default: `false`.
+    + **Added** `config.markdown.bookmarks` option (`Boolean|String`) which automatically adds bookmark links to headings to content generated from markdown files. Default: `false`.
     + **Added** pre-build and post-build process support for Docma templates. See [Docma Templates documentation](https://onury.io/docma/?content=templates).
     + **Added** Docma compatibility version check for Docma templates.
-    + **Added** build statistics logs to console output. Now, displaying gzipped size of generated (docma-web) script, in addition to minified size.
-    + **Updated** builder/core dependencies to their latest versions.
+    + **Added** build statistics logs to console output. Now, displaying gzipped size of generated (docma-web) script, in addition to minified size; and more detailed summary of routes configured.
+    + **Updated** core dependencies to their latest versions.
     + **Migrated** all code to ES2015.
 
 - <p><b>Docma CLI</b>:</p>
 
     + **Added** static mock server for serving / testing the generated SPA. i.e. `docma serve`.  
     See [CLI documentation][docma-cli] for detailed information.
-    + **Revision**: CLI will now auto-check for `docma.config.json` file in the current working directory if `-c` option is omitted.
+    + **Revision**: CLI will now auto-check for a `docma.json` (or `.docma.json`) file in the current working directory if `-c` option is omitted.
 
 - <p><b>Docma Web Core</b>:</p>
 
-    + **Fixed** an issue where URI encoded characters after hash (`#`) would break the bookmark link. e.g. when navigated to `#MyClass%7EInnerObject` instead of `#MyClass~InnerObject`.
+    + **Fixed** broken bookmark links due to URI encoded characters after hash (`#`). e.g. when navigated to `#MyClass%7EInnerObject` instead of `#MyClass~InnerObject`.
     + **Fixed** an issue with `docma.utils.getLongName()`, occured after JSDoc core upgrade.
     + **Added** utility methods `docma.utils.getCodeTags()`, `docma.utils.getFormattedTypeList()`. Fixes [#33](https://github.com/onury/docma/issues/33). 
     + **Added** utility methods `docma.utils.trimNewLines()`. This also has a dust filter `$tnl`.
     + **Updated** web-core dependencies.
 
+- <p><b>Docma Template API</b>:</p>
+
+    + Docma templates are now npm modules. This is the initial Template API. See updated documentation on [Creating Docma Templates](http://onury.io/docma/?content=templates).
+
 - <p><b>Default Template - Zebra</b> (v2.0.0):</p>
 
-    + **Breaking Change** Removed icomoon selection of icons (and `ico-` prefix). Added FontAwsome (v5) and SVG icons support.
     + Default template finally has a name :) - Zebra.
+    + **BREAKING CHANGES**:
+        + You need Docma v2+ for Zebra Template to work.
+        + **Removed** icomoon selection of icons (and `ico-` prefix). Added FontAwsome (v5) and SVG icons support.
+        + **Removed** bootstrap and its dependencies (css and js) which dramatically reduces the size of the generated SPA. Also, cleaned up all unused styles.
     + **Added** support for `@example <caption>Title</caption>`. Fixes [issue #14](https://github.com/onury/docma/issues/14). 
     + **Added** `toolbar` (`boolean`) template option that toggles a tiny toolbar below the search box, for switching symbol list outline or quick-filtering symbols by symbol-kind. Enabled by default.
-    + **Added** `animations` (`boolean`) template option that specifies whether animations are enabled for sidebar and listed symbols.
+    + **Added** `logo` (`String|Object`) template option that specifies the URL of your logo. If you need separate logos for dark and light backgrounds set this to an object. i.e. `{ dark: String, light: String }`. Recommended size of a logo image is 120 x 120 pixels.
+    + **Added** `animations` (`Boolean`) template option that specifies whether animations are enabled for sidebar and listed symbols.
     + **Improved** symbol listing. Also; when search is active, outline is temporarily set to `"flat"` so that you see the parent of the symbol. When search box is cleaned, it's set back to the initial template setting. (e.g. `"tree"` if set).
     + **Improved** `@example` outputs. If there are multiple examples for a symbol, they will be numbered now.
     + **Added** support for `@hideconstructor` tag. Fixes [issue #21](https://github.com/onury/docma/issues/21).
     + **Added** support for collapsing child members of symbols. Added `collapseSymbols` (`boolean`) template option. Fixes [issue #26](https://github.com/onury/docma/issues/26). 
     + **Fixed** some spacing issues with class descriptions. Empty tables are auto-removed now.
-    + **Fixed** an issue where the constructor would be incorrectly marked as alias by JSDoc core.
+    + **Fixed** a JSDoc issue where the constructor would be incorrectly marked as alias.
     + **Improved** nested bullet list spacing, for better readability.
     + **Fixed** an anchor/bookmark issue with multiple symbols having the same id.
     + Sub-symbols that are listed in a table, will not wrap to new line anymore.
     + **Fixed** an issue where the (heading) title would be hidden under the nav-bar when navigated via a local bookmark on a page, generated from a markdown file. Also improved spacing for headings.
-    + **Fixed** an issue where sidebar scrollbars were not fully visible.
+    + **Fixed** an issue where the page would not scroll/jump to the bookmark on initial load; when the URL has a location hash.
+    + **Fixed** pre/code controls not to wrap content. Now, horizontally scrollable (like on GitHub).
+    + **Fixed** sidebar scrollbars that were not fully visible.
     + **Fixed** some issues with navbar margins when sidebar is disabled.
-    + **Improved** responsive layout. On small screens, sidebar auto-collapses; top navbar turns into hamburger menu.
-    + **Removed** bootstrap dependencies (css and js) which dramatically reduces the size of the generated SPA.
-    + **Improved** `.badges` template option (default: `true`). Now also accepts a string value for custom bullets instead of badges.
+    + **Improved** UI and responsive layout. On small screens, sidebar auto-collapses; top navbar turns into hamburger menu. Also, truely printable.
+    + **Improved** template option `.badges` (default: `true`) to also accept a string value for custom bullets instead of badges.
+    + **Improved** template option `.title` to accept HTML tags (i.e. you can place the title in `<a />` to link it).
+    + Various minor improvements and clean up.
 
-### v1.5.3 (2017-12-21)
+## v1.5.3 &nbsp;&nbsp;`2017-12-21`
 
 - <p><b>Docma Web Core</b>:</p>
 
     + **Fixed** a parser issue where carriage return (CR) of Windows newlines (CRLF) were removed. Fixes [#28](https://github.com/onury/docma/issues/28).
 
-### v1.5.2 (2017-12-09)
+## v1.5.2 &nbsp;&nbsp;`2017-12-09`
 
 - <p><b>Docma Web Core</b>:</p>
 
@@ -75,13 +90,13 @@ _This is a WIP. New items will be added to the changes below._
 
 > _**Note**: For this release, some dependencies (such as `jsdoc-x`, `jsdom`) are NOT updated on purpose 'cause they introduce breaking changes. In **v2** (WIP, to be released) these will be updated and many things will be improved._
 
-### v1.5.1 (2017-03-11)
+## v1.5.1 &nbsp;&nbsp;`2017-03-11`
 
 - <p><b>Docma Web Core</b>:</p>
 
     + **Fixed** `slice` error for non-string default value.
 
-### v1.5.0 (2017-03-10)
+## v1.5.0 &nbsp;&nbsp;`2017-03-10)`
 
 - <p><b>Docma</b> (Builder):</p>
 
@@ -102,21 +117,21 @@ _This is a WIP. New items will be added to the changes below._
     + **Revision**: Default string values are now represented in quotes.
     + **Added** `static` badge for static members, `deprecated` badge for deprecated symbols.
 
-### v1.4.7 (2017-03-09)
+## v1.4.7 &nbsp;&nbsp;`2017-03-09`
 
 - <p><b>Docma</b> (Builder):</p>
 
     + **Fixed** an issue where build config `config.jsdoc.includePattern` would not be respected when filtering files.
     + **Fixed** an issue where sorting would change when `config.jsdoc.hierarchy` option is enabled.
 
-### v1.4.5 (2017-03-05)
+## v1.4.5 &nbsp;&nbsp;`2017-03-05`
 
 - <p><b>Docma</b> (Builder):</p>
 
     + **Added** build config options: `config.jsdoc.allowUnknownTags`, `config.jsdoc.dictionaries`, `config.jsdoc.includePattern`, `config.jsdoc.excludePattern` (`jsdoc-x` feature).
     + **Added** [JSDoc plugin](http://usejsdoc.org/about-plugins.html) support via the new `config.jsdoc.plugins` option (`jsdoc-x` feature).
 
-### v1.4.0 (2017-02-13)
+## v1.4.0 &nbsp;&nbsp;`2017-02-13`
 
 - <p><b>Docma</b> (Builder):</p>
 
@@ -138,7 +153,7 @@ _This is a WIP. New items will be added to the changes below._
     + **Fixed** a style issue where sidebar would not scroll all the way to the bottom in Firefox. Fixes [issue #8](https://github.com/onury/docma/issues/8).
     + If `config.template.title` is omitted, `config.app.title` is used. (Defaults to `"Documentation"` if not set).
 
-### v1.3.0 (2016-11-23)
+## v1.3.0 &nbsp;&nbsp;`2016-11-23`
 
 - <p><b>Docma</b> (Builder):</p>
 
@@ -157,7 +172,7 @@ _This is a WIP. New items will be added to the changes below._
     + **Fixed** an issue where symbols with return type parameters (such as `Promise<Array>`) would not be escaped and parsed properly. Fixes [issue #4](https://github.com/onury/docma/issues/4).
     + **Fixed** an issue where boolean symbol parameters' default values would not be parsed properly. Fixes [issue #5](https://github.com/onury/docma/issues/5).
 
-### v1.2.0 (2016-10-31)
+## v1.2.0 &nbsp;&nbsp;`2016-10-31`
 
 - <p><b>Docma CLI</b>:</p>
 
@@ -167,11 +182,11 @@ _This is a WIP. New items will be added to the changes below._
 
     + **Updated** (one-dark) highlighting styles.
 
-### v1.1.1 (2016-08-13)
+## v1.1.1 &nbsp;&nbsp;`2016-08-13`
 
 - **Fixed** an anchor/linking issue which prevented some browsers (such as Safari) to navigate properly.
 
-### v1.1.0 (2016-08-12)
+## v1.1.0 &nbsp;&nbsp;`2016-08-12`
 
 - <p><b>Docma</b> (Builder):</p>
 
@@ -185,17 +200,17 @@ _This is a WIP. New items will be added to the changes below._
     + An access badge is shown next to symbol name, if symbol has `private` or `protected` access.
     + Clean up.
 
-### v1.0.3 (2016-06-27)
+## v1.0.3 &nbsp;&nbsp;`2016-06-27`
 
 - **Docma** (Builder): Added HTML source file support. You can include HTML files together with JS and markdown files while building your documentation.
 - **Default Template**: Removed YAML syntax highlighting support because of incorrect auto-detection. Opened an issue [here](https://github.com/isagalaev/highlight.js/issues/1213).
 
-### v1.0.1 (2016-06-11)
+## v1.0.1 &nbsp;&nbsp;`2016-06-11`
 
 - **Fixed** missing web components.
 - David considers [marked][marked] as [insecure dependency][docma-david]. This is [already](https://nodesecurity.io/advisories/marked_content-injection) [reported](https://github.com/chjj/marked/pull/592).
 
-### v1.0.0 (2016-06-11)
+## v1.0.0 &nbsp;&nbsp;`2016-06-11`
 
 - <p><b>Docma</b> (Builder):</p>
 
@@ -249,20 +264,20 @@ _This is a WIP. New items will be added to the changes below._
 
 ---
 
-### v0.5.4 Pre-Release (2016-05-22)
+## v0.5.4 Pre-Release &nbsp;&nbsp;`2016-05-22`
 
 - `docma.template.json` is no more copied over to the output.
 - **Added** default template option `badges:Boolean`.
 
 ---
 
-### v0.5.3 Pre-Release (2016-05-22)
+## v0.5.3 Pre-Release &nbsp;&nbsp;`2016-05-22`
 
 - **Fixed** docma-web file paths.
 
 ---
 
-### v0.5.2 Pre-Release (2016-05-20)
+## v0.5.2 Pre-Release &nbsp;&nbsp;`2016-05-20`
 
 - **Updated** default template.
 - **Updated** dependencies.
@@ -270,7 +285,7 @@ _This is a WIP. New items will be added to the changes below._
 
 ---
 
-### v0.5.0 Pre-Release (2016-05-11)
+## v0.5.0 Pre-Release &nbsp;&nbsp;`2016-05-11`
 
 - Initial (pre) release.
 - **Added** ability to parse JSDoc documentation.
