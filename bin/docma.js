@@ -19,7 +19,7 @@ const chalk = require('chalk');
 
 // own modules
 const Docma = require('../lib/docma');
-const serve = require('./serve');
+const serve = require('./commands/serve');
 const pkg = require('../package.json');
 const utils = require('../lib/utils');
 
@@ -29,15 +29,15 @@ const utils = require('../lib/utils');
 
 const examples = 'Examples:\n\n'
     + '  * Build documentation with a Docma configuration (JSON) file:\n'
-    + chalk.white('      docma -c path/to/docma.config.json')
-    + '\n  * If a docma.config.json exists in the current directory, simply:\n'
+    + chalk.white('      docma -c path/to/docma.json')
+    + '\n  * If a docma.json exists in the current directory, simply:\n'
     + chalk.white('      docma')
     + '\n  * Output to a different directory:\n'
-    + chalk.white('      docma -c path/to/docma.config.json -d path/to/docs')
+    + chalk.white('      docma -c path/to/docma.json -d path/to/docs')
     + '\n  * Re-define source files (ignore the ones defined in the config file):\n'
-    + chalk.white('      docma -c path/to/docma.config.json -s path/to/lib-1.js -s path/to/lib-2.js')
+    + chalk.white('      docma -c path/to/docma.json -s path/to/lib-1.js -s path/to/lib-2.js')
     + '\n  * Define name-grouped source files:\n'
-    + chalk.white('      docma -c path/to/docma.config.json -s mylib:path/to/lib-1.js -s mylib:path/to/lib-2.js')
+    + chalk.white('      docma -c path/to/docma.json -s mylib:path/to/lib-1.js -s mylib:path/to/lib-2.js')
     + '\n  * Serve generated SPA at the default port (9000):\n'
     + chalk.white('      docma serve /path/to/docs')
     + '\n  * Configure a custom port and serve:\n'
@@ -168,6 +168,33 @@ function updateConfig(config) {
     return config;
 }
 
+function getConfigFileSync() {
+    if (argv.config) {
+        if (fs.pathExistsSync(argv.config)) return path.resolve(argv.config);
+        // throw only if -c option is set initially and file does not exist
+        console.error(chalk.red(`Error: Config file "${argv.config}" does not exist.`));
+        process.exit(1);
+    }
+
+    // otherwise, try other default config file names.
+    const conf = utils._findDocmaConfigFileSync();
+    if (conf) {
+        console.log(chalk.blue(`Using configuration file: ${conf}`));
+        return conf;
+    }
+
+    // if `docma` is run with no options/commands,
+    // we'll display help.
+    if (!process.argv.slice(2).length) {
+        console.log(chalk.yellow(`No source or destination is specified.\n`));
+        yargs.showHelp();
+        process.exit(0);
+    }
+    // otherwise we'll use empty config
+    console.log(chalk.blue(`No configuration file specified. Using default configuration.`));
+    return null;
+}
+
 // --------------------------
 // PROGRAM ROUTINE
 // --------------------------
@@ -182,29 +209,13 @@ if (cmds.indexOf('serve') >= 0) {
         quite: argv.quite
     });
 } else {
-    const isConfigSet = Boolean(argv.config);
-    const configFile = isConfigSet
-        ? argv.config
-        : path.join(process.cwd(), 'docma.config.json');
+    const configFile = getConfigFileSync();
 
-    fs.pathExists(configFile)
-        .then(exists => {
-            if (!exists) {
-                // throw only if -c option is set initially and file does not
-                // exist
-                if (isConfigSet) {
-                    throw new Error(`Config file "${configFile}" does not exist`);
-                }
-                // if `docma` is run with no options/commands,
-                // we'll display help.
-                if (!process.argv.slice(2).length) {
-                    yargs.showHelp();
-                    process.exit(0);
-                }
-                // otherwise we'll use empty config
-                return {};
-            }
-            return utils.json.read(configFile);
+    Promise.resolve()
+        .then(() => {
+            return configFile
+                ? utils.json.read(configFile)
+                : {}; // use empty config
         })
         .then(config => {
             config = updateConfig(config);
