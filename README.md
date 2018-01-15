@@ -45,7 +45,7 @@ npm i docma -g
 
 ### Command-Line Usage
 ```shell
-docma -c path/to/docma.config.json -d path/to/destination
+docma -c path/to/docma.json -d path/to/destination
 ```
 See <a href="https://onury.io/docma/?content=docma-cli">Docma CLI reference</a>.
 
@@ -54,7 +54,7 @@ See <a href="https://onury.io/docma/?content=docma-cli">Docma CLI reference</a>.
 ```js
 const Docma = require('docma');
 Docma.create()
-    .build(config)
+    .build(config) // pass file path or object
     .then(success => console.log('Documentation is built successfully.'))
     .catch(error => console.log(error));
 ```
