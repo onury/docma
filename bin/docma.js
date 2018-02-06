@@ -20,6 +20,7 @@ const chalk = require('chalk');
 // own modules
 const Docma = require('../lib/docma');
 const serve = require('./commands/serve');
+const doctor = require('./commands/template.doctor');
 const pkg = require('../package.json');
 const utils = require('../lib/utils');
 
@@ -46,9 +47,9 @@ const examples = 'Examples:\n\n'
 const info = '\n\n'
     + chalk.yellow('Docma Repo ') + '@ ' + chalk.blue('https://github.com/onury/docma')
     + '\n'
-    + chalk.yellow('Docma Docs ') + '@ ' + chalk.blue('http://onury.io/docma')
+    + chalk.yellow('Docma Docs ') + '@ ' + chalk.blue('https://onury.io/docma')
     + '\n'
-    + chalk.yellow('Docma CLI ') + ' @ ' + chalk.blue('http://onury.io/docma/?content=docma-cli');
+    + chalk.yellow('Docma CLI ') + ' @ ' + chalk.blue('https://onury.io/docma/?content=docma-cli');
 
 console.log();
 
@@ -100,12 +101,28 @@ const argv = yargs
         type: 'boolean',
         description: '(Debug) Disable build logs for the Node console.'
     })
-    .command('serve [spaPath]', 'start mock-server for the SPA')
+    .command('serve [spaPath]', 'Start a static server for the generated SPA.')
     .option('p', {
         alias: 'port',
         describe: 'Port number to bind the mock-server on.',
         type: 'number',
         default: 9000
+    })
+    .command('template init [path]', 'Initialize a new Docma template.', yargs => {
+        // yargs
+        //     .options({
+        //         v: { alias: 'verbose', default: true }
+        //     });
+    })
+    .command('template doctor [path]', 'Diagnose a Docma template.', yargs => {
+        yargs
+            .options({
+                // v: { alias: 'verbose', default: true },
+                first: {
+                    describe: 'Whether to stop on first failure when diagnosing a template.',
+                    default: false
+                }
+            });
     })
     .wrap(80)
     // .locale('en')
@@ -208,6 +225,14 @@ if (cmds.indexOf('serve') >= 0) {
         port: argv.port,
         quite: argv.quite
     });
+} else if (cmds.indexOf('template') >= 0) {
+    if (argv.doctor) {
+        console.log(argv);
+        doctor(argv.path, {
+            quite: argv.quite,
+            stopOnFirstFailure: argv.first
+        });
+    }
 } else {
     const configFile = getConfigFileSync();
 
