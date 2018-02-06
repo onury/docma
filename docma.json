@@ -47,7 +47,8 @@
             },
             "sidebar": true,
             "collapsed": false,
-            "outline": "flat",
+            "outline": "tree",
+            "foldSymbols": false,
             "badges": true,
             "symbolMeta": false,
             "search": true,
@@ -69,7 +70,7 @@
                     "iconClass": "fas fa-puzzle-piece",
                     "label": "Templates",
                     "items": [
-                        { "label": "Docma Default Template", "href": "?content=default-template" },
+                        { "label": "Default Template - Zebra", "href": "?content=default-template" },
                         { "separator": true },
                         { "label": "Creating Docma Templates", "href": "?content=templates" },
                         { "separator": true },
@@ -101,18 +102,6 @@
                 {
                     "iconClass": "fab fa-github",
                     "label": "GitHub",
-                    "href": "https://github.com/onury/docma",
-                    "target": "_blank"
-                },
-                {
-                    "iconClass": "ico-md ico-github",
-                    "label": "Test Item",
-                    "href": "https://github.com/onury/docma",
-                    "target": "_blank"
-                },
-                {
-                    "iconClass": "ico-md ico-github",
-                    "label": "More",
                     "href": "https://github.com/onury/docma",
                     "target": "_blank"
                 }
