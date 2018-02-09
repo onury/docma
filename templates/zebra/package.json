@@ -1,0 +1,31 @@
+{
+  "name": "docma-template-zebra",
+  "version": "2.0.0",
+  "description": "Zebra - Default template for Docma. https://github.com/onury/docma",
+  "repository": "https://github.com/onury/docma/tree/master/templates/zebra",
+  "license": "MIT",
+  "author": "Onur Yıldırım <onur@cutepilot.com>",
+  "main": "index.js",
+  "files": [
+    "template/",
+    "index.js",
+    "LICENSE"
+  ],
+  "scripts": {
+    "less": "lessc ./src/less/styles.less ./template/css/styles.css --clean-css=\"--s1 --advanced\"",
+    "uglify": "uglifyjs ./src/js/app.svg.js ./src/js/app.helper.js ./src/js/app.filters.js ./src/js/app.core.js -o ./template/js/app.min.js --comments",
+    "build": "npm run less && npm run uglify"
+  },
+  "keywords": [
+    "docma",
+    "template"
+  ],
+  "peerDependencies": {
+    "docma": ">=2.0.0"
+  },
+  "devDependencies": {
+    "less": "^2.7.3",
+    "less-plugin-clean-css": "^1.5.1",
+    "uglify-js": "^3.3.9"
+  }
+}
