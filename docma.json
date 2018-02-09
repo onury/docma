@@ -49,6 +49,7 @@
             "collapsed": false,
             "outline": "tree",
             "foldSymbols": false,
+            "typeLinks": true,
             "badges": true,
             "symbolMeta": false,
             "search": true,
