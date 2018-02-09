@@ -1,0 +1,483 @@
+@import "variables.less";
+@import "mixins.less";
+@import "normalize.less";
+@import "table.less";
+@import "code.less";
+@import "navbar.less"; // must come before sidebar
+@import "sidebar.less";
+@import "highlight-one-dark.less";
+@import "print.less";
+
+html {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+body, html {
+    font-family: @font-family-sans-serif;
+    font-size: @font-size-base;
+    line-height: @line-height-base;
+    background-color: @body-bg !important;
+    color: @text-color;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    padding-top: @navbar-height; // for the fixed navbar
+}
+
+* {
+    .box-sizing(border-box);
+    outline: 0 none !important;
+}
+*:before,
+*:after {
+    .box-sizing(border-box);
+}
+
+button {
+    outline: 0 none !important;
+    font-size: @font-size-base !important;
+    &::-moz-focus-inner {
+        border: 0 !important;
+    }
+
+    &.btn-block {
+        letter-spacing: 0.03em;
+        font-size: @font-size-medium !important;
+        // text-transform: uppercase;
+    }
+
+    &.btn {
+        border: 0 none;
+    }
+}
+
+select {
+    -webkit-appearance: menulist-button;
+    /*background: none !important;*/
+    background: #fff !important;
+    /*border: 0 none !important;*/
+    outline: none !important;
+}
+
+// Links
+
+a {
+    position: relative; // !!!
+    color: @link-color;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        color: @link-hover-color;
+        text-decoration: @link-hover-decoration;
+    }
+
+    &:focus {
+        .tab-focus();
+    }
+}
+
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    margin: 10px 0 20px 0;
+}
+// h1 + hr,
+// h2 + hr {
+//     margin: 0 !important;
+// }
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: @headings-font-family;
+  font-weight: @headings-font-weight;
+  line-height: @headings-line-height;
+  color: @headings-color;
+
+  small,
+  .small {
+    font-weight: normal;
+    line-height: 1;
+    color: @gray-light;
+  }
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3 {
+  margin-top: @line-height-computed;
+  margin-bottom: (@line-height-computed / 2.5);
+
+  small,
+  .small {
+    font-size: 65%;
+  }
+}
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  margin-top: (@line-height-computed / 2);
+  margin-bottom: (@line-height-computed / 2);
+
+  small,
+  .small {
+    font-size: 75%;
+  }
+}
+
+h1, .h1 { font-size: @font-size-h1; }
+h2, .h2 { font-size: @font-size-h2; }
+h3, .h3 { font-size: @font-size-h3; }
+h4, .h4 { font-size: @font-size-h4; }
+h5, .h5 { font-size: @font-size-h5; }
+h6, .h6 { font-size: @font-size-h6; }
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    // in a page, generated from markdown; when a bookmark is clicked, the title
+    // will be hidden under the top nav-bar. this will prevent that.
+    padding-top: @navbar-height + 10;
+    margin-top: -40px;
+
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+
+    font-family: @headings-font-family;
+    font-weight: @headings-font-weight;
+    line-height: @headings-line-height;
+    color: @headings-color;
+
+    & a {
+        color: @headings-color;
+        &:hover {
+            color: @headings-color;
+            text-decoration: none;
+        }
+    }
+
+    // reset top space
+    &.no-space {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+}
+
+
+p {
+    margin: 0 0 (@line-height-computed / 2);
+}
+
+// nested list fixes
+ul, ol > li > p {
+    margin: 5px 0;
+}
+ul, ol > li > ul, ol {
+    margin-bottom: 12px !important;
+}
+
+td > p {
+    margin: 0;
+}
+
+div {
+    border: 0 none !important;
+}
+
+img {
+    vertical-align: middle;
+}
+
+// Blockquotes
+blockquote {
+  padding: 10px 12px; // (@line-height-computed / 2) @line-height-computed;
+  margin: 0 0 @line-height-computed;
+  font-size: 1em; // @blockquote-font-size;
+  border-left: 5px solid @blockquote-border-color;
+  color: #576075;
+  background-color: #f9f9f9;
+  border-top-right-radius: @border-radius-base;
+  border-bottom-right-radius: @border-radius-base;
+
+  p,
+  ul,
+  ol {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Note: Deprecated small and .small as of v3.1.0
+  // Context: https://github.com/twbs/bootstrap/issues/11660
+  footer,
+  small,
+  .small {
+    display: block;
+    font-size: 80%; // back to default font-size
+    line-height: @line-height-base;
+    color: @blockquote-small-color;
+
+    &:before {
+      content: '\2014 \00A0'; // em dash, nbsp
+    }
+  }
+}
+
+@symbol-font-size: ceil(@font-size-base * 1.2);
+.symbol {
+    font-size: @symbol-font-size;
+    & a {
+        #bookmark-icon(1em);
+    }
+}
+code.symbol-name {
+    font-weight: 500;
+    color: @code-color;
+    & .def-val {
+        color: @gray-light;
+        font-weight: normal;
+    }
+}
+span.symbol-sep {
+    background-color: transparent;
+    color: @gray-light;
+    font-size: @symbol-font-size;
+    padding-left: 5px;
+    font-weight: normal;
+    // font-size: 0.8em;
+}
+code.symbol-type {
+    color: @gray;
+    font-size: @font-size-base;
+    font-weight: normal;
+    background-color: transparent;
+}
+
+.symbol-meta {
+    font-size: 14px !important;
+    font-style: italic;
+    text-align: right;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.symbol-container {
+    // when a bookmark is clicked, the symbol title will be hidden under the top
+    // nav-bar. this will prevent that.
+    padding-top: @navbar-height;
+    margin-top: -@navbar-height;
+
+    & .symbol-heading {
+        & .symbol {
+            padding: 10px 0;
+        }
+    }
+
+    & .symbol-definition {
+        padding: 5px 0;
+
+        // add a bit more space when a table comes right after a paragraph.
+        & p + table {
+            margin-top: 20px;
+        }
+
+        & .table {
+            & td:first-child {
+                white-space: nowrap;
+            }
+            & td:last-child {
+                width: auto;
+            }
+        }
+    }
+}
+
+.boxed {
+    display: inline-block;
+    font-size: @font-size-xsmall;
+    letter-spacing: 0.04em;
+    color: #fff;
+    padding: 2px 6px 0px;
+    border-radius: @border-radius-small;
+    margin: -2px 3px 0 0;
+    vertical-align: middle;
+    background-color: darken(@gray-lighter, 5%);
+}
+
+// --------------------------
+
+.well {
+    background-color: #f9f9f9;
+    border-radius: 3px;
+    padding: 20px;
+}
+
+// --------------------------
+
+.docma.bookmark {
+    #bookmark-icon(0.7em);
+}
+
+.docma-info {
+    display: inline-block;
+    font-size: @font-size-small;
+    font-style: italic;
+    letter-spacing: 0.07em;
+    margin-bottom: 25px;
+    z-index: 2;
+}
+
+#docma-content {
+    margin-top: 17px;
+}
+
+// --------------------------
+
+.container {
+    position: relative;
+    padding: 0 @page-padding-horizontal;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.container-boxed {
+    position: relative;
+    max-width: 960px !important;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: @screen-lg-max) {
+    .container-boxed {
+        padding: 0 @page-padding-horizontal;
+    }
+}
+
+// --------------------------
+
+/*  GRID ROW  */
+.row {
+	clear: both;
+	padding: 0px;
+    margin: 0px;
+
+    /*  GROUPING  */
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+/*  COLUMNS  */
+.col {
+	display: block;
+	float: left;
+    margin: 1% 0 1% 4%; // 1.6%;
+
+    &:first-child {
+        margin-left: 0;
+    }
+}
+
+/*  GRID OF THREE  */
+.span-3 {
+	width: 100%;
+}
+.span-2 {
+	width: 64%; // 66.1%;
+}
+.span-1 {
+	width: 31.5%; // 32.2%;
+}
+
+@media only screen and (max-width: @screen-lg-max) {
+	.col { margin: 1% 0 1% 0%;}
+	.span-3, .span-2, .span-1 { width: 100%; }
+}
+
+// --------------------------
+
+// SVG SYMBOL BADGES
+
+@symbol-badge-size: 26px;
+@symbol-badge-btn-size: 22px;
+.symbol-badge {
+    display: inline-block;
+    position: relative;
+    width: @symbol-badge-size;
+    height: @symbol-badge-size;
+    opacity: 0.65;
+    margin-left: -1px;
+
+    & > span {
+        position: absolute;
+        display: block;
+        font-family: Arial, sans-serif;
+        font-size: 10.5px;
+        color: #fff;
+        width: 100%;
+        line-height: @symbol-badge-size + 1;
+        text-indent: 0 !important;
+        text-align: center;
+        left: 0;
+        top: 0;
+        z-index: 2;
+    }
+    & > svg {
+        position: absolute;
+        display: block;
+        width: @symbol-badge-size;
+        height: @symbol-badge-size;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        fill: black; // default
+    }
+}
+
+.symbol-badge.badge-btn {
+    display: inline-block;
+    position: relative;
+    width: @symbol-badge-btn-size !important;
+    height: @symbol-badge-btn-size !important;
+    margin-right: 3px;
+    cursor: pointer;
+    white-space: nowrap;
+    .user-select(none);
+    opacity: 0.3;
+
+    & > span {
+        width: @symbol-badge-btn-size !important;
+        height: @symbol-badge-btn-size !important;
+        font-size: 9px !important;
+        line-height: @symbol-badge-btn-size !important;
+        margin-left: -0.5px;
+    }
+    & > svg {
+        width: @symbol-badge-btn-size !important;
+        height: @symbol-badge-btn-size !important;
+    }
+
+    &.active {
+        opacity: 1;
+    }
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.item-tree-line {
+    .no-pointer-events;
+    .user-select(none);
+}

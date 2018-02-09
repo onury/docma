@@ -1,0 +1,432 @@
+@sidebar-width: 280px; // change app.SIDEBAR_WIDTH in JS if modified
+@sidebar-header-height: 130px;
+@sidebar-toolbar-height: 30px;
+@sidebar-header-tb-height: @sidebar-header-height + @sidebar-toolbar-height;
+@sidebar-brand-height: 50px;
+@sidebar-item-height: 38px;
+@sidebar-toggle-color: #636982;
+
+input[type=search] {
+    &:-moz-placeholder {
+    	color: @over-dark;
+    }
+     &::-webkit-input-placeholder {
+    	color: @over-dark;
+    }
+}
+
+// for animating the memberof part of symbol name
+// when outline is switched
+.symbol-memberof {
+    display: inline-block;
+    width: auto;
+    max-width: 100px;
+    overflow-x: hidden;
+    vertical-align: middle;
+}
+.symbol-memberof.no-width {
+    // width: 0;
+    max-width: 0;
+}
+
+// SMALL ELEMENTS / SUB-DIVs
+
+#sidebar-toggle {
+    display: block;
+    position: fixed;
+    z-index: 9999999;
+    top: 0;
+    left: 0;
+    width: @sidebar-brand-height;
+    text-align: center;
+    // background-color: @dark-softer;
+    line-height: @sidebar-brand-height;
+    font-size: @font-size-large;
+    cursor: pointer;
+    & svg.fa-bars {
+        display: inline-block;
+        margin-top: 13px;
+        color: @sidebar-toggle-color;
+        opacity: 0.4;
+    }
+    &:hover {
+        & svg.fa-bars {
+            opacity: 1;
+        }
+    }
+
+    &.toggled {
+        & svg.fa-bars {
+            color: @sidebar-toggle-color
+        }
+        &:hover {
+            & svg.fa-bars {
+                color: #fff;
+                opacity: 0.85;
+            }
+        }
+    }
+}
+
+.sidebar-item {
+
+    & .item-label {
+        display: inline-block;
+        text-indent: 0 !important;
+        margin-left: 34px;
+        // height: 24px;
+        // line-height: 24px;
+        & span {
+            display: inline-block;
+            position: relative;
+            height: 24px;
+            line-height: 24px;
+            vertical-align: middle;
+        }
+    }
+
+    // see symbol-badge class in styles.less
+    & .symbol-badge {
+        position: absolute;
+        top: 6px;
+    }
+
+    &:hover {
+        & .symbol-badge {
+            opacity: 1;
+        }
+    }
+}
+
+.sidebar-header {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: @sidebar-width;
+    height: @sidebar-header-height;
+    background-color: @dark;
+    .user-select(none);
+
+    & > .sidebar-brand {
+        display: table;
+        position: relative;
+        height: @sidebar-brand-height;
+        // line-height: @sidebar-brand-height;
+        background-color: @dark-softer;
+        padding-left: @navbar-height + 5;
+        width: 100%;
+
+        & .sidebar-logo {
+            display: table-cell;
+            position: relative;
+            height: @navbar-inner-height;
+            width: @navbar-inner-height;
+            padding: 0;
+            margin: @navbar-padding-base (@navbar-padding-base * 2) 0 0;
+        }
+
+        & span.sidebar-title {
+            position: relative;
+            display: table-cell;
+            width: 100%;
+            margin: 0;
+            margin-left: @sidebar-brand-height; // + 15px;
+            margin-top: auto; // 2px;
+            font-family: @font-family-base;
+            font-size: @font-size-medium;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            height: @navbar-height;
+            line-height: 1em;
+            vertical-align: middle;
+            color: @over-dark-light;
+            & > a {
+                display: inline-block;
+                padding-top: @navbar-baseline-fix;
+                text-decoration: none;
+                color: @over-dark-light;
+                &:hover {
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    & > .sidebar-toolbar {
+        display: block;
+        position: relative;
+        text-align: center;
+        height: @sidebar-toolbar-height;
+        overflow: none;
+        margin-top: 5px;
+    }
+}
+
+.toolbar-buttons {
+    padding: 0;
+    position: relative;
+    cursor: pointer;
+    white-space: nowrap;
+    .user-select(none);
+    top: -1px;
+
+    & span {
+        color: #fff;
+        opacity: 0.5;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+.toolbar-filters {
+    margin: 0 5px;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.sidebar-search {
+    margin: 0 20px;
+    padding: 0;
+    padding: 20px 0 12px;
+    position: relative;
+
+    & #txt-search {
+        outline: 0 none !important;
+        font-size: @font-size-small; // * 0.93;
+        width: 100%;
+        height: @input-height-base;
+        // letter-spacing: 0.03em;
+        margin-bottom: 0;
+        padding: 2px 25px 0 30px;
+        border-radius: 36px;
+        text-indent: 0px !important;
+        background-color: @dark-soft;
+        color: @over-dark;
+        border: 1px solid @dark-softer;
+        &:focus {
+            background-color: #fff;
+            color: @gray-dark;
+        }
+    }
+
+    & .sidebar-search-icon {
+        position: absolute;
+        top: 22px;
+        left: 10px;
+        line-height: 36px;
+        color: @over-dark;
+        z-index: 999;
+    }
+
+    & .sidebar-search-clean {
+        position: absolute;
+        top: 21px;
+        right: 6px;
+        line-height: 36px;
+        color: @over-dark;
+        z-index: 999;
+        cursor: pointer;
+        text-indent: 0 !important;
+        &:hover {
+            & svg {
+                color: @deep-dark;
+            }
+        }
+    }
+}
+
+.search-query:focus + button {
+    z-index: 3;
+}
+
+
+// WRAPPER ELEMENTS / CONTAINERS
+
+.sidebar-nav-container {
+    display: block;
+    position: absolute;
+    overflow-y: auto;
+    top: @sidebar-header-height;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+ul.sidebar-nav, ul.sidebar-nav ul {
+    display: block;
+    position: relative;
+    overflow: visible;
+    list-style: none;
+    padding: 0;
+}
+ul.sidebar-nav {
+    padding-bottom: 15px;
+}
+ul.sidebar-nav ul {
+    margin: 0 !important;
+    height: auto;
+    max-height: 10000px;
+    overflow-y: hidden;
+    .trans-all-ease;
+
+    &.no-height {
+        max-height: 0;
+    }
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: @sidebar-brand-height;
+    font-size: 18px;
+    line-height: @sidebar-brand-height;
+    background-color: @dark-softer;
+
+    & a {
+        color: @over-dark;
+        &:hover {
+            color: #fff;
+            background: none;
+        }
+    }
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: @sidebar-item-height;
+    white-space: nowrap;
+
+    & > a {
+        display: block;
+        text-decoration: none;
+        color: @gray-light; // @over-dark;
+
+        &:hover {
+            text-decoration: none;
+            color: #fff;
+            background: @darkest; // @deep-dark;
+        }
+
+        &:active,
+        &:focus {
+            text-decoration: none;
+            outline: 0 none;
+        }
+    }
+}
+
+.sidebar-nav li div.chevron {
+    position: absolute;
+    display: block;
+    right: 0px;
+    height: @sidebar-item-height;
+    width: @sidebar-item-height;
+    color: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    z-index: 9;
+    & svg {
+        margin-left: -12px;
+        .trans-all-ease;
+        #rotate(90deg);
+    }
+    &.members-folded {
+        & svg {
+            #rotate(0deg);
+        }
+    }
+    &:hover {
+        & svg {
+            color: #fff;
+        }
+    }
+    // https://stackoverflow.com/a/6910112/112731
+    &:hover ~ a {
+        background-color: rgba(0, 0, 0, 0.35);
+    }
+    &:hover ~ ul {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+}
+
+#wrapper {
+    display: block;
+    position: relative;
+    margin-left: 0;
+
+    &.toggled {
+        margin-left: @sidebar-width;
+
+        & #sidebar-wrapper {
+            display: block;
+            width: @sidebar-width;
+        }
+
+        & #page-content-wrapper {
+            position: absolute;
+            margin-right: -@sidebar-width;
+        }
+    }
+}
+
+#sidebar-wrapper {
+    position: fixed;
+    display: block;
+    width: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: hidden; // #MODIFIED
+    background-color: @dark;
+    font-family: @font-family-monospace;
+    font-size: ceil(@font-size-small * 0.90);
+    z-index: 999999;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    // padding: 0 20px 20px 20px;
+    position: relative;
+    background: #fff;
+    margin-right: 0;
+}
+
+// --------------------------
+
+// on small screens or when printing; hide the sidebar
+@media print, (max-width: @screen-sm-max) {
+
+    #sidebar-toggle {
+        display: none;
+    }
+
+    #wrapper {
+        margin-left: 0;
+
+        &.toggled {
+            margin-left: 0;
+
+            & #sidebar-wrapper {
+                width: 0;
+            }
+
+            & #page-content-wrapper {
+                position: relative;
+                margin-right: 0;
+            }
+        }
+    }
+
+    #sidebar-wrapper {
+        // display: none;
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        position: absolute;
+        // padding: 0 15px 15px 15px;
+    }
+
+}
