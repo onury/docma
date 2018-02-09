@@ -1,0 +1,12 @@
+{>"navbar" boxed="true"/}
+
+<div id="page-content-wrapper">
+    <div class='{@eq key=currentRoute.sourceType value="md"}container container-boxed{/eq}'>
+        <div id="docma-content"></div>
+        {@eq key=currentRoute.sourceType value="md"}
+            <br />
+            <hr />
+            <span class="docma-info">Documentation built with <b><a target="_blank" href="https://onury.io/docma">Docma</a></b>.</span>
+        {/eq}
+    </div>
+</div>
