@@ -254,8 +254,9 @@ var app = window.app || {};
     }
 
     docma.on('navigate', function (currentRoute) { // eslint-disable-line
+        isApiRoute = currentRoute && currentRoute.type === 'api';
         // when navigated to a #hash / bookmark, make sure navbar does not overlap.
-        if (templateOpts.navbar) {
+        if (templateOpts.navbar && !isApiRoute) {
             setTimeout(function () {
                 $window.scrollTop($window.scrollTop() - (app.NAVBAR_HEIGHT + 20));
             }, 30);
