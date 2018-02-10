@@ -140,11 +140,6 @@ h6, .h6 { font-size: @font-size-h6; }
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-    // in a page, generated from markdown; when a bookmark is clicked, the title
-    // will be hidden under the top nav-bar. this will prevent that.
-    padding-top: @navbar-height + 10;
-    margin-top: -40px;
-
     -webkit-background-clip: padding-box;
     -moz-background-clip: padding;
     background-clip: padding-box;
@@ -192,6 +187,7 @@ div {
 
 img {
     vertical-align: middle;
+    border: 0 none !important;
 }
 
 // Blockquotes
@@ -204,29 +200,6 @@ blockquote {
   background-color: #f9f9f9;
   border-top-right-radius: @border-radius-base;
   border-bottom-right-radius: @border-radius-base;
-
-  p,
-  ul,
-  ol {
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  // Note: Deprecated small and .small as of v3.1.0
-  // Context: https://github.com/twbs/bootstrap/issues/11660
-  footer,
-  small,
-  .small {
-    display: block;
-    font-size: 80%; // back to default font-size
-    line-height: @line-height-base;
-    color: @blockquote-small-color;
-
-    &:before {
-      content: '\2014 \00A0'; // em dash, nbsp
-    }
-  }
 }
 
 @symbol-font-size: ceil(@font-size-base * 1.2);
@@ -399,8 +372,11 @@ code.symbol-type {
 .span-1 {
 	width: 31.5%; // 32.2%;
 }
+.span-half {
+	width: 47.5%;
+}
 
-@media only screen and (max-width: @screen-lg-max) {
+@media only screen and (max-width: @screen-sm-max) {
 	.col { margin: 1% 0 1% 0%;}
 	.span-3, .span-2, .span-1 { width: 100%; }
 }
