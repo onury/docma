@@ -25,6 +25,9 @@ module.exports = (template, modules) => { // eslint-disable-line
         foldSymbols: false,
         typeLinks: true,    // "internal" | "external" | true (both)
         badges: true,
+        params: 'list',     // "list" | "table"
+        enums: 'list',      // "list" | "table"
+        props: 'list',      // "list" | "table"
         symbolMeta: false,
         bookmarks: false,
         search: true,
