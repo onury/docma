@@ -109,7 +109,7 @@ Template specific options that can be used when building your documentation with
             <td><code>Boolean|String</code></td>
             <td><code>false</code></td>
             <td>
-                Whether to automatically add bookmark links for headings. In order to customize the list of heading tags, set to a comma separated tag name list. e.g. `"h3,h4,h5"`.
+                Whether to automatically add bookmark links for headings. In order to customize the list of heading tags, set to a comma separated tag name list. e.g. `"h1,h2"`.
             </td>
         </tr>
         <tr>
