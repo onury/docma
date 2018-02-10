@@ -15,7 +15,8 @@ _This is a WIP. New items will be added to the changes below._
 #### Added
 - Support for documenting code with **ES2015** syntax. (JSDoc and jsdoc-x dep. update.) Fixes [#18](https://github.com/onury/docma/issues/18) and [#21](https://github.com/onury/docma/issues/21).
 - `assets` build configuration which provides ability to copy defined asset files/directories to build directory; so you can use/link to non-source, static asset files (such as images, PDFs, etc). See [build configuration][build-config]. Fixes [#29](https://github.com/onury/docma/issues/29).
-- Pre-build and post-build process support for Docma templates. See [Docma Templates documentation](https://onury.io/docma/?content=templates).
+- Pre-build and post-build process support for Docma templates. See [Docma Templates documentation](https://onury.io/docma/?content=creating-templates).
+- `markdown.xhtml` option for build configuration.
 - Docma version compatibility check for Docma templates.
 - Build statistics logs to console output. Now, displaying gzipped size of generated (docma-web) script, in addition to minified size; and more detailed summary of routes configured.
 
@@ -24,6 +25,7 @@ _This is a WIP. New items will be added to the changes below._
 - An issue where compiled template scripts were altered when full-debug is enabled.
 - An issue with redirecting a page when the routing method is set to `"path"`.
 - An issue with images in HTML (generated from markdown) that would overflow out of page. Now, limiting the image width to `100%` of parent container while keeping the aspect ratio.
+- An issue with generated heading ids when building docs from markdown. Other HTML tags contained within the heading were not ignored, resulting in too complex ids (bookmarks).
 
 #### Changed
 - **BREAKING**: Due to several upgrades (such as `jsdom`), Docma v2+ requires Node.js v6 or newer.
@@ -34,7 +36,7 @@ _This is a WIP. New items will be added to the changes below._
 
 #### Removed
 - **For template authors only**: 
-    + **BREAKING**: `docma.template.json` file that defines the template build and configuration options is dropped in favor of template module main (JS) file or `package.json`. There are several other improvements. See updated documentation on [Creating Docma Templates](http://onury.io/docma/?content=templates).
+    + **BREAKING**: `docma.template.json` file that defines the template build and configuration options is dropped in favor of template module main (JS) file or `package.json`. There are several other improvements. See updated documentation on [Creating Docma Templates](http://onury.io/docma/?content=creating-templates).
     + **BREAKING**: `compile` property of template configuration is removed. Now, scripts or less/sass files of the template should be pre-compiled. This is logical and speeds up the documentation build process of Docma.
 
 ### Docma CLI
@@ -70,7 +72,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 ### Docma Template API
 
 #### Changed
-- Docma templates are now npm modules. This is the initial Template API. See updated documentation on [Creating Docma Templates](http://onury.io/docma/?content=templates).
+- Docma templates are now npm modules. This is the initial Template API. See updated documentation on [Creating Docma Templates](http://onury.io/docma/?content=creating-templates).
 
 ### Default Template - Zebra `v2.0.0`
 
