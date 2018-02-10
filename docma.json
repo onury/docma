@@ -71,7 +71,7 @@
                     "iconClass": "fas fa-puzzle-piece",
                     "label": "Templates",
                     "items": [
-                        { "label": "Default Template - Zebra", "href": "?content=default-template" },
+                        { "label": "Default Template - Zebra", "href": "?content=zebra" },
                         { "separator": true },
                         { "label": "Creating Docma Templates", "href": "?content=templates" },
                         { "separator": true },
@@ -125,12 +125,11 @@
         // markdown
         "./CHANGELOG.md",
         "./doc/**/*.md",
-        // renamed markdown
         {
-            "guide": "./doc/readme-modified.md"
-        },
-        // html files
-        {
+            // renamed markdown
+            "guide": "./doc/readme-modified.md",
+            "zebra": "./templates/zebra/README.md",
+            // html files
             "home": "./doc/front.html"
         }
     ],
