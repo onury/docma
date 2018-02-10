@@ -240,6 +240,14 @@
 .inline-block       { display: inline-block; }
 .absolute           { position: absolute; }
 
+.snap-left          { display: block; float: left; }
+.snap-right         { display: block; float: right; }
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
 .color-white            { color: #fff !important; }
 .color-black            { color: #000 !important; }
 .color-blue             { color: @blue !important; }
