@@ -5,7 +5,7 @@ This is the default template for [Docma][docma]; with a side-bar symbols menu, s
 
 Using Zebra template is straight-forward. Just set `buildConfig.template.path` to `"default"` or `"zebra"` or omit it.
 
-### Template Options
+## Template Options
 
 Template specific options that can be used when building your documentation with this default template.
 
@@ -68,6 +68,14 @@ Template specific options that can be used when building your documentation with
             </td>
         </tr>
         <tr>
+            <td><code><b>foldSymbols</b></code></td>
+            <td><code>Boolean</code></td>
+            <td><code>false</code></td>
+            <td>
+                Indicates whether to initially fold symbols with child members, in the sidebar.
+            </td>
+        </tr>
+        <tr>
             <td><code><b>animations</b></code></td>
             <td><code>Boolean</code></td>
             <td><code>true</code></td>
@@ -80,7 +88,7 @@ Template specific options that can be used when building your documentation with
             <td><code>Boolean|String</code></td>
             <td><code>true</code></td>
             <td>
-                Whether to show symbol badges (that indicate member type and symbol scope) within the sidebar. If set to false, `•` will be used as bullets, instead of badges. Or you can set a string for custom bullets.
+                Whether to show symbol badges (that indicate member type and symbol scope) within the sidebar. If set to false, <code>•</code> will be used as bullets, instead of badges. Or you can set a string for custom bullets.
             </td>
         </tr>
         <tr>
@@ -118,7 +126,7 @@ Template specific options that can be used when building your documentation with
     </tbody>
 </table>
 
-#### Navigation Items
+### Navigation Items
 
 Linked labels that build the navigation bar on the top of the document. Each item is an arbitrary <code>Object</code> with the following properties.
 
@@ -175,7 +183,7 @@ Linked labels that build the navigation bar on the top of the document. Each ite
     </tbody>
 </table>
 
-### Usage with Docma
+## Usage with Docma
 
 Template options are defined within the [build configuration](?api=docma#Docma~BuildConfiguration). i.e. in a `docma.json` file.
 
