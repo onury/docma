@@ -253,17 +253,17 @@ var app = window.app || {};
         templateOpts.title = docma.app.title || 'Documentation';
     }
 
-    docma.on('navigate', function (currentRoute) {
-        console.log('navigate', currentRoute);
+    docma.on('navigate', function (currentRoute) { // eslint-disable-line
         // when navigated to a #hash / bookmark, make sure navbar does not overlap.
         if (templateOpts.navbar) {
-            $window.scrollTop($window.scrollTop() - (app.NAVBAR_HEIGHT + 15));
+            setTimeout(function () {
+                $window.scrollTop($window.scrollTop() - (app.NAVBAR_HEIGHT + 20));
+            }, 30);
         }
     });
 
-    docma.on('render', function (currentRoute) { // eslint-disable-line
-        console.log('render');
-        isApiRoute = docma.currentRoute && docma.currentRoute.type === 'api';
+    docma.on('render', function (currentRoute) {
+        isApiRoute = currentRoute && currentRoute.type === 'api';
 
         // remove empty tables (especially for classdesc)
         // trim bec. jQuery treates whitespace as non-empty
@@ -346,6 +346,24 @@ var app = window.app || {};
             // We'll add the template's modified table classes
             $('table').addClass('table table-striped table-bordered');
 
+
+            // set bookmarks for headings with id
+            if (templateOpts.bookmarks) {
+                const selector = typeof templateOpts.bookmarks === 'string'
+                    ? templateOpts.bookmarks
+                    : ':header'; // all: "h1, h2, h3, h4, h5, h6"
+                $(selector).each(function () {
+                    var heading = $(this);
+                    var bmId = heading.attr('id');
+                    if (bmId) {
+                        // also add classes so can be re-styled
+                        // easily via templates
+                        heading
+                            .addClass('zebra-bookmark')
+                            .wrapInner('<a href="' + bmId + '"></a>');
+                    }
+                });
+            }
             // prepend link icon to bookmarks, if any
             $('.docma.bookmark a')
                 .prepend('<i class="fas fa-link color-gray-light" aria-hidden="true"></i>');
