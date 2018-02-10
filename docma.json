@@ -25,7 +25,6 @@
         "sanitize": false,
         "smartLists": true,
         "smartypants": false,
-        "bookmarks": true,
         "tasks": true,
         "emoji": true
     },
@@ -52,6 +51,7 @@
             "typeLinks": true,
             "badges": true,
             "symbolMeta": false,
+            "bookmarks": true,
             "search": true,
             "navbar": true,
             "navItems": [
@@ -73,7 +73,7 @@
                     "items": [
                         { "label": "Default Template - Zebra", "href": "?content=zebra" },
                         { "separator": true },
-                        { "label": "Creating Docma Templates", "href": "?content=templates" },
+                        { "label": "Creating Docma Templates", "href": "?content=creating-templates" },
                         { "separator": true },
                         { "label": "Docma Web API", "href": "?api=docma-web" },
                         { "label": "Docma Filters", "href": "?content=docma-filters" }
