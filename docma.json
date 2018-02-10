@@ -25,6 +25,7 @@
         "sanitize": false,
         "smartLists": true,
         "smartypants": false,
+        "xhtml": false,
         "tasks": true,
         "emoji": true
     },
