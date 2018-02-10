@@ -1,7 +1,5 @@
 'use strict';
 
-const path = require('path');
-
 /**
  *  Zebra
  *  Docma Default Template
@@ -9,9 +7,9 @@ const path = require('path');
  *  @license MIT
  */
 
-module.exports = (template, modules) => {
+module.exports = (template, modules) => { // eslint-disable-line
 
-    const { _, Promise, fs, utils } = modules;
+    // const { _, Promise, fs, utils } = modules;
 
     // Template main HTML file
     template.mainHTML = 'index.html';
