@@ -15,7 +15,6 @@ _This is a WIP. New items will be added to the changes below._
 #### Added
 - Support for documenting code with **ES2015** syntax. (JSDoc and jsdoc-x dep. update.) Fixes [#18](https://github.com/onury/docma/issues/18) and [#21](https://github.com/onury/docma/issues/21).
 - `assets` build configuration which provides ability to copy defined asset files/directories to build directory; so you can use/link to non-source, static asset files (such as images, PDFs, etc). See [build configuration][build-config]. Fixes [#29](https://github.com/onury/docma/issues/29).
-- `config.markdown.bookmarks` option (`Boolean|String`) which automatically adds bookmark links to headings to content generated from markdown files. Default: `false`.
 - Pre-build and post-build process support for Docma templates. See [Docma Templates documentation](https://onury.io/docma/?content=templates).
 - Docma version compatibility check for Docma templates.
 - Build statistics logs to console output. Now, displaying gzipped size of generated (docma-web) script, in addition to minified size; and more detailed summary of routes configured.
@@ -81,6 +80,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - Template option `logo` (`String|Object`) specifies the URL of your logo. If you need separate logos for dark and light backgrounds set this to an object. i.e. `{ dark: String, light: String }`. Recommended size of a logo image is 120 x 120 pixels.
 - Template option `typeLinks` (`Boolean|String`) specifies whether documented types should be auto-linked to `internal` paths (i.e. Docma route if type/object definition is within the generated documentation) or `external` URLs (MDN docs if it's a JS or Web-API built-in type/object such as `String`). Thanks to [@warpdesign](https://github.com/warpdesign) for the [idea](https://github.com/onury/docma/issues/30#issuecomment-353888926).
 - Template option `animations` (`Boolean`) specifies whether animations are enabled for sidebar and listed symbols.
+- Template option `bookmarks` option (`Boolean|String`) which automatically adds bookmark links to headings to content generated from markdown files. Default: `false`.
 - Support for `@hideconstructor` tag. Fixes [issue #21](https://github.com/onury/docma/issues/21).
 - Support for `@event`, `@emits` (and alias `@fires`) tags. Fixes [issue #35](https://github.com/onury/docma/issues/35).
 - Support for `@generator` and `@yields` tags.
