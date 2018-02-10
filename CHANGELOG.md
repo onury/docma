@@ -1,6 +1,12 @@
 # Docma Changelog
 
-## v2.0.0 (NOT RELEASED YET - v2 branch)
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
+
+## [v2.0.0](https://github.com/onury/docma/compare/v1.5.3...v2.0.0) (NOT RELEASED YET - v2 branch)
 
 _This is a WIP. New items will be added to the changes below._
 
@@ -47,6 +53,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 ### Docma Web Core
 
 #### Added
+- Event `navigate` that's triggered either when route is changed or on hash-change.
 - Utility methods `docma.utils.getCodeTags()`, `docma.utils.getFormattedTypeList()`. Fixes [#33](https://github.com/onury/docma/issues/33). 
 - Utility method `docma.utils.trimNewLines()`. This also has a dust filter `$tnl`.
 - Each symbol in `docma.apis[name].documentation` instances, now has a `.$docmaLink` property.
@@ -55,6 +62,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 #### Fixed
 - Broken bookmark links due to URI encoded characters after hash (`#`). e.g. when navigated to `#MyClass%7EInnerObject` instead of `#MyClass~InnerObject`.
 - An issue with `docma.utils.getLongName()`, occured after JSDoc core upgrade.
+- `currentRoute` parameter of the `route` event. Passing `null` instead of empty route object when route does not exist.
 
 #### Changed
 - `docma.utils.getSymbolByName()` signature is changed.
@@ -271,96 +279,117 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 
 ## v1.0.3 `2016-06-27`
 
-- **Docma** (Builder): Added HTML source file support. You can include HTML files together with JS and markdown files while building your documentation.
-- **Default Template**: Removed YAML syntax highlighting support because of incorrect auto-detection. Opened an issue [here](https://github.com/isagalaev/highlight.js/issues/1213).
+### Docma (Builder)
+
+#### Added
+- HTML source file support. You can include HTML files together with JS and markdown files while building your documentation.
+
+### Default Template
+
+#### Changed
+- Removed YAML syntax highlighting support because of incorrect auto-detection. Opened an issue [here](https://github.com/isagalaev/highlight.js/issues/1213).
 
 ## v1.0.1 `2016-06-11`
 
-- **Fixed** missing web components.
-- David considers [marked][marked] as [insecure dependency][docma-david]. This is [already](https://nodesecurity.io/advisories/marked_content-injection) [reported](https://github.com/chjj/marked/pull/592).
+### Docma Web Core
+
+> [David][david] considers [marked][marked] as [insecure dependency][docma-david]. This is [already](https://nodesecurity.io/advisories/marked_content-injection) [reported](https://github.com/chjj/marked/pull/592).
+
+#### Fixed
+- Missing web components.
+
 
 ## v1.0.0 `2016-06-11`
 
-- <p><b>Docma</b> (Builder):</p>
+### Docma (Builder)
 
-    + **Added** ability to convert markdown files to HTML. See documentation.
-    + **Added** `.markdown:Object` build configuration options. (Same as `marked` module options).
-    + **Added** `.markdown.tasks:Boolean` option for parsing GitHub-like markdown tasks.
-    + **Added** emoji (twemoji) support for converted markdown files. Added `.markdown.emoji:Boolean` option.
-    + **Improved** GFM parsing.  
-    + **Added** `.app.server` build option that defines the server/host type for generating server config file(s) for the SPA. e.g., setting to `"apache"` generates an `.htaccess` file within the root of the generated output. Supports `"apache"` and `"github"`.
-    + **Added** `.app.base:String` build option that sets the base path for the SPA.
-    + **Added** `.app.entrance:String` build option that sets the initial content to be displayed.
-    + **Added** `.debug:Boolean` build option.
-    + **Dropped** `.dump` config option in favor of `.debug` option.
-    + **Moved** `.template.document` configuration to `.app`.
-    + **Added** ability to group `.js` files into multiple, separate documentation. See `.src` build option.
-    + **Added** ability to rename routes for generated markdown files. See `.src` build option.
-    + **Added** negated glob support (that excludes the paths) for the `src` build option.
+#### Added
+- Ability to convert markdown files to HTML. See documentation.
+- `.markdown:Object` build configuration options. (Same as `marked` module options).
+- `.markdown.tasks:Boolean` option for parsing GitHub-like markdown tasks.
+- Emoji (twemoji) support for converted markdown files. Added `.markdown.emoji:Boolean` option.
+- `.app.server` build option that defines the server/host type for generating server config file(s) for the SPA. e.g., setting to `"apache"` generates an `.htaccess` file within the root of the generated output. Supports `"apache"` and `"github"`.
+- `.app.base:String` build option that sets the base path for the SPA.
+- `.app.entrance:String` build option that sets the initial content to be displayed.
+- `.debug:Boolean` build option.
+- Ability to group `.js` files into multiple, separate documentation. See `.src` build option.
+- Ability to rename routes for generated markdown files. See `.src` build option.
+- Negated glob support (that excludes the paths) for the `src` build option.
 
-- <p><b>Docma Web Core</b>:</p>
+#### Changed
+- Improved GFM parsing.  
+- Dropped `.dump` config option in favor of `.debug` option.
+- Moved `.template.document` configuration to `.app`.
 
-    + **Added** client-side routing support for the SPA with paths (e.g. `/api`) or query-strings (e.g. `?content=api`). Configured via `.app.routing:String` option. Set to `"path"` or `"query"`. Uses page.js internally.
-    + **Implemented** `EventEmitter`.
-    + **BREAKING CHANGE**: Dropped `docma.ready()` method. Use `docma.on('ready', listener)` that's only triggered once on every page load or `docma.on('render', listener)` triggered when each content is rendered. Also see `docma.on('route', listener)` triggered when SPA route is changed.
-    + Docma web initializing errors are no longer passed to event listeners. They are now immediately thrown.
-    + **Revision**: `docma.app:Object` and `docma.template.main:String` are exposed to the SPA.
-    + **Revision**: The `docma` object accessible by the SPA is now `Object.freeze`d.
-    + **Fixed** bookmark scrolling.
-    + **Added** new methods to `docma.utils` such as `getCodeName(symbol)`, `getFullName(symbol)`, etc...
-    + **Revision**: If `debug >= 3`, web app will also output logs.
+### Docma Web Core
 
-- <p><b>Default Template</b>:</p>
+#### Added
+- Client-side routing support for the SPA with paths (e.g. `/api`) or query-strings (e.g. `?content=api`). Configured via `.app.routing:String` option. Set to `"path"` or `"query"`. Uses page.js internally.
+- Implemented `EventEmitter`.
+- New methods to `docma.utils` such as `getCodeName(symbol)`, `getFullName(symbol)`, etc...
 
-    + **Improved** layout for HTML files converted from markdown.
-    + **Fixed** documentation of `@property` JSDoc tags.
-    + **Updated** default template structure.
-    + **Added** more supported languages for syntax highlighting (Javascript, JSON, CSS, HTML, XML, CoffeeScript, TypeScript, Bash, HTTP, Markdown, Dust and YAML).
-    + **Added** ability to auto-detect language for syntax highlighting.
-    + **Added** ability to style tables in HTML generated from markdown.
-    + **Added** ability to style code blocks in HTML generated from markdown.
-    + **Improved** font display for code and summary/descriptions.
-    + **Improved** UX by auto-adjusting font size of sidebar items to fit the sidebar, if they exceed the width.
-    + **Fixed** incorrect symbols sort issue when symbol(s) have aliases.
-    + **Improved** various API documentation styles.
+#### Changed
+- **BREAKING**: Dropped `docma.ready()` method. Use `docma.on('ready', listener)` that's only triggered once on every page load or `docma.on('render', listener)` triggered when each content is rendered. Also see `docma.on('route', listener)` triggered when SPA route is changed.
+- Docma web initializing errors are no longer passed to event listeners. They are now immediately thrown.
+- `docma.app:Object` and `docma.template.main:String` are now exposed to the SPA.
+- `docma` object accessible by the SPA is now `Object.freeze`d.
+- If `debug >= 3`, web app will now also output logs.
 
-- <p>Other:</p>
+#### Fixed
+- Bookmark scrolling.
 
-    + **(Dev)** Manage web-component dependency packages via Bower.
-    + **Updated** project structure.
-    + Various minor revisions and clean-up.
-    + **Improved** Docma source code documentation.
+### Default Template
 
----
+#### Added
+- More supported languages for syntax highlighting (Javascript, JSON, CSS, HTML, XML, CoffeeScript, TypeScript, Bash, HTTP, Markdown, Dust and YAML).
+- Ability to auto-detect language for syntax highlighting.
+- Ability to style tables in HTML generated from markdown.
+- Ability to style code blocks in HTML generated from markdown.
+
+#### Fixed
+- Documentation of `@property` JSDoc tags.
+- Incorrect symbols sort issue when symbol(s) have aliases.
+
+#### Changed
+- Updated default template structure.
+- Improved layout for HTML files converted from markdown.
+- Improved font display for code and summary/descriptions.
+- Improved UX by auto-adjusting font size of sidebar items to fit the sidebar, if they exceed the width.
+- Improved various API documentation styles.
+
+#### Other
+
+- **(Dev)**: Manage web-component dependency packages via Bower.
+- Updated project structure.
+- Various minor revisions and clean-up.
+- Improved Docma source code documentation.
 
 ## v0.5.4 Pre-Release `2016-05-22`
 
-- `docma.template.json` is no more copied over to the output.
-- **Added** default template option `badges:Boolean`.
+#### Added
+- Default template option `badges:Boolean`.
 
----
+#### Changed
+- `docma.template.json` is no more copied over to the output.
 
 ## v0.5.3 Pre-Release `2016-05-22`
 
-- **Fixed** docma-web file paths.
-
----
+#### Fixed
+- Docma Web file paths.
 
 ## v0.5.2 Pre-Release `2016-05-20`
 
-- **Updated** default template.
-- **Updated** dependencies.
+#### Changed
+- Updated default template.
+- Updated dependencies.
 - Clean-up.
-
----
 
 ## v0.5.0 Pre-Release `2016-05-11`
 
 - Initial (pre) release.
-- **Added** ability to parse JSDoc documentation.
-- **Created** default template.
 
 [marked]:https://github.com/chjj/marked
 [docma-david]:https://david-dm.org/onury/docma
 [docma-cli]:https://onury.io/docma/?content=docma-cli
 [build-config]:https://onury.io/docma/?api=docma#Docma~BuildConfiguration
+[david]:https://david-dm.org
