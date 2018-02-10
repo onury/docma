@@ -1,6 +1,5 @@
 # Zebra - Docma Template
-
-<img align="right" width="200" height="200" src="https://raw.github.com/onury/docma/v2/templates/zebra/zebra-logo.png" />
+<img align="left" width="200" height="200" style="margin-right:30px" src="https://raw.github.com/onury/docma/v2/templates/zebra/zebra-logo.png" />
 
 This is the default template for [Docma][docma]; with a side-bar symbols menu, search and navigation features; and a beautiful layout.
 
