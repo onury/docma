@@ -1,0 +1,223 @@
+@symbol-font-size: ceil(@font-size-base * 1.2);
+.symbol {
+    font-size: @symbol-font-size;
+    & a {
+        #bookmark-icon(1em);
+    }
+}
+code.symbol-name {
+    font-weight: 500;
+    color: @code-color;
+    & .def-val {
+        color: @gray-light;
+        font-weight: normal;
+    }
+}
+span.symbol-sep {
+    background-color: transparent;
+    color: @gray-light;
+    font-size: @symbol-font-size;
+    padding-left: 5px;
+    font-weight: normal;
+    // font-size: 0.8em;
+}
+code.symbol-type {
+    color: @gray;
+    font-size: @font-size-base;
+    font-weight: normal;
+    background-color: transparent;
+}
+
+.symbol-meta {
+    font-size: 14px !important;
+    font-style: italic;
+    text-align: right;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.symbol-container {
+    // when a bookmark is clicked, the symbol title will be hidden under the top
+    // nav-bar. this will prevent that.
+    padding-top: @navbar-height;
+    margin-top: -@navbar-height;
+
+    & .symbol-heading {
+        & .symbol {
+            padding: 10px 0;
+        }
+    }
+
+    & .symbol-definition {
+        padding: 5px 0;
+
+        & > p {
+            margin: 0 0 15px; // (@line-height-computed / 2);
+        }
+
+        // add a bit more space when a table comes right after a paragraph.
+        & p + table {
+            margin-top: 20px;
+        }
+
+        & .table {
+            & td:first-child {
+                white-space: nowrap;
+            }
+            & td:last-child {
+                width: auto;
+            }
+        }
+
+        & .caption {
+            display: inline-block !important;
+            min-width: 65px;
+        }
+    }
+}
+
+.boxed {
+    display: inline-block;
+    font-size: @font-size-xsmall;
+    letter-spacing: 0.04em;
+    color: #fff;
+    padding: 2px 6px 0px;
+    border-radius: @border-radius-small;
+    margin: -2px 3px 0 0;
+    vertical-align: middle;
+    background-color: darken(@gray-lighter, 5%);
+}
+
+
+// --------------------------
+
+ul.param-list {
+    margin-bottom: 25px !important;
+
+    & > li {
+        padding-top: 10px;
+        margin-bottom: 15px;
+
+        & .param-meta {
+            & .param-info-box {
+                float: right;
+            }
+        }
+
+        & .param-desc {
+            margin-top: 10px;
+            padding: 10px 12px 9px 12px;
+            border-left: 3px solid #eef0f5 !important;
+            background: @light-default;
+            border-top-right-radius: @border-radius-base;
+            border-bottom-right-radius: @border-radius-base;
+
+            & p:last-of-type {
+                margin: 0 !important;
+            }
+        }
+    }
+}
+
+.param-info {
+    .user-select(none);
+    cursor: default;
+
+    &.required {
+        background: @red;
+        margin-right: 7px;
+    }
+    &.optional {
+        background: @gray-light;
+        margin-right: 7px;
+    }
+    &.default,
+    &.value {
+        background: #b8c2da; // #94a2c3;
+        & + span {
+            color: @gray-light !important;
+            font-size: 13px;
+        }
+        & + span + code {
+            margin: 0 12px 0 3px;
+            // color: @gray-darker;
+        }
+    }
+}
+
+// --------------------------
+
+// SVG SYMBOL BADGES
+
+@symbol-badge-size: 26px;
+@symbol-badge-btn-size: 22px;
+.symbol-badge {
+    display: inline-block;
+    position: relative;
+    width: @symbol-badge-size;
+    height: @symbol-badge-size;
+    opacity: 0.65;
+    margin-left: -1px;
+
+    & > span {
+        position: absolute;
+        display: block;
+        font-family: Arial, sans-serif;
+        font-size: 10.5px;
+        color: #fff;
+        width: 100%;
+        line-height: @symbol-badge-size + 1;
+        text-indent: 0 !important;
+        text-align: center;
+        left: 0;
+        top: 0;
+        z-index: 2;
+    }
+    & > svg {
+        position: absolute;
+        display: block;
+        width: @symbol-badge-size;
+        height: @symbol-badge-size;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        fill: black; // default
+    }
+}
+
+.symbol-badge.badge-btn {
+    display: inline-block;
+    position: relative;
+    width: @symbol-badge-btn-size !important;
+    height: @symbol-badge-btn-size !important;
+    margin-right: 3px;
+    cursor: pointer;
+    white-space: nowrap;
+    .user-select(none);
+    opacity: 0.3;
+
+    & > span {
+        width: @symbol-badge-btn-size !important;
+        height: @symbol-badge-btn-size !important;
+        font-size: 9px !important;
+        line-height: @symbol-badge-btn-size !important;
+        margin-left: -0.5px;
+    }
+    & > svg {
+        width: @symbol-badge-btn-size !important;
+        height: @symbol-badge-btn-size !important;
+    }
+
+    &.active {
+        opacity: 1;
+    }
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.item-tree-line {
+    .no-pointer-events;
+    .user-select(none);
+}
