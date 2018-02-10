@@ -3,7 +3,9 @@
 @import "normalize.less";
 @import "table.less";
 @import "code.less";
+@import "layout.less";
 @import "navbar.less"; // must come before sidebar
+@import "symbol.less";
 @import "sidebar.less";
 @import "highlight-one-dark.less";
 @import "print.less";
@@ -149,14 +151,6 @@ h1, h2, h3, h4, h5, h6,
     line-height: @headings-line-height;
     color: @headings-color;
 
-    & a {
-        color: @headings-color;
-        &:hover {
-            color: @headings-color;
-            text-decoration: none;
-        }
-    }
-
     // reset top space
     &.no-space {
         margin-top: 0 !important;
@@ -166,7 +160,7 @@ h1, h2, h3, h4, h5, h6,
 
 
 p {
-    margin: 0 0 (@line-height-computed / 2);
+    margin: 0 0 15px;
 }
 
 // nested list fixes
@@ -192,103 +186,28 @@ img {
 
 // Blockquotes
 blockquote {
-  padding: 10px 12px; // (@line-height-computed / 2) @line-height-computed;
-  margin: 0 0 @line-height-computed;
-  font-size: 1em; // @blockquote-font-size;
-  border-left: 5px solid @blockquote-border-color;
-  color: #576075;
-  background-color: #f9f9f9;
-  border-top-right-radius: @border-radius-base;
-  border-bottom-right-radius: @border-radius-base;
-}
+    padding: 10px 12px; // (@line-height-computed / 2) @line-height-computed;
+    margin: 0; // 0 @line-height-computed;
+    font-size: 1em; // @blockquote-font-size;
+    border-left: 5px solid @blockquote-border-color;
+    color: #576075;
+    background-color: #f9f9f9;
+    border-top-right-radius: @border-radius-base;
+    border-bottom-right-radius: @border-radius-base;
 
-@symbol-font-size: ceil(@font-size-base * 1.2);
-.symbol {
-    font-size: @symbol-font-size;
-    & a {
-        #bookmark-icon(1em);
+    & > p:last-of-type {
+        margin-bottom: 0;
     }
 }
-code.symbol-name {
-    font-weight: 500;
-    color: @code-color;
-    & .def-val {
-        color: @gray-light;
-        font-weight: normal;
-    }
-}
-span.symbol-sep {
-    background-color: transparent;
-    color: @gray-light;
-    font-size: @symbol-font-size;
-    padding-left: 5px;
-    font-weight: normal;
-    // font-size: 0.8em;
-}
-code.symbol-type {
-    color: @gray;
-    font-size: @font-size-base;
-    font-weight: normal;
-    background-color: transparent;
-}
-
-.symbol-meta {
-    font-size: 14px !important;
-    font-style: italic;
-    text-align: right;
-    padding-bottom: 0;
-    margin-bottom: 0;
-}
-
-.symbol-container {
-    // when a bookmark is clicked, the symbol title will be hidden under the top
-    // nav-bar. this will prevent that.
-    padding-top: @navbar-height;
-    margin-top: -@navbar-height;
-
-    & .symbol-heading {
-        & .symbol {
-            padding: 10px 0;
-        }
-    }
-
-    & .symbol-definition {
-        padding: 5px 0;
-
-        // add a bit more space when a table comes right after a paragraph.
-        & p + table {
-            margin-top: 20px;
-        }
-
-        & .table {
-            & td:first-child {
-                white-space: nowrap;
-            }
-            & td:last-child {
-                width: auto;
-            }
-        }
-    }
-}
-
-.boxed {
-    display: inline-block;
-    font-size: @font-size-xsmall;
-    letter-spacing: 0.04em;
-    color: #fff;
-    padding: 2px 6px 0px;
-    border-radius: @border-radius-small;
-    margin: -2px 3px 0 0;
-    vertical-align: middle;
-    background-color: darken(@gray-lighter, 5%);
-}
-
-// --------------------------
 
 .well {
     background-color: #f9f9f9;
     border-radius: 3px;
     padding: 20px;
+
+    & > p:last-of-type {
+        margin-bottom: 0;
+    }
 }
 
 // --------------------------
@@ -308,152 +227,4 @@ code.symbol-type {
 
 #docma-content {
     margin-top: 17px;
-}
-
-// --------------------------
-
-.container {
-    position: relative;
-    padding: 0 @page-padding-horizontal;
-    margin: 0 auto;
-    box-sizing: border-box;
-}
-
-.container-boxed {
-    position: relative;
-    max-width: 960px !important;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-@media screen and (max-width: @screen-lg-max) {
-    .container-boxed {
-        padding: 0 @page-padding-horizontal;
-    }
-}
-
-// --------------------------
-
-/*  GRID ROW  */
-.row {
-	clear: both;
-	padding: 0px;
-    margin: 0px;
-
-    /*  GROUPING  */
-    &:before,
-    &:after {
-        content: "";
-        display: table;
-    }
-    &:after {
-        clear: both;
-    }
-}
-
-/*  COLUMNS  */
-.col {
-	display: block;
-	float: left;
-    margin: 1% 0 1% 4%; // 1.6%;
-
-    &:first-child {
-        margin-left: 0;
-    }
-}
-
-/*  GRID OF THREE  */
-.span-3 {
-	width: 100%;
-}
-.span-2 {
-	width: 64%; // 66.1%;
-}
-.span-1 {
-	width: 31.5%; // 32.2%;
-}
-.span-half {
-	width: 47.5%;
-}
-
-@media only screen and (max-width: @screen-sm-max) {
-	.col { margin: 1% 0 1% 0%;}
-	.span-3, .span-2, .span-1 { width: 100%; }
-}
-
-// --------------------------
-
-// SVG SYMBOL BADGES
-
-@symbol-badge-size: 26px;
-@symbol-badge-btn-size: 22px;
-.symbol-badge {
-    display: inline-block;
-    position: relative;
-    width: @symbol-badge-size;
-    height: @symbol-badge-size;
-    opacity: 0.65;
-    margin-left: -1px;
-
-    & > span {
-        position: absolute;
-        display: block;
-        font-family: Arial, sans-serif;
-        font-size: 10.5px;
-        color: #fff;
-        width: 100%;
-        line-height: @symbol-badge-size + 1;
-        text-indent: 0 !important;
-        text-align: center;
-        left: 0;
-        top: 0;
-        z-index: 2;
-    }
-    & > svg {
-        position: absolute;
-        display: block;
-        width: @symbol-badge-size;
-        height: @symbol-badge-size;
-        left: 0;
-        top: 0;
-        z-index: 1;
-        fill: black; // default
-    }
-}
-
-.symbol-badge.badge-btn {
-    display: inline-block;
-    position: relative;
-    width: @symbol-badge-btn-size !important;
-    height: @symbol-badge-btn-size !important;
-    margin-right: 3px;
-    cursor: pointer;
-    white-space: nowrap;
-    .user-select(none);
-    opacity: 0.3;
-
-    & > span {
-        width: @symbol-badge-btn-size !important;
-        height: @symbol-badge-btn-size !important;
-        font-size: 9px !important;
-        line-height: @symbol-badge-btn-size !important;
-        margin-left: -0.5px;
-    }
-    & > svg {
-        width: @symbol-badge-btn-size !important;
-        height: @symbol-badge-btn-size !important;
-    }
-
-    &.active {
-        opacity: 1;
-    }
-
-    &:hover {
-        opacity: 1;
-    }
-}
-
-.item-tree-line {
-    .no-pointer-events;
-    .user-select(none);
 }
