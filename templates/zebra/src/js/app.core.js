@@ -1,4 +1,4 @@
-/* global docma, dust, hljs, $ */
+/* global docma, hljs, $ */
 /* eslint camelcase:0, no-nested-ternary:0, max-depth:0, no-var:0, prefer-template:0, prefer-arrow-callback:0, prefer-spread:0, object-shorthand:0 */
 
 var app = window.app || {};
@@ -309,7 +309,7 @@ var app = window.app || {};
             $('.navbar-menu').css({ 'margin-right': navMargin + 'px' });
 
             // toggle navbar menu when hamburger is clicked.
-            $nbmBtn.on('click', function (event) {
+            $nbmBtn.on('click', function () {
                 toggleHamMenu(!$navbarMenu.hasClass('toggled'));
             });
 
@@ -346,27 +346,24 @@ var app = window.app || {};
             // We'll add the template's modified table classes
             $('table').addClass('table table-striped table-bordered');
 
-
             // set bookmarks for headings with id
             if (templateOpts.bookmarks) {
-                const selector = typeof templateOpts.bookmarks === 'string'
+                var bmSelector = typeof templateOpts.bookmarks === 'string'
                     ? templateOpts.bookmarks
                     : ':header'; // all: "h1, h2, h3, h4, h5, h6"
-                $(selector).each(function () {
-                    var heading = $(this);
-                    var bmId = heading.attr('id');
+                $(bmSelector).each(function () {
+                    var bmHeading = $(this);
+                    var bmId = bmHeading.attr('id');
                     if (bmId) {
                         // also add classes so can be re-styled
                         // easily via templates
-                        heading
+                        bmHeading
                             .addClass('zebra-bookmark')
-                            .wrapInner('<a href="' + bmId + '"></a>');
+                            // prepend link icon to bookmarks
+                            .prepend('<a href="#' + bmId + '"><i class="fas fa-link color-gray-light" aria-hidden="true"></i></a>');
                     }
                 });
             }
-            // prepend link icon to bookmarks, if any
-            $('.docma.bookmark a')
-                .prepend('<i class="fas fa-link color-gray-light" aria-hidden="true"></i>');
 
             // code blocks in markdown files (e.g. ```js) are converted into
             // <code class="lang-js">. we'll add classes for hljs for proper
