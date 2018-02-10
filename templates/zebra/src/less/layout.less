@@ -1,0 +1,68 @@
+.container {
+    position: relative;
+    padding: 0 @page-padding-horizontal;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.container-boxed {
+    position: relative;
+    max-width: 960px !important;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: @screen-lg-max) {
+    .container-boxed {
+        padding: 0 @page-padding-horizontal;
+    }
+}
+
+// --------------------------
+
+/*  GRID ROW  */
+.row {
+	clear: both;
+	padding: 0px;
+    margin: 0px;
+
+    /*  GROUPING  */
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+/*  COLUMNS  */
+.col {
+	display: block;
+	float: left;
+    margin: 1% 0 1% 4%; // 1.6%;
+
+    &:first-child {
+        margin-left: 0;
+    }
+}
+
+/*  GRID OF THREE  */
+.span-3 {
+	width: 100%;
+}
+.span-2 {
+	width: 64%; // 66.1%;
+}
+.span-1 {
+	width: 31.5%; // 32.2%;
+}
+.span-half {
+	width: 47.5%;
+}
+
+@media only screen and (max-width: @screen-sm-max) {
+	.col { margin: 1% 0 1% 0%;}
+	.span-3, .span-2, .span-1, .span-half { width: 100%; }
+}
