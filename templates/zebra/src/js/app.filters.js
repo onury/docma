@@ -18,7 +18,7 @@
             var cls = templateOpts.animations ? ' trans-all-ease-fast' : '';
             return '<span class="color-gray symbol-memberof' + cls + '">' + app.helper.colorOperators(match[1]) + '</span><span>' + app.helper.colorOperators(match[2]) + '</span>';
         }
-        return '<span class="color-gray">' + app.helper.colorOperators(match[1]) + '</span>' + app.helper.colorOperators(match[2]);
+        return '<span class="color-gray">' + app.helper.colorOperators(match[1]) + '</span><span class="fw-medium">' + app.helper.colorOperators(match[2]) + '</span>';
     }
 
     docma
@@ -56,14 +56,7 @@
             return ':';
         })
         .addFilter('$param_desc', function (param) {
-            var str = !param.optional
-                ? '<span class="boxed bg-red">Required</span>&nbsp;'
-                : '';
-            str += param.description;
-            if (param.optional) {
-                str += ' Default: <code>' + String(param.defaultvalue) + '</code>';
-            }
-            return docma.utils.parse(str);
+            return docma.utils.parse(param.description);
         })
         .addFilter('$longname', function (symbol) {
             if (typeof symbol === 'string') return symbol;
@@ -86,7 +79,8 @@
                             defValHtml = param.optional
                                 ? '<span class="def-val">=' + defVal + '</span>'
                                 : '';
-                            memo.push(param.name + defValHtml);
+                            var rest = param.variable ? '...' : '';
+                            memo.push(rest + param.name + defValHtml);
                         }
                         return memo;
                     }, []).join(', ');
