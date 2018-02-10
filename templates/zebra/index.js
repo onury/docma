@@ -28,6 +28,7 @@ module.exports = (template, modules) => {
         typeLinks: true,    // "internal" | "external" | true (both)
         badges: true,
         symbolMeta: false,
+        bookmarks: false,
         search: true,
         navbar: true,
         navItems: []
