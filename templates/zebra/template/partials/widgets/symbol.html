@@ -11,10 +11,12 @@
 
             {symbol|s|$tags}
         </div>
+    </div>
 
+    <div class="symbol-definition">
         {?symbol.augments}
             <p class="space-right-sm">
-                <b>Extends:</b> {symbol|s|$extends}
+                <b class="caption">Extends:</b> {symbol|s|$extends}
             </p>
         {/symbol.augments}
 
@@ -23,14 +25,11 @@
             <!-- So if this is not the "$constructor" element, display alias. -->
             {^$constructor}
                 <p class="space-right-sm">
-                    <b>Alias:</b> <code>{symbol.alias|s|$dot_prop}</code>
+                    <b class="caption">Alias:</b> <code>{symbol.alias|s|$dot_prop}</code>
                 </p>
             {/$constructor}
         {/symbol.alias}
 
-    </div>
-
-    <div class="symbol-definition">
         {?symbol.classdesc}
             <table class="pad-bottom-sm">
                 {?symbol.version}
@@ -65,7 +64,7 @@
         <p class="no-margin">
             <b>See</b>
             {@gt key=symbol.see.length value=1}
-                <ul class="pad-bottom-sm">
+                <ul>
                 {#symbol.see}<li>{.|s|$pl}</li>{/symbol.see}
                 </ul>
             {:else}
@@ -78,27 +77,27 @@
         constructor and its params separately, if this is a class declaration.  -->
         {@eq key=symbol.meta.code.type value="ClassDeclaration"}
         {:else}
-            {>"params":symbol/}
+            {>"params":symbol template=template /} <!-- passing the template object to partial -->
             {?symbol.isEnum}{:else}
-                {>"properties":symbol/}
+                {>"properties":symbol template=template /} <!-- passing the template object to partial -->
             {/symbol.isEnum}
         {/eq}
 
         {?symbol.fires}
             {@gt key=symbol.fires.length value="0" type="number"}
-                <b>Emits:</b>&nbsp;&nbsp;{symbol|s|$emits}
+                <b class="caption">Emits:</b>&nbsp;&nbsp;{symbol|s|$emits}
             {/gt}
         {/symbol.fires}
 
         {?symbol.returns}
             {@gt key=symbol.returns.length value="1" type="number"}
-                <b>Returns:</b>
+                <b class="caption">Returns:</b>
                 <p class="pad-left">
                     {symbol|s|$returns}
                 </p>
             {:else}
                 <p>
-                    <b>Returns:</b>&nbsp;&nbsp;{symbol|s|$returns}
+                    <b class="caption">Returns:</b>&nbsp;&nbsp;{symbol|s|$returns}
                 </p>
             {/gt}
         {/symbol.returns}
@@ -106,13 +105,13 @@
         {?symbol.generator}
             {?symbol.yields}
                  {@gt key=symbol.yields.length value="1" type="number"}
-                    <b>Yields:</b>
+                    <b class="caption">Yields:</b>
                     <p class="pad-left">
                         {symbol|s|$yields}
                     </p>
                     {:else}
                     <p>
-                        <b>Yields:</b>&nbsp;&nbsp;{symbol|s|$yields}
+                        <b class="caption">Yields:</b>&nbsp;&nbsp;{symbol|s|$yields}
                     </p>
                 {/gt}
             {/symbol.yields}
@@ -120,25 +119,25 @@
 
         {?symbol.exceptions}
             {@gt key=symbol.exceptions.length value="1" type="number"}
-                <b>Throws:</b>
+                <b class="caption">Throws:</b>
                 <p class="pad-left">
                     {symbol|s|$exceptions}
                 </p>
             {:else}
                 <p>
-                    <b>Throws:</b>&nbsp;&nbsp;{symbol|s|$exceptions}
+                    <b class="caption">Throws:</b>&nbsp;&nbsp;{symbol|s|$exceptions}
                 </p>
             {/gt}
         {/symbol.exceptions}
 
         <!-- if this is an enumeration symbol, list the members in a table -->
         {?symbol.isEnum}
-            {>"enums":symbol/}
+            {>"enums":symbol template=template /} <!-- passing the template object to partial -->
         {/symbol.isEnum}
 
         {?symbol.examples}
             {#symbol.examples}
-                <p><b>Example
+                <p><b class="caption">Example
                 {@gt key=symbol.examples.length value=1}
                     &nbsp;#{@math key=$idx method="add" operand="1"/}
                 {/gt}
