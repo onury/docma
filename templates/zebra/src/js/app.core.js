@@ -10,6 +10,7 @@ var app = window.app || {};
 
     var templateOpts = docma.template.options;
 
+    var $window = $(window);
     var $sidebarNodes, $btnClean, $txtSearch;
     var $wrapper, $sidebarWrapper, $pageContentWrapper, $sidebarToggle;
     var $nbmBtn, $navOverlay, $navbarMenu, $navbarBrand, $navbarInner, $navbarList;
@@ -252,8 +253,16 @@ var app = window.app || {};
         templateOpts.title = docma.app.title || 'Documentation';
     }
 
-    docma.on('render', function (currentRoute) { // eslint-disable-line
+    docma.on('navigate', function (currentRoute) {
+        console.log('navigate', currentRoute);
+        // when navigated to a #hash / bookmark, make sure navbar does not overlap.
+        if (templateOpts.navbar) {
+            $window.scrollTop($window.scrollTop() - (app.NAVBAR_HEIGHT + 15));
+        }
+    });
 
+    docma.on('render', function (currentRoute) { // eslint-disable-line
+        console.log('render');
         isApiRoute = docma.currentRoute && docma.currentRoute.type === 'api';
 
         // remove empty tables (especially for classdesc)
