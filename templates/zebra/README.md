@@ -3,7 +3,12 @@
 
 This is the default template for [Docma][docma]; with a side-bar symbols menu, search and navigation features; and a beautiful layout.
 
-Using Zebra template is straight-forward. Just set `buildConfig.template.path` to `"default"` or `"zebra"` or omit it.
+Although Zebra is installed together with Docma, you can still install/update via NPM:
+```sh
+npm i docma-template-zebra -g
+```
+
+Using Zebra template is straight-forward. Just set `template.path` to `"default"` or `"zebra"` or omit it in your build configuration (docma.json).
 
 ## Template Options
 
@@ -97,6 +102,14 @@ Template specific options that can be used when building your documentation with
             <td><code>false</code></td>
             <td>
                 Whether to add meta information at the end of each symbol documentation such as code file name and line number.
+            </td>
+        </tr>
+        <tr>
+            <td><code><b>bookmarks</b></code></td>
+            <td><code>Boolean|String</code></td>
+            <td><code>false</code></td>
+            <td>
+                Whether to automatically add bookmark links for headings. In order to customize the list of heading tags, set to a comma separated tag name list. e.g. `"h3,h4,h5"`.
             </td>
         </tr>
         <tr>
