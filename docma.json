@@ -51,6 +51,9 @@
             "foldSymbols": false,
             "typeLinks": true,
             "badges": true,
+            "params": "list",
+            "enums": "list",
+            "props": "list",
             "symbolMeta": false,
             "bookmarks": true,
             "search": true,
@@ -75,6 +78,7 @@
                         { "label": "Default Template - Zebra", "href": "?content=zebra" },
                         { "separator": true },
                         { "label": "Creating Docma Templates", "href": "?content=creating-templates" },
+                        { "label": "Docma Template API", "href": "?api=template" },
                         { "separator": true },
                         { "label": "Docma Web API", "href": "?api=docma-web" },
                         { "label": "Docma Filters", "href": "?content=docma-filters" }
@@ -114,7 +118,8 @@
         // API sources
         // grouped JS API documentation
         {
-            "docma": "./lib/docma.js",
+            "docma": "./lib/Docma.js",
+            "template": "./lib/DocmaTemplate.js",
             "docma-web": [
                 "./lib/web/core.js",
                 "./lib/web/core.*.js",
