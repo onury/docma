@@ -9,7 +9,7 @@ const path = require('path');
 // dep modules
 const chalk = require('chalk');
 // own modules
-const TemplateDoctor = require('../../lib/TemplateDoctor');
+const DocmaTemplateDoctor = require('../../lib/DocmaTemplateDoctor');
 // const utils = require('../../lib/utils');
 
 module.exports = (templatePath, settings) => {
@@ -22,7 +22,7 @@ module.exports = (templatePath, settings) => {
         console.log(chalk.cyan(`Checking for Docma template in directory '${templatePath}'...`));
     }
 
-    const doctor = new TemplateDoctor(templatePath, settings);
+    const doctor = new DocmaTemplateDoctor(templatePath, settings);
     console.log(chalk.cyan(`Diagnosing npm package: ${doctor.templateName}\n`));
     doctor.diagnose();
     process.exit(0);
