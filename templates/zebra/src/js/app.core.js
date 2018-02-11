@@ -32,25 +32,16 @@ var app = window.app || {};
 
         $('.badge-btn').removeClass('active');
         if ($txtSearch) $txtSearch.val('').focus();
-        // reset outline back to initial value
-        helper.setSidebarNodesOutline(templateOpts.outline);
-        $sidebarNodes.show();
+        $sidebarNodes.removeClass('hidden');
         if ($btnClean) $btnClean.hide();
         $('.toolbar-buttons > span').css('color', '#fff');
         // show back the chevrons within the sidebar symbols.
         $('.chevron').show();
+        // reset outline back to initial value
+        setTimeout(function () {
+            helper.setSidebarNodesOutline(templateOpts.outline);
+        }, 100); // with a little delay
         isFilterActive = false;
-    }
-
-    /**
-     *  Sets "flat" outline for the sidebar nodes. This wrapped in a function to
-     *  be passed to the last node's anim method callback argument. We set
-     *  outline to "flat" bec. if outline is "tree", and some symbol parent does
-     *  not match the search/filter, it (the indents) looks weird.
-     *  @private
-     */
-    function cbSetSidebarNodesOutline() {
-        helper.setSidebarNodesOutline('flat');
     }
 
     /**
@@ -83,6 +74,11 @@ var app = window.app || {};
 
         isFilterActive = true;
 
+        // We set outline to "flat" bec. if outline is "tree", and some symbol
+        // parent does not match the search/filter, the indents and tree lines
+        // look weird.
+        helper.setSidebarNodesOutline('flat');
+
         // e.g. search filter » "kind: instance-method"
         var reSym = /^\s*kind\s*:\s*/i;
         var filterByKind = reSym.test(search)
@@ -94,24 +90,13 @@ var app = window.app || {};
         var data;
         var attr = filterByKind ? 'data-kind' : 'data-keywords';
         var find = filterByKind ? filterByKind : search;
-        $sidebarNodes.each(function (index) {
-            // callback to be passed to the last node's anim method, so that
-            // outline is animated after all nodes are anim'ed-out. this is for
-            // better performance.
-            var cb = index === $sidebarNodes.length - 1
-                ? cbSetSidebarNodesOutline
-                : $.noop;
+        $sidebarNodes.each(function () {
             // get the data to be searched from each node's target attribute.
             data = $(this).attr(attr);
             if (data.indexOf(find) < 0) {
-                if (templateOpts.animations) {
-                    $(this).slideUp('fast', cb);
-                } else {
-                    $(this).hide('fast', cb);
-                }
+                $(this).addClass('hidden');
             } else {
-                $(this).show('fast', cb);
-                // $(this).slideDown('fast', cb);
+                $(this).removeClass('hidden');
             }
         });
 
@@ -304,6 +289,14 @@ var app = window.app || {};
             $nbmBtn = $('.navbar-menu-btn');
             $navOverlay = $('.nav-overlay');
             $navbarMenu = $('.navbar-menu');
+
+            if (!templateOpts.animations) {
+                $navOverlay.addClass('no-trans-force');
+                $navbarMenu.addClass('no-trans-force');
+                $navbarList.addClass('no-trans-force')
+                    .find('ul').addClass('no-trans-force');
+            }
+
             // navbar elements style / margin when route type is API.
             var navMargin = isApiRoute ? 55 : 0; // @page-padding-horizontal
             $('.navbar-brand').css({ 'margin-left': navMargin + 'px' });
@@ -421,6 +414,11 @@ var app = window.app || {};
         var pageContentRow = $pageContentWrapper.find('.row').first();
         if (templateOpts.sidebar) {
             $sidebarNodes = $('ul.sidebar-nav .sidebar-item');
+
+            if (templateOpts.animations) {
+                $sidebarNodes.addClass('trans-height-ease');
+            }
+
             helper.setSidebarNodesOutline();
 
             $btnSwitchOutline = $('.toolbar-buttons .btn-switch-outline');
