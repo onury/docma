@@ -14,49 +14,40 @@
     </div>
 
     <div class="symbol-definition">
-        {?symbol.augments}
-            <p class="space-right-sm">
-                <b class="caption">Extends:</b> {symbol|s|$extends}
-            </p>
-        {/symbol.augments}
 
-        {?symbol.alias}
-            <!-- JSDoc bug: sometimes constructor is marked as alias of class. -->
-            <!-- So if this is not the "$constructor" element, display alias. -->
-            {^$constructor}
-                <p class="space-right-sm">
-                    <b class="caption">Alias:</b> <code>{symbol.alias|s|$dot_prop}</code>
-                </p>
-            {/$constructor}
-        {/symbol.alias}
+        <div class="symbol-info">
+            {?symbol.alias}
+                <!-- JSDoc bug: sometimes constructor is marked as alias of class. -->
+                <!-- So if this is not the "$constructor" element, display alias. -->
+                {^$constructor}
+                    <p><b class="caption">Alias:</b> <code>{symbol.alias|s|$dot_prop}</code></p>
+                {/$constructor}
+            {/symbol.alias}
 
-        {?symbol.classdesc}
-            <table class="pad-bottom-sm">
-                {?symbol.version}
-                <tr>
-                    <td><b>Version:</b>&nbsp;&nbsp;&nbsp;</td><td>{symbol.version|s}</td>
-                </tr>
-                {/symbol.version}
+            {?symbol.augments}
+                <p><b class="caption">Extends:</b> {symbol|s|$extends}</p>
+            {/symbol.augments}
 
-                {?symbol.copyright}
-                <tr>
-                    <td><b>Copyright:</b>&nbsp;&nbsp;&nbsp;</td><td>{symbol.copyright|s}</td>
-                </tr>
-                {/symbol.copyright}
+            {?symbol.version}
+            <p><b class="caption">Version:</b>&nbsp;{symbol.version|s}</p>
+            {/symbol.version}
 
-                {?symbol.author}
-                <tr>
-                    <td><b>Author:</b>&nbsp;&nbsp;&nbsp;</td><td>{symbol.author|s|$author}</td>
-                </tr>
-                {/symbol.author}
+            {?symbol.since}
+            <p><b class="caption">Since:</b>&nbsp;{symbol.since|s}</p>
+            {/symbol.since}
 
-                {?symbol.license}
-                <tr>
-                    <td><b>License:</b>&nbsp;&nbsp;&nbsp;</td><td>{symbol.license|s}</td>
-                </tr>
-                {/symbol.license}
-            </table>
-        {/symbol.classdesc}
+            {?symbol.copyright}
+            <p><b class="caption">Copyright:</b>&nbsp;{symbol.copyright|s}</p>
+            {/symbol.copyright}
+
+            {?symbol.author}
+            <p><b class="caption">Author:</b>&nbsp;{symbol.author|s|$author}</p>
+            {/symbol.author}
+
+            {?symbol.license}
+            <p><b class="caption">License:</b>&nbsp;{symbol.license|s}</p>
+            {/symbol.license}
+        </div>
 
         {symbol|s|$desc}
 
@@ -85,7 +76,9 @@
 
         {?symbol.fires}
             {@gt key=symbol.fires.length value="0" type="number"}
-                <b class="caption">Emits:</b>&nbsp;&nbsp;{symbol|s|$emits}
+                <p>
+                    <b class="caption">Emits:</b>&nbsp;&nbsp;{symbol|s|$emits}
+                </p>
             {/gt}
         {/symbol.fires}
 
@@ -137,7 +130,7 @@
 
         {?symbol.examples}
             {#symbol.examples}
-                <p><b class="caption">Example
+                <p><b>Example
                 {@gt key=symbol.examples.length value=1}
                     &nbsp;#{@math key=$idx method="add" operand="1"/}
                 {/gt}
