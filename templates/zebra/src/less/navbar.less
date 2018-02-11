@@ -29,7 +29,7 @@
     background-color: fade(@navbar-dark, 50%);
     z-index: -1;
     opacity: 0;
-    transition: opacity .2s, z-index 0s;
+    .transition(~"opacity .2s, z-index 0s");
 
     &.toggled {
         z-index: 999997;
@@ -192,7 +192,7 @@ ul.navbar-list {
             border: 1px solid darken(@navbar-border-color, 3%);
 
             opacity: 0;
-            transition: all .2s ease-out;
+            .transition(~"all .2s ease-out");
 
             & > li {
                 border-radius: @navbar-border-radius;
@@ -242,7 +242,7 @@ ul.navbar-list {
     width: @navbar-inner-height;
     border-radius: @navbar-inner-height;
     cursor: pointer;
-    transition: all .2s ease;
+    .transition(~"all .2s ease");
     &:hover {
         background-color: @navbar-hover-bg-color;
     }
@@ -321,7 +321,7 @@ ul.navbar-list {
     box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
     background-clip: padding-box;
     background-color: #fff;
-    transition: all .2s ease-out;
+    .transition(~"all .2s ease-out");
     .hide-navbar-menu;
     border-bottom-left-radius: @navbar-border-radius * 2;
     border-bottom-right-radius: @navbar-border-radius * 2;
@@ -331,7 +331,7 @@ ul.navbar-list.break {
     display: block;
     position: relative;
     margin-bottom: 0 !important;
-    transition: all .2s ease-out;
+    .transition(~"all .2s ease-out");
 
     & > li {
         display: table;
@@ -382,7 +382,7 @@ ul.navbar-list.break {
                 border: 0 none;
                 border-left: 1px dashed @navbar-border-color;
                 opacity: 1;
-                transition: none;
+                .transition(none);
                 & > li {
                     height: auto;
                     opacity: 1;
