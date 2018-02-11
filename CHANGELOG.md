@@ -102,13 +102,14 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - An issue where the page would not scroll/jump to the bookmark on initial load; when the URL has a location hash.
 - Pre/code elements not to wrap content. Now, horizontally scrollable (like on GitHub).
 - An issue with sidebar symbol names auto-resizing incorrectly in some cases. Also improved performance by caching font-size for each item.
+- hidden meta issue. If symbol had no class description, tags such as `@author`, `@version` and `@copyright` would not be shown.
 - Sidebar scrollbars that were not fully visible.
 - Some issues with navbar margins when sidebar is disabled.
 
 #### Changed
 - Default template finally has a name :) - Zebra.
 - **BREAKING**: You need Docma v2+ for latest Zebra template to work.
-- Improved symbol listing. Also; when search is active, outline is temporarily set to `"flat"` so that you see the parent of the symbol. When search box is cleaned, it's set back to the initial template setting. (e.g. `"tree"` if set).
+- Improved symbol listing styles and performance. Using CSS transitions instead of JS manipulation. Also; when search is active, outline is temporarily set to `"flat"` so that you see the parent of the symbol. When search box is cleaned, it's set back to the initial template setting. (e.g. `"tree"` if set).
 - Improved `@example` outputs. If there are multiple examples for a symbol, they will be numbered now.
 - Improved nested bullet list spacing, for better readability.
 - Using SVG shapes for sidebar badges instead of CSS shapes.
