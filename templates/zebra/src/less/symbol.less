@@ -1,4 +1,11 @@
 @symbol-font-size: ceil(@font-size-base * 1.2);
+@symbol-badge-size: 25px;
+@symbol-badge-btn-size: 22px;
+// for the space around badge SVG shapes we need to go -2 to the left to snap
+// tree line to shape. this needs to be set both for .item-tree-line and
+// .symbol-badge.
+@symbol-badge-tree-fix: -2px; // margin-left
+
 .symbol {
     font-size: @symbol-font-size;
     & a {
@@ -51,8 +58,17 @@ code.symbol-type {
     & .symbol-definition {
         padding: 5px 0;
 
+        & .symbol-info {
+            & > p {
+                margin: 0;
+                &:last-of-type {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
         & > p {
-            margin: 0 0 15px; // (@line-height-computed / 2);
+            margin: 0 0 10px; // (@line-height-computed / 2);
         }
 
         // add a bit more space when a table comes right after a paragraph.
@@ -71,7 +87,7 @@ code.symbol-type {
 
         & .caption {
             display: inline-block !important;
-            min-width: 65px;
+            min-width: 80px;
         }
     }
 }
@@ -147,26 +163,24 @@ ul.param-list {
 
 // --------------------------
 
-// SVG SYMBOL BADGES
+// SYMBOL BADGES
 
-@symbol-badge-size: 26px;
-@symbol-badge-btn-size: 22px;
 .symbol-badge {
     display: inline-block;
     position: relative;
     width: @symbol-badge-size;
     height: @symbol-badge-size;
     opacity: 0.65;
-    margin-left: -1px;
+    margin-left: -2px;
 
     & > span {
         position: absolute;
         display: block;
         font-family: Arial, sans-serif;
-        font-size: 10.5px;
+        font-size: 9.5px;
         color: #fff;
         width: 100%;
-        line-height: @symbol-badge-size + 1;
+        line-height: @symbol-badge-size;
         text-indent: 0 !important;
         text-align: center;
         left: 0;
@@ -176,12 +190,31 @@ ul.param-list {
     & > svg {
         position: absolute;
         display: block;
-        width: @symbol-badge-size;
-        height: @symbol-badge-size;
+        width: @symbol-badge-size !important;
+        height: @symbol-badge-size !important;
         left: 0;
         top: 0;
         z-index: 1;
         fill: black; // default
+        // margin-left: -0.5px;
+
+        // we use our own svgs for badges but for errors, we use fontawsome svg,
+        // which should be a bit smaller.
+        &.svg-inline--fa {
+            width: @symbol-badge-size * 0.9 !important;
+            height: @symbol-badge-size * 0.9 !important;
+            margin: 1px 0 0 2px;
+            padding: 0;
+        }
+    }
+
+    // STRING BADGES
+    &.badge-str {
+        & > span {
+            font-weight: bold;
+            font-size: 18px !important;
+            line-height: 25px !important;
+        }
     }
 }
 
@@ -208,16 +241,15 @@ ul.param-list {
         height: @symbol-badge-btn-size !important;
     }
 
-    &.active {
-        opacity: 1;
-    }
-
+    &.active,
     &:hover {
         opacity: 1;
     }
 }
 
-.item-tree-line {
+img.item-tree-line {
     .no-pointer-events;
     .user-select(none);
+    vertical-align: top;
+    margin-left: @symbol-badge-tree-fix - 0.2;
 }
