@@ -45,12 +45,13 @@
                 "dark": "img/docma-logo-dark.png",
                 "light": "img/docma-logo-light.png"
             },
+            "animations": true,
             "sidebar": true,
             "collapsed": false,
             "outline": "tree",
             "foldSymbols": false,
             "typeLinks": true,
-            "badges": true,
+            "badges": "*",
             "params": "list",
             "enums": "list",
             "props": "list",
@@ -118,7 +119,10 @@
         // API sources
         // grouped JS API documentation
         {
-            "docma": "./lib/Docma.js",
+            "docma": [
+                "./lib/Docma.js",
+                "./lib/DocmaTemplateDoctor.js"
+            ],
             "template": "./lib/DocmaTemplate.js",
             "docma-web": [
                 "./lib/web/core.js",
