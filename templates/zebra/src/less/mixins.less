@@ -94,19 +94,23 @@
 }
 
 .trans-all-ease-fast {
-    -webkit-transition: all 0.15s ease;
-    -o-transition: all 0.15s ease;
-    transition: all .15s ease;
+    .transition(~"all 0.15s ease");
 }
 .trans-all-ease-slow {
-    -webkit-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all .5s ease;
+    .transition(~"all .5s ease");
 }
 .trans-all-ease {
-    -webkit-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    .transition(~"all 0.3s ease");
+}
+.trans-height-ease {
+    .transition(~"opacity 0.15s ease, height 0.15s ease");
+}
+
+.no-trans {
+    .transition-property(none);
+}
+.no-trans-force {
+    .transition-property(~"none !important");
 }
 
 // --------------------------
