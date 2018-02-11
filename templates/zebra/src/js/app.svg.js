@@ -30,8 +30,10 @@ var app = window.app || {};
     shapes.pentagon = shapes.pentagonUp;
     shapes.hexagon = shapes.hexagonV;
 
-    function getHtml(svg, char, title, color, addClass) {
-        var cls = 'svg-fill-' + (color || 'black');
+    function getHtml(svgName, char, title, color, addClass) {
+        var svg = shapes[svgName];
+        var cls = 'badge-' + svgName;
+        cls += ' svg-fill-' + (color || 'black');
         if (addClass) cls += ' ' + addClass;
         svg = '<svg xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 60 60">' + svg + '</svg>';
         return '<div class="symbol-badge ' + cls + '" title="' + (title || '') + '"><span>' + (char || '-') + '</span>' + svg + '</div>';
@@ -39,8 +41,15 @@ var app = window.app || {};
 
     Object.keys(shapes).forEach(function (name) {
         app.svg[name] = function (char, title, color, addClass) {
-            return getHtml(shapes[name], char, title, color, addClass);
+            return getHtml(name, char, title, color, addClass);
         };
     });
+
+    app.svg.error = function (title) {
+        title = 'This is documented incorrectly. ' + (title || 'Check your JSDoc comments.');
+        return '<div class="symbol-badge svg-fill-red" title="' + title + '"><span></span>'
+            + '<i class="fas fa-exclamation-circle color-red" title="Error"></i>'
+            + '</div>';
+    };
 
 })();
