@@ -3,7 +3,7 @@
 @sidebar-toolbar-height: 30px;
 @sidebar-header-tb-height: @sidebar-header-height + @sidebar-toolbar-height;
 @sidebar-brand-height: 50px;
-@sidebar-item-height: 38px;
+@sidebar-item-height: 36px;
 @sidebar-toggle-color: #636982;
 
 input[type=search] {
@@ -20,7 +20,7 @@ input[type=search] {
 .symbol-memberof {
     display: inline-block;
     width: auto;
-    max-width: 100px;
+    max-width: @sidebar-width; // not really necessary ?!?
     overflow-x: hidden;
     vertical-align: middle;
 }
@@ -69,26 +69,34 @@ input[type=search] {
 }
 
 .sidebar-item {
+    opacity: 1;
+
+    &.hidden {
+        height: 0;
+        opacity: 0;
+        overflow: hidden;
+    }
 
     & .item-label {
         display: inline-block;
         text-indent: 0 !important;
-        margin-left: 34px;
-        // height: 24px;
-        // line-height: 24px;
+        margin-left: 31px;
+
         & span {
             display: inline-block;
             position: relative;
-            height: 24px;
-            line-height: 24px;
+            height: @sidebar-item-height !important;
+            line-height: @sidebar-item-height !important;
             vertical-align: middle;
+            font-size: 13px; // this should match app.NODE_MAX_FONT_SIZE in app.js
         }
     }
 
-    // see symbol-badge class in styles.less
+    // see symbol-badge class in symbol.less
     & .symbol-badge {
         position: absolute;
         top: 6px;
+        margin-left: @symbol-badge-tree-fix;
     }
 
     &:hover {
@@ -181,7 +189,7 @@ input[type=search] {
     }
 }
 .toolbar-filters {
-    margin: 0 5px;
+    margin: 0 10px 0 0;
     padding: 0;
     position: relative;
     text-align: center;
@@ -296,13 +304,14 @@ ul.sidebar-nav ul {
 
 .sidebar-nav li {
     text-indent: 20px;
-    line-height: @sidebar-item-height;
+    line-height: @sidebar-item-height !important;
     white-space: nowrap;
 
     & > a {
         display: block;
         text-decoration: none;
         color: @gray-light; // @over-dark;
+        height: @sidebar-item-height;
 
         &:hover {
             text-decoration: none;
@@ -324,6 +333,7 @@ ul.sidebar-nav ul {
     right: 0px;
     height: @sidebar-item-height;
     width: @sidebar-item-height;
+    line-height: @sidebar-item-height;
     color: rgba(255, 255, 255, 0.35);
     cursor: pointer;
     z-index: 9;
