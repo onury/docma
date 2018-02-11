@@ -11,16 +11,16 @@ var app = window.app || {};
 (function () {
     'use strict';
 
-    app.MIN_FONT_SIZE = 10;
-    app.MAX_FONT_SIZE = 14;
+    app.NODE_MIN_FONT_SIZE = 10;
+    app.NODE_MAX_FONT_SIZE = 13; // this should match .item-label span font-size in CSS
     app.RE_EXAMPLE_CAPTION = /^\s*<caption>(.*?)<\/caption>\s*/gi;
     // CAUTION: if modifying these constants, also update less vars in
     // sidebar.less
     app.NAVBAR_HEIGHT = 50;
     app.SIDEBAR_WIDTH = 280; // change @sidebar-width in less if modified
-    app.SIDEBAR_NODE_HEIGHT = 40;
+    app.SIDEBAR_NODE_HEIGHT = 36;
     app.TOOLBAR_HEIGHT = 30;
-    app.TREE_NODE_WIDTH = 24;
+    // app.TREE_NODE_WIDTH = 25;
 
     /**
      *  Helper utilities for Zebra Template/App
@@ -68,11 +68,37 @@ var app = window.app || {};
     // Adjusts font-size of each sidebar node's label so that they are not
     // cropped.
     app.helper.setFontSize = function ($el) {
-        var f = app.MAX_FONT_SIZE;
-        while ($el.width() > 215 && f >= app.MIN_FONT_SIZE) {
-            f--;
-            $el.css('font-size', f + 'px');
+        // we're storing each symbol's font-size for each outline (tree and
+        // flat). so we'll initially check for the current outline's font-size
+        // for this element.
+        var da = 'data-font-' + templateOpts.outline;
+        var savedSize = $el.attr(da);
+
+        // if previously saved, restore font size now and return.
+        if (savedSize) {
+            $el.css('font-size', savedSize);
+            return;
         }
+
+        // start with max font size
+        $el.css('font-size', app.NODE_MAX_FONT_SIZE + 'px');
+
+        // css transition duration is .2s
+        var delay = templateOpts.animations ? 210 : 0;
+        setTimeout(function () {
+            // disable transitions, otherwise it'll measure wrong
+            var spans = $el.find('span').addClass('no-trans');
+            // start from the normal/max font-size
+            var f = app.NODE_MAX_FONT_SIZE;
+            while ($el.width() > 190 && f >= app.NODE_MIN_FONT_SIZE) {
+                f -= 0.2; // small steps
+                $el.css('font-size', f + 'px');
+            }
+            // store shrinked font size for this outline to attribute
+            $el.attr(da, f + 'px');
+            // enable transitions back
+            spans.removeClass('no-trans');
+        }, delay);
     };
 
     app.helper.colorOperators = function (str) {
@@ -169,12 +195,13 @@ var app = window.app || {};
     };
 
     function getSymbolData(symbol) {
-        var none = {
-            kind: '',
-            char: '',
-            badge: ''
-        };
-        if (!symbol) return none;
+        if (!symbol) {
+            return {
+                kind: 'Unknown',
+                char: '',
+                badge: app.svg.error()
+            };
+        }
 
         if (docma.utils.isClass(symbol)) return app.helper.getSymbolInfo('class');
         if (docma.utils.isConstructor(symbol)) return app.helper.getSymbolInfo('constructor');
@@ -203,17 +230,15 @@ var app = window.app || {};
         // return none;
     }
 
-    function getTreeLine(treeNode, marginLeft, addClass) {
-        marginLeft = marginLeft || 0;
+    function getTreeLine(treeNode, addClass) {
         var cls = 'item-tree-line';
         if (addClass) cls += ' ' + addClass;
         if (treeNode === 'parent') cls += ' item-tree-parent';
-        return '<img class="' + cls + '" src="img/tree-' + treeNode + '.png" width="' + app.TREE_NODE_WIDTH + 'px" height="' + app.SIDEBAR_NODE_HEIGHT + 'px" style="margin-left:' + marginLeft + 'px;" />';
+        return '<img class="' + cls + '" src="img/tree-' + treeNode + '.png" width="' + app.TREE_NODE_WIDTH + '" height="' + app.SIDEBAR_NODE_HEIGHT + '" />';
     }
 
     // treeNode: 'first'/'parent', 'last' or 'node' (or 'deep' which is calculated)
     function getTreeLineImgs(levels, treeNode, hasChildren) {
-        var marginLeft = -app.TREE_NODE_WIDTH;
         // this will be checked and src might be changed to img/tree-last.png if
         // this is the last item of a tree node.
 
@@ -221,7 +246,7 @@ var app = window.app || {};
 
         // if this has children, we'll add a tree-parent line but should be
         // absolutely positioned right below the badge.
-        if (hasChildren) imgs = [getTreeLine('parent', 0, 'absolute')];
+        if (hasChildren) imgs = [getTreeLine('parent', 'absolute')];
 
         if (treeNode === 'first') {
             // if first but level > 1, treat this as tree-node (not first).
@@ -233,10 +258,9 @@ var app = window.app || {};
 
         // deeper levels, if any...
         if (levels > 2) {
-            var i, ml;
+            var i;
             for (i = 2; i < levels; i++) {
-                ml = (i - 2) * marginLeft;
-                imgs.unshift(getTreeLine('deep', ml));
+                imgs.unshift(getTreeLine('deep'));
             }
         }
         return imgs.join('');
@@ -244,14 +268,30 @@ var app = window.app || {};
 
     function getSidebarNavItemInner(badge, symbolName, treeNode, hasChildren) {
         var levels = ((symbolName || '').split(/[.#~]/) || []).length;
+        var badgeIsStr = typeof templateOpts.badges === 'string';
         // colon (:) is not a level separator. JSDoc uses colon in cases like:
         // `obj~event:ready` or `module:someModule`
 
         var name = dust.filters.$dot_prop_sb(symbolName);
+
+        if (badgeIsStr) {
+            badge = '<div class="symbol-badge badge-str"><span>' + badge + '</span></div>';
+        }
+
+        if (treeNode === 'first' && levels > 1) {
+            badge = badgeIsStr
+                ? '<div class="symbol-badge badge-str"><span class="color-red">!</span></div>'
+                : app.svg.error('The symbol should have a parent.');
+        }
+
+        // svg badges have margin-left=31px
+        // if string badges, set this to 25px
+        var styleLabel = badgeIsStr ? ' style="margin-left: 25px !important"' : '';
+
         return '<span class="item-inner" data-levels="' + levels + '" data-tree="' + treeNode + '" style="margin-left:0px">'
             + getTreeLineImgs(levels, treeNode, hasChildren)
             + badge
-            + '<span class="item-label">' + name + '</span>'
+            + '<span class="item-label"' + styleLabel + '>' + name + '</span>'
             + '</span>';
     }
 
@@ -330,13 +370,7 @@ var app = window.app || {};
             var label = item.find('.item-label');
             // .badges also accepts string
             // label.css('margin-left', templateOpts.badges === true ? '12px' : '0');
-
-            // css transition duration is .2s
-            var delay = templateOpts.animations ? 210 : 0;
-            setTimeout(function () {
-                label.css('font-size', app.MAX_FONT_SIZE + 'px');
-                app.helper.setFontSize(label);
-            }, delay);
+            app.helper.setFontSize(label);
         });
     };
 
