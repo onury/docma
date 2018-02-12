@@ -5,7 +5,11 @@
                 {?template.options.logo.dark}
                     <img src="{template.options.logo.dark}" alt="logo" class="navbar-logo" />
                 {/template.options.logo.dark}
-                <span class="navbar-title">{template.options.title|s}</span>
+                <span class="navbar-title">
+                    <a href="{template.options.title.href}">
+                        {template.options.title.label}
+                    </a>
+                </span>
             </div>
 
             {@gt key=template.options.navbar.menuItems.length value=0}

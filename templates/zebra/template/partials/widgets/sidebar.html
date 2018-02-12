@@ -6,7 +6,11 @@
         {?template.options.logo.light}
             <img src="{template.options.logo.light}" alt="logo" class="sidebar-logo" />
         {/template.options.logo.light}
-        <span class="sidebar-title">{template.options.title|s}</span>
+        <span class="sidebar-title">
+            <a href="{template.options.title.href}">
+            {template.options.title.label}
+            </a>
+        </span>
     </div>
     {?template.options.sidebar.search}
     <div class="sidebar-search">
