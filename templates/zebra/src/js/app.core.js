@@ -411,7 +411,6 @@ var app = window.app || {};
             $('.sidebar-nav').css('top', '0px');
         }
 
-        var pageContentRow = $pageContentWrapper.find('.row').first();
         if (templateOpts.sidebar.enabled) {
             $sidebarNodes = $('ul.sidebar-nav .sidebar-item');
 
@@ -434,19 +433,6 @@ var app = window.app || {};
                 event.preventDefault();
                 $wrapper.toggleClass('toggled');
                 $sidebarToggle.toggleClass('toggled');
-                // add some extra spacing if navbar is disabled; to prevent top
-                // left toggle button to overlap with content.
-                if (!templateOpts.navbar.enabled) {
-                    var hasToggled = $wrapper.hasClass('toggled');
-                    var marginLeft = hasToggled ? '+=30px' : '-=30px';
-                    if (templateOpts.sidebar.animations) {
-                        pageContentRow.animate({
-                            'margin-left': marginLeft
-                        }, 300);
-                    } else {
-                        pageContentRow.css('margin-left', marginLeft);
-                    }
-                }
             });
 
             $('.chevron').on('click', function () {
