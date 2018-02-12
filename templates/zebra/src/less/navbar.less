@@ -14,7 +14,9 @@
 
 @navbar-menu-res-height:        300px; // responsive height
 
-@navbar-baseline-fix:           5px; // Fira Sans font is a bit high from the baseline
+// also used in sidebar.less
+// Fira Sans font is a bit high from the baseline
+@navbar-baseline-fix:           5px;
 
 .nav-overlay {
     display: block;
@@ -81,7 +83,7 @@
         // width: 100%;
         height: @navbar-height;
         line-height: 1em;
-        white-space: nowrap;
+        // white-space: nowrap;
         vertical-align: middle;
         font-family: @font-family-base;
         font-weight: 700;
@@ -90,7 +92,9 @@
 
         & a {
             display: inline-block;
-            padding-top: @navbar-baseline-fix;
+            white-space: normal !important;
+            max-width: @brand-title-width;
+            padding-top: 3px;
             text-decoration: none;
             color: @navbar-text-color;
             &:hover {

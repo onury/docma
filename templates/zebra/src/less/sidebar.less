@@ -132,8 +132,8 @@ input[type=search] {
             position: relative;
             height: @navbar-inner-height;
             width: @navbar-inner-height;
-            padding: 0;
-            margin: @navbar-padding-base (@navbar-padding-base * 2) 0 0;
+            padding: 1px;
+            margin: @navbar-padding-base (@navbar-padding-base * 1.5) 0 0;
         }
 
         & span.sidebar-title {
@@ -153,9 +153,10 @@ input[type=search] {
             color: @over-dark-light;
             & > a {
                 display: inline-block;
-                padding-top: @navbar-baseline-fix;
+                margin-top: @navbar-baseline-fix;
                 text-decoration: none;
                 color: @over-dark-light;
+                width: @brand-title-width;
                 &:hover {
                     color: #fff;
                 }
