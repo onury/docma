@@ -45,11 +45,20 @@ var app = window.app || {};
         };
     });
 
-    app.svg.error = function (title) {
-        title = 'This is documented incorrectly. ' + (title || 'Check your JSDoc comments.');
-        return '<div class="symbol-badge svg-fill-red" title="' + title + '"><span></span>'
-            + '<i class="fas fa-exclamation-circle color-red" title="Error"></i>'
+    function getFaHtml(title, color) {
+        return '<div class="symbol-badge svg-fill-' + color + '" title="' + title + '"><span></span>'
+            + '<i class="fas fa-exclamation-circle color-' + color + '"></i>'
             + '</div>';
+    }
+
+    app.svg.warn = function (title) {
+        title = title || 'Warning: Check your JSDoc comments.';
+        return getFaHtml(title, 'yellow');
+    };
+
+    app.svg.error = function (title) {
+        title = title || 'Error: Check your JSDoc comments.';
+        return getFaHtml(title, 'red');
     };
 
 })();
