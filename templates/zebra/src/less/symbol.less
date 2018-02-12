@@ -1,6 +1,8 @@
 @symbol-font-size: ceil(@font-size-base * 1.2);
 @symbol-badge-size: 25px;
 @symbol-badge-btn-size: 22px;
+// when fontawesome SVGs used for badges
+@symbol-badge-fa-size: (@symbol-badge-size / 1.19);
 // for the space around badge SVG shapes we need to go -2 to the left to snap
 // tree line to shape. this needs to be set both for .item-tree-line and
 // .symbol-badge.
@@ -201,8 +203,8 @@ ul.param-list {
         // we use our own svgs for badges but for errors, we use fontawsome svg,
         // which should be a bit smaller.
         &.svg-inline--fa {
-            width: @symbol-badge-size * 0.9 !important;
-            height: @symbol-badge-size * 0.9 !important;
+            width: @symbol-badge-fa-size !important;
+            height: @symbol-badge-fa-size !important;
             margin: 1px 0 0 2px;
             padding: 0;
         }
