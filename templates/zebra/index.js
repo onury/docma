@@ -54,17 +54,6 @@ module.exports = (template, modules) => {
     template.preBuild(() => {
 
         if (helper.isOldStructureOptions) {
-
-            const deprecatedMessage =
-                '------------------------------------------------------------' +
-                '»  Zebra Template options structure is changed in v2.0.0.' +
-                '»  Please see improved options and documentation at' +
-                '»  https://onury.io/docma/?content=zebra#Template-Options' +
-                '------------------------------------------------------------';
-            console.log();
-            console.log(deprecatedMessage);
-            console.log();
-
             helper.convertOptionsToNewStructure();
         }
 
@@ -74,5 +63,15 @@ module.exports = (template, modules) => {
         helper.setDarkLightLogos();
     });
 
-    // template.postBuild(() => { });
+    template.postBuild(() => {
+        // Display deprecated message at the end if needed
+        if (helper.isOldStructureOptions) {
+            const optsDeprecated =
+                'Zebra Template options structure is changed in v2.0.0. ' +
+                'Please update your template options.\n' +
+                'See documentation @ https://onury.io/docma/?content=zebra#Template-Options';
+            template.debug.log(); // empty line
+            template.debug.warn(optsDeprecated);
+        }
+    });
 };
