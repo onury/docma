@@ -73,11 +73,11 @@ Template specific options that can be used when building your documentation with
             </td>
         </tr>
         <tr>
-            <td><code><b>foldSymbols</b></code></td>
+            <td><code><b>folded</b></code></td>
             <td><code>Boolean</code></td>
             <td><code>false</code></td>
             <td>
-                Indicates whether to initially fold symbols with child members, in the sidebar.
+                Indicates whether to initially fold symbol items with child members, in the sidebar.
             </td>
         </tr>
         <tr>
