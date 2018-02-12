@@ -18,8 +18,8 @@ module.exports = (template, modules) => {
 
     // Template default options.
     template.defaultOptions = {
-        title: '',
-        logo: null,             // URL String or { dark: String, light: String }
+        title: '',              // String or { label:String, href:String }
+        logo: null,             // URL String or { dark:String, light:String }
         sidebar: {
             enabled: true,
             outline: 'tree',    // "flat" | "tree"
@@ -60,6 +60,7 @@ module.exports = (template, modules) => {
         // else — options provided by the end-user is not in old-structure so we
         // leave the rest to Docma.
 
+        helper.setTitle();
         helper.setDarkLightLogos();
     });
 
@@ -69,7 +70,7 @@ module.exports = (template, modules) => {
             const optsDeprecated =
                 'Zebra Template options structure is changed in v2.0.0. ' +
                 'Please update your template options.\n' +
-                'See documentation @ https://onury.io/docma/?content=zebra#Template-Options';
+                'See documentation @ https://onury.io/docma/?content=zebra-template#Template-Options';
             template.debug.log(); // empty line
             template.debug.warn(optsDeprecated);
         }
