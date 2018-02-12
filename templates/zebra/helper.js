@@ -54,6 +54,19 @@ module.exports = (template, modules) => {
             }
         },
         /**
+         *  If a string is directly passed to `template.options.title`, we'll set
+         *  we'll set `title.label` to this and set `title.href` to '#'.
+         */
+        setTitle() {
+            const title = opts.title;
+            if (typeof title === 'string') {
+                opts.title = {
+                    label: title,
+                    href: '#'
+                };
+            }
+        },
+        /**
          *  Checks whether the current template options (provided by the
          *  end-user) has old-structure (as in Default Template v1.x).
          */
