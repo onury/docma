@@ -21,7 +21,7 @@ var app = window.app || {};
     app.SIDEBAR_WIDTH = 280; // change @sidebar-width in less if modified
     app.SIDEBAR_NODE_HEIGHT = 36;
     app.TOOLBAR_HEIGHT = 30;
-    // app.TREE_NODE_WIDTH = 25;
+    app.TREE_NODE_WIDTH = 25;
 
     /**
      *  Helper utilities for Zebra Template/App
@@ -271,22 +271,31 @@ var app = window.app || {};
         var noBadge = Boolean(templateOpts.sidebar.badges) === false;
         var name = dust.filters.$dot_prop_sb(symbolName);
 
+        var treeImages = '';
+
         // svg badges should have margin-left=31px
         // if string badges, set this to 25px, otherwise 7px (for no badge)
         var labelMargin;
+
+        // This message is set as element title if the symbol hierarchy has a
+        // problem.
+        var errMessage = '';
 
         // if this node is deeper than 1 level and node type is first, then it
         // means the symbol has no parent in the documentation. Which is wrong.
         // So we'll visually show this via "!" (string or SVG).
         if (treeNode === 'first' && levels > 1) {
+            errMessage = 'Warning: This symbol does not have a documented parent. '
+                + 'Expected `' + docma.utils.getParentName(symbolName) + '` to be documented.';
             if (badgeIsStr || noBadge) {
-                badge = ''; // '<div class="symbol-badge badge-str"><span class="color-red">!</span></div>';
+                badge = '<div class="symbol-badge badge-str" title="' + errMessage + '"><span class="color-red">!</span></div>';
                 labelMargin = 25;
             } else {
-                badge = app.svg.error('The symbol should have a parent.');
+                badge = app.svg.warn(errMessage);
                 labelMargin = 31;
             }
         } else {
+            treeImages = getTreeLineImgs(levels, treeNode, hasChildren);
             if (noBadge) {
                 badge = '';
                 labelMargin = 7;
@@ -300,11 +309,12 @@ var app = window.app || {};
         }
 
         var labelStyle = ' style="margin-left: ' + labelMargin + 'px !important; "';
+        var itemTitle = errMessage ? ' title="' + errMessage + '"' : '';
 
         return '<span class="item-inner" data-levels="' + levels + '" data-tree="' + treeNode + '" style="margin-left:0px">'
-            + getTreeLineImgs(levels, treeNode, hasChildren)
+            + treeImages
             + badge
-            + '<span class="item-label"' + labelStyle + '>' + name + '</span>'
+            + '<span class="item-label"' + itemTitle + labelStyle + '>' + name + '</span>'
             + '</span>';
     }
 
