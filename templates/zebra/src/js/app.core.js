@@ -28,7 +28,7 @@ var app = window.app || {};
      *  @private
      */
     function cleanFilter() {
-        if (!templateOpts.sidebar) return;
+        if (!templateOpts.sidebar.enabled) return;
 
         $('.badge-btn').removeClass('active');
         if ($txtSearch) $txtSearch.val('').focus();
@@ -39,7 +39,7 @@ var app = window.app || {};
         $('.chevron').show();
         // reset outline back to initial value
         setTimeout(function () {
-            helper.setSidebarNodesOutline(templateOpts.outline);
+            helper.setSidebarNodesOutline(templateOpts.sidebar.outline);
         }, 100); // with a little delay
         isFilterActive = false;
     }
@@ -57,7 +57,7 @@ var app = window.app || {};
      *  @param {*} strSearch - String to be searched for.
      */
     function filterSidebarNodes(strSearch) {
-        if (!templateOpts.sidebar) return;
+        if (!templateOpts.sidebar.enabled) return;
 
         var search = (strSearch || '').trim().toLowerCase();
         if (search === '') {
@@ -151,7 +151,7 @@ var app = window.app || {};
         var newCls = !folded
             ? 'fa-caret-square-down'
             : 'fa-caret-square-right';
-        templateOpts.foldSymbols = folded;
+        templateOpts.sidebar.folded = folded;
         $btni.addClass(newCls);
     }
 
@@ -241,7 +241,7 @@ var app = window.app || {};
     docma.on('navigate', function (currentRoute) { // eslint-disable-line
         isApiRoute = currentRoute && currentRoute.type === 'api';
         // when navigated to a #hash / bookmark, make sure navbar does not overlap.
-        if (templateOpts.navbar && !isApiRoute) {
+        if (templateOpts.navbar.enabled && !isApiRoute) {
             setTimeout(function () {
                 $window.scrollTop($window.scrollTop() - (app.NAVBAR_HEIGHT + 20));
             }, 30);
@@ -263,7 +263,7 @@ var app = window.app || {};
         $pageContentWrapper = $('#page-content-wrapper');
         $sidebarToggle = $('#sidebar-toggle');
 
-        if (templateOpts.animations) {
+        if (templateOpts.sidebar.animations) {
             $wrapper.addClass('trans-all-ease');
             $sidebarWrapper.addClass('trans-all-ease');
         } else {
@@ -271,7 +271,7 @@ var app = window.app || {};
             $sidebarWrapper.removeClass('trans-all-ease');
         }
 
-        if (!templateOpts.navbar) {
+        if (!templateOpts.navbar.enabled) {
             // remove the gap created for navbar
             $('body, html').css('padding-top', 0);
             // remove sidbar top spacing
@@ -290,7 +290,7 @@ var app = window.app || {};
             $navOverlay = $('.nav-overlay');
             $navbarMenu = $('.navbar-menu');
 
-            if (!templateOpts.animations) {
+            if (!templateOpts.navbar.animations) {
                 $navOverlay.addClass('no-trans-force');
                 $navbarMenu.addClass('no-trans-force');
                 $navbarList.addClass('no-trans-force')
@@ -341,9 +341,9 @@ var app = window.app || {};
             $('table').addClass('table table-striped table-bordered');
 
             // set bookmarks for headings with id
-            if (templateOpts.bookmarks) {
-                var bmSelector = typeof templateOpts.bookmarks === 'string'
-                    ? templateOpts.bookmarks
+            if (templateOpts.contentView.bookmarks) {
+                var bmSelector = typeof templateOpts.contentView.bookmarks === 'string'
+                    ? templateOpts.contentView.bookmarks
                     : ':header'; // all: "h1, h2, h3, h4, h5, h6"
                 $(bmSelector).each(function () {
                     var bmHeading = $(this);
@@ -385,12 +385,12 @@ var app = window.app || {};
         }
 
         // CAUTION: if modifying this, also update less vars in sidebar.less
-        var sidebarHeaderHeight = templateOpts.search ? 130 : app.NAVBAR_HEIGHT;
-        if (templateOpts.toolbar) sidebarHeaderHeight += app.TOOLBAR_HEIGHT;
+        var sidebarHeaderHeight = templateOpts.sidebar.search ? 130 : app.NAVBAR_HEIGHT;
+        if (templateOpts.sidebar.toolbar) sidebarHeaderHeight += app.TOOLBAR_HEIGHT;
         $('.sidebar-nav-container').css('top', sidebarHeaderHeight);
         $('.sidebar-header').css('height', sidebarHeaderHeight);
 
-        if (templateOpts.search) {
+        if (templateOpts.sidebar.search) {
             $btnClean = $('.sidebar-search-clean');
             $txtSearch = $('#txt-search');
 
@@ -412,10 +412,10 @@ var app = window.app || {};
         }
 
         var pageContentRow = $pageContentWrapper.find('.row').first();
-        if (templateOpts.sidebar) {
+        if (templateOpts.sidebar.enabled) {
             $sidebarNodes = $('ul.sidebar-nav .sidebar-item');
 
-            if (templateOpts.animations) {
+            if (templateOpts.sidebar.animations) {
                 $sidebarNodes.addClass('trans-height-ease');
             }
 
@@ -423,9 +423,9 @@ var app = window.app || {};
 
             $btnSwitchOutline = $('.toolbar-buttons .btn-switch-outline');
             $btnSwitchFold = $('.toolbar-buttons .btn-switch-fold');
-            toggleAllSubTrees(templateOpts.foldSymbols);
+            toggleAllSubTrees(templateOpts.sidebar.folded);
 
-            if (!templateOpts.collapsed) {
+            if (!templateOpts.sidebar.collapsed) {
                 $wrapper.addClass('toggled');
                 $sidebarToggle.addClass('toggled');
             }
@@ -436,10 +436,10 @@ var app = window.app || {};
                 $sidebarToggle.toggleClass('toggled');
                 // add some extra spacing if navbar is disabled; to prevent top
                 // left toggle button to overlap with content.
-                if (!templateOpts.navbar) {
+                if (!templateOpts.navbar.enabled) {
                     var hasToggled = $wrapper.hasClass('toggled');
                     var marginLeft = hasToggled ? '+=30px' : '-=30px';
-                    if (templateOpts.animations) {
+                    if (templateOpts.sidebar.animations) {
                         pageContentRow.animate({
                             'margin-left': marginLeft
                         }, 300);
@@ -453,7 +453,7 @@ var app = window.app || {};
                 toggleSubTree($(this));
             });
 
-            if (templateOpts.toolbar) {
+            if (templateOpts.sidebar.toolbar) {
 
                 var filterButtons = helper.getSymbolInfo('global', true).badge
                     + helper.getSymbolInfo('namespace', true).badge
@@ -487,8 +487,8 @@ var app = window.app || {};
                 $btnSwitchFold.on('click', function () {
                     // disable if search is active
                     if (isFilterActive) return;
-                    setFoldState(!templateOpts.foldSymbols);
-                    toggleAllSubTrees(templateOpts.foldSymbols);
+                    setFoldState(!templateOpts.sidebar.folded);
+                    toggleAllSubTrees(templateOpts.sidebar.folded);
                 });
 
                 $btnSwitchOutline.on('click', function () {
@@ -500,19 +500,19 @@ var app = window.app || {};
                     var $btni = $btn.find('[data-fa-i2svg]').removeClass('fa-outdent fa-indent');
 
                     var newOutline, newCls;
-                    if (templateOpts.outline === 'flat') {
+                    if (templateOpts.sidebar.outline === 'flat') {
                         newOutline = 'tree';
                         newCls = 'fa-indent';
                     } else {
                         newOutline = 'flat';
                         newCls = 'fa-outdent';
                     }
-                    templateOpts.outline = newOutline;
+                    templateOpts.sidebar.outline = newOutline;
                     $btni.addClass(newCls);
                     helper.setSidebarNodesOutline(newOutline);
                 });
             }
-        } else { // if (templateOpts.sidebar === false)
+        } else { // if (templateOpts.sidebar.enabled === false)
             // collapse the sidebar since it's disabled
             $wrapper.removeClass('toggled');
             $sidebarToggle.removeClass('toggled');

@@ -15,7 +15,7 @@
             match = re.exec(name);
         if (!match) return '<span class="fw-medium">' + name + '</span>';
         if (forSidebar) {
-            var cls = templateOpts.animations ? ' trans-all-ease-fast' : '';
+            var cls = templateOpts.sidebar.animations ? ' trans-all-ease-fast' : '';
             return '<span class="color-gray symbol-memberof' + cls + '">' + app.helper.colorOperators(match[1]) + '</span><span>' + app.helper.colorOperators(match[2]) + '</span>';
         }
         return '<span class="color-gray">' + app.helper.colorOperators(match[1]) + '</span><span class="fw-medium">' + app.helper.colorOperators(match[2]) + '</span>';
@@ -38,7 +38,7 @@
         .addFilter('$type', function (symbol) {
             if (docma.utils.isConstructor(symbol)) return '';
             var opts = {
-                links: templateOpts.typeLinks
+                links: templateOpts.symbols.autoLink
             };
             if (symbol.kind === 'function') {
                 var returnTypes = docma.utils.getReturnTypes(symbol, opts);
@@ -94,7 +94,7 @@
             var ext = Array.isArray(symbol) ? symbol : symbol.augments;
             return docma.utils.getCodeTags(ext, {
                 delimeter: ', ',
-                links: templateOpts.typeLinks
+                links: templateOpts.symbols.autoLink
             });
         })
         .addFilter('$returns', function (symbol) {
@@ -102,7 +102,7 @@
             return docma.utils.getFormattedTypeList(returns, {
                 delimeter: '|',
                 descriptions: true,
-                links: templateOpts.typeLinks
+                links: templateOpts.symbols.autoLink
             });
         })
         .addFilter('$yields', function (symbol) {
@@ -110,14 +110,14 @@
             return docma.utils.getFormattedTypeList(yields, {
                 delimeter: '|',
                 descriptions: true,
-                links: templateOpts.typeLinks
+                links: templateOpts.symbols.autoLink
             });
         })
         .addFilter('$emits', function (symbol) {
             var emits = Array.isArray(symbol) ? symbol : symbol.fires;
             return docma.utils.getEmittedEvents(emits, {
                 delimeter: ', ',
-                links: templateOpts.typeLinks
+                links: templateOpts.symbols.autoLink
             });
         })
         .addFilter('$exceptions', function (symbol) {
@@ -125,7 +125,7 @@
             return docma.utils.getFormattedTypeList(exceptions, {
                 delimeter: '|',
                 descriptions: true,
-                links: templateOpts.typeLinks
+                links: templateOpts.symbols.autoLink
             });
         })
         // non-standard JSDoc directives are stored in `.tags` property of a

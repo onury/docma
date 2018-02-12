@@ -11,8 +11,9 @@ var app = window.app || {};
 (function () {
     'use strict';
 
-    app.NODE_MIN_FONT_SIZE = 10;
+    app.NODE_MIN_FONT_SIZE = 9;
     app.NODE_MAX_FONT_SIZE = 13; // this should match .item-label span font-size in CSS
+    app.NODE_LABEL_MAX_WIDTH = 190; // this should match .item-label max-width in CSS
     app.RE_EXAMPLE_CAPTION = /^\s*<caption>(.*?)<\/caption>\s*/gi;
     // CAUTION: if modifying these constants, also update less vars in
     // sidebar.less
@@ -71,7 +72,7 @@ var app = window.app || {};
         // we're storing each symbol's font-size for each outline (tree and
         // flat). so we'll initially check for the current outline's font-size
         // for this element.
-        var da = 'data-font-' + templateOpts.outline;
+        var da = 'data-font-' + templateOpts.sidebar.outline;
         var savedSize = $el.attr(da);
 
         // if previously saved, restore font size now and return.
@@ -80,19 +81,16 @@ var app = window.app || {};
             return;
         }
 
-        // start with max font size
-        $el.css('font-size', app.NODE_MAX_FONT_SIZE + 'px');
-
         // css transition duration is .2s
-        var delay = templateOpts.animations ? 210 : 0;
+        var delay = templateOpts.sidebar.animations ? 210 : 0;
         setTimeout(function () {
             // disable transitions, otherwise it'll measure wrong
             var spans = $el.find('span').addClass('no-trans');
             // start from the normal/max font-size
             var f = app.NODE_MAX_FONT_SIZE;
-            while ($el.width() > 190 && f >= app.NODE_MIN_FONT_SIZE) {
-                f -= 0.2; // small steps
+            while ($el.width() > app.NODE_LABEL_MAX_WIDTH && f >= app.NODE_MIN_FONT_SIZE) {
                 $el.css('font-size', f + 'px');
+                f -= 0.2; // small steps
             }
             // store shrinked font size for this outline to attribute
             $el.attr(da, f + 'px');
@@ -267,31 +265,46 @@ var app = window.app || {};
     }
 
     function getSidebarNavItemInner(badge, symbolName, treeNode, hasChildren) {
-        var levels = ((symbolName || '').split(/[.#~]/) || []).length;
-        var badgeIsStr = typeof templateOpts.badges === 'string';
-        // colon (:) is not a level separator. JSDoc uses colon in cases like:
-        // `obj~event:ready` or `module:someModule`
+        var levels = docma.utils.getLevels(symbolName);
 
+        var badgeIsStr = typeof templateOpts.sidebar.badges === 'string';
+        var noBadge = Boolean(templateOpts.sidebar.badges) === false;
         var name = dust.filters.$dot_prop_sb(symbolName);
 
-        if (badgeIsStr) {
-            badge = '<div class="symbol-badge badge-str"><span>' + badge + '</span></div>';
-        }
+        // svg badges should have margin-left=31px
+        // if string badges, set this to 25px, otherwise 7px (for no badge)
+        var labelMargin;
 
+        // if this node is deeper than 1 level and node type is first, then it
+        // means the symbol has no parent in the documentation. Which is wrong.
+        // So we'll visually show this via "!" (string or SVG).
         if (treeNode === 'first' && levels > 1) {
-            badge = badgeIsStr
-                ? '<div class="symbol-badge badge-str"><span class="color-red">!</span></div>'
-                : app.svg.error('The symbol should have a parent.');
+            if (badgeIsStr || noBadge) {
+                badge = ''; // '<div class="symbol-badge badge-str"><span class="color-red">!</span></div>';
+                labelMargin = 25;
+            } else {
+                badge = app.svg.error('The symbol should have a parent.');
+                labelMargin = 31;
+            }
+        } else {
+            if (noBadge) {
+                badge = '';
+                labelMargin = 7;
+            } else if (badgeIsStr) {
+                badge = '<div class="symbol-badge badge-str"><span>' + badge + '</span></div>';
+                labelMargin = 25;
+            } else {
+                // badge = badge; // SVG badge
+                labelMargin = 31;
+            }
         }
 
-        // svg badges have margin-left=31px
-        // if string badges, set this to 25px
-        var styleLabel = badgeIsStr ? ' style="margin-left: 25px !important"' : '';
+        var labelStyle = ' style="margin-left: ' + labelMargin + 'px !important; "';
 
         return '<span class="item-inner" data-levels="' + levels + '" data-tree="' + treeNode + '" style="margin-left:0px">'
             + getTreeLineImgs(levels, treeNode, hasChildren)
             + badge
-            + '<span class="item-label"' + styleLabel + '>' + name + '</span>'
+            + '<span class="item-label"' + labelStyle + '>' + name + '</span>'
             + '</span>';
     }
 
@@ -303,9 +316,9 @@ var app = window.app || {};
         var keywords = docma.utils.getKeywords(symbol);
         var symbolData = getSymbolData(symbol);
         // .badges also accepts string
-        var badge = templateOpts.badges === true
+        var badge = templateOpts.sidebar.badges === true
             ? symbolData.badge || ''
-            : (typeof templateOpts.badges === 'string' ? templateOpts.badges : '&nbsp;•&nbsp;');
+            : (typeof templateOpts.sidebar.badges === 'string' ? templateOpts.sidebar.badges : '&nbsp;•&nbsp;');
         var hasChildren = app.helper.hasChildren(symbol);
         var innerHTML = getSidebarNavItemInner(badge, symbol.$longname, treeNode, hasChildren);
         var chevron = '';
@@ -334,7 +347,7 @@ var app = window.app || {};
     };
 
     app.helper.setSidebarNodesOutline = function (outline) {
-        outline = outline || templateOpts.outline;
+        outline = outline || templateOpts.sidebar.outline;
         var isTree = outline === 'tree';
 
         if (isTree) {
@@ -350,13 +363,6 @@ var app = window.app || {};
             inners.find('.symbol-memberof').removeClass('no-width'); // show
         }
 
-        // moved this out here for performance
-        // .badges also accepts string
-        // inners.find('.item-label').css('margin-left', templateOpts.badges === true ? '12px' : '0');
-        if (!templateOpts.badges) {
-            inners.find('.item-label').css('margin-left', '0');
-        }
-
         $('.sidebar-nav .item-inner').each(function () {
             var item = $(this);
 
@@ -369,7 +375,7 @@ var app = window.app || {};
 
             var label = item.find('.item-label');
             // .badges also accepts string
-            // label.css('margin-left', templateOpts.badges === true ? '12px' : '0');
+            // label.css('margin-left', templateOpts.sidebar.badges === true ? '12px' : '0');
             app.helper.setFontSize(label);
         });
     };
