@@ -41,78 +41,88 @@
         "path": "zebra",
         "options": {
             "title": "<a href=\"/docma\">Docma</a>",
-            "logo": {
+            "logo": {               // URL String or { dark: String, light: String }
                 "dark": "img/docma-logo-dark.png",
                 "light": "img/docma-logo-light.png"
             },
-            "animations": true,
-            "sidebar": true,
-            "collapsed": false,
-            "outline": "tree",
-            "foldSymbols": false,
-            "typeLinks": true,
-            "badges": "*",
-            "params": "list",
-            "enums": "list",
-            "props": "list",
-            "symbolMeta": false,
-            "bookmarks": true,
-            "search": true,
-            "navbar": true,
-            "navItems": [
-                {
-                    "iconClass": "fas fa-book",
-                    "label": "Building Docs",
-                    "items": [
-                        { "label": "Guide", "href": "./" },
-                        { "separator": true },
-                        { "label": "Docma (Builder) API", "href": "?api=docma" },
-                        { "label": "Build Configuration", "href": "?api=docma#Docma~BuildConfiguration" },
-                        { "separator": true },
-                        { "label": "Docma CLI", "href": "?content=docma-cli" }
-                    ]
+            "sidebar": {
+                "enabled": true,
+                "outline": "tree",  // "flat" | "tree"
+                "collapsed": false,
+                "toolbar": true,
+                "folded": false,
+                "badges": true,     // true | false | <string-value>
+                "search": true,
+                "animations": true
                 },
-                {
-                    "iconClass": "fas fa-puzzle-piece",
-                    "label": "Templates",
-                    "items": [
-                        { "label": "Default Template - Zebra", "href": "?content=zebra" },
-                        { "separator": true },
-                        { "label": "Creating Docma Templates", "href": "?content=creating-templates" },
-                        { "label": "Docma Template API", "href": "?api=template" },
-                        { "separator": true },
-                        { "label": "Docma Web API", "href": "?api=docma-web" },
-                        { "label": "Docma Filters", "href": "?content=docma-filters" }
-                    ]
-                },
-                {
-                    "iconClass": "fas fa-cloud-download-alt",
-                    "label": "Download",
-                    "items": [
-                        {
-                            "label": "<code>npm i docma -g</code>",
-                            "href": "https://www.npmjs.com/package/docma",
-                            "target": "_blank"
-                        },
-                        {
-                            "label": "Docma Releases",
-                            "href": "https://github.com/onury/docma/releases",
-                            "target": "_blank"
-                        },
-                        { "separator": true },
-                        {
-                            "label": "Change Log",
-                            "href": "?content=changelog"
-                        }
-                    ]
-                },
-                {
-                    "iconClass": "fab fa-github",
-                    "label": "GitHub",
-                    "href": "https://github.com/onury/docma",
-                    "target": "_blank"
-                }
-            ]
+            "symbols": {
+                "autoLink": true,   // "internal" | "external" | true (both)
+                "params": "list",   // "list" | "table"
+                "enums": "list",    // "list" | "table"
+                "props": "list",    // "list" | "table"
+                "meta": false
+            },
+            "contentView": {
+                "bookmarks": true
+            },
+            "navbar": {
+                "enabled": true,
+                "animations": true,
+                "menuItems": [
+                    {
+                        "iconClass": "fas fa-book",
+                        "label": "Building Docs",
+                        "items": [
+                            { "label": "Guide", "href": "./" },
+                            { "separator": true },
+                            { "label": "Docma (Builder) API", "href": "?api=docma" },
+                            { "label": "Build Configuration", "href": "?api=docma#Docma~BuildConfiguration" },
+                            { "separator": true },
+                            { "label": "Docma CLI", "href": "?content=docma-cli" }
+                        ]
+                    },
+                    {
+                        "iconClass": "fas fa-puzzle-piece",
+                        "label": "Templates",
+                        "items": [
+                            { "label": "Default Template - Zebra", "href": "?content=zebra" },
+                            { "separator": true },
+                            { "label": "Creating Docma Templates", "href": "?content=creating-templates" },
+                            { "label": "Docma Template API", "href": "?api=template" },
+                            { "separator": true },
+                            { "label": "Docma Web API", "href": "?api=docma-web" },
+                            { "label": "Docma Filters", "href": "?content=docma-filters" }
+                        ]
+                    },
+                    {
+                        "iconClass": "fas fa-cloud-download-alt",
+                        "label": "Download",
+                        "items": [
+                            {
+                                "label": "<code>npm i docma -g</code>",
+                                "href": "https://www.npmjs.com/package/docma",
+                                "target": "_blank"
+                            },
+                            {
+                                "label": "Docma Releases",
+                                "href": "https://github.com/onury/docma/releases",
+                                "target": "_blank"
+                            },
+                            { "separator": true },
+                            {
+                                "label": "Change Log",
+                                "href": "?content=changelog"
+                            }
+                        ]
+                    },
+                    {
+                        "iconClass": "fab fa-github",
+                        "label": "GitHub",
+                        "href": "https://github.com/onury/docma",
+                        "target": "_blank"
+                    }
+                ]
+            }
         }
     },
     "src": [
