@@ -4,6 +4,7 @@
 @sidebar-header-tb-height: @sidebar-header-height + @sidebar-toolbar-height;
 @sidebar-brand-height: 50px;
 @sidebar-item-height: 36px;
+// @sidebar-item-label-max-width: 190px;
 @sidebar-toggle-color: #636982;
 
 input[type=search] {
@@ -20,7 +21,7 @@ input[type=search] {
 .symbol-memberof {
     display: inline-block;
     width: auto;
-    max-width: @sidebar-width; // not really necessary ?!?
+    // max-width: @sidebar-width; // not really necessary ?!?
     overflow-x: hidden;
     vertical-align: middle;
 }
@@ -80,7 +81,6 @@ input[type=search] {
     & .item-label {
         display: inline-block;
         text-indent: 0 !important;
-        margin-left: 31px;
 
         & span {
             display: inline-block;
@@ -88,7 +88,9 @@ input[type=search] {
             height: @sidebar-item-height !important;
             line-height: @sidebar-item-height !important;
             vertical-align: middle;
-            font-size: 13px; // this should match app.NODE_MAX_FONT_SIZE in app.js
+            // font-size: 13px; // this should match app.NODE_MAX_FONT_SIZE in app.js
+            font-size: inherit; // this should match app.NODE_MAX_FONT_SIZE in app.js
+            overflow: hidden;
         }
     }
 
