@@ -121,4 +121,5 @@ module.exports = (template, modules) => {
         }
     };
 
+    return helper;
 };
