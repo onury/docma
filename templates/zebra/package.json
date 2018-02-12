@@ -9,6 +9,7 @@
   "files": [
     "template/",
     "index.js",
+    "helper.js",
     "LICENSE"
   ],
   "scripts": {
