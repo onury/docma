@@ -40,7 +40,10 @@
     "template": {
         "path": "zebra",
         "options": {
-            "title": "<a href=\"/docma\">Docma</a>",
+            "title": {
+                "label": "Docma",
+                "href": "/docma/?"
+            },
             "logo": {               // URL String or { dark: String, light: String }
                 "dark": "img/docma-logo-dark.png",
                 "light": "img/docma-logo-light.png"
@@ -85,7 +88,7 @@
                         "iconClass": "fas fa-puzzle-piece",
                         "label": "Templates",
                         "items": [
-                            { "label": "Default Template - Zebra", "href": "?content=zebra" },
+                            { "label": "Default Template - Zebra", "href": "?content=zebra-template" },
                             { "separator": true },
                             { "label": "Creating Docma Templates", "href": "?content=creating-templates" },
                             { "label": "Docma Template API", "href": "?api=template" },
@@ -148,7 +151,7 @@
         {
             // renamed markdown
             "guide": "./doc/readme-modified.md",
-            "zebra": "./templates/zebra/README.md",
+            "zebra-template": "./templates/zebra/README.md",
             // html files
             "home": "./doc/front.html"
         }
