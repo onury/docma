@@ -2,11 +2,11 @@
 
 <div id="wrapper">
 
-    {?template.options.sidebar}
+    {?template.options.sidebar.enabled}
     <div id="sidebar-wrapper">
         {>"sidebar"/}
     </div>
-    {/template.options.sidebar}
+    {/template.options.sidebar.enabled}
 
     <div id="page-content-wrapper">
 
