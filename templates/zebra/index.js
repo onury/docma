@@ -1,38 +1,50 @@
 'use strict';
 
 /**
- *  Zebra
- *  Docma Default Template
+ *  Zebra - Docma Default Template
  *  @author Onur Yıldırım <onur@cutepilot.com>
  *  @license MIT
+ *  @since Docma 2.0.0
  */
 
-module.exports = (template, modules) => { // eslint-disable-line
+module.exports = (template, modules) => {
 
-    // const { _, Promise, fs, utils } = modules;
+    // modules: _, Promise, fs, dust, HtmlParser, utils
+
+    const helper = require('./helper')(template, modules);
 
     // Template main HTML file
     template.mainHTML = 'index.html';
+
     // Template default options.
     template.defaultOptions = {
         title: '',
-        logo: null,         // URL String or { dark: String, light: String }
-        sidebar: true,
-        toolbar: true,
-        animations: true,
-        collapsed: false,
-        outline: 'tree',    // "flat" | "tree"
-        foldSymbols: false,
-        typeLinks: true,    // "internal" | "external" | true (both)
-        badges: true,
-        params: 'list',     // "list" | "table"
-        enums: 'list',      // "list" | "table"
-        props: 'list',      // "list" | "table"
-        symbolMeta: false,
-        bookmarks: false,
-        search: true,
-        navbar: true,
-        navItems: []
+        logo: null,             // URL String or { dark: String, light: String }
+        sidebar: {
+            enabled: true,
+            outline: 'tree',    // "flat" | "tree"
+            collapsed: false,
+            toolbar: true,
+            folded: false,
+            badges: true,       // true | false | <string>
+            search: true,
+            animations: true
+        },
+        symbols: {
+            autoLink: true,     // "internal" | "external" | true (both)
+            params: 'list',     // "list" | "table"
+            enums: 'list',      // "list" | "table"
+            props: 'list',      // "list" | "table"
+            meta: false
+        },
+        contentView: {
+            bookmarks: false
+        },
+        navbar: {
+            enabled: true,
+            animations: true,
+            menuItems: []
+        }
     };
 
     // ignore files relative to /template directory. other files in the root of
@@ -40,15 +52,26 @@ module.exports = (template, modules) => { // eslint-disable-line
     // template.ignore = [];
 
     template.preBuild(() => {
-        // if a string passed to `logo`, we'll set dark and light to this
-        // value.
-        const logo = template.options.logo;
-        if (typeof template.options.logo === 'string') {
-            template.options.logo = {
-                dark: logo,
-                light: logo
-            };
+
+        if (helper.isOldStructureOptions) {
+
+            const deprecatedMessage =
+                '------------------------------------------------------------' +
+                '»  Zebra Template options structure is changed in v2.0.0.' +
+                '»  Please see improved options and documentation at' +
+                '»  https://onury.io/docma/?content=zebra#Template-Options' +
+                '------------------------------------------------------------';
+            console.log();
+            console.log(deprecatedMessage);
+            console.log();
+
+            helper.convertOptionsToNewStructure();
         }
+
+        // else — options provided by the end-user is not in old-structure so we
+        // leave the rest to Docma.
+
+        helper.setDarkLightLogos();
     });
 
     // template.postBuild(() => { });
