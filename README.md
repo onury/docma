@@ -26,12 +26,12 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 
 - Parse **JSDoc** documentation, **Markdown** and **HTML** files.
 - Build a cool **SPA** (Single Page Application) from parsed files.
-- Generate multiple/separate API documentations by grouping JS files.
+- Generate multiple/separate API documentations by **grouping** JS files.
 - Path or Query-string based app routing.
-- Non-opinionated engine, built-in template with cool opinions. :sunglasses:
+- Non-opinionated engine, **built-in** template with cool opinions. :sunglasses:
 - Supports custom templates.
 - Works great with **GitHub Pages**, Amazon **S3**, Nginx, Apache, etc...
-- Build via API or CLI.
+- Build via **API** or **CLI**.
 - Extremely configurable and debuggable.
 - Well documented. :point_up:
 
