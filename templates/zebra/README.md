@@ -26,10 +26,26 @@ Template specific options that can be used when building your documentation with
     <tbody>
         <tr>
             <td><code><b>title</b></code></td>
+            <td><code>String|Object</code></td>
+            <td><code>""</code></td>
+            <td>
+                Title to be set both on the navbar and sidebar. If you want to set a link for these titles, pass an object. <i>Note: Don't confuse this with document title (tag) which is set via <code>app.title</code> in the build configuration.</i>
+            </td>
+        </tr>
+        <tr>
+            <td>↳&nbsp;<code>title<b>.label</b></code></td>
             <td><code>String</code></td>
             <td><code>""</code></td>
             <td>
-                Title to be set both on the navbar and sidebar. HTML is allowed. <i>Don't confuse this with document title (tag).</i>
+                Title to be set both on navbar and sidebar.
+            </td>
+        </tr>
+        <tr>
+            <td>↳&nbsp;<code>title<b>.href</b></code></td>
+            <td><code>String</code></td>
+            <td><code>"#"</code></td>
+            <td>
+                Link to be set for both navbar and sidebar titles.
             </td>
         </tr>
         <tr>
@@ -37,19 +53,43 @@ Template specific options that can be used when building your documentation with
             <td><code>String|Object</code></td>
             <td><code>null</code></td>
             <td>
-                URL of your logo to be used both in the sidebar and navbar, on the left of the title. If you need to set separate logos for dark and light backgrounds, set this to an object. i.e. <code>{ dark: String, light: String }</code>. Recommended size of a logo image is 120 x 120 pixels.
+                URL of your logo to be used both in the sidebar and navbar, on the left of the title. If you need to set separate logos for dark and light backgrounds, set this to an object. <i>Recommended size of a logo image is 120 x 120 pixels.</i>
+            </td>
+        </tr>
+        <tr>
+            <td>↳&nbsp;<code>logo<b>.dark</b></code></td>
+            <td><code>String</code></td>
+            <td><code>null</code></td>
+            <td>
+                URL for dark logo.
+            </td>
+        </tr>
+        <tr>
+            <td>↳&nbsp;<code>logo<b>.light</b></code></td>
+            <td><code>String</code></td>
+            <td><code>null</code></td>
+            <td>
+                URL for light logo.
             </td>
         </tr>
         <tr>
             <td><code><b>sidebar</b></code></td>
-            <td><code>Boolean</code></td>
+            <td><code>Object|Boolean</code></td>
             <td><code>true</code></td>
             <td>
-                Whether to enable sidebar that lists the documentation symbols; as an outline menu.
+                Contains settings for the sidebar that lists the documentation symbols; as an outline menu. To simply toggle this with default settings, pass a boolean. For detailed configuration pass an object.
             </td>
         </tr>
         <tr>
-            <td><code><b>collapsed</b></code></td>
+            <td>↳&nbsp;<code>sidebar<b>.enabled</b></code></td>
+            <td><code>Boolean</code></td>
+            <td><code>true</code></td>
+            <td>
+                Whether to the sidebar should be visible/enabled..
+            </td>
+        </tr>
+        <tr>
+            <td>↳&nbsp;<code>sidebar<b>.collapsed</b></code></td>
             <td><code>Boolean</code></td>
             <td><code>false</code></td>
             <td>
@@ -57,23 +97,23 @@ Template specific options that can be used when building your documentation with
             </td>
         </tr>
         <tr>
-            <td><code><b>outline</b></code></td>
+            <td>↳&nbsp;<code>sidebar<b>.outline</b></code></td>
             <td><code>String</code></td>
-            <td><code>"flat"</code></td>
+            <td><code>"tree"</code></td>
             <td>
-                Indicates the outline style for the sidebar symbols. If set to `"flat"` symbols are listed with their long names. If set to `"tree"`, symbols are listed with their short names; indented depending on their hierarchical position.
+                Indicates the outline style for the sidebar symbols. If set to `"flat"` symbols are listed with their long names. If set to `"tree"`, symbols are listed with their short names; as an indented tree, depending on their hierarchical position.
             </td>
         </tr>
         <tr>
-            <td><code><b>toolbar</b></code></td>
+            <td>↳&nbsp;<code>sidebar<b>.toolbar</b></code></td>
             <td><code>Boolean</code></td>
             <td><code>true</code></td>
             <td>
-                Whether the toolbar below the sidebar search box should be shown. This toolbar provides buttons for switching between outlines, quick-filtering symbols by symbol-kind, etc...
+                Whether the toolbar below the sidebar search-box should be shown. This toolbar provides buttons for switching between outlines, quick-filtering symbols by symbol-kind, etc...
             </td>
         </tr>
         <tr>
-            <td><code><b>folded</b></code></td>
+            <td>↳&nbsp;<code>sidebar<b>.folded</b></code></td>
             <td><code>Boolean</code></td>
             <td><code>false</code></td>
             <td>
@@ -81,15 +121,15 @@ Template specific options that can be used when building your documentation with
             </td>
         </tr>
         <tr>
-            <td><code><b>animations</b></code></td>
+            <td>↳&nbsp;<code>sidebar<b>.animations</b></code></td>
             <td><code>Boolean</code></td>
             <td><code>true</code></td>
             <td>
-                Whether animations & transitions are enabled for sidebar and listed symbols.
+                Whether CSS transitions and animations are enabled for sidebar and listed symbols.
             </td>
         </tr>
         <tr>
-            <td><code><b>badges</b></code></td>
+            <td>↳&nbsp;<code>sidebar<b>.badges</b></code></td>
             <td><code>Boolean|String</code></td>
             <td><code>true</code></td>
             <td>
@@ -97,7 +137,31 @@ Template specific options that can be used when building your documentation with
             </td>
         </tr>
         <tr>
-            <td><code><b>symbolMeta</b></code></td>
+            <td>↳&nbsp;<code>sidebar<b>.search</b></code></td>
+            <td><code>Boolean</code></td>
+            <td><code>true</code></td>
+            <td>
+                Whether to enable the search box within the sidebar. For this to be visible, sidebar should be enabled.
+            </td>
+        </tr>
+        <tr>
+            <td><code><b>symbols</b></code></td>
+            <td><code>Object</code></td>
+            <td><code>{}</code></td>
+            <td>
+                Contains settings for symbol definition documentation.
+            </td>
+        </tr>
+        <tr>
+            <td>↳&nbsp;<code>symbols<b>.autoLink</b></code></td>
+            <td><code>Boolean|String</code></td>
+            <td><code>true</code></td>
+            <td>
+                Specifies whether documented types should be auto-linked to their sources. Set to <code>"internal"</code> paths (i.e. Docma route if type/object definition is within the generated docs) or <code>"external"</code> (MDN docs if it's a JS or Web-API built-in type/object); or <code>true</code> for both.
+            </td>
+        </tr>
+        <tr>
+            <td>↳&nbsp;<code>symbols<b>.meta</b></code></td>
             <td><code>Boolean</code></td>
             <td><code>false</code></td>
             <td>
@@ -105,7 +169,39 @@ Template specific options that can be used when building your documentation with
             </td>
         </tr>
         <tr>
-            <td><code><b>bookmarks</b></code></td>
+            <td>↳&nbsp;<code>symbols<b>.params</b></code></td>
+            <td><code>String</code></td>
+            <td><code>"list"</code></td>
+            <td>
+                Specifies the layout style for documented parameters of a symbol. Possible values are <code>"list"</code> or <code>"table"</code>.
+            </td>
+        </tr>
+        <tr>
+            <td>↳&nbsp;<code>symbols<b>.props</b></code></td>
+            <td><code>String</code></td>
+            <td><code>"list"</code></td>
+            <td>
+                Specifies the layout style for documented properties of a symbol. Possible values are <code>"list"</code> or <code>"table"</code>.
+            </td>
+        </tr>
+        <tr>
+            <td>↳&nbsp;<code>symbols<b>.enums</b></code></td>
+            <td><code>String</code></td>
+            <td><code>"list"</code></td>
+            <td>
+                Specifies the layout style for documented properties of an enumeration symbol. Possible values are <code>"list"</code> or <code>"table"</code>.
+            </td>
+        </tr>
+        <tr>
+            <td><code><b>contentView</b></code></td>
+            <td><code>Object</code></td>
+            <td><code>{}</code></td>
+            <td>
+                Contains settings for content view, which is generated from markdown or HTML files.
+            </td>
+        </tr>
+        <tr>
+            <td>↳&nbsp;<code>contentView<b>.bookmarks</b></code></td>
             <td><code>Boolean|String</code></td>
             <td><code>false</code></td>
             <td>
@@ -113,35 +209,35 @@ Template specific options that can be used when building your documentation with
             </td>
         </tr>
         <tr>
-            <td><code><b>search</b></code></td>
-            <td><code>Boolean</code></td>
-            <td><code>true</code></td>
-            <td>
-                Whether to enable the search box within the sidebar. For this to be visible, <code>sidebar</code> should be enabled.
-            </td>
-        </tr>
-        <tr>
             <td><code><b>navbar</b></code></td>
-            <td><code>Boolean</code></td>
+            <td><code>Object</code></td>
             <td><code>true</code></td>
             <td>
-                Whether to enable the navigation bar on top of the main document. This is useful if you have extra views to navigate to; such as a bookmark on the same document, an external guide, demo or a repository page...
+                Contains settings for the navigation bar on top of the main document. This is useful if you have extra views to navigate to. To simply toggle this with default settings, pass a boolean. For detailed configuration pass an object.
             </td>
         </tr>
         <tr>
-            <td><code><b>navItems</b></code></td>
+            <td>↳&nbsp;<code>navbar<b>.enabled</b></code></td>
+            <td><code>Boolean</code></td>
+            <td><code>true</code></td>
+            <td>
+                Whether to the navbar should be visible/enabled..
+            </td>
+        </tr>
+        <tr>
+            <td>↳&nbsp;<code>navbar<b>.menu</b></code></td>
             <td><code>Array</code></td>
             <td><code>[]</code></td>
             <td>
-                List of navigation items that builds the navbar and submenu items. See <a href="#navigation-items">Navigation Items</a> below.
+                List of navigation menu items that builds the navbar and submenu items. See <a href="#menu-items">Navigation Menu Items</a> below.
             </td>
         </tr>
     </tbody>
 </table>
 
-### Navigation Items
+### Navigation Menu
 
-Linked labels that build the navigation bar on the top of the document. Each item is an arbitrary <code>Object</code> with the following properties.
+Linked labels that build the navigation menu on the top bar of the document. Each item is an arbitrary <code>Object</code> with the following properties.
 
 <table>
     <thead>
@@ -205,60 +301,74 @@ Template options are defined within the [build configuration](?api=docma#Docma~B
     "template": {
         // Docma Template to be used. 
         // Either a path, module name or "default"
-        "path": "zebra", 
-        // Template-specific options
+        "path": "zebra",
+        // Zebra template-specific options
         "options": {
-            "title": "My Library",
+            "title": {
+                "label": "Docma",
+                "href": "/docma/?"
+            },
             "logo": {
                 "dark": "img/dark-logo.png",
                 "light": "img/light-logo.png"
             },
-            "sidebar": true,
-            "collapsed": false,
-            "badges": true,
-            "search": true,
-            "toolbar": true,
-            "symbolMeta": true,
-            "outline": "tree",
-            "animations": true,
-            "navbar": true,
-            "navItems": [
-                {
-                    "label": "Documentation",
-                    "iconClass": "fas fa-book",
-                    "href": "./"
+            "sidebar": {
+                "enabled": true,
+                "outline": "tree",
+                "collapsed": false,
+                "toolbar": true,
+                "folded": false,
+                "badges": true,
+                "search": true,
+                "animations": true
                 },
-                {
-                    "label": "Demos",
-                    "iconClass": "fas fa-mouse-pointer",
-                    "href": "?content=demos"
-                },
-                {
-                    "label": "Download",
-                    "iconClass": "fas fa-cloud-download-alt",
-                    "items": [
-                        {
-                            "label": "v0.5.0-pre",
-                            "href": "https://github.com/user/repo/archive/v0.5.0-pre.zip"
-                        },
-                        {
-                            "label": "v0.7.0-pre",
-                            "href": "https://github.com/user/repo/archive/v0.7.0-pre.zip"
-                        },
-                        { "separator": true },
-                        {
-                            "label": "v1.0.0",
-                            "href": "https://github.com/user/repo/archive/v1.0.0.zip"
-                        }
-                    ]
-                },
-                {
-                    "label": "GitHub",
-                    "iconClass": "fab fa-github",
-                    "href": "https://github.com/user/repo",
-                    "target": "_blank"
-                }
-            ]
+            "symbols": {
+                "autoLink": true,
+                "params": "list",
+                "enums": "list",
+                "props": "list",
+                "meta": false
+            },
+            "contentView": {
+                "bookmarks": true
+            },
+            "navbar": {
+                "enabled": true,
+                "animations": true,
+                "menu": [
+                    {
+                        "label": "Docs",
+                        "iconClass": "fas fa-book",
+                        "href": "./"
+                    },
+                    {
+                        "label": "Demos",
+                        "iconClass": "fas fa-mouse-pointer",
+                        "href": "?content=demos"
+                    },
+                    {
+                        "label": "Download",
+                        "iconClass": "fas fa-cloud-download-alt",
+                        "items": [
+                            {
+                                "label": "v0.5.0-pre",
+                                "href": "https://github.com/user/repo/archive/v0.7.0-pre.zip"
+                            },
+                            { "separator": true },
+                            {
+                                "label": "v1.0.0",
+                                "href": "https://github.com/user/repo/archive/v1.0.0.zip"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "GitHub",
+                        "iconClass": "fab fa-github",
+                        "href": "https://github.com/user/repo",
+                        "target": "_blank"
+                    }
+                ]
+            }
         }
     },
     // other build configuration options
