@@ -12,14 +12,14 @@
                 </span>
             </div>
 
-            {@gt key=template.options.navbar.menuItems.length value=0}
+            {@gt key=template.options.navbar.menu.length value=0}
                 <div class="navbar-menu-btn" tabindex="0">
                     <i class="fas fa-lg fa-bars trans-all-ease"></i>
                     <i class="fas fa-md fa-times trans-all-ease"></i>
                 </div>
                 <div class="navbar-menu">
                     <ul class="navbar-list">
-                    {#template.options.navbar.menuItems}
+                    {#template.options.navbar.menu}
                         {?items}
                             <li class="dropdown">
                                 <a href="{?href}{href}{:else}#{/href}" role="button" aria-haspopup="true" aria-expanded="false">
@@ -32,7 +32,7 @@
                         {:else}
                             {>"navitem":./}
                         {/items}
-                    {/template.options.navbar.menuItems}
+                    {/template.options.navbar.menu}
                     </ul>
                 </div>
             {/gt}
