@@ -19,7 +19,6 @@ Template specific options that can be used when building your documentation with
         <tr>
             <th>Option</th>
             <th>Type</th>
-            <th>Default</th>
             <th>Description</th>
         </tr>
     </thead>
@@ -27,175 +26,153 @@ Template specific options that can be used when building your documentation with
         <tr>
             <td><code><b>title</b></code></td>
             <td><code>String|Object</code></td>
-            <td><code>""</code></td>
             <td>
-                Title to be set both on the navbar and sidebar. If you want to set a link for these titles, pass an object. <i>Note: Don't confuse this with document title (tag) which is set via <code>app.title</code> in the build configuration.</i>
+                Title to be set both on the navbar and sidebar. If you want to set a link for these titles, pass an object. <i>Note: Don't confuse this with document title (tag) which is set via <code>app.title</code> in the build configuration.</i> Default: <code>""</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>title<b>.label</b></code></td>
             <td><code>String</code></td>
-            <td><code>""</code></td>
             <td>
-                Title to be set both on navbar and sidebar.
+                Title to be set both on navbar and sidebar. Default: <code>""</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>title<b>.href</b></code></td>
             <td><code>String</code></td>
-            <td><code>"#"</code></td>
             <td>
-                Link to be set for both navbar and sidebar titles.
+                Link to be set for both navbar and sidebar titles. Default: <code>"#"</code>
             </td>
         </tr>
         <tr>
             <td><code><b>logo</b></code></td>
             <td><code>String|Object</code></td>
-            <td><code>null</code></td>
             <td>
-                URL of your logo to be used both in the sidebar and navbar, on the left of the title. If you need to set separate logos for dark and light backgrounds, set this to an object. <i>Recommended size of a logo image is 120 x 120 pixels.</i>
+                URL of your logo to be used both in the sidebar and navbar, on the left of the title. If you need to set separate logos for dark and light backgrounds, set this to an object. <i>Recommended size of a logo image is 120 x 120 pixels.</i> Default: <code>null</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>logo<b>.dark</b></code></td>
             <td><code>String</code></td>
-            <td><code>null</code></td>
             <td>
-                URL for dark logo.
+                URL for dark logo. Default: <code>null</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>logo<b>.light</b></code></td>
             <td><code>String</code></td>
-            <td><code>null</code></td>
             <td>
-                URL for light logo.
+                URL for light logo. Default: <code>null</code>
             </td>
         </tr>
         <tr>
             <td><code><b>sidebar</b></code></td>
             <td><code>Object|Boolean</code></td>
-            <td><code>true</code></td>
             <td>
-                Contains settings for the sidebar that lists the documentation symbols; as an outline menu. To simply toggle this with default settings, pass a boolean. For detailed configuration pass an object.
+                Contains settings for the sidebar that lists the documentation symbols; as an outline menu. To simply toggle this with default settings, pass a boolean. For detailed configuration pass an object. Default: <code>true</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>sidebar<b>.enabled</b></code></td>
             <td><code>Boolean</code></td>
-            <td><code>true</code></td>
             <td>
-                Whether to the sidebar should be visible/enabled..
+                Whether to the sidebar should be visible/enabled... Default: <code>true</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>sidebar<b>.collapsed</b></code></td>
             <td><code>Boolean</code></td>
-            <td><code>false</code></td>
             <td>
-                Whether to collapse the sidebar initially by default, on document load.
+                Whether to collapse the sidebar initially by default, on document load. Default: <code>false</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>sidebar<b>.outline</b></code></td>
             <td><code>String</code></td>
-            <td><code>"tree"</code></td>
             <td>
-                Indicates the outline style for the sidebar symbols. If set to `"flat"` symbols are listed with their long names. If set to `"tree"`, symbols are listed with their short names; as an indented tree, depending on their hierarchical position.
+                Indicates the outline style for the sidebar symbols. If set to `"flat"` symbols are listed with their long names. If set to `"tree"`, symbols are listed with their short names; as an indented tree, depending on their hierarchical position. Default: <code>"tree"</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>sidebar<b>.toolbar</b></code></td>
             <td><code>Boolean</code></td>
-            <td><code>true</code></td>
             <td>
-                Whether the toolbar below the sidebar search-box should be shown. This toolbar provides buttons for switching between outlines, quick-filtering symbols by symbol-kind, etc...
+                Whether the toolbar below the sidebar search-box should be shown. This toolbar provides buttons for switching between outlines, quick-filtering symbols by symbol-kind, etc... Default: <code>true</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>sidebar<b>.folded</b></code></td>
             <td><code>Boolean</code></td>
-            <td><code>false</code></td>
             <td>
-                Indicates whether to initially fold symbol items with child members, in the sidebar.
+                Indicates whether to initially fold symbol items with child members, in the sidebar. Default: <code>false</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>sidebar<b>.animations</b></code></td>
             <td><code>Boolean</code></td>
-            <td><code>true</code></td>
             <td>
-                Whether CSS transitions and animations are enabled for sidebar and listed symbols.
+                Whether CSS transitions and animations are enabled for sidebar and listed symbols. Default: <code>true</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>sidebar<b>.badges</b></code></td>
             <td><code>Boolean|String</code></td>
-            <td><code>true</code></td>
             <td>
-                Whether to show symbol badges (that indicate member type and symbol scope) within the sidebar. If set to false, <code>•</code> will be used as bullets, instead of badges. Or you can set a string for custom bullets.
+                Whether to show symbol badges (that indicate member type and symbol scope) within the sidebar. If set to false, <code>•</code> will be used as bullets, instead of badges. Or you can set a string for custom bullets. Default: <code>true</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>sidebar<b>.search</b></code></td>
             <td><code>Boolean</code></td>
-            <td><code>true</code></td>
             <td>
-                Whether to enable the search box within the sidebar. For this to be visible, sidebar should be enabled.
+                Whether to enable the search box within the sidebar. For this to be visible, sidebar should be enabled. Default: <code>true</code>
             </td>
         </tr>
         <tr>
             <td><code><b>symbols</b></code></td>
             <td><code>Object</code></td>
-            <td><code>{}</code></td>
             <td>
-                Contains settings for symbol definition documentation.
+                Contains settings for symbol definition documentation. Default: <code>{}</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>symbols<b>.autoLink</b></code></td>
             <td><code>Boolean|String</code></td>
-            <td><code>true</code></td>
             <td>
-                Specifies whether documented types should be auto-linked to their sources. Set to <code>"internal"</code> paths (i.e. Docma route if type/object definition is within the generated docs) or <code>"external"</code> (MDN docs if it's a JS or Web-API built-in type/object); or <code>true</code> for both.
+                Specifies whether documented types should be auto-linked to their sources. Set to <code>"internal"</code> paths (i.e. Docma route if type/object definition is within the generated docs) or <code>"external"</code> (MDN docs if it's a JS or Web-API built-in type/object); or <code>true</code> for both. Default: <code>true</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>symbols<b>.meta</b></code></td>
             <td><code>Boolean</code></td>
-            <td><code>false</code></td>
             <td>
-                Whether to add meta information at the end of each symbol documentation such as code file name and line number.
+                Whether to add meta information at the end of each symbol documentation such as code file name and line number. Default: <code>false</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>symbols<b>.params</b></code></td>
             <td><code>String</code></td>
-            <td><code>"list"</code></td>
             <td>
-                Specifies the layout style for documented parameters of a symbol. Possible values are <code>"list"</code> or <code>"table"</code>.
+                Specifies the layout style for documented parameters of a symbol. Possible values are <code>"list"</code> or <code>"table"</code>. Default: <code>"list"</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>symbols<b>.props</b></code></td>
             <td><code>String</code></td>
-            <td><code>"list"</code></td>
             <td>
-                Specifies the layout style for documented properties of a symbol. Possible values are <code>"list"</code> or <code>"table"</code>.
+                Specifies the layout style for documented properties of a symbol. Possible values are <code>"list"</code> or <code>"table"</code>. Default: <code>"list"</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>symbols<b>.enums</b></code></td>
             <td><code>String</code></td>
-            <td><code>"list"</code></td>
             <td>
-                Specifies the layout style for documented properties of an enumeration symbol. Possible values are <code>"list"</code> or <code>"table"</code>.
+                Specifies the layout style for documented properties of an enumeration symbol. Possible values are <code>"list"</code> or <code>"table"</code>. Default: <code>"list"</code>
             </td>
         </tr>
         <tr>
             <td><code><b>contentView</b></code></td>
             <td><code>Object</code></td>
-            <td><code>{}</code></td>
             <td>
                 Contains settings for content view, which is generated from markdown or HTML files.
             </td>
@@ -203,33 +180,29 @@ Template specific options that can be used when building your documentation with
         <tr>
             <td>↳&nbsp;<code>contentView<b>.bookmarks</b></code></td>
             <td><code>Boolean|String</code></td>
-            <td><code>false</code></td>
             <td>
-                Whether to automatically add bookmark links for headings. In order to customize the list of heading tags, set to a comma separated tag name list. e.g. `"h1,h2"`.
+                Whether to automatically add bookmark links for headings. In order to customize the list of heading tags, set to a comma separated tag name list. e.g. `"h1,h2"`. Default: <code>false</code>
             </td>
         </tr>
         <tr>
             <td><code><b>navbar</b></code></td>
-            <td><code>Object</code></td>
-            <td><code>true</code></td>
+            <td><code>Object|Boolean</code></td>
             <td>
-                Contains settings for the navigation bar on top of the main document. This is useful if you have extra views to navigate to. To simply toggle this with default settings, pass a boolean. For detailed configuration pass an object.
+                Contains settings for the navigation bar on top of the main document. This is useful if you have extra views to navigate to. To simply toggle this with default settings, pass a boolean. For detailed configuration pass an object. Default: <code>{}</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>navbar<b>.enabled</b></code></td>
             <td><code>Boolean</code></td>
-            <td><code>true</code></td>
             <td>
-                Whether to the navbar should be visible/enabled..
+                Whether to the navbar should be visible/enabled... Default: <code>true</code>
             </td>
         </tr>
         <tr>
             <td>↳&nbsp;<code>navbar<b>.menu</b></code></td>
             <td><code>Array</code></td>
-            <td><code>[]</code></td>
             <td>
-                List of navigation menu items that builds the navbar and submenu items. See <a href="#menu-items">Navigation Menu Items</a> below.
+                List of navigation menu items that builds the navbar and submenu items. See <a href="#menu-items">Navigation Menu Items</a> below. Default: <code>[]</code>
             </td>
         </tr>
     </tbody>
@@ -244,7 +217,6 @@ Linked labels that build the navigation menu on the top bar of the document. Eac
         <tr>
             <th>Property</th>
             <th>Type</th>
-            <th>Default</th>
             <th>Description</th>
         </tr>
     </thead>
@@ -252,41 +224,36 @@ Linked labels that build the navigation menu on the top bar of the document. Eac
         <tr>
             <td><code><b>label</b></code></td>
             <td><code>String</code></td>
-            <td><code>""</code></td>
             <td>
-                Label of the navigation item. Try keeping this short.
+                Label of the navigation item. Try keeping this short. Default: <code>""</code>
             </td>
         </tr>
         <tr>
             <td><code><b>href</b></code></td>
             <td><code>String</code></td>
-            <td><code>"#"</code></td>
             <td>
-                Sets the link of the navigation item. Either a bookmark, a relative or external link.
+                Sets the link of the navigation item. Either a bookmark, a relative or external link. Default: <code>"#"</code>
             </td>
         </tr>
         <tr>
             <td><code><b>target</b></code></td>
             <td><code>String</code></td>
-            <td><code>undefined</code></td>
             <td>
-                Sets the anchor target option. e.g. <code>"&#x5F;blank"</code> to open the link in new/blank page.
+                Sets the anchor target option. e.g. <code>"&#x5F;blank"</code> to open the link in new/blank page. Default: <code>undefined</code>
             </td>
         </tr>
         <tr>
             <td><code><b>iconClass</b></code></td>
             <td><code>String</code></td>
-            <td><code>undefined</code></td>
             <td>
-                One of FontAwsome (v5) Free icon CSS classes. e.g. <code>"fab fa-github"</code>. You can combine this with a class that define the size of the icon such as <code>"fab fa-github fa-w-16"</code>. See <a target="_blank" href="https://fontawesome.com/how-to-use/svg-with-js">this</a> on how to use FontAwsome v5 icons for details.
+                One of FontAwsome (v5) Free icon CSS classes. e.g. <code>"fab fa-github"</code>. You can combine this with a class that define the size of the icon such as <code>"fab fa-github fa-w-16"</code>. See <a target="_blank" href="https://fontawesome.com/how-to-use/svg-with-js">this</a> on how to use FontAwsome v5 icons for details. Default: <code>undefined</code>
             </td>
         </tr>
         <tr>
             <td><code><b>items</b></code></td>
             <td><code>Array</code></td>
-            <td><code>undefined</code></td>
             <td>
-                Sub-items for this navigation item. You can use <code>label</code>, <code>href</code> and <code>target</code> options. You can also use an additional <code>separator</code> option, which places a horizontal line within the submenu. e.g. <code>{ separator: true }</code>.
+                Sub-items for this navigation item. You can use <code>label</code>, <code>href</code> and <code>target</code> options. You can also use an additional <code>separator</code> option, which places a horizontal line within the submenu. e.g. <code>{ separator: true }</code>. Default: <code>undefined</code>
             </td>
         </tr>
     </tbody>
@@ -305,8 +272,8 @@ Template options are defined within the [build configuration](?api=docma#Docma~B
         // Zebra template-specific options
         "options": {
             "title": {
-                "label": "Docma",
-                "href": "/docma/?"
+                "label": "My Library",
+                "href": "/base/"
             },
             "logo": {
                 "dark": "img/dark-logo.png",
