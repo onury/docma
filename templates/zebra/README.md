@@ -27,7 +27,7 @@ Template specific options that can be used when building your documentation with
             <td><code><b>title</b></code></td>
             <td><code>String|Object</code></td>
             <td>
-                Title to be set both on the navbar and sidebar. If you want to set a link for these titles, pass an object. <i>Note: Don't confuse this with document title (tag) which is set via <code>app.title</code> in the build configuration.</i> Default: <code>""</code>
+                Title to be set both on the navbar and sidebar. If you want to set a link for these titles, pass an object. Default: <code>""</code> <br /> <i>Note: Don't confuse this with document title (tag) which is set via <code>app.title</code> in the build configuration.</i>
             </td>
         </tr>
         <tr>
