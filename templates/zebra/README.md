@@ -199,6 +199,13 @@ Template specific options that can be used when building your documentation with
             </td>
         </tr>
         <tr>
+            <td>↳&nbsp;<code>navbar<b>.animations</b></code></td>
+            <td><code>Boolean</code></td>
+            <td>
+                Whether CSS transitions and animations are enabled for navbar and listed symbols. Default: <code>true</code>
+            </td>
+        </tr>
+        <tr>
             <td>↳&nbsp;<code>navbar<b>.menu</b></code></td>
             <td><code>Array</code></td>
             <td>
