@@ -43,7 +43,7 @@ module.exports = (template, modules) => {
         navbar: {
             enabled: true,
             animations: true,
-            menuItems: []
+            menu: []
         }
     };
 

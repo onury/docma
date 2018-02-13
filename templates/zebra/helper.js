@@ -124,8 +124,8 @@ module.exports = (template, modules) => {
             // NAVBAR OPTS
             // .navbar is changed to .navbar.enabled
             setOpt('navbar', 'boolean', newOpts.navbar, 'enabled');
-            // .navItems is changed to .navbar.menuItems
-            setOpt('navItems', 'array', newOpts.navbar, 'menuItems');
+            // .navItems is changed to .navbar.menu
+            setOpt('navItems', 'array', newOpts.navbar, 'menu');
             // .animations is changed to .navbar.animations (and .sidebar.animations)
             setOpt('animations', 'boolean', newOpts.navbar);
 
