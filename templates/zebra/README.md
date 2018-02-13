@@ -90,7 +90,7 @@ Template specific options that can be used when building your documentation with
             <td>↳&nbsp;<code>sidebar<b>.outline</b></code></td>
             <td><code>String</code></td>
             <td>
-                Indicates the outline style for the sidebar symbols. If set to `"flat"` symbols are listed with their long names. If set to `"tree"`, symbols are listed with their short names; as an indented tree, depending on their hierarchical position. Default: <code>"tree"</code>
+                Indicates the outline style for the sidebar symbols. If set to <code>"flat"</code> symbols are listed with their long names. If set to <code>"tree"</code>, symbols are listed with their short names; as an indented tree, depending on their hierarchical position. Default: <code>"tree"</code>
             </td>
         </tr>
         <tr>
@@ -181,7 +181,7 @@ Template specific options that can be used when building your documentation with
             <td>↳&nbsp;<code>contentView<b>.bookmarks</b></code></td>
             <td><code>Boolean|String</code></td>
             <td>
-                Whether to automatically add bookmark links for headings. In order to customize the list of heading tags, set to a comma separated tag name list. e.g. `"h1,h2"`. Default: <code>false</code>
+                Whether to automatically add bookmark links for headings. In order to customize the list of heading tags, set to a comma separated tag name list. e.g. <code>"h1,h2"</code>. Default: <code>false</code>
             </td>
         </tr>
         <tr>
