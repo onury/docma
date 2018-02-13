@@ -1,11 +1,13 @@
 <p align="center"><img width="200" height="200" src="https://raw.github.com/onury/docma/v2/docma-logo.png" /></p>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-![npm](https://img.shields.io/npm/v/docma.svg)
-![release](https://img.shields.io/github/release/onury/docma.svg)
-![dependencies](https://david-dm.org/onury/docma.svg)
-![maintained](https://img.shields.io/maintenance/yes/2017.svg)
-![license](http://img.shields.io/npm/l/docma.svg)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[![npm](http://img.shields.io/npm/v/docma.svg)](https://www.npmjs.com/package/docma)
+[![release](https://img.shields.io/github/release/onury/docma.svg)](https://github.com/onury/docma)
+[![license](http://img.shields.io/npm/l/docma.svg)](https://github.com/onury/docma/blob/master/LICENSE)
+[![downloads](https://img.shields.io/npm/dt/docma.svg)](https://www.npmjs.com/package/docma)
+[![dependencies](https://david-dm.org/onury/docma.svg)](https://david-dm.org/onury/docma)
+[![maintained](https://img.shields.io/maintenance/yes/2017.svg)](https://github.com/onury/docma/graphs/commit-activity)  
+
 ---
 
 ## v2 Branch — W.I.P.
@@ -35,7 +37,7 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 
 ...like this:
 
-[![Docma Screenshot][screenshot]][docma-doc]
+[![Docma Screenshot][screenshot]][docma-docs]
 
 ### Installation
 
@@ -43,26 +45,70 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 npm i docma -g
 ```
 
-### Command-Line Usage
-```shell
-docma -c path/to/docma.json -d path/to/destination
-```
-See <a href="https://onury.io/docma/?content=docma-cli">Docma CLI reference</a>.
+### Building Documentation with CLI
 
-### Programmatic Usage
+You can use Docma CLI to build documentations directly from your console. Once you create the configuration (JSON) file, it's quite simple.
+
+```sh
+docma -c path/to/docma.json
+```
+You can even serve the docs locally and test.
+```sh
+docma serve path/to/docs
+```
+
+See 
+ - [Docma CLI Reference][docma-cli]
+ - [Build Configuration][docma-config]
+
+### Building Documentation Programmatically
+
+If you need to build documentation from within your code, use the API.
 
 ```js
 const Docma = require('docma');
+```
+Either by passing a [configuration][docma-config] object.
+```js
+const config = {
+    src: [
+        './code/**/*.js',
+        './README.md'
+    ],
+    dest: './output/doc'
+};
 Docma.create()
-    .build(config) // pass file path or object
+    .build(config)
     .then(success => console.log('Documentation is built successfully.'))
     .catch(error => console.log(error));
 ```
-See <a href="https://onury.io/docma/?api=docma#Docma~BuildConfiguration">Build configuration</a>.
+Or by reading [configuration][docma-config] from a JSON file.
+```js
+Docma.create()
+    .build('./path/to/docma.json')
+    .catch(error => console.log(error));
+```
+See [Docma API Reference][docma-api].
+
+### Parsed Output
+
+To investigate the parsed JSDoc output, enable the `debug` option that will create a JSON output(s) within the root of the destination directory. If you have a problem with the parsed documentation data, open an issue @ [jsdoc-x][jsdoc-x]. _(I'm the author.)_
+
+For markdown output issues (that are not related with style), you can open an issue @ [marked][marked].
+
+### Change-log
+
+See [**CHANGELOG**][changelog].  
+_Note: If you're upgrading from Docma v1.x to v2.x, there are some [**breaking changes**][changelog]._
 
 ### Documentation
+Read [Docma documentation][docma-docs], built with Docma, for a Docma demo... :eyes:
 
-Read [**Docma documentation**][docma-doc], built with Docma, for a Docma demo... ;)
+### License
+
+[**MIT**][license]. You don't have to include any copyright notice in your documentation output or templates but I'd appreciate if you let people know about this tool so we can read better documentations.
+
+Emoji shortcuts used in source markdown files are parsed into [twemoji][twemoji]. Graphics and icons licensed under [CC-BY 4.0][cc-by-4].
 
 ### Related Modules
 
@@ -71,16 +117,20 @@ Read [**Docma documentation**][docma-doc], built with Docma, for a Docma demo...
 - [dustjs][dustjs-github] — Asynchronous Javascript templating for the browser and server.
 
 
+[license]:https://github.com/onury/docma/blob/master/LICENSE
+[changelog]:https://github.com/onury/docma/blob/master/CHANGELOG.md
 [screenshot]:https://raw.github.com/onury/docma/master/docma-screen.jpg
-[docma-doc]:https://onury.io/docma
+[docma-docs]:https://onury.io/docma
+[docma-api]:https://onury.io/docma/?api=docma
+[docma-cli]:https://onury.io/docma/?content=docma-cli
+[docma-config]:https://onury.io/docma/?api=docma#Docma~BuildConfiguration
+[docma-web-api]:https://github.com/onury/docma/blob/master/doc/docma.web.md
+[zebra]:https://onury.io/docma/?content=zebra-template
 [jsdoc]:http://usejsdoc.org
-[markdown]:https://daringfireball.net/projects/markdown
 [jsdoc-x]:https://github.com/onury/jsdoc-x
 [marked]:https://github.com/chjj/marked
-[default-template]:https://github.com/onury/docma/tree/master/templates/default
-[docma-web-api]:https://github.com/onury/docma/blob/master/doc/docma.web.md
+[markdown]:https://daringfireball.net/projects/markdown
 [dustjs]: http://www.dustjs.com
 [dustjs-github]: https://github.com/linkedin/dustjs
-[grunt-docma]:https://github.com/onury/grunt-docma
 [twemoji]:https://github.com/twitter/twemoji
 [cc-by-4]:https://creativecommons.org/licenses/by/4.0
