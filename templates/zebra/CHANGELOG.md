@@ -10,13 +10,13 @@
 - Support for `@generator` and `@yields` tags.
 - Support for rest parameters (i.e. `...args`).
 - Support for `@since` tag.
-- Support for folding child members of parent symbols. Added `foldSymbols` (`boolean`) template option for initial state. Fixes [issue #26](https://github.com/onury/docma/issues/26). 
-- Template option `toolbar` (`boolean`) that toggles a tiny toolbar below the search box, for switching symbol list outline or quick-filtering symbols by symbol-kind. Enabled by default.
+- Support for folding child members of parent symbols. Added template option `sidebar.folded` (`boolean`) for setting the initial state. Fixes [issue #26](https://github.com/onury/docma/issues/26). 
+- Template option `sidebar.toolbar` (`boolean`) that toggles a tiny toolbar below the search box, for switching symbol list outline or quick-filtering symbols by symbol-kind. Enabled by default.
 - Template option `logo` (`String|Object`) specifies the URL of your logo. If you need separate logos for dark and light backgrounds set this to an object. i.e. `{ dark: String, light: String }`. Recommended size of a logo image is 120 x 120 pixels.
-- Template option `typeLinks` (`Boolean|String`) specifies whether documented types should be auto-linked to `internal` paths (i.e. Docma route if type/object definition is within the generated documentation) or `external` URLs (MDN docs if it's a JS or Web-API built-in type/object such as `String`). Thanks to [@warpdesign](https://github.com/warpdesign) for the [idea](https://github.com/onury/docma/issues/30#issuecomment-353888926).
-- Template option `animations` (`Boolean`) specifies whether animations are enabled for sidebar and listed symbols.
-- Template option `bookmarks` option (`Boolean|String`) which automatically adds bookmark links to headings to content generated from markdown files. Default: `false`.
-- Template options `params`, `props` and `enums` all taking a string value, either `"list"` (default) or `"table"`; defining the layout style for parameters, properties and enumerations. If you like the design in previous versions, set these to `"table"`.
+- Template option `symbols.autoLink` (`Boolean|String`) specifies whether documented types should be auto-linked to `internal` paths (i.e. Docma route if type/object definition is within the generated documentation) or `external` URLs (MDN docs if it's a JS or Web-API built-in type/object such as `String`); or both. Thanks to [@warpdesign](https://github.com/warpdesign) for the [idea](https://github.com/onury/docma/issues/30#issuecomment-353888926).
+- Template options `symbols.params`, `symbols.props` and `symbols.enums` all taking a string value, either `"list"` (default) or `"table"`; defining the layout style for parameters, properties and enumerations. If you like the design in previous versions, set these to `"table"`.
+- Template option `sidebar.animations` and `navbar.animations` (`Boolean`) specifies whether CSS transitions and animations should be enabled for navbar, sidebar and listed symbols.
+- Template option `contentView.bookmarks` option (`Boolean|String`) which automatically adds bookmark links to headings to content generated from markdown files. Default: `false`.
 - `generator` badge for generator functions.
 
 ### Fixed
@@ -31,18 +31,20 @@
 - hidden meta issue. If symbol had no class description, tags such as `@author`, `@version` and `@copyright` would not be shown.
 - Sidebar scrollbars that were not fully visible.
 - Some issues with navbar margins when sidebar is disabled.
+- Sidebar and navbar title so that they allow longer strings without breaking.
 
 ### Changed
 - Default template finally has a name :) - Zebra.
 - **BREAKING**: You need Docma v2+ for latest Zebra template to work.
+- **DEPRECATED**: The template options object structure is changed and a couple of options are renamed. Old structure is still supported and it won't break anything but this support will be removed in future versions. See documentation for the new & improved structure.
 - Improved symbol listing styles and performance. Using CSS transitions instead of JS manipulation. Also; when search is active, outline is temporarily set to `"flat"` so that you see the parent of the symbol. When search box is cleaned, it's set back to the initial template setting. (e.g. `"tree"` if set).
 - Improved `@example` outputs. If there are multiple examples for a symbol, they will be numbered now.
 - Improved nested bullet list spacing, for better readability.
 - Improved UI and responsive layout. On small screens, sidebar auto-collapses; top navbar turns into hamburger menu. Also, truely printable.
 - Improved template option `.badges` (default: `true`) to also accept a string value for custom bullets instead of badges.
-- Improved template option `.title` to accept HTML tags (i.e. you can place the title in `<a />` to link it).
+- Improved template option `.title` to also accept an object `{ label:String, href:String }` so you can link it.
 - Various other improvements and clean up.
 
 ### Removed
-- **BREAKING**: icomoon selection of icons (and `ico-` prefix) in favor of FontAwsome (v5) and SVG icons support.
+- **BREAKING**: icomoon selection of icons (and `ico-` CSS prefix) in favor of FontAwsome (v5) and SVG icons support.
 - Bootstrap and its dependencies (css and js) which dramatically reduces the size of the generated SPA. Also, cleaned up all unused styles.
