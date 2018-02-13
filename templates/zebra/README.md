@@ -12,7 +12,7 @@ Using Zebra template is straight-forward. Just set `template.path` to `"default"
 
 ## Template Options
 
-Template specific options that can be used when building your documentation with this default template.
+Template specific options that can be used when building your documentation with Zebra.
 
 <table>
     <thead>
