@@ -48,7 +48,7 @@ Template specific options that can be used when building your documentation with
             <td><code><b>logo</b></code></td>
             <td><code>String|Object</code></td>
             <td>
-                URL of your logo to be used both in the sidebar and navbar, on the left of the title. If you need to set separate logos for dark and light backgrounds, set this to an object. <i>Recommended size of a logo image is 120 x 120 pixels.</i> Default: <code>null</code>
+                URL of your logo to be used both in the sidebar and navbar, on the left of the title. If you need to set separate logos for dark (sidebar) and light (navbar) backgrounds, set this to an object. <i>Recommended size of a logo image is 120 x 120 pixels.</i> Default: <code>null</code>
             </td>
         </tr>
         <tr>
