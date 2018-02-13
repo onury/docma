@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
+<br />
 ## [v2.0.0](https://github.com/onury/docma/compare/v1.5.3...v2.0.0) (NOT RELEASED YET - v2 branch)
 
 _This is a WIP. New items will be added to the changes below._
@@ -123,6 +123,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - **BREAKING**: icomoon selection of icons (and `ico-` CSS prefix) in favor of FontAwsome (v5) and SVG icons support.
 - Bootstrap and its dependencies (css and js) which dramatically reduces the size of the generated SPA. Also, cleaned up all unused styles.
 
+<br />
 ## v1.5.3 `2017-12-21`
 
 ### Docma Web Core
@@ -130,6 +131,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 #### Fixed
 - A parser issue where carriage return (CR) of Windows newlines (CRLF) were removed. Fixes [#28](https://github.com/onury/docma/issues/28).
 
+<br />
 ## v1.5.2 `2017-12-09`
 
 ### Docma Web Core
@@ -140,6 +142,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 
 > _**Note**: For this release, some dependencies (such as `jsdoc-x`, `jsdom`) are NOT updated on purpose 'cause they introduce breaking changes. In **v2** (WIP, to be released) these will be updated and many things will be improved._
 
+<br />
 ## v1.5.1 `2017-03-11`
 
 ### Docma Web Core
@@ -147,6 +150,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 #### Fixed
 - `slice` error for non-string default value.
 
+<br />
 ## v1.5.0 `2017-03-10`
 
 ### Docma (Builder)
@@ -175,6 +179,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - `Type.<T>` is now represented as `Type<T>`.
 - Default string values are now represented in quotes.
 
+<br />
 ## v1.4.7 `2017-03-09`
 
 ### Docma (Builder)
@@ -183,6 +188,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - An issue where build config `config.jsdoc.includePattern` would not be respected when filtering files.
 - An issue where sorting would change when `config.jsdoc.hierarchy` option is enabled.
 
+<br />
 ## v1.4.5 `2017-03-05`
 
 ### Docma (Builder)
@@ -191,6 +197,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - Build config options: `config.jsdoc.allowUnknownTags`, `config.jsdoc.dictionaries`, `config.jsdoc.includePattern`, `config.jsdoc.excludePattern` (`jsdoc-x` feature).
 - [JSDoc plugin](http://usejsdoc.org/about-plugins.html) support via the new `config.jsdoc.plugins` option (`jsdoc-x` feature).
 
+<br />
 ## v1.4.0 `2017-02-13`
 
 ### Docma (Builder)
@@ -222,6 +229,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 #### Changed
 - If `config.template.title` is omitted, `config.app.title` is used. (Defaults to `"Documentation"` if not set).
 
+<br />
 ## v1.3.0 `2016-11-23`
 
 ### Docma (Builder)
@@ -248,6 +256,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - An issue where symbols with return type parameters (such as `Promise<Array>`) would not be escaped and parsed properly. Fixes [issue #4](https://github.com/onury/docma/issues/4).
 - An issue where boolean symbol parameters' default values would not be parsed properly. Fixes [issue #5](https://github.com/onury/docma/issues/5).
 
+<br />
 ## v1.2.0 `2016-10-31`
 
 ### Docma CLI
@@ -260,6 +269,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 #### Changed
 - Updated (one-dark) highlighting styles.
 
+<br />
 ## v1.1.1 `2016-08-13`
 
 ### Default Template
@@ -267,6 +277,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 #### Fixed
 - An anchor/linking issue which prevented some browsers (such as Safari) to navigate properly.
 
+<br />
 ## v1.1.0 `2016-08-12`
 
 ### Docma (Builder)
@@ -287,6 +298,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - An access badge is shown next to symbol name, if symbol has `private` or `protected` access.
     + Clean up.
 
+<br />
 ## v1.0.3 `2016-06-27`
 
 ### Docma (Builder)
@@ -299,6 +311,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 #### Changed
 - Removed YAML syntax highlighting support because of incorrect auto-detection. Opened an issue [here](https://github.com/isagalaev/highlight.js/issues/1213).
 
+<br />
 ## v1.0.1 `2016-06-11`
 
 ### Docma Web Core
@@ -308,7 +321,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 #### Fixed
 - Missing web components.
 
-
+<br />
 ## v1.0.0 `2016-06-11`
 
 ### Docma (Builder)
@@ -374,6 +387,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - Various minor revisions and clean-up.
 - Improved Docma source code documentation.
 
+<br />
 ## v0.5.4 Pre-Release `2016-05-22`
 
 #### Added
@@ -382,11 +396,13 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 #### Changed
 - `docma.template.json` is no more copied over to the output.
 
+<br />
 ## v0.5.3 Pre-Release `2016-05-22`
 
 #### Fixed
 - Docma Web file paths.
 
+<br />
 ## v0.5.2 Pre-Release `2016-05-20`
 
 #### Changed
@@ -394,6 +410,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - Updated dependencies.
 - Clean-up.
 
+<br />
 ## v0.5.0 Pre-Release `2016-05-11`
 
 - Initial (pre) release.
