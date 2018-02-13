@@ -209,7 +209,7 @@ Template specific options that can be used when building your documentation with
             <td>↳&nbsp;<code>navbar<b>.menu</b></code></td>
             <td><code>Array</code></td>
             <td>
-                List of navigation menu items that builds the navbar and submenu items. See <a href="#menu-items">Navigation Menu Items</a> below. Default: <code>[]</code>
+                List of navigation menu items that builds the navbar and submenu items. See <a href="#navigation-menu">Navigation Menu</a> below. Default: <code>[]</code>
             </td>
         </tr>
     </tbody>
