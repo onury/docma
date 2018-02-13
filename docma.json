@@ -71,7 +71,7 @@
             "navbar": {
                 "enabled": true,
                 "animations": true,
-                "menuItems": [
+                "menu": [
                     {
                         "iconClass": "fas fa-book",
                         "label": "Building Docs",
