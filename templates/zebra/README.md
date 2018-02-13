@@ -295,7 +295,7 @@ Template options are defined within the [build configuration](?api=docma#Docma~B
                 "badges": true,
                 "search": true,
                 "animations": true
-                },
+            },
             "symbols": {
                 "autoLink": true,
                 "params": "list",
