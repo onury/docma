@@ -56,7 +56,7 @@ console.log();
 const argv = yargs
     .usage('Usage: docma [options]') // 'Usage: $0 <cmd> [options]'
     .help('h', 'Show this help').alias('h', 'help')
-    .version('V', 'Output Docma version', pkg.version).alias('V', 'version')
+    .version('v', 'Output Docma version', pkg.version).alias('v', 'version')
     .option('c', {
         alias: 'config',
         type: 'string',
@@ -79,7 +79,7 @@ const argv = yargs
         type: 'boolean',
         description: '(Debug) Enable logs in the browser console, for the generated SPA.'
     })
-    .option('v', {
+    .option('V', {
         alias: 'verbose',
         type: 'boolean',
         description: '(Debug) Output verbose logs to consoles.'
