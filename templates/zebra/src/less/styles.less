@@ -97,66 +97,27 @@ hr {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: @headings-font-family;
-  font-weight: @headings-font-weight;
-  line-height: @headings-line-height;
-  color: @headings-color;
-
-  small,
-  .small {
-    font-weight: normal;
-    line-height: 1;
-    color: @gray-light;
-  }
-}
-
-h1, .h1,
-h2, .h2,
-h3, .h3 {
-  margin-top: @line-height-computed;
-  margin-bottom: (@line-height-computed / 2.5);
-
-  small,
-  .small {
-    font-size: 65%;
-  }
-}
-h4, .h4,
-h5, .h5,
-h6, .h6 {
-  margin-top: (@line-height-computed / 2);
-  margin-bottom: (@line-height-computed / 2);
-
-  small,
-  .small {
-    font-size: 75%;
-  }
-}
-
-h1, .h1 { font-size: @font-size-h1; }
-h2, .h2 { font-size: @font-size-h2; }
-h3, .h3 { font-size: @font-size-h3; }
-h4, .h4 { font-size: @font-size-h4; }
-h5, .h5 { font-size: @font-size-h5; }
-h6, .h6 { font-size: @font-size-h6; }
-
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
-    -webkit-background-clip: padding-box;
-    -moz-background-clip: padding;
-    background-clip: padding-box;
-
     font-family: @headings-font-family;
     font-weight: @headings-font-weight;
     line-height: @headings-line-height;
     color: @headings-color;
+    .background-clip-padding;
 
-    // reset top space
-    &.no-space {
-        margin-top: 0 !important;
-        padding-top: 0 !important;
+    small,
+    .small {
+        font-size: 70%;
+        font-weight: normal;
+        line-height: 1;
+        color: @gray-light;
     }
 }
+
+h1, .h1 { #heading-size(@font-size-h1); }
+h2, .h2 { #heading-size(@font-size-h2); }
+h3, .h3 { #heading-size(@font-size-h3); }
+h4, .h4 { #heading-size(@font-size-h4); }
+h5, .h5 { #heading-size(@font-size-h5); }
+h6, .h6 { #heading-size(@font-size-h6); }
 
 
 p {
@@ -187,7 +148,7 @@ img {
 // Blockquotes
 blockquote {
     padding: 10px 12px; // (@line-height-computed / 2) @line-height-computed;
-    margin: 0; // 0 @line-height-computed;
+    margin: 0;
     font-size: 1em; // @blockquote-font-size;
     border-left: 5px solid @blockquote-border-color;
     color: #576075;
