@@ -47,6 +47,7 @@ _This is a WIP. New items will be added to the changes below._
 #### Changed
 - Dropped default configuration file **name** `docma.config.json` in favor of `docma.json` (shorter) and `.docma.json` if you need to hide it. This does not break anything, you can still use the former if you want.
 - CLI will now auto-check for a `docma.json` (or `.docma.json`) file in the current working directory if `-c` option is omitted.
+- Options `-v` (lowercase) and `-V` (uppercase) are swapped. `-v` gets the Docma version now (alias `--version`). And `-V` is `--verbose`.
 
 See [CLI documentation][docma-cli] for detailed information on updated CLI.
 
