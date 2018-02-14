@@ -33,6 +33,18 @@
     transform: rotate(@angle);
 }
 
+#heading-size(@size) {
+    font-size: @size;
+    margin-top: @size;
+    margin-bottom: @size / 2.7;
+}
+
+.background-clip-padding {
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+}
+
 // Generic Mixins
 
 .user-select(@select) {
@@ -135,6 +147,10 @@
 
 .no-margin,
 .no-space           { margin: 0 !important; }
+.no-space-top       { margin-top: 0 !important; }
+.no-space-right     { margin-right: 0 !important; }
+.no-space-bottom    { margin-bottom: 0 !important; }
+.no-space-left      { margin-left: 0 !important; }
 
 .space-xs           { margin-left: @s-xs !important; }
 .space-sm           { margin-left: @s-sm !important; }
@@ -169,6 +185,10 @@
 
 .no-pad,
 .no-padding         { padding: 0 !important; }
+.no-pad-top         { padding-top: 0 !important; }
+.no-pad-right       { padding-right: 0 !important; }
+.no-pad-bottom      { padding-bottom: 0 !important; }
+.no-pad-left        { padding-left: 0 !important; }
 
 .pad-xs             { padding: @s-xs !important; }
 .pad-sm             { padding: @s-sm !important; }
