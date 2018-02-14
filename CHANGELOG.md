@@ -5,8 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-<br />
-## [v2.0.0](https://github.com/onury/docma/compare/v1.5.3...v2.0.0) (NOT RELEASED YET - v2 branch)
+## [v2.0.0](https://github.com/onury/docma/compare/v1.5.3...v2.0.0) (Not Released Yet - v2 branch)
 
 _This is a WIP. New items will be added to the changes below._
 
@@ -77,7 +76,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 
 ### Default Template - Zebra `v2.0.0`
 
-### Added
+#### Added
 - Support for `@example <caption>Title</caption>`. Fixes [issue #14](https://github.com/onury/docma/issues/14). 
 - Support for `@hideconstructor` tag. Fixes [issue #21](https://github.com/onury/docma/issues/21).
 - Support for `@event`, `@emits` (and alias `@fires`) tags. Fixes [issue #35](https://github.com/onury/docma/issues/35).
@@ -93,7 +92,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - Template option `contentView.bookmarks` option (`Boolean|String`) which automatically adds bookmark links to headings to content generated from markdown files. Default: `false`.
 - `generator` badge for generator functions.
 
-### Fixed
+#### Fixed
 - Some spacing issues with class descriptions. Empty tables are auto-removed now.
 - A JSDoc issue where the constructor would be incorrectly marked as alias.
 - An anchor/bookmark issue with multiple symbols having the same id.
@@ -107,7 +106,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - Some issues with navbar margins when sidebar is disabled.
 - Sidebar and navbar title so that they allow longer strings without breaking.
 
-### Changed
+#### Changed
 - Default template finally has a name :) - Zebra.
 - **BREAKING**: You need Docma v2+ for latest Zebra template to work.
 - **DEPRECATED**: The template options object structure is changed and a couple of options are renamed. Old structure is still supported and it won't break anything but this support will be removed in future versions. See documentation for the new & improved structure.
@@ -119,7 +118,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - Improved template option `.title` to also accept an object `{ label:String, href:String }` so you can link it.
 - Various other improvements and clean up.
 
-### Removed
+#### Removed
 - **BREAKING**: icomoon selection of icons (and `ico-` CSS prefix) in favor of FontAwsome (v5) and SVG icons support.
 - Bootstrap and its dependencies (css and js) which dramatically reduces the size of the generated SPA. Also, cleaned up all unused styles.
 
