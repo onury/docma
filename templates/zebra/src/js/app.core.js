@@ -23,6 +23,27 @@ var app = window.app || {};
     // HELPER METHODS
     // ---------------------------
 
+    /**
+     *  Checks whether the sidebar title has wrapped to the second line. If so,
+     *  decreases the font-size of both sidebar and navbar titles.
+     */
+    function setTitleSize() {
+        var sb = templateOpts.sidebar.enabled;
+        var nb = templateOpts.navbar.enabled;
+        if (!sb && !nb) return;
+        var $a = sb
+            ? $('.sidebar-title a')
+            : $('.navbar-title a');
+        // titles font-size is 18px
+        if ($a.height() > 18) {
+            var css = { 'font-size': '16px' };
+            $a.parent().css(css);
+            if (nb) {
+                $('.navbar-title').css(css);
+            }
+        }
+    }
+
     // if search filter is active, we force the outline to "flat".
     function getCurrentOutline() {
         return isFilterActive ? 'flat' : templateOpts.sidebar.outline;
@@ -286,6 +307,10 @@ var app = window.app || {};
     if (!templateOpts.title) {
         templateOpts.title = docma.app.title || 'Documentation';
     }
+
+    docma.once('ready', function () {
+        setTitleSize();
+    });
 
     docma.on('navigate', function (currentRoute) { // eslint-disable-line
         isApiRoute = currentRoute && currentRoute.type === 'api';
