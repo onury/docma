@@ -108,6 +108,13 @@ Template specific options that can be used when building your documentation with
             </td>
         </tr>
         <tr>
+            <td>↳&nbsp;<code>sidebar<b>.fitItems</b></code></td>
+            <td><code>String</code></td>
+            <td>
+                Specifies how to fit overflowing sidebar items. Either set to <code>"crop"</code> (crops the item and reveals on hover), or <code>"shrink"</code> (decreases font-size until it fits). Default: <code>"crop"</code>
+            </td>
+        </tr>
+        <tr>
             <td>↳&nbsp;<code>sidebar<b>.animations</b></code></td>
             <td><code>Boolean</code></td>
             <td>
