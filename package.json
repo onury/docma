@@ -23,6 +23,7 @@
   },
   "scripts": {
     "docs": "node bin/docma",
+    "zebra-then-docs": "cd ./templates/zebra && npm run build && cd ../.. && npm run docs",
     "test": "jest --verbose --no-cache"
   },
   "jest": {
