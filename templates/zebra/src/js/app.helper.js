@@ -66,14 +66,44 @@ var app = window.app || {};
         return parseInt($elem.css(styleName), 10) || 0;
     };
 
+    app.helper.getScrollWidth = function ($elem) {
+        return $elem.get(0).scrollWidth || $elem.outerWidth() || 0;
+    };
+
     // Adjusts font-size of each sidebar node's label so that they are not
     // cropped.
-    app.helper.setFontSize = function ($el) {
+    app.helper.fitSidebarNavItems = function ($el, outline) {
+        outline = outline || templateOpts.sidebar.outline;
+
+        var cropToFit = templateOpts.sidebar.fitItems === 'crop';
+
+        if (cropToFit) {
+            // we'll store the difference between .inner scrollWidth and outer
+            // (label) width in a data attribute, for each outline style
+            // flat/tree. On hover, we'll apply this value as margin-left so
+            // that the cropped part of the .item-label > .inner is revealed.
+            var dMarginLeft = 'data-margin-' + outline;
+            var $inner = $el.find('.inner');
+            var savedMargin = $inner.attr(dMarginLeft);
+            // only save once, for each outline style
+            if (!savedMargin) {
+                // round this so we don't trigger transition for tiny
+                // differences.
+                var marginLeft = Math.round(app.NODE_LABEL_MAX_WIDTH - app.helper.getScrollWidth($inner));
+                if (marginLeft >= 0) marginLeft = 0;
+                // this value will be used to set margin-left on hover via JS.
+                $inner.attr(dMarginLeft, marginLeft + 'px');
+            }
+            return;
+        }
+
+        // templateOpts.sidebar.fitItems === 'shrink'
+
         // we're storing each symbol's font-size for each outline (tree and
         // flat). so we'll initially check for the current outline's font-size
         // for this element.
-        var da = 'data-font-' + templateOpts.sidebar.outline;
-        var savedSize = $el.attr(da);
+        var dFontSize = 'data-font-' + outline;
+        var savedSize = $el.attr(dFontSize);
 
         // if previously saved, restore font size now and return.
         if (savedSize) {
@@ -93,7 +123,7 @@ var app = window.app || {};
                 f -= 0.2; // small steps
             }
             // store shrinked font size for this outline to attribute
-            $el.attr(da, f + 'px');
+            $el.attr(dFontSize, f + 'px');
             // enable transitions back
             spans.removeClass('no-trans');
         }, delay);
@@ -311,11 +341,11 @@ var app = window.app || {};
         var labelStyle = ' style="margin-left: ' + labelMargin + 'px !important; "';
         var itemTitle = errMessage ? ' title="' + errMessage + '"' : '';
 
-        return '<span class="item-inner" data-levels="' + levels + '" data-tree="' + treeNode + '" style="margin-left:0px">'
+        return '<div class="item-inner" data-levels="' + levels + '" data-tree="' + treeNode + '" style="margin-left:0px">'
             + treeImages
             + badge
-            + '<span class="item-label"' + itemTitle + labelStyle + '>' + name + '</span>'
-            + '</span>';
+            + '<div class="item-label"' + itemTitle + labelStyle + '><div class="inner">' + name + '</div></div>'
+            + '</div>';
     }
 
     function getSidebarNavItem(symbol, parentSymbol, isLast) {
@@ -354,40 +384,6 @@ var app = window.app || {};
             items.push('<li>' + navItem + members + '</li>');
         });
         return items;
-    };
-
-    app.helper.setSidebarNodesOutline = function (outline) {
-        outline = outline || templateOpts.sidebar.outline;
-        var isTree = outline === 'tree';
-
-        if (isTree) {
-            $('.sidebar-nav .item-tree-line').show();
-        } else {
-            $('.sidebar-nav .item-tree-line').hide();
-        }
-
-        var inners = $('.sidebar-nav .item-inner');
-        if (isTree) {
-            inners.find('.symbol-memberof').addClass('no-width'); // hide
-        } else {
-            inners.find('.symbol-memberof').removeClass('no-width'); // show
-        }
-
-        $('.sidebar-nav .item-inner').each(function () {
-            var item = $(this);
-
-            var memberof = item.find('.symbol-memberof');
-            if (isTree) {
-                memberof.addClass('no-width'); // .hide();
-            } else {
-                memberof.removeClass('no-width'); // .show();
-            }
-
-            var label = item.find('.item-label');
-            // .badges also accepts string
-            // label.css('margin-left', templateOpts.sidebar.badges === true ? '12px' : '0');
-            app.helper.setFontSize(label);
-        });
     };
 
 })();
