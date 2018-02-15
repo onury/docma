@@ -23,6 +23,55 @@ var app = window.app || {};
     // HELPER METHODS
     // ---------------------------
 
+    // if search filter is active, we force the outline to "flat".
+    function getCurrentOutline() {
+        return isFilterActive ? 'flat' : templateOpts.sidebar.outline;
+    }
+
+    function setSidebarNodesOutline(outline) {
+        outline = outline || templateOpts.sidebar.outline;
+        var isTree = outline === 'tree';
+        var $labels = $sidebarNodes.find('.item-label');
+
+        if (isTree) {
+            $sidebarNodes.find('.item-tree-line').show();
+            $labels.find('.symbol-memberof').addClass('no-width'); // hide
+        } else {
+            $sidebarNodes.find('.item-tree-line').hide();
+            $labels.find('.symbol-memberof').removeClass('no-width'); // show
+        }
+
+        // fitItems is "crop" or not, remove this first
+        $labels.removeClass('crop-to-fit');
+
+        // css transition duration is .2s
+        // we'll delay so we get measurements after transitions end.
+        var delay = templateOpts.sidebar.animations
+            // we won't delay if it's "shrink" bec. transitions are not smooth
+            // otherwise.
+            ? templateOpts.sidebar.fitItems === 'shrink' ? 0 : 210
+            : 0;
+
+        setTimeout(function () {
+            $labels.each(function () {
+                app.helper.fitSidebarNavItems($(this), outline);
+            });
+        // $labels.find('.inner').css('width', 'auto');
+        }, delay);
+
+        // add .crop-to-fit class after .fitSidebarNavItems() applied
+        if (templateOpts.sidebar.fitItems === 'crop') {
+            $labels.addClass('crop-to-fit');
+
+            // below is a hacky fix to refresh the ellipsis on Chrome
+            var $inners = $labels.find('.inner');
+            $inners.css('text-overflow', 'clip');
+            setTimeout(function () {
+                $inners.css('text-overflow', 'ellipsis');
+            }, 130);
+        }
+    }
+
     /**
      *  Cleans the search filter.
      *  @private
@@ -39,7 +88,7 @@ var app = window.app || {};
         $('.chevron').show();
         // reset outline back to initial value
         setTimeout(function () {
-            helper.setSidebarNodesOutline(templateOpts.sidebar.outline);
+            setSidebarNodesOutline(templateOpts.sidebar.outline);
         }, 100); // with a little delay
         isFilterActive = false;
     }
@@ -77,7 +126,7 @@ var app = window.app || {};
         // We set outline to "flat" bec. if outline is "tree", and some symbol
         // parent does not match the search/filter, the indents and tree lines
         // look weird.
-        helper.setSidebarNodesOutline('flat');
+        setSidebarNodesOutline('flat');
 
         // e.g. search filter » "kind: instance-method"
         var reSym = /^\s*kind\s*:\s*/i;
@@ -100,7 +149,7 @@ var app = window.app || {};
             }
         });
 
-        $('.toolbar-buttons > span').css('color', '#7b8395');
+        $('.toolbar-buttons > span').css('color', '#3f4450'); // '#7b8395'
     }
 
     /**
@@ -312,7 +361,6 @@ var app = window.app || {};
             setTimeout(function () {
                 breakNavbarMenu(); // initial
                 $(window).on('resize', deBreakNavbarMenu);
-                // $(window).on('resize', breakNavbarMenu);
             }, 300); // need a bit delay to get proper navbarMenuActuallWidth
 
             // don't navigate to /#
@@ -418,7 +466,7 @@ var app = window.app || {};
                 $sidebarNodes.addClass('trans-height-ease');
             }
 
-            helper.setSidebarNodesOutline();
+            setSidebarNodesOutline();
 
             $btnSwitchOutline = $('.toolbar-buttons .btn-switch-outline');
             $btnSwitchFold = $('.toolbar-buttons .btn-switch-fold');
@@ -495,9 +543,21 @@ var app = window.app || {};
                     }
                     templateOpts.sidebar.outline = newOutline;
                     $btni.addClass(newCls);
-                    helper.setSidebarNodesOutline(newOutline);
+                    setSidebarNodesOutline(newOutline);
                 });
             }
+
+            if (templateOpts.sidebar.fitItems === 'crop') {
+                $sidebarNodes.hover(
+                    function () {
+                        setInnerMarginLeft($(this));
+                    },
+                    function () {
+                        setInnerMarginLeft($(this), true);
+                    }
+                );
+            }
+
         } else { // if (templateOpts.sidebar.enabled === false)
             // collapse the sidebar since it's disabled
             $wrapper.removeClass('toggled');
@@ -505,5 +565,12 @@ var app = window.app || {};
         }
 
     });
+
+    function setInnerMarginLeft($elem, reset) {
+        var $inner = $elem.find('.crop-to-fit > .inner');
+        var dMarginLeft = 'data-margin-' + getCurrentOutline();
+        var m = parseInt($inner.attr(dMarginLeft), 0) || 0;
+        $inner.css('margin-left', reset ? 0 : m);
+    }
 
 })();
