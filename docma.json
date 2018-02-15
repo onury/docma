@@ -41,7 +41,7 @@
         "path": "zebra",
         "options": {
             "title": {
-                "label": "Docma Documentation",
+                "label": "Docma",
                 "href": "/docma/?"
             },
             "logo": {                   // URL String or { dark: String, light: String }
