@@ -4,7 +4,7 @@
 @sidebar-header-tb-height: @sidebar-header-height + @sidebar-toolbar-height;
 @sidebar-brand-height: 50px;
 @sidebar-item-height: 36px;
-// @sidebar-item-label-max-width: 190px;
+@sidebar-item-label-max-width: 190px; // this should match app.NODE_LABEL_MAX_WIDTH max-width in JS
 @sidebar-toggle-color: #636982;
 
 input[type=search] {
@@ -71,6 +71,8 @@ input[type=search] {
 
 .sidebar-item {
     opacity: 1;
+    // .box-shadow(~"inset 26px 2px 5px rgba(0,0,0,0.08)");
+    .user-select(none);
 
     &.hidden {
         height: 0;
@@ -78,20 +80,43 @@ input[type=search] {
         overflow: hidden;
     }
 
-    & .item-label {
-        display: inline-block;
-        text-indent: 0 !important;
+    & .item-inner {
+        height: @sidebar-item-height;
 
-        & span {
+        & .item-label {
             display: inline-block;
-            position: relative;
-            height: @sidebar-item-height !important;
-            line-height: @sidebar-item-height !important;
-            vertical-align: middle;
-            // font-size: 13px; // this should match app.NODE_MAX_FONT_SIZE in app.js
-            font-size: inherit; // this should match app.NODE_MAX_FONT_SIZE in app.js
-            overflow: hidden;
+            text-indent: 0 !important;
+
+            &.crop-to-fit {
+                width: @sidebar-item-label-max-width !important;
+                overflow-x: hidden;
+                & div.inner {
+                    display: block;
+                    text-overflow: ellipsis;
+                    overflow-x: hidden;
+                    width: auto;
+                    .transition(~"margin-left .2s ease");
+                }
+            }
+
+            div.inner {
+                display: inline;
+                text-overflow: ellipsis;
+                // transition: all .5s ease;
+
+                & span {
+                    display: inline-block;
+                    position: relative;
+                    height: @sidebar-item-height !important;
+                    line-height: @sidebar-item-height !important;
+                    vertical-align: middle;
+                    // font-size: 13px; // this should match app.NODE_MAX_FONT_SIZE in app.js
+                    font-size: inherit; // this should match app.NODE_MAX_FONT_SIZE in app.js
+                    overflow: hidden;
+                }
+            }
         }
+
     }
 
     // see symbol-badge class in symbol.less
@@ -105,6 +130,12 @@ input[type=search] {
         & .symbol-badge {
             opacity: 1;
         }
+        & .item-label.crop-to-fit {
+            & div.inner {
+                text-overflow: clip; // default value
+                overflow-x: visible;
+            }
+        }
     }
 }
 
@@ -116,6 +147,7 @@ input[type=search] {
     width: @sidebar-width;
     height: @sidebar-header-height;
     background-color: @dark;
+    border-bottom: 2px solid darken(@dark, 1%) !important;
     .user-select(none);
 
     & > .sidebar-brand {
@@ -123,7 +155,8 @@ input[type=search] {
         position: relative;
         height: @sidebar-brand-height;
         // line-height: @sidebar-brand-height;
-        background-color: @dark-softer;
+        background-color: @darker; // @dark-softer;
+        border-bottom: 2px solid rgba(0,0,0,0.06) !important;
         padding-left: @navbar-height + 5;
         width: 100%;
 
@@ -169,7 +202,7 @@ input[type=search] {
         position: relative;
         text-align: center;
         height: @sidebar-toolbar-height;
-        overflow: none;
+        overflow: hidden;
         margin-top: 5px;
     }
 }
@@ -216,12 +249,15 @@ input[type=search] {
         padding: 2px 25px 0 30px;
         border-radius: 36px;
         text-indent: 0px !important;
-        background-color: @dark-soft;
+        background-color: desaturate(@dark-softer, 1%);
         color: @over-dark;
         border: 1px solid @dark-softer;
+        .box-shadow(~"inset 12px 2px 5px rgba(0,0,0,0.1)");
+
         &:focus {
             background-color: #fff;
             color: @gray-dark;
+            .box-shadow(~"inset 0px 0px 5px rgba(0,0,0,.3)");
         }
     }
 
