@@ -41,28 +41,29 @@
         "path": "zebra",
         "options": {
             "title": {
-                "label": "Docma",
+                "label": "Docma Documentation",
                 "href": "/docma/?"
             },
-            "logo": {               // URL String or { dark: String, light: String }
+            "logo": {                   // URL String or { dark: String, light: String }
                 "dark": "img/docma-logo-dark.png",
                 "light": "img/docma-logo-light.png"
             },
             "sidebar": {
                 "enabled": true,
-                "outline": "tree",  // "flat" | "tree"
+                "outline": "tree",      // "flat" | "tree"
                 "collapsed": false,
                 "toolbar": true,
                 "folded": false,
-                "badges": true,     // true | false | <string-value>
+                "badges": true,         // true | false | <string-value>
                 "search": true,
+                "fitItems": "crop",     // "crop" | "shrink"
                 "animations": true
                 },
             "symbols": {
-                "autoLink": true,   // "internal" | "external" | true (both)
-                "params": "list",   // "list" | "table"
-                "enums": "list",    // "list" | "table"
-                "props": "list",    // "list" | "table"
+                "autoLink": true,       // "internal" | "external" | true (both)
+                "params": "list",       // "list" | "table"
+                "enums": "list",        // "list" | "table"
+                "props": "list",        // "list" | "table"
                 "meta": false
             },
             "contentView": {
