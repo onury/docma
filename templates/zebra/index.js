@@ -18,27 +18,28 @@ module.exports = (template, modules) => {
 
     // Template default options.
     template.defaultOptions = {
-        title: '',              // String or { label:String, href:String }
-        logo: null,             // URL String or { dark:String, light:String }
+        title: '',                  // String or { label:String, href:String }
+        logo: null,                 // URL String or { dark:String, light:String }
         sidebar: {
             enabled: true,
-            outline: 'tree',    // "flat" | "tree"
+            outline: 'tree',        // "flat" | "tree"
             collapsed: false,
             toolbar: true,
             folded: false,
-            badges: true,       // true | false | <string>
+            badges: true,           // true | false | <string>
             search: true,
+            fitItems: 'crop',       // "crop" | "shrink"
             animations: true
         },
         symbols: {
-            autoLink: true,     // "internal" | "external" | true (both)
-            params: 'list',     // "list" | "table"
-            enums: 'list',      // "list" | "table"
-            props: 'list',      // "list" | "table"
+            autoLink: true,         // "internal" | "external" | true (both)
+            params: 'list',         // "list" | "table"
+            enums: 'list',          // "list" | "table"
+            props: 'list',          // "list" | "table"
             meta: false
         },
         contentView: {
-            bookmarks: false
+            bookmarks: false        // Boolean | String (e.g. 'h1,h2,h3')
         },
         navbar: {
             enabled: true,
