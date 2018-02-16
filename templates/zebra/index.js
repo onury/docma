@@ -10,6 +10,7 @@
 module.exports = (template, modules) => {
 
     // modules: _, Promise, fs, dust, HtmlParser, utils
+    // const { _ } = modules;
 
     const helper = require('./helper')(template, modules);
 
@@ -25,10 +26,10 @@ module.exports = (template, modules) => {
             outline: 'tree',        // "flat" | "tree"
             collapsed: false,
             toolbar: true,
-            folded: false,
+            itemsFolded: false,
+            itemsOverflow: 'crop',  // "crop" | "shrink"
             badges: true,           // true | false | <string>
             search: true,
-            fitItems: 'crop',       // "crop" | "shrink"
             animations: true
         },
         symbols: {
@@ -43,6 +44,7 @@ module.exports = (template, modules) => {
         },
         navbar: {
             enabled: true,
+            dark: false,
             animations: true,
             menu: []
         }
@@ -63,6 +65,7 @@ module.exports = (template, modules) => {
 
         helper.setTitle();
         helper.setDarkLightLogos();
+        helper.configNavMenu();
     });
 
     template.postBuild(() => {
