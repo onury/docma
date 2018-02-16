@@ -1,22 +1,36 @@
-@navbar-dark:                   @gray-base;
-@navbar-light:                  @light-default;
-
 @navbar-height:                 50px;
 @navbar-padding-base:           @padding-base;
 @navbar-inner-height:           @navbar-height - (@navbar-padding-base * 2);
 @navbar-submenu-item-height:    30px; // auto
-@navbar-bg-color:               #fff; // @navbar-light;
-@navbar-border-color:           darken(@navbar-bg-color, 5%);
-@navbar-text-color:             lighten(@navbar-dark, 25%);
-@navbar-hover-text-color:       darken(@navbar-dark, 10%);
-@navbar-hover-bg-color:         lighten(@navbar-dark, 86%);
 @navbar-border-radius:          @border-radius-base;
-
 @navbar-menu-res-height:        300px; // responsive height
-
 // also used in sidebar.less
 // Fira Sans font is a bit high from the baseline
-@navbar-baseline-fix:           5px;
+@navbar-baseline-fix:           4px;
+@navbar-border-bottom:          2px;
+
+@navbar-gray:                   @gray-base;
+
+// Light Navbar Colors
+@navbar-bg-color:               #fff;
+@navbar-text-color:             lighten(@navbar-gray, 25%);
+@navbar-hover-text-color:       darken(@navbar-gray, 10%);
+@navbar-hover-bg-color:         lighten(@navbar-gray, 86%);
+
+// Dark Navbar Colors
+@navbar-d-bgcolor:              #282c35;
+@navbar-d-text-color:           #8890a2;
+@navbar-d-hover-text-color:     #fff;
+@navbar-d-hover-bg-color:       lighten(@navbar-d-bgcolor, 10%);
+
+// Dark/Light Common Colors
+@navbar-border-color:           fade(@navbar-d-bgcolor, 10%); // darken(@navbar-bg-color, 5%);
+
+// .nav-icon {}
+
+.nav-arrow  {
+    margin-left: 6px;
+}
 
 .nav-overlay {
     display: block;
@@ -28,7 +42,7 @@
     width: 100%;
     height: 100%;
     overflow: scroll;
-    background-color: fade(@navbar-dark, 50%);
+    background-color: fade(@navbar-gray, 50%);
     z-index: -1;
     opacity: 0;
     .transition(~"opacity .2s, z-index 0s");
@@ -52,10 +66,9 @@
     // box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .1);
     // height: @navbar-height;
 
-    @navbar-bb: 2px;
-    box-shadow: 0px 1px 30px 10px rgba(0,0,0,.02);      // acts like gradient transition to page body
-    border-bottom: @navbar-bb solid rgba(0,0,0,0.04);   // acts like shadow
-    height: @navbar-height + @navbar-bb;                  // +2px for border-bottom
+    box-shadow: 0px 1px 30px 10px rgba(0,0,0,.02);                  // acts like gradient transition to page body
+    border-bottom: @navbar-border-bottom solid rgba(0,0,0,0.04);    // acts like shadow
+    height: @navbar-height + @navbar-border-bottom;                   // +2px for border-bottom
 
     & > .navbar-inner {
         display: block;
@@ -100,11 +113,11 @@
             display: inline-block;
             white-space: normal !important;
             max-width: @brand-title-width;
-            padding-top: 3px;
+            padding-top: 4px;
             text-decoration: none;
             color: @navbar-text-color;
             &:hover {
-                color: @navbar-dark;
+                color: @navbar-gray;
             }
         }
     }
@@ -119,7 +132,7 @@
     // margin-right: @page-padding-horizontal;
     z-index: 8;
 }
-ul.navbar-list {
+.navbar-list {
     display: block;
     position: relative;
     margin: 0 !important;
@@ -154,6 +167,10 @@ ul.navbar-list {
         font-weight: 500;
         cursor: pointer;
         z-index: 3;
+
+        span.nav-label {
+            margin-left: 6px;
+        }
     }
     &:last-child > a {
         border-right: 0 none;
@@ -168,6 +185,7 @@ ul.navbar-list {
 
         &:hover {
             overflow: visible;
+
             & > ul {
                 display: block;
                 margin-top: @navbar-height;
@@ -226,9 +244,9 @@ ul.navbar-list {
                     cursor: pointer;
                 }
                 &:hover {
-                    background-color: @navbar-hover-bg-color; // lighten(@gray-base, 40%);
+                    background-color: @navbar-hover-bg-color;
                     & > a {
-                        color: @navbar-hover-text-color; // #fff;
+                        color: @navbar-hover-text-color;
                     }
                 }
             }
@@ -250,6 +268,48 @@ li.dropdown > ul > li > a > code {
 }
 
 // ---------------------------------
+// NAVBAR DARK
+// ---------------------------------
+
+.navbar.dark {
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+    border-bottom: 0 none;
+    height: @navbar-height;
+
+    background-color: @navbar-d-bgcolor;
+    color: @navbar-d-text-color;
+
+    & .navbar-title a {
+        color: @over-dark-light;
+        &:hover {
+            color: @navbar-d-hover-text-color;
+        }
+    }
+
+    .navbar-list > li {
+        background-color: @navbar-d-bgcolor;
+        color: @navbar-d-text-color;
+        & > a {
+            color: @navbar-d-text-color;
+        }
+        &:hover {
+            background-color: @navbar-d-hover-bg-color;
+            color: @navbar-d-hover-text-color;
+            & > a {
+                background-color: @navbar-d-hover-bg-color;
+                color: @navbar-d-hover-text-color;
+            }
+        }
+        // keep dropdown lists same
+        &.dropdown {
+            & > ul {
+                color: @navbar-text-color;
+            }
+        }
+    }
+}
+
+// ---------------------------------
 // NAVBAR (HAMBURGER) MENU BUTTON
 // ---------------------------------
 
@@ -268,12 +328,12 @@ li.dropdown > ul > li > a > code {
     }
     &:focus, &:active {
         outline: 0 none;
-        // background-color: @navbar-dark;
+        // background-color: @navbar-gray;
     }
     & svg.fa-bars {
         display: block;
         position: absolute;
-        color: @navbar-dark;
+        color: @navbar-gray;
         margin: 8px 0 0 9px;
         opacity: 1;
     }
@@ -286,7 +346,7 @@ li.dropdown > ul > li > a > code {
     }
 }
 .navbar-menu-btn.toggled {
-    background-color: @navbar-dark !important;
+    background-color: @navbar-gray !important;
     & svg.fa-bars {
         color: #fff;
         opacity: 0;
@@ -364,7 +424,7 @@ ul.navbar-list.break {
             display: table-cell;
             border-right: none;
             padding: 0 (@navbar-padding-base * 5);
-            background-color: @navbar-light;
+            background-color: @light-default;
         }
 
         &.dropdown {
