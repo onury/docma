@@ -62,7 +62,7 @@ var app = window.app || {};
             $labels.find('.symbol-memberof').removeClass('no-width'); // show
         }
 
-        // fitItems is "crop" or not, remove this first
+        // itemsOverflow is "crop" or not, remove this first
         $labels.removeClass('crop-to-fit');
 
         // css transition duration is .2s
@@ -70,7 +70,7 @@ var app = window.app || {};
         var delay = templateOpts.sidebar.animations
             // we won't delay if it's "shrink" bec. transitions are not smooth
             // otherwise.
-            ? templateOpts.sidebar.fitItems === 'shrink' ? 0 : 210
+            ? templateOpts.sidebar.itemsOverflow === 'shrink' ? 0 : 210
             : 0;
 
         setTimeout(function () {
@@ -81,7 +81,7 @@ var app = window.app || {};
         }, delay);
 
         // add .crop-to-fit class after .fitSidebarNavItems() applied
-        if (templateOpts.sidebar.fitItems === 'crop') {
+        if (templateOpts.sidebar.itemsOverflow === 'crop') {
             $labels.addClass('crop-to-fit');
 
             // below is a hacky fix to refresh the ellipsis on Chrome
@@ -572,7 +572,7 @@ var app = window.app || {};
                 });
             }
 
-            if (templateOpts.sidebar.fitItems === 'crop') {
+            if (templateOpts.sidebar.itemsOverflow === 'crop') {
                 $sidebarNodes.hover(
                     function () {
                         setInnerMarginLeft($(this));
