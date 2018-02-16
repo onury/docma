@@ -153,10 +153,10 @@ input[type=search] {
     & > .sidebar-brand {
         display: table;
         position: relative;
-        height: @sidebar-brand-height;
+        height: @sidebar-brand-height - 1;
         // line-height: @sidebar-brand-height;
         background-color: @darker; // @dark-softer;
-        border-bottom: 2px solid rgba(0,0,0,0.06) !important;
+        border-bottom: 1px solid rgba(0,0,0,0.04) !important;
         padding-left: @navbar-height + 5;
         width: 100%;
 
@@ -164,8 +164,7 @@ input[type=search] {
             display: table-cell;
             position: relative;
             height: @navbar-inner-height;
-            width: @navbar-inner-height;
-            padding: 1px;
+            width: auto; // @navbar-inner-height;
             margin: @navbar-padding-base (@navbar-padding-base * 1.5) 0 0;
         }
 
