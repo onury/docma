@@ -84,7 +84,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - Support for `@generator` and `@yields` tags.
 - Support for rest parameters (i.e. `...args`).
 - Support for `@since` tag.
-- Support for folding child members of parent symbols. Added template option `sidebar.folded` (`boolean`) for setting the initial state. Fixes [issue #26](https://github.com/onury/docma/issues/26). 
+- Support for folding child members of parent symbols. Added template option `sidebar.itemsFolded` (`boolean`) for setting the initial state. Fixes [issue #26](https://github.com/onury/docma/issues/26). 
 - Template option `sidebar.toolbar` (`boolean`) that toggles a tiny toolbar below the search box, for switching symbol list outline or quick-filtering symbols by symbol-kind. Enabled by default.
 - Template option `logo` (`String|Object`) specifies the URL of your logo. If you need separate logos for dark and light backgrounds set this to an object. i.e. `{ dark: String, light: String }`. Recommended size of a logo image is 120 x 120 pixels.
 - Template option `symbols.autoLink` (`Boolean|String`) specifies whether documented types should be auto-linked to `internal` paths (i.e. Docma route if type/object definition is within the generated documentation) or `external` URLs (MDN docs if it's a JS or Web-API built-in type/object such as `String`); or both. Thanks to [@warpdesign](https://github.com/warpdesign) for the [idea](https://github.com/onury/docma/issues/30#issuecomment-353888926).
