@@ -66,6 +66,22 @@ module.exports = (template, modules) => {
                 };
             }
         },
+        configNavMenu() {
+            const navbar = template.options.navbar;
+            navbar.menu = (navbar.menu || []).map(topItem => {
+                if (!topItem.items || topItem.items.length === 0) return topItem;
+                topItem.chevron = true;
+                return _.defaultsDeep(topItem, {
+                    chevron: true
+                });
+                // if we need to set defaults for subitems
+                // topItem.items = topItem.items.map(item => {
+                //     return _.defaultsDeep(item, {
+                //         // prop: value
+                //     });
+                // });
+            });
+        },
         /**
          *  Checks whether the current template options (provided by the
          *  end-user) has old-structure (as in Default Template v1.x).
