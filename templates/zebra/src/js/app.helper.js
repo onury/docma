@@ -75,7 +75,7 @@ var app = window.app || {};
     app.helper.fitSidebarNavItems = function ($el, outline) {
         outline = outline || templateOpts.sidebar.outline;
 
-        var cropToFit = templateOpts.sidebar.fitItems === 'crop';
+        var cropToFit = templateOpts.sidebar.itemsOverflow === 'crop';
 
         if (cropToFit) {
             // we'll store the difference between .inner scrollWidth and outer
@@ -97,7 +97,7 @@ var app = window.app || {};
             return;
         }
 
-        // templateOpts.sidebar.fitItems === 'shrink'
+        // templateOpts.sidebar.itemsOverflow === 'shrink'
 
         // we're storing each symbol's font-size for each outline (tree and
         // flat). so we'll initially check for the current outline's font-size
