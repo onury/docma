@@ -44,26 +44,26 @@
                 "label": "Docma",
                 "href": "/docma/?"
             },
-            "logo": {                   // URL String or { dark: String, light: String }
+            "logo": {                       // URL String or { dark: String, light: String }
                 "dark": "img/docma-logo-dark.png",
                 "light": "img/docma-logo-light.png"
             },
             "sidebar": {
                 "enabled": true,
-                "outline": "tree",      // "flat" | "tree"
+                "outline": "tree",          // "flat" | "tree"
                 "collapsed": false,
                 "toolbar": true,
-                "folded": false,
-                "badges": true,         // true | false | <string-value>
+                "itemsFolded": false,
+                "itemsOverflow": "crop",    // "crop" | "shrink"
+                "badges": true,             // true | false | <string-value>
                 "search": true,
-                "fitItems": "crop",     // "crop" | "shrink"
                 "animations": true
                 },
             "symbols": {
-                "autoLink": true,       // "internal" | "external" | true (both)
-                "params": "list",       // "list" | "table"
-                "enums": "list",        // "list" | "table"
-                "props": "list",        // "list" | "table"
+                "autoLink": true,           // "internal" | "external" | true (both)
+                "params": "list",           // "list" | "table"
+                "enums": "list",            // "list" | "table"
+                "props": "list",            // "list" | "table"
                 "meta": false
             },
             "contentView": {
@@ -71,10 +71,11 @@
             },
             "navbar": {
                 "enabled": true,
+                "dark": true,
                 "animations": true,
                 "menu": [
                     {
-                        "iconClass": "fas fa-book",
+                        // "iconClass": "fas fa-book",
                         "label": "Building Docs",
                         "items": [
                             { "label": "Guide", "href": "./" },
@@ -99,7 +100,7 @@
                         ]
                     },
                     {
-                        "iconClass": "fas fa-cloud-download-alt",
+                        // "iconClass": "fas fa-cloud-download-alt",
                         "label": "Download",
                         "items": [
                             {
@@ -120,8 +121,8 @@
                         ]
                     },
                     {
-                        "iconClass": "fab fa-github",
-                        "label": "GitHub",
+                        "iconClass": "fab fa-lg fa-github",
+                        "label": "",
                         "href": "https://github.com/onury/docma",
                         "target": "_blank"
                     }
