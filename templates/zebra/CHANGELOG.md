@@ -10,13 +10,15 @@
 - Support for `@generator` and `@yields` tags.
 - Support for rest parameters (i.e. `...args`).
 - Support for `@since` tag.
-- Support for folding child members of parent symbols. Added template option `sidebar.folded` (`boolean`) for setting the initial state. Fixes [issue #26](https://github.com/onury/docma/issues/26). 
+- Support for folding child members of parent symbols. Added template option `sidebar.itemsFolded` (`boolean`) for setting the initial state. Fixes [issue #26](https://github.com/onury/docma/issues/26). 
 - Template option `sidebar.toolbar` (`boolean`) that toggles a tiny toolbar below the search box, for switching symbol list outline or quick-filtering symbols by symbol-kind. Enabled by default.
 - Template option `logo` (`String|Object`) specifies the URL of your logo. If you need separate logos for dark and light backgrounds set this to an object. i.e. `{ dark: String, light: String }`. Recommended size of a logo image is 120 x 120 pixels.
 - Template option `symbols.autoLink` (`Boolean|String`) specifies whether documented types should be auto-linked to `internal` paths (i.e. Docma route if type/object definition is within the generated documentation) or `external` URLs (MDN docs if it's a JS or Web-API built-in type/object such as `String`); or both. Thanks to [@warpdesign](https://github.com/warpdesign) for the [idea](https://github.com/onury/docma/issues/30#issuecomment-353888926).
 - Template options `symbols.params`, `symbols.props` and `symbols.enums` all taking a string value, either `"list"` (default) or `"table"`; defining the layout style for parameters, properties and enumerations. If you like the design in previous versions, set these to `"table"`.
-- Template option `sidebar.fitItems` (`String`) that specifies how to fit overflowing sidebar items. Either set to `"crop"` (default, crops the item and reveals on hover), or `"shrink"` (decreases font-size until it fits).
+- Template option `sidebar.itemsOverflow` (`String`) that specifies how to fit overflowing sidebar items. Either set to `"crop"` (default, crops the item and reveals on hover), or `"shrink"` (decreases font-size until it fits).
 - Template option `sidebar.animations` and `navbar.animations` (`Boolean`) specifies whether CSS transitions and animations should be enabled for navbar, sidebar and listed symbols.
+- Template option `navbar.dark` (`Boolean`) enables dark theme for the navbar.
+- `chevron` (`Boolean`) option for navbar menu items. Set this to false if you don't want the dropdown arrow to be visible for that item.
 - Template option `contentView.bookmarks` option (`Boolean|String`) which automatically adds bookmark links to headings to content generated from markdown files. Default: `false`.
 - `generator` badge for generator functions.
 

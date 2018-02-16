@@ -101,14 +101,14 @@ Template specific options that can be used when building your documentation with
             </td>
         </tr>
         <tr>
-            <td>↳&nbsp;<code>sidebar<b>.folded</b></code></td>
+            <td>↳&nbsp;<code>sidebar<b>.itemsFolded</b></code></td>
             <td><code>Boolean</code></td>
             <td>
                 Indicates whether to initially fold symbol items with child members, in the sidebar. Default: <code>false</code>
             </td>
         </tr>
         <tr>
-            <td>↳&nbsp;<code>sidebar<b>.fitItems</b></code></td>
+            <td>↳&nbsp;<code>sidebar<b>.itemsOverflow</b></code></td>
             <td><code>String</code></td>
             <td>
                 Specifies how to fit overflowing sidebar items. Either set to <code>"crop"</code> (crops the item and reveals on hover), or <code>"shrink"</code> (decreases font-size until it fits). Default: <code>"crop"</code>
@@ -206,6 +206,13 @@ Template specific options that can be used when building your documentation with
             </td>
         </tr>
         <tr>
+            <td>↳&nbsp;<code>navbar<b>.dark</b></code></td>
+            <td><code>Boolean</code></td>
+            <td>
+                Whether to enable dark theme on navbar. Default: <code>false</code> <i>Note: If this is enabled, you don't need to set path for a dark logo.</i> 
+            </td>
+        </tr>
+        <tr>
             <td>↳&nbsp;<code>navbar<b>.animations</b></code></td>
             <td><code>Boolean</code></td>
             <td>
@@ -264,6 +271,13 @@ Linked labels that build the navigation menu on the top bar of the document. Eac
             </td>
         </tr>
         <tr>
+            <td><code><b>chevron</b></code></td>
+            <td><code>Boolean</code></td>
+            <td>
+                Toggles the visibility of the dropdown arrow for the corresponding item. Default: <code>true</code>
+            </td>
+        </tr>
+        <tr>
             <td><code><b>items</b></code></td>
             <td><code>Array</code></td>
             <td>
@@ -298,7 +312,8 @@ Template options are defined within the [build configuration](?api=docma#Docma~B
                 "outline": "tree",
                 "collapsed": false,
                 "toolbar": true,
-                "folded": false,
+                "itemsFolded": false,
+                "itemsOverflow": "crop",
                 "badges": true,
                 "search": true,
                 "animations": true
@@ -315,6 +330,7 @@ Template options are defined within the [build configuration](?api=docma#Docma~B
             },
             "navbar": {
                 "enabled": true,
+                "dark": false,
                 "animations": true,
                 "menu": [
                     {
