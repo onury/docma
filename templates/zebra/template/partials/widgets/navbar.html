@@ -1,9 +1,13 @@
 {?template.options.navbar.enabled}
-    <nav class="navbar">
+    <nav class="navbar {?template.options.navbar.dark}dark{/template.options.navbar.dark}">
         <div class="navbar-inner {?boxed}container container-boxed{/boxed}">
             <div class="navbar-brand">
                 {?template.options.logo.dark}
+                    {?template.options.navbar.dark}
+                    <img src="{template.options.logo.light}" alt="logo" class="navbar-logo" />
+                    {:else}
                     <img src="{template.options.logo.dark}" alt="logo" class="navbar-logo" />
+                    {/template.options.navbar.dark}
                 {/template.options.logo.dark}
                 <span class="navbar-title">
                     <a href="{template.options.title.href}">
@@ -23,7 +27,7 @@
                         {?items}
                             <li class="dropdown">
                                 <a href="{?href}{href}{:else}#{/href}" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i class="{iconClass}" aria-hidden="true"></i>&nbsp;&nbsp;{label}&nbsp;&nbsp;<i class="fas fa-sm fa-angle-down"></i>
+                                    <i class="nav-icon {iconClass}" aria-hidden="true"></i>{?label}<span class="nav-label">{label}</span>{/label}{?chevron}<i class="nav-arrow fas fa-sm fa-angle-down"></i>{/chevron}
                                 </a>
                                 <ul>
                                 {#items} {>"navitem":./} {/items}

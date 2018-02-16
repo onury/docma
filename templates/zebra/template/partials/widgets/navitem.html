@@ -3,7 +3,8 @@
 {:else}
     <li>
         <a href="{?href}{href}{:else}#{/href}" target="{target}">
-            {?iconClass}<i class="ico {iconClass}" aria-hidden="true"></i>&nbsp;&nbsp;{/iconClass}{label|s}
+            {?iconClass}<i class="nav-icon {iconClass}" aria-hidden="true"></i>{/iconClass}
+            {?label}<span class="nav-label">{label|s}</span>{/label}
         </a>
     </li>
 {/separator}
