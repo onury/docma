@@ -17,6 +17,7 @@
 - Template options `symbols.params`, `symbols.props` and `symbols.enums` all taking a string value, either `"list"` (default) or `"table"`; defining the layout style for parameters, properties and enumerations. If you like the design in previous versions, set these to `"table"`.
 - Template option `sidebar.itemsOverflow` (`String`) that specifies how to fit overflowing sidebar items. Either set to `"crop"` (default, crops the item and reveals on hover), or `"shrink"` (decreases font-size until it fits).
 - Template option `sidebar.animations` and `navbar.animations` (`Boolean`) specifies whether CSS transitions and animations should be enabled for navbar, sidebar and listed symbols.
+- Template option `navbar.fixed` (`Boolean`) toggles between fixed and static navbar.
 - Template option `navbar.dark` (`Boolean`) enables dark theme for the navbar.
 - `chevron` (`Boolean`) option for navbar menu items. Set this to false if you don't want the dropdown arrow to be visible for that item.
 - Template option `contentView.bookmarks` option (`Boolean|String`) which automatically adds bookmark links to headings to content generated from markdown files. Default: `false`.
@@ -30,6 +31,7 @@
 - An issue where the (heading) title would be hidden under the nav-bar when navigated via a local bookmark on a page, generated from a markdown file. Also improved spacing for headings.
 - An issue where the page would not scroll/jump to the bookmark on initial load; when the URL has a location hash.
 - Pre/code elements not to wrap content. Now, horizontally scrollable (like on GitHub).
+- An issue where it would throw if a symbol paramter with no description is parsed.
 - An issue with sidebar symbol names auto-resizing incorrectly in some cases. Also improved performance by caching font-size for each item.
 - hidden meta issue. If symbol had no class description, tags such as `@author`, `@version` and `@copyright` would not be shown.
 - Sidebar scrollbars that were not fully visible.
