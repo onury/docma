@@ -71,7 +71,8 @@
             },
             "navbar": {
                 "enabled": true,
-                "dark": true,
+                "fixed": true,
+                "dark": false,
                 "animations": true,
                 "menu": [
                     {
@@ -140,11 +141,10 @@
             ],
             "template": "./lib/DocmaTemplate.js",
             "docma-web": [
-                "./lib/web/core.js",
-                "./lib/web/core.*.js",
-                "!./lib/web/core.utils.js"
+                "./lib/web/DocmaWeb.js",
+                "./lib/web/DocmaWeb.Route.js"
             ],
-            "docma-web-utils": "./lib/web/core.utils.js"
+            "docma-web-utils": "./lib/web/DocmaWeb.Utils.js"
         },
         // Content sources
         // markdown
