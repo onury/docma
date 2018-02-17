@@ -26,6 +26,27 @@
 // Dark/Light Common Colors
 @navbar-border-color:           fade(@navbar-d-bgcolor, 10%); // darken(@navbar-bg-color, 5%);
 
+
+body {
+    // space for the fixed navbar
+    // padding-top: @navbar-height !important;
+
+    &.static-navbar {
+        padding-top: 0 !important;
+        & .navbar {
+            position: relative;
+        }
+    }
+}
+
+// only rendered if navbar.fixed = true
+.nav-spacer {
+    display: block;
+    position: relative;
+    height: @navbar-height;
+    visibility: hidden;
+}
+
 // .nav-icon {}
 
 .nav-arrow  {
@@ -67,7 +88,7 @@
     // height: @navbar-height;
 
     box-shadow: 0px 1px 30px 10px rgba(0,0,0,.02);                  // acts like gradient transition to page body
-    border-bottom: @navbar-border-bottom solid rgba(0,0,0,0.04);    // acts like shadow
+    border-bottom: @navbar-border-bottom solid rgba(0,0,0,0.05);    // acts like shadow
     height: @navbar-height + @navbar-border-bottom;                   // +2px for border-bottom
 
     & > .navbar-inner {
@@ -173,7 +194,7 @@
         }
     }
     &:last-child > a {
-        border-right: 0 none;
+        border-right: 0 none !important;
     }
 
     &.dropdown {
@@ -265,48 +286,6 @@
 
 li.dropdown > ul > li > a > code {
     background-color: @navbar-hover-bg-color !important;
-}
-
-// ---------------------------------
-// NAVBAR DARK
-// ---------------------------------
-
-.navbar.dark {
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
-    border-bottom: 0 none;
-    height: @navbar-height;
-
-    background-color: @navbar-d-bgcolor;
-    color: @navbar-d-text-color;
-
-    & .navbar-title a {
-        color: @over-dark-light;
-        &:hover {
-            color: @navbar-d-hover-text-color;
-        }
-    }
-
-    .navbar-list > li {
-        background-color: @navbar-d-bgcolor;
-        color: @navbar-d-text-color;
-        & > a {
-            color: @navbar-d-text-color;
-        }
-        &:hover {
-            background-color: @navbar-d-hover-bg-color;
-            color: @navbar-d-hover-text-color;
-            & > a {
-                background-color: @navbar-d-hover-bg-color;
-                color: @navbar-d-hover-text-color;
-            }
-        }
-        // keep dropdown lists same
-        &.dropdown {
-            & > ul {
-                color: @navbar-text-color;
-            }
-        }
-    }
 }
 
 // ---------------------------------
@@ -473,6 +452,93 @@ ul.navbar-list.break {
                     margin: 11px 0 !important;
                     opacity: 1;
                 }
+            }
+        }
+    }
+}
+
+// ---------------------------------
+// NAVBAR DARK
+// ---------------------------------
+
+.navbar.dark {
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+    border-bottom: 0 none;
+    height: @navbar-height;
+
+    background-color: @navbar-d-bgcolor;
+    color: @navbar-d-text-color;
+
+    & .navbar-title a {
+        color: @over-dark-light;
+        &:hover {
+            color: @navbar-d-hover-text-color;
+        }
+    }
+
+    & .navbar-list > li {
+        background-color: @navbar-d-bgcolor;
+        color: @navbar-d-text-color;
+        & > a {
+            color: @navbar-d-text-color;
+            border-right: 1px dashed rgba(104, 110, 123, 0.1);
+        }
+        &:hover {
+            background-color: @navbar-d-hover-bg-color;
+            color: @navbar-d-hover-text-color;
+            & > a {
+                background-color: @navbar-d-hover-bg-color;
+                color: @navbar-d-hover-text-color;
+            }
+        }
+        // keep dropdown lists same
+        &.dropdown {
+            & > ul {
+                color: @navbar-text-color;
+            }
+        }
+    }
+
+    & .navbar-menu-btn {
+        &:hover {
+            background-color: @navbar-d-hover-bg-color;
+            & svg.fa-bars {
+                color: #fff;
+            }
+        }
+        & svg.fa-bars {
+            color: @navbar-d-text-color;
+        }
+        & svg.fa-times {
+            color: #fff;
+        }
+    }
+    .navbar-menu-btn.toggled {
+        background-color: @navbar-gray !important;
+        & svg.fa-bars {
+            color: #fff;
+        }
+        // & svg.fa-times {}
+    }
+}
+
+.navbar.dark {
+    .navbar-menu.break {
+        background-color: #fff;
+    }
+
+    ul.navbar-list.break {
+
+        & > li {
+            background-color: @navbar-bg-color;
+
+            &:hover > a {
+                background-color: @navbar-hover-bg-color;
+                color: @navbar-hover-text-color;
+            }
+
+            & > a {
+                background-color: @light-default;
             }
         }
     }
