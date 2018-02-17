@@ -206,6 +206,13 @@ Template specific options that can be used when building your documentation with
             </td>
         </tr>
         <tr>
+            <td>↳&nbsp;<code>navbar<b>.fixed</b></code></td>
+            <td><code>Boolean</code></td>
+            <td>
+                Whether navbar should be fixed to top of the page. Default: <code>true</code>
+            </td>
+        </tr>
+        <tr>
             <td>↳&nbsp;<code>navbar<b>.dark</b></code></td>
             <td><code>Boolean</code></td>
             <td>
@@ -223,7 +230,7 @@ Template specific options that can be used when building your documentation with
             <td>↳&nbsp;<code>navbar<b>.menu</b></code></td>
             <td><code>Array</code></td>
             <td>
-                List of navigation menu items that builds the navbar and submenu items. See <a href="#navigation-menu">Navigation Menu</a> below. Default: <code>[]</code>
+                List of navigation menu items that builds the navbar and submenu items. See <a href="#Navigation-Menu">Navigation Menu</a> below. Default: <code>[]</code>
             </td>
         </tr>
     </tbody>
