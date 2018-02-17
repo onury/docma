@@ -1,4 +1,4 @@
-/* global docma, dust, $ */
+/* global docma, DocmaWeb, dust, $ */
 /* eslint camelcase:0, no-nested-ternary:0, max-depth:0, no-var:0, prefer-template:0, prefer-arrow-callback:0, prefer-spread:0, object-shorthand:0 */
 
 /**
@@ -231,27 +231,27 @@ var app = window.app || {};
             };
         }
 
-        if (docma.utils.isClass(symbol)) return app.helper.getSymbolInfo('class');
-        if (docma.utils.isConstructor(symbol)) return app.helper.getSymbolInfo('constructor');
-        if (docma.utils.isNamespace(symbol)) return app.helper.getSymbolInfo('namespace');
-        if (docma.utils.isModule(symbol)) return app.helper.getSymbolInfo('module');
-        if (docma.utils.isEnum(symbol)) return app.helper.getSymbolInfo('enum');
-        if (docma.utils.isEvent(symbol)) return app.helper.getSymbolInfo('event');
-        if (docma.utils.isGlobal(symbol)) {
-            return docma.utils.isMethod(symbol)
+        if (DocmaWeb.Utils.isClass(symbol)) return app.helper.getSymbolInfo('class');
+        if (DocmaWeb.Utils.isConstructor(symbol)) return app.helper.getSymbolInfo('constructor');
+        if (DocmaWeb.Utils.isNamespace(symbol)) return app.helper.getSymbolInfo('namespace');
+        if (DocmaWeb.Utils.isModule(symbol)) return app.helper.getSymbolInfo('module');
+        if (DocmaWeb.Utils.isEnum(symbol)) return app.helper.getSymbolInfo('enum');
+        if (DocmaWeb.Utils.isEvent(symbol)) return app.helper.getSymbolInfo('event');
+        if (DocmaWeb.Utils.isGlobal(symbol)) {
+            return DocmaWeb.Utils.isMethod(symbol)
                 ? app.helper.getSymbolInfo('global-function')
                 : app.helper.getSymbolInfo('global-object');
         }
-        if (docma.utils.isInner(symbol)) {
-            return docma.utils.isMethod(symbol)
+        if (DocmaWeb.Utils.isInner(symbol)) {
+            return DocmaWeb.Utils.isMethod(symbol)
                 ? app.helper.getSymbolInfo('inner-method')
                 : app.helper.getSymbolInfo('inner');
         }
-        if (docma.utils.isStaticProperty(symbol)) return app.helper.getSymbolInfo('static-property');
-        if (docma.utils.isInstanceProperty(symbol)) return app.helper.getSymbolInfo('instance-property');
-        if (docma.utils.isStaticMethod(symbol)) return app.helper.getSymbolInfo('static-method');
-        if (docma.utils.isInstanceMethod(symbol)) return app.helper.getSymbolInfo('instance-method');
-        if (docma.utils.isMethod(symbol)) {
+        if (DocmaWeb.Utils.isStaticProperty(symbol)) return app.helper.getSymbolInfo('static-property');
+        if (DocmaWeb.Utils.isInstanceProperty(symbol)) return app.helper.getSymbolInfo('instance-property');
+        if (DocmaWeb.Utils.isStaticMethod(symbol)) return app.helper.getSymbolInfo('static-method');
+        if (DocmaWeb.Utils.isInstanceMethod(symbol)) return app.helper.getSymbolInfo('instance-method');
+        if (DocmaWeb.Utils.isMethod(symbol)) {
             return app.helper.getSymbolInfo('function');
         }
         return app.helper.getSymbolInfo();
@@ -295,7 +295,7 @@ var app = window.app || {};
     }
 
     function getSidebarNavItemInner(badge, symbolName, treeNode, hasChildren) {
-        var levels = docma.utils.getLevels(symbolName);
+        var levels = DocmaWeb.Utils.getLevels(symbolName);
 
         var badgeIsStr = typeof templateOpts.sidebar.badges === 'string';
         var noBadge = Boolean(templateOpts.sidebar.badges) === false;
@@ -312,31 +312,36 @@ var app = window.app || {};
         var errMessage = '';
 
         // if this node is deeper than 1 level and node type is first, then it
-        // means the symbol has no parent in the documentation. Which is wrong.
+        // means the symbol has no parent in the documentation.
         // So we'll visually show this via "!" (string or SVG).
-        if (treeNode === 'first' && levels > 1) {
-            errMessage = 'Warning: This symbol does not have a documented parent. '
-                + 'Expected `' + docma.utils.getParentName(symbolName) + '` to be documented.';
-            if (badgeIsStr || noBadge) {
-                badge = '<div class="symbol-badge badge-str" title="' + errMessage + '"><span class="color-red">!</span></div>';
-                labelMargin = 25;
-            } else {
-                badge = app.svg.warn(errMessage);
-                labelMargin = 31;
-            }
+
+        // Disabled this. Some docs might intentionally not include the top node/symbol ???
+
+        // if (treeNode === 'first' && levels > 1) {
+        //     errMessage = 'Warning: This symbol does not have a documented parent. '
+        //         + 'Expected `' + DocmaWeb.Utils.getParentName(symbolName) + '` to be documented.';
+        //     if (badgeIsStr || noBadge) {
+        //         badge = '<div class="symbol-badge badge-str" title="' + errMessage + '"><span class="color-red">!</span></div>';
+        //         labelMargin = 25;
+        //     } else {
+        //         badge = app.svg.warn(errMessage);
+        //         labelMargin = 31;
+        //     }
+        // } else {
+
+        treeImages = getTreeLineImgs(levels, treeNode, hasChildren);
+        if (noBadge) {
+            badge = '';
+            labelMargin = 7;
+        } else if (badgeIsStr) {
+            badge = '<div class="symbol-badge badge-str"><span>' + badge + '</span></div>';
+            labelMargin = 25;
         } else {
-            treeImages = getTreeLineImgs(levels, treeNode, hasChildren);
-            if (noBadge) {
-                badge = '';
-                labelMargin = 7;
-            } else if (badgeIsStr) {
-                badge = '<div class="symbol-badge badge-str"><span>' + badge + '</span></div>';
-                labelMargin = 25;
-            } else {
-                // badge = badge; // SVG badge
-                labelMargin = 31;
-            }
+            // badge = badge; // SVG badge
+            labelMargin = 31;
         }
+
+        // }
 
         var labelStyle = ' style="margin-left: ' + labelMargin + 'px !important; "';
         var itemTitle = errMessage ? ' title="' + errMessage + '"' : '';
@@ -353,7 +358,7 @@ var app = window.app || {};
             ? isLast ? 'last' : 'node'
             : 'first';
         var id = dust.filters.$id(symbol);
-        var keywords = docma.utils.getKeywords(symbol);
+        var keywords = DocmaWeb.Utils.getKeywords(symbol);
         var symbolData = getSymbolData(symbol);
         // .badges also accepts string
         var badge = templateOpts.sidebar.badges === true
