@@ -44,6 +44,7 @@ module.exports = (template, modules) => {
         },
         navbar: {
             enabled: true,
+            fixed: true,
             dark: false,
             animations: true,
             menu: []
