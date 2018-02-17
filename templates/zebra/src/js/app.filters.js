@@ -1,4 +1,4 @@
-/* global app, docma */
+/* global app, docma, DocmaWeb */
 /* eslint camelcase:0, no-nested-ternary:0, max-depth:0, no-var:0, prefer-template:0, prefer-arrow-callback:0, prefer-spread:0, object-shorthand:0 */
 
 (function () {
@@ -13,12 +13,12 @@
     function dotProp(name, forSidebar) {
         var re = /(.*)([.#~][\w:]+)/g,
             match = re.exec(name);
-        if (!match) return '<span class="fw-medium">' + name + '</span>';
+        if (!match) return '<span class="fw-bold">' + name + '</span>';
         if (forSidebar) {
             var cls = templateOpts.sidebar.animations ? ' trans-all-ease-fast' : '';
             return '<span class="color-gray symbol-memberof' + cls + '">' + app.helper.colorOperators(match[1]) + '</span><span>' + app.helper.colorOperators(match[2]) + '</span>';
         }
-        return '<span class="color-gray">' + app.helper.colorOperators(match[1]) + '</span><span class="fw-medium">' + app.helper.colorOperators(match[2]) + '</span>';
+        return '<span class="color-gray">' + app.helper.colorOperators(match[1]) + '</span><span class="fw-bold">' + app.helper.colorOperators(match[2]) + '</span>';
     }
 
     docma
@@ -36,19 +36,19 @@
             return authors.join(', ');
         })
         .addFilter('$type', function (symbol) {
-            if (docma.utils.isConstructor(symbol)) return '';
+            if (DocmaWeb.Utils.isConstructor(symbol)) return '';
             var opts = {
                 links: templateOpts.symbols.autoLink
             };
             if (symbol.kind === 'function') {
-                var returnTypes = docma.utils.getReturnTypes(symbol, opts);
+                var returnTypes = DocmaWeb.Utils.getReturnTypes(docma.apis, symbol, opts);
                 return returnTypes ? returnTypes : '';
             }
-            var types = docma.utils.getTypes(symbol, opts);
+            var types = DocmaWeb.Utils.getTypes(docma.apis, symbol, opts);
             return types ? types : '';
         })
         .addFilter('$type_sep', function (symbol) {
-            if (docma.utils.isConstructor(symbol)) return '';
+            if (DocmaWeb.Utils.isConstructor(symbol)) return '';
             if (symbol.kind === 'function') return '⇒';
             if (symbol.kind === 'event' && symbol.type) return '⇢';
             if (symbol.kind === 'class') return ':';
@@ -56,16 +56,16 @@
             return ':';
         })
         .addFilter('$param_desc', function (param) {
-            return docma.utils.parse(param.description);
+            return DocmaWeb.Utils.parse(param.description || '');
         })
         .addFilter('$longname', function (symbol) {
             if (typeof symbol === 'string') return symbol;
-            var nw = docma.utils.isConstructor(symbol) ? 'new ' : '';
-            return nw + symbol.$longname; // docma.utils.getFullName(symbol);
+            var nw = DocmaWeb.Utils.isConstructor(symbol) ? 'new ' : '';
+            return nw + symbol.$longname; // DocmaWeb.Utils.getFullName(symbol);
         })
         .addFilter('$longname_params', function (symbol) {
-            var isCon = docma.utils.isConstructor(symbol),
-                longName = app.helper.colorOperators(symbol.$longname); // docma.utils.getFullName(symbol);
+            var isCon = DocmaWeb.Utils.isConstructor(symbol),
+                longName = app.helper.colorOperators(symbol.$longname); // DocmaWeb.Utils.getFullName(symbol);
             if (symbol.kind === 'function' || isCon) {
                 var defVal,
                     defValHtml = '',
@@ -92,14 +92,14 @@
         })
         .addFilter('$extends', function (symbol) {
             var ext = Array.isArray(symbol) ? symbol : symbol.augments;
-            return docma.utils.getCodeTags(ext, {
+            return DocmaWeb.Utils.getCodeTags(docma.apis, ext, {
                 delimeter: ', ',
                 links: templateOpts.symbols.autoLink
             });
         })
         .addFilter('$returns', function (symbol) {
             var returns = Array.isArray(symbol) ? symbol : symbol.returns;
-            return docma.utils.getFormattedTypeList(returns, {
+            return DocmaWeb.Utils.getFormattedTypeList(docma.apis, returns, {
                 delimeter: '|',
                 descriptions: true,
                 links: templateOpts.symbols.autoLink
@@ -107,7 +107,7 @@
         })
         .addFilter('$yields', function (symbol) {
             var yields = Array.isArray(symbol) ? symbol : symbol.yields;
-            return docma.utils.getFormattedTypeList(yields, {
+            return DocmaWeb.Utils.getFormattedTypeList(docma.apis, yields, {
                 delimeter: '|',
                 descriptions: true,
                 links: templateOpts.symbols.autoLink
@@ -115,14 +115,14 @@
         })
         .addFilter('$emits', function (symbol) {
             var emits = Array.isArray(symbol) ? symbol : symbol.fires;
-            return docma.utils.getEmittedEvents(emits, {
+            return DocmaWeb.Utils.getEmittedEvents(docma.apis, emits, {
                 delimeter: ', ',
                 links: templateOpts.symbols.autoLink
             });
         })
         .addFilter('$exceptions', function (symbol) {
             var exceptions = Array.isArray(symbol) ? symbol : symbol.exceptions;
-            return docma.utils.getFormattedTypeList(exceptions, {
+            return DocmaWeb.Utils.getFormattedTypeList(docma.apis, exceptions, {
                 delimeter: '|',
                 descriptions: true,
                 links: templateOpts.symbols.autoLink
@@ -143,28 +143,28 @@
                 close = '</span>',
                 tagBoxes = [];
 
-            if (docma.utils.isDeprecated(symbol)) {
+            if (DocmaWeb.Utils.isDeprecated(symbol)) {
                 tagBoxes.push(open6 + 'deprecated' + close);
             }
-            if (docma.utils.isGlobal(symbol) && !docma.utils.isConstructor(symbol)) {
+            if (DocmaWeb.Utils.isGlobal(symbol) && !DocmaWeb.Utils.isConstructor(symbol)) {
                 tagBoxes.push(open7 + 'global' + close);
             }
-            if (docma.utils.isConstructor(symbol)) {
+            if (DocmaWeb.Utils.isConstructor(symbol)) {
                 tagBoxes.push(open + 'constructor' + close);
             }
-            if (docma.utils.isStatic(symbol)) {
+            if (DocmaWeb.Utils.isStatic(symbol)) {
                 tagBoxes.push(open5 + 'static' + close);
             }
-            if (docma.utils.isPublic(symbol) === false) {
+            if (DocmaWeb.Utils.isPublic(symbol) === false) {
                 tagBoxes.push(open4 + symbol.access + close);
             }
-            if (docma.utils.isNamespace(symbol)) {
+            if (DocmaWeb.Utils.isNamespace(symbol)) {
                 tagBoxes.push(open + 'namespace' + close);
             }
-            if (docma.utils.isReadOnly(symbol)) {
+            if (DocmaWeb.Utils.isReadOnly(symbol)) {
                 tagBoxes.push(open3 + 'readonly' + close);
             }
-            if (docma.utils.isGenerator(symbol)) {
+            if (DocmaWeb.Utils.isGenerator(symbol)) {
                 tagBoxes.push(open8 + 'generator' + close);
             }
 
@@ -181,7 +181,7 @@
         })
         .addFilter('$get_caption', function (example) {
             var m = app.RE_EXAMPLE_CAPTION.exec(example || '');
-            return (m && m[1] ? ' — <i>' + docma.utils.parseTicks(m[1]) + '</i>' : '');
+            return (m && m[1] ? ' — <i>' + DocmaWeb.Utils.parseTicks(m[1]) + '</i>' : '');
         })
         .addFilter('$remove_caption', function (example) {
             return (example || '').replace(app.RE_EXAMPLE_CAPTION, '');
