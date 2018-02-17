@@ -1,4 +1,4 @@
-/* global docma, hljs, $ */
+/* global docma, DocmaWeb, hljs, $ */
 /* eslint camelcase:0, no-nested-ternary:0, max-depth:0, no-var:0, prefer-template:0, prefer-arrow-callback:0, prefer-spread:0, object-shorthand:0 */
 
 var app = window.app || {};
@@ -12,11 +12,13 @@ var app = window.app || {};
 
     var $window = $(window);
     var $sidebarNodes, $btnClean, $txtSearch;
-    var $wrapper, $sidebarWrapper, $pageContentWrapper, $sidebarToggle;
+    var $wrapper, $sidebarWrapper, $sidebarToggle;
     var $nbmBtn, $navOverlay, $navbarMenu, $navbarBrand, $navbarInner, $navbarList;
     var $btnSwitchFold, $btnSwitchOutline;
     var navbarMenuActuallWidth;
     var isFilterActive = false;
+    // current fold state
+    var isItemsFolded = templateOpts.sidebar.itemsFolded; // initial fold state
     var isApiRoute = false;
 
     // ---------------------------
@@ -221,7 +223,7 @@ var app = window.app || {};
         var newCls = !folded
             ? 'fa-caret-square-down'
             : 'fa-caret-square-right';
-        templateOpts.sidebar.folded = folded;
+        isItemsFolded = folded;
         $btni.addClass(newCls);
     }
 
@@ -315,11 +317,11 @@ var app = window.app || {};
     docma.on('navigate', function (currentRoute) { // eslint-disable-line
         isApiRoute = currentRoute && currentRoute.type === 'api';
         // when navigated to a #hash / bookmark, make sure navbar does not overlap.
-        if (templateOpts.navbar.enabled && !isApiRoute) {
-            setTimeout(function () {
-                $window.scrollTop($window.scrollTop() - (app.NAVBAR_HEIGHT + 20));
-            }, 30);
-        }
+        // if (templateOpts.navbar.enabled && !isApiRoute) {
+        //     setTimeout(function () {
+        //         $window.scrollTop($window.scrollTop() - (app.NAVBAR_HEIGHT + 20));
+        //     }, 30);
+        // }
     });
 
     docma.on('render', function (currentRoute) {
@@ -334,7 +336,7 @@ var app = window.app || {};
 
         $wrapper = $('#wrapper');
         $sidebarWrapper = $('#sidebar-wrapper');
-        $pageContentWrapper = $('#page-content-wrapper');
+        // $pageContentWrapper = $('#page-content-wrapper');
         $sidebarToggle = $('#sidebar-toggle');
 
         if (templateOpts.sidebar.animations) {
@@ -495,7 +497,7 @@ var app = window.app || {};
 
             $btnSwitchOutline = $('.toolbar-buttons .btn-switch-outline');
             $btnSwitchFold = $('.toolbar-buttons .btn-switch-fold');
-            toggleAllSubTrees(templateOpts.sidebar.folded);
+            toggleAllSubTrees(isItemsFolded);
 
             if (!templateOpts.sidebar.collapsed) {
                 $wrapper.addClass('toggled');
@@ -544,10 +546,11 @@ var app = window.app || {};
                     });
 
                 $btnSwitchFold.on('click', function () {
+                    console.log('clicked');
                     // disable if search is active
                     if (isFilterActive) return;
-                    setFoldState(!templateOpts.sidebar.folded);
-                    toggleAllSubTrees(templateOpts.sidebar.folded);
+                    setFoldState(!isItemsFolded);
+                    toggleAllSubTrees(isItemsFolded);
                 });
 
                 $btnSwitchOutline.on('click', function () {
