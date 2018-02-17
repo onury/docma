@@ -24,10 +24,7 @@ body, html {
     padding: 0;
     margin: 0;
     height: 100%;
-}
-
-body {
-    padding-top: @navbar-height; // for the fixed navbar
+    min-height: 100%;
 }
 
 * {
@@ -175,13 +172,20 @@ blockquote {
 
 .zebra-bookmark {
     #bookmark-icon(0.7em);
+    &:before {
+        content: " ";
+        display: block;
+        visibility: hidden;
+        height: @navbar-height; /* fixed header height*/
+        margin-top: -(@navbar-height); /* negative fixed header height */
+    }
 }
 
 .docma-info {
     display: inline-block;
-    font-size: @font-size-small;
+    font-size: @font-size-xsmall;
     font-style: italic;
-    letter-spacing: 0.07em;
+    letter-spacing: 0.04em;
     margin-bottom: 25px;
     z-index: 2;
 }
