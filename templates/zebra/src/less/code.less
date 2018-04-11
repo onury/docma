@@ -25,10 +25,10 @@ samp {
 
 // Inline code
 code {
-  padding: 3px 5px 2px;
-  font-size: 87%;
+  padding: 2px 5px 3px;
+  font-size: 90%;
   color: inherit; // @code-color;
-  background-color: @light-base; // @code-bg;
+  background-color: fade(@light-base, 74%); // @code-bg;
   border-radius: @border-radius-base;
 }
 
@@ -51,7 +51,7 @@ pre {
     // Account for some code outputs that place code tags in pre tags
     code {
         padding: 15px 25px !important; // 0;
-        // font-size: inherit;
+        font-size: 85.4%;
         color: inherit;
         white-space: unset;
         background-color: transparent;
@@ -60,6 +60,11 @@ pre {
             padding: 15px 25px 0 25px !important;
         }
     }
+}
+
+// special class for code delimeter (e.g. pipe |)
+.code-delim {
+    color: #cfd3de; // @gray-light;
 }
 
 // Enable scrollable blocks of code
