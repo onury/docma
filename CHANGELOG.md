@@ -1,13 +1,11 @@
 # Docma Changelog
 
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](http://semver.org).
 
 ## [v2.0.0](https://github.com/onury/docma/compare/v1.5.3...v2.0.0) (Not Released Yet - v2 branch)
 
-_This is a WIP. New items will be added to the changes below._
+_This is a WIP. Anything is subject to change. New items will be added to the changes below._
 
 ### Docma (Builder)
 
@@ -17,6 +15,7 @@ _This is a WIP. New items will be added to the changes below._
 - Pre-build and post-build process support for Docma templates. See [Docma Templates documentation](https://onury.io/docma/?content=creating-templates).
 - `markdown.xhtml` option for build configuration.
 - Docma version compatibility check for Docma templates.
+- `clean` option that specifies whether to empty destination directory before the build. Default is `false`.
 - Build statistics logs to console output. Now, displaying gzipped size of generated (docma-web) script, in addition to minified size; and more detailed summary of routes configured.
 
 #### Fixed
@@ -28,6 +27,8 @@ _This is a WIP. New items will be added to the changes below._
 
 #### Changed
 - **BREAKING**: Due to several upgrades (such as `jsdom`), Docma v2+ requires Node.js v6 or newer.
+- Greatly improved the symbol sorting logic ([jsdoc-x][jsdoc-x]). You can now sort by `scope`, by `access` type, by `kind`, `grouped` or `alphabetic` (default). See `jsdoc.sort` option in [build configuration][build-config].
+- The destination directory is not auto-cleaned anymore before the build. Use `clean` option for the old behavior. Fixes [#34](https://github.com/onury/docma/issues/34).
 - Improved markdown parser. Both `<h1 />` and `<h2 />` tags are now followed with a `<hr/>`, like on GitHub.
 - Updated core dependencies to their latest versions.
 - Migrated all code to ES2015.
@@ -41,7 +42,9 @@ _This is a WIP. New items will be added to the changes below._
 ### Docma CLI
 
 #### Added
+- Option `--clean` to empty destination directory before the build.
 - Command `docma serve` for starting a static server for serving / testing the generated SPA.
+- Command `docma template init` for initializing a new Docma template project.
 - Command `docma template doctor` for diagnosing a Docma template. Useful for template authors.
 
 #### Changed
@@ -55,19 +58,21 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 
 #### Added
 - Event `navigate` that's triggered either when route is changed or on hash-change.
-- Utility methods `docma.utils.getCodeTags()`, `docma.utils.getFormattedTypeList()`. Fixes [#33](https://github.com/onury/docma/issues/33). 
-- Utility method `docma.utils.trimNewLines()`. This also has a dust filter `$tnl`.
 - Each symbol in `docma.apis[name].documentation` instances, now has a `.$docmaLink` property.
-- Utility methods `docma.utils.type()`, `docma.utils.getSymbolLink()`, `docma.utils.getLevels()`, `docma.utils.utils.getParentName()`, `docma.utils.isEvent()`, `docma.utils.isGenerator()` and `docma.utils.isCallback()`.
+- New utility methods to `DocmaWeb.Utils`: `.type()`, `.getSymbolLink()`, `.getLevels()`, `.getParentName()`, `.getParent()`, `.isPackagePrivate()`, `.isEvent()`, `.isGenerator()`, `.isCallback()`, `.isConstant()`, `.isInterface()`, `.isExternal()` and `.isMixin()`.
+- Utility methods `.getCodeTags()`, `.getFormattedTypeList()`. Fixes [#33](https://github.com/onury/docma/issues/33). 
+- Utility method `.trimNewLines()`. This also has a dust filter `$tnl`.
 
 #### Fixed
 - Broken bookmark links due to URI encoded characters after hash (`#`). e.g. when navigated to `#MyClass%7EInnerObject` instead of `#MyClass~InnerObject`.
-- An issue with `docma.utils.getLongName()`, occured after JSDoc core upgrade.
+- An issue with `DocmaWeb.Utils.getLongName()`, occured after JSDoc core upgrade.
 - `currentRoute` parameter of the `route` event. Passing `null` instead of empty route object when route does not exist.
-- An issue with `.isClass()` utility method where `meta.code.type` is not set to `ClassDeclaration`.
+- An issue with `DocmaWeb.Utils.isClass()` utility method where `meta.code.type` is not set to `ClassDeclaration`.
+- `DocmaWeb.Utils.isProperty()` utility method. It'll now return `false` if symbol is a method/function. This also affects the following methods: `.isStaticProperty()`, `.isInstanceProperty()`.
 
 #### Changed
-- `docma.utils.getSymbolByName()` signature is changed.
+- **BREAKING**: Docma utility methods are moved to `DocmaWeb.Utils` static namespace (formerly under `docma.utils`).
+- `DocmaWeb.Utils.getSymbolByName()` signature is changed.
 - Updated web-core dependencies.
 
 ### Docma Template API
@@ -110,18 +115,20 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 #### Changed
 - Default template finally has a name :) - Zebra.
 - **BREAKING**: You need Docma v2+ for latest Zebra template to work.
-- **DEPRECATED**: The template options object structure is changed and a couple of options are renamed. Old structure is still supported and it won't break anything but this support will be removed in future versions. See documentation for the new & improved structure.
 - Improved symbol listing styles and performance. Using CSS transitions instead of JS manipulation. Also; when search is active, outline is temporarily set to `"flat"` so that you see the parent of the symbol. When search box is cleaned, it's set back to the initial template setting. (e.g. `"tree"` if set).
 - Improved `@example` outputs. If there are multiple examples for a symbol, they will be numbered now.
 - Improved nested bullet list spacing, for better readability.
-- Improved UI and responsive layout. On small screens, sidebar auto-collapses; top navbar turns into hamburger menu. Also, truely printable.
+- Improved UI and responsive layout. On small screens, sidebar auto-collapses; top navbar turns into hamburger menu. Also, truly printable.
 - Improved template option `.badges` (default: `true`) to also accept a string value for custom bullets instead of badges.
 - Improved template option `.title` to also accept an object `{ label:String, href:String }` so you can link it.
 - Various other improvements and clean up.
 
+#### Deprecated
+- The template options object structure is changed and a couple of options are renamed. Old structure is still supported and it won't break anything but this support will be removed in future versions. See documentation for the new & improved structure.
+
 #### Removed
 - **BREAKING**: icomoon selection of icons (and `ico-` CSS prefix) in favor of FontAwsome (v5) and SVG icons support.
-- Bootstrap and its dependencies (css and js) which dramatically reduces the size of the generated SPA. Also, cleaned up all unused styles.
+- Bootstrap and its dependencies (css and js). Also, cleaned up all unused styles.
 
 <br />
 ## v1.5.3 `2017-12-21`
@@ -415,6 +422,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 
 - Initial (pre) release.
 
+[jsdoc-x]:https://github.com/onury/jsdoc-x
 [marked]:https://github.com/chjj/marked
 [docma-david]:https://david-dm.org/onury/docma
 [docma-cli]:https://onury.io/docma/?content=docma-cli
