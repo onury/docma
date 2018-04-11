@@ -94,7 +94,7 @@
                             { "label": "Default Template - Zebra", "href": "?content=zebra-template" },
                             { "separator": true },
                             { "label": "Creating Docma Templates", "href": "?content=creating-templates" },
-                            { "label": "Docma Template API", "href": "?api=template" },
+                            { "label": "Docma Template API", "href": "?api=docma#Docma.Template" },
                             { "separator": true },
                             { "label": "Docma Web API", "href": "?api=docma-web" },
                             { "label": "Docma Filters", "href": "?content=docma-filters" }
@@ -137,9 +137,9 @@
         {
             "docma": [
                 "./lib/Docma.js",
-                "./lib/DocmaTemplateDoctor.js"
+                "./lib/Template.js",
+                "./lib/TemplateDoctor.js"
             ],
-            "template": "./lib/DocmaTemplate.js",
             "docma-web": [
                 "./lib/web/DocmaWeb.js",
                 "./lib/web/DocmaWeb.Route.js"
@@ -161,5 +161,6 @@
     "assets": {
         "/img": ["./doc/img/*.*"]
     },
-    "dest": "../onury.github.io/docma"
+    "dest": "../onury.github.io/docma",
+    "clean": true
 }
