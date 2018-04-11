@@ -132,46 +132,60 @@
         // symbol. We also add other properties such as .access (if not public),
         // `.readonly` or `.kind=namespace` as tags.
         .addFilter('$tags', function (symbol) {
-            var open = '<span class="boxed vertical-middle bg-ice opacity-full">',
-                open2 = '<span class="boxed vertical-middle bg-ice-mid opacity-full">',
-                open3 = '<span class="boxed vertical-middle">',
-                open4 = '<span class="boxed vertical-middle bg-ice-dark opacity-full">',
-                open5 = '<span class="boxed vertical-middle bg-blue opacity-full">',
-                open6 = '<span class="boxed vertical-middle bg-yellow color-brown opacity-full">',
-                open7 = '<span class="boxed vertical-middle bg-purple color-white opacity-full">',
-                open8 = '<span class="boxed vertical-middle bg-green color-white opacity-full">',
+            var // open = '<span class="boxed vertical-middle">',
+                openIce = '<span class="boxed vertical-middle bg-ice opacity-full">',
+                openIceDark = '<span class="boxed vertical-middle bg-ice-dark opacity-full">',
+                openBlue = '<span class="boxed vertical-middle bg-blue opacity-full">',
+                // openGreen = '<span class="boxed vertical-middle bg-green color-white opacity-full">',
+                openGreenPale = '<span class="boxed vertical-middle bg-green-pale color-white opacity-full">',
+                openYellow = '<span class="boxed vertical-middle bg-yellow color-brown opacity-full">',
+                openPurple = '<span class="boxed vertical-middle bg-purple color-white opacity-full">',
+                openRed = '<span class="boxed vertical-middle bg-red color-white opacity-full">',
+                openPink = '<span class="boxed vertical-middle bg-pink color-white opacity-full">',
                 close = '</span>',
                 tagBoxes = [];
 
             if (DocmaWeb.Utils.isDeprecated(symbol)) {
-                tagBoxes.push(open6 + 'deprecated' + close);
-            }
-            if (DocmaWeb.Utils.isGlobal(symbol) && !DocmaWeb.Utils.isConstructor(symbol)) {
-                tagBoxes.push(open7 + 'global' + close);
-            }
-            if (DocmaWeb.Utils.isConstructor(symbol)) {
-                tagBoxes.push(open + 'constructor' + close);
-            }
-            if (DocmaWeb.Utils.isStatic(symbol)) {
-                tagBoxes.push(open5 + 'static' + close);
-            }
-            if (DocmaWeb.Utils.isPublic(symbol) === false) {
-                tagBoxes.push(open4 + symbol.access + close);
-            }
-            if (DocmaWeb.Utils.isNamespace(symbol)) {
-                tagBoxes.push(open + 'namespace' + close);
-            }
-            if (DocmaWeb.Utils.isReadOnly(symbol)) {
-                tagBoxes.push(open3 + 'readonly' + close);
-            }
-            if (DocmaWeb.Utils.isGenerator(symbol)) {
-                tagBoxes.push(open8 + 'generator' + close);
+                tagBoxes.push(openYellow + 'deprecated' + close);
             }
 
-            var tags = Array.isArray(symbol) ? symbol : symbol.tags || [],
-                tagTitles = tags.map(function (tag) {
-                    return open2 + tag.originalTitle + close;
-                });
+            if (DocmaWeb.Utils.isGlobal(symbol) && !DocmaWeb.Utils.isConstructor(symbol)) {
+                tagBoxes.push(openPurple + 'global' + close);
+            }
+            if (DocmaWeb.Utils.isStatic(symbol)) {
+                tagBoxes.push(openBlue + 'static' + close);
+            }
+            if (DocmaWeb.Utils.isInner(symbol)) {
+                tagBoxes.push(openIceDark + 'inner' + close);
+            }
+
+            if (DocmaWeb.Utils.isModule(symbol)) {
+                tagBoxes.push(openRed + 'module' + close);
+            }
+            // if (DocmaWeb.Utils.isClass(symbol)) {
+            //     tagBoxes.push(openGreen + 'class' + close);
+            // }
+            if (DocmaWeb.Utils.isConstructor(symbol)) {
+                tagBoxes.push(openGreenPale + 'constructor' + close);
+            }
+            if (DocmaWeb.Utils.isNamespace(symbol)) {
+                tagBoxes.push(openPink + 'namespace' + close);
+            }
+            if (DocmaWeb.Utils.isGenerator(symbol)) {
+                tagBoxes.push(openBlue + 'generator' + close);
+            }
+
+            if (DocmaWeb.Utils.isPublic(symbol) === false) {
+                tagBoxes.push(openIceDark + symbol.access + close);
+            }
+            if (DocmaWeb.Utils.isReadOnly(symbol)) {
+                tagBoxes.push(openIceDark + 'readonly' + close);
+            }
+
+            var tags = Array.isArray(symbol) ? symbol : symbol.tags || [];
+            var tagTitles = tags.map(function (tag) {
+                return openIce + tag.originalTitle + close;
+            });
             tagBoxes = tagBoxes.concat(tagTitles);
             if (tagBoxes.length) return '&nbsp;&nbsp;' + tagBoxes.join('&nbsp;');
             return '';
