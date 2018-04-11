@@ -1,3 +1,5 @@
+{^symbol.$hide}
+
 <div id="{symbol|$id}" class="symbol-container">
 
     <div class="symbol-heading">
@@ -66,13 +68,12 @@
 
         <!--  don't list params for class declarations since we already list
         constructor and its params separately, if this is a class declaration.  -->
-        {@eq key=symbol.meta.code.type value="ClassDeclaration"}
-        {:else}
+        {@ne key=symbol.meta.code.type value="ClassDeclaration"}
             {>"params":symbol template=template /} <!-- passing the template object to partial -->
             {?symbol.isEnum}{:else}
                 {>"properties":symbol template=template /} <!-- passing the template object to partial -->
             {/symbol.isEnum}
-        {/eq}
+        {/ne}
 
         {?symbol.fires}
             {@gt key=symbol.fires.length value="0" type="number"}
@@ -153,22 +154,19 @@
 </div>
 <hr />
 
-<!--  don't list params for class declarations since we already list
-constructor and its params separately, if this is a class declaration.  -->
-{@eq key=symbol.meta.code.type value="ClassDeclaration"}
-    {?symbol.$constructor}
-        {@eq key=symbol.hideconstructor type="boolean" value="true"}
-        {:else}
-            {>"symbol" symbol=symbol.$constructor template=template/}
-        {/eq}
-    {/symbol.$constructor}
-{/eq}
+{?symbol.$constructor}
+    {@ne key=symbol.hideconstructor type="boolean" value="true"}
+        {>"symbol" symbol=symbol.$constructor template=template/}
+    {/ne}
+{/symbol.$constructor}
 
 <!-- if not an enumeration symbol -->
-{?symbol.isEnum}
-{:else}
+{^symbol.isEnum}
     <!-- recurse as symbol section -->
     {#symbol.$members}
         {>"symbol" symbol=. template=template/}
     {/symbol.$members}
 {/symbol.isEnum}
+
+
+{/symbol.$hide}
