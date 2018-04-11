@@ -33,6 +33,12 @@
     transform: rotate(@angle);
 }
 
+#circle(@size) {
+    width: @size;
+    height: @size;
+    border-radius: @size; // floor(@size);
+}
+
 #heading-size(@size) {
     font-size: @size;
     margin-top: @size;
@@ -74,12 +80,20 @@
     outline-offset: -2px;
 }
 
+.underline-skip {
+    -webkit-text-decoration-line: underline;
+    text-decoration-line: underline;
+    /* https://css-tricks.com/almanac/properties/t/text-decoration-skip/ */
+    text-decoration-skip: ink;
+    -webkit-text-decoration-skip: ink;
+    text-decoration-skip-ink: auto;
+}
+
 // Transitions
 // --------------------------
 
 .transition(@transition) {
   -webkit-transition: @transition;
-       -o-transition: @transition;
           transition: @transition;
 }
 .transition-property(@transition-property) {
@@ -101,7 +115,6 @@
 .transition-transform(@transition) {
   -webkit-transition: -webkit-transform @transition;
      -moz-transition: -moz-transform @transition;
-       -o-transition: -o-transform @transition;
           transition: transform @transition;
 }
 
@@ -116,6 +129,10 @@
 }
 .trans-height-ease {
     .transition(~"opacity 0.15s ease, height 0.15s ease");
+}
+
+.trans-delay-1 {
+    transition-delay: .1s;
 }
 
 .no-trans {
@@ -281,6 +298,7 @@
 .bg-accent              { background-color: @accent !important; }
 .bg-cyan                { background-color: @cyan !important; }
 .bg-green               { background-color: @green !important; }
+.bg-green-pale          { background-color: @green-pale !important; }
 .bg-yellow              { background-color: @yellow !important; }
 .bg-red                 { background-color: @red !important; }
 .bg-purple              { background-color: @purple !important; }
@@ -290,7 +308,9 @@
 .bg-ice                 { background-color: @ice !important; }
 .bg-ice-mid             { background-color: @ice-mid !important; }
 .bg-ice-dark            { background-color: @ice-dark !important; }
+.bg-ice-blue            { background-color: @ice-blue !important; }
 .bg-gray                { background-color: @gray !important; }
+.bg-gray-light          { background-color: @gray-light !important; }
 .bg-gray-dark           { background-color: @gray-dark !important; }
 .bg-gray-darker         { background-color: @gray-darker !important; }
 
@@ -311,6 +331,8 @@
 .svg-fill-orange svg        { fill: @orange !important; }
 .svg-fill-gray svg          { fill: @gray !important; }
 .svg-fill-gray-dark svg     { fill: @gray-dark !important; }
+.svg-fill-ice-blue svg      { fill: @ice-blue !important; }
+.svg-fill-brown svg         { fill: @brown !important; }
 .svg-fill-black svg         { fill: #000 !important; }
 
 // --------------------------

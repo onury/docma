@@ -7,6 +7,7 @@
 @import "navbar.less"; // must come before sidebar
 @import "symbol.less"; // must come before sidebar
 @import "sidebar.less";
+@import "tooltip.less";
 @import "highlight-one-dark.less";
 @import "print.less";
 
@@ -71,8 +72,10 @@ a {
 
     &:hover,
     &:focus {
+        .underline-skip;
         color: @link-hover-color;
         text-decoration: @link-hover-decoration;
+        text-decoration-color: @link-decoration-color !important;
     }
 
     &:focus {
@@ -99,6 +102,9 @@ h1, h2, h3, h4, h5, h6,
     line-height: @headings-line-height;
     color: @headings-color;
     .background-clip-padding;
+    // required for preventing headings overlapping on other content such as
+    // paragraphs.
+    z-index: 0;
 
     small,
     .small {
@@ -119,6 +125,16 @@ h6, .h6 { #heading-size(@font-size-h6); }
 
 p {
     margin: 0 0 15px;
+    // below is required to prevent anchor links within paragraphs from being
+    // overlapped by header margins. (h margins are used for navbar space)
+    position: relative;
+    z-index: 1;
+}
+
+a, p, ul, ol, table {
+    // required for preventing headings overlapping on other content such as
+    // paragraphs, lists, etc...
+    z-index: 1;
 }
 
 // nested list fixes
@@ -126,7 +142,7 @@ ul, ol > li > p {
     margin: 5px 0;
 }
 ul, ol > li > ul, ol {
-    margin-bottom: 12px !important;
+    // margin-bottom: 12px !important;
 }
 
 td > p {
@@ -145,8 +161,9 @@ img {
 // Blockquotes
 blockquote {
     padding: 10px 12px; // (@line-height-computed / 2) @line-height-computed;
-    margin: 0;
+    margin: 0 0 17px 0;
     font-size: 1em; // @blockquote-font-size;
+    font-style: italic;
     border-left: 5px solid @blockquote-border-color;
     color: #576075;
     background-color: #f9f9f9;

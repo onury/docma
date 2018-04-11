@@ -3,11 +3,12 @@
 // -------------------------------
 
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans:400,500,700,400italic");
-@import url("https://fonts.googleapis.com/css?family=Fira+Mono:400,500,700");
+// @import url("https://fonts.googleapis.com/css?family=Fira+Mono:400,500,700");
+@import url("https://fonts.googleapis.com/css?family=Overpass+Mono:400,600,700");
 
 @font-family-sans-serif:  "Fira Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-family-serif:       "Fira Sans", Cambria, Georgia, Times, serif;
-@font-family-monospace:   "Fira Mono", Menlo, Monaco, Consolas, monospace, "Courier New";
+@font-family-monospace:   "Overpass Mono", Menlo, Monaco, Consolas, monospace, "Courier New";
 @font-family-base:        @font-family-sans-serif;
 
 @font-size-base:          16px;
@@ -16,7 +17,7 @@
 @font-size-small:         ceil((@font-size-base * 0.85));
 @font-size-xsmall:        ceil((@font-size-base * 0.70));
 
-@font-size-mono-base:     15px;
+@font-size-mono-base:     15.5px;
 
 @font-size-h1:            floor((@font-size-base * 2.25));  // 36px
 @font-size-h2:            floor((@font-size-base * 2));     // 32px
@@ -48,13 +49,13 @@
 @gray-light:             lighten(@gray-base, 60%);
 @gray-lighter:           lighten(@gray-base, 80%);
 
-@blue:                  fade(#4d9cee, 80%);
+@blue:                  #5ca1eb; // fade(#4d9cee, 80%);
 @blue-pale:             #4f5e84;
-@green:                 fade(#5cb85c, 80%);
-@green-pale:            #35633a;
-@cyan:                  fade(#5bc0de, 80%);
-@yellow:                fade(#f0ad4e, 92%);
-@red:                   fade(#d9534f, 80%);
+@green:                 #52af52; // fade(#5cb85c, 80%);
+@green-pale:            #34793c;
+@cyan:                  #5bc0de; // fade(#5bc0de, 80%);
+@yellow:                #f0b563; // fade(#f0ad4e, 92%);
+@red:                   #e07470; // fade(#d9534f, 80%);
 @accent:                #3875ee;
 @purple:                #996599;
 @purple-pale:           #7f58ab;
@@ -64,7 +65,9 @@
 @ice:                   #9cbed3;
 @ice-mid:               #9aaec3;
 @ice-dark:              #788EA3;
-@brown:                 #4e1b0b;
+@ice-blue:              #465c84;
+@brown:                 #8a4c42;
+@brown-pale:            #734e48;
 
 @dark-softer:           lighten(@dark-soft, 3%);
 @dark-soft:             #242730;
@@ -91,7 +94,8 @@
 
 //** Global textual link color.
 @link-color:            darken(@blue, 10%);
-@link-hover-color:      darken(@link-color, 20%);
+@link-hover-color:      darken(@blue, 20%);; // darken(@link-color, 20%);
+@link-decoration-color: darken(@link-hover-color, 10%);
 @link-hover-decoration: underline;
 
 // -------------------------------
@@ -171,5 +175,5 @@
 
 // -------------------------------
 
-@brand-title-width: 165px;
+@brand-title-width: 180px;
 

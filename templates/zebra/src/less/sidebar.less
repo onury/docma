@@ -1,10 +1,10 @@
-@sidebar-width: 280px; // change app.SIDEBAR_WIDTH in JS if modified
+@sidebar-width: 300px; // change app.SIDEBAR_WIDTH in JS if modified
 @sidebar-header-height: 130px;
 @sidebar-toolbar-height: 30px;
 @sidebar-header-tb-height: @sidebar-header-height + @sidebar-toolbar-height;
 @sidebar-brand-height: 50px;
 @sidebar-item-height: 36px;
-@sidebar-item-label-max-width: 190px; // this should match app.NODE_LABEL_MAX_WIDTH max-width in JS
+@sidebar-item-label-max-width: 210px; // this should match app.NODE_LABEL_MAX_WIDTH max-width in JS
 @sidebar-toggle-color: #636982;
 
 input[type=search] {
@@ -148,7 +148,7 @@ input[type=search] {
     width: @sidebar-width;
     height: @sidebar-header-height;
     background-color: @dark;
-    border-bottom: 2px solid darken(@dark, 1%) !important;
+    border-bottom: 2px solid fade(darken(@dark, 1%), 70%) !important;
     .user-select(none);
 
     & > .sidebar-brand {
@@ -203,14 +203,32 @@ input[type=search] {
         text-align: center;
         height: @sidebar-toolbar-height;
         overflow: hidden;
-        margin-top: 5px;
+        margin-top: 6px;
     }
 }
 
-.toolbar-buttons {
-    padding: 0;
+.toolbar-kind-filters {
+    display: inline-block;
     position: relative;
-    cursor: pointer;
+    margin: 0 6px 0 0;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.toolbar-scope-filters {
+    display: inline-block;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    vertical-align: top;
+    white-space: nowrap;
+}
+.toolbar-buttons {
+    display: inline-block;
+    position: relative;
+    padding: 0;
     white-space: nowrap;
     .user-select(none);
     top: -1px;
@@ -218,25 +236,18 @@ input[type=search] {
     & span {
         color: #fff;
         opacity: 0.5;
+        cursor: pointer;
 
         &:hover {
             opacity: 1;
         }
     }
 }
-.toolbar-filters {
-    margin: 0 10px 0 0;
-    padding: 0;
-    position: relative;
-    text-align: center;
-    vertical-align: middle;
-    white-space: nowrap;
-}
 
 .sidebar-search {
     margin: 0 20px;
     padding: 0;
-    padding: 20px 0 12px;
+    padding: 20px 0 10px;
     position: relative;
 
     & #txt-search {
@@ -244,7 +255,6 @@ input[type=search] {
         font-size: @font-size-small; // * 0.93;
         width: 100%;
         height: @input-height-base;
-        // letter-spacing: 0.03em;
         margin-bottom: 0;
         padding: 2px 25px 0 30px;
         border-radius: 36px;
@@ -253,11 +263,13 @@ input[type=search] {
         color: @over-dark;
         border: 1px solid @dark-softer;
         .box-shadow(~"inset 12px 2px 5px rgba(0,0,0,0.1)");
+        // .trans-all-ease; // this class is added inline (to be toggled via `animations` option)
+        .trans-delay-1;
 
         &:focus {
             background-color: #fff;
             color: @gray-dark;
-            .box-shadow(~"inset 0px 0px 5px rgba(0,0,0,.3)");
+            .box-shadow(~"inset 1px 0px 2px rgba(0,0,0,.5)");
         }
     }
 
@@ -318,7 +330,7 @@ ul.sidebar-nav ul {
     margin: 0 !important;
     height: auto;
     max-height: 10000px;
-    overflow-y: hidden;
+    overflow: hidden;
     .trans-all-ease;
 
     &.no-height {
@@ -356,6 +368,10 @@ ul.sidebar-nav ul {
             text-decoration: none;
             color: #fff;
             background: @darkest; // @deep-dark;
+
+            & .badge-scope-circle {
+                border-color: @darkest !important;
+            }
         }
 
         &:active,
