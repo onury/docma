@@ -1,5 +1,5 @@
-/* global docma, DocmaWeb, hljs, $ */
-/* eslint camelcase:0, no-nested-ternary:0, max-depth:0, no-var:0, prefer-template:0, prefer-arrow-callback:0, prefer-spread:0, object-shorthand:0 */
+/* global docma, hljs, tippy, $ */
+/* eslint camelcase:0, no-nested-ternary:0, max-depth:0, no-var:0, prefer-template:0, prefer-arrow-callback:0, prefer-spread:0, object-shorthand:0, complexity:0 */
 
 var app = window.app || {};
 
@@ -10,16 +10,19 @@ var app = window.app || {};
 
     var templateOpts = docma.template.options;
 
-    var $window = $(window);
+    // var $window = $(window);
     var $sidebarNodes, $btnClean, $txtSearch;
     var $wrapper, $sidebarWrapper, $sidebarToggle;
     var $nbmBtn, $navOverlay, $navbarMenu, $navbarBrand, $navbarInner, $navbarList;
     var $btnSwitchFold, $btnSwitchOutline;
+    var $scopeFilters, $scopeFilterBtns, $kindFilters, $kindFilterBtns;
     var navbarMenuActuallWidth;
     var isFilterActive = false;
     // current fold state
     var isItemsFolded = templateOpts.sidebar.itemsFolded; // initial fold state
     var isApiRoute = false;
+    var SidebarSearch = app.SidebarSearch;
+    var sbSearch = new SidebarSearch();
 
     // ---------------------------
     // HELPER METHODS
@@ -77,7 +80,7 @@ var app = window.app || {};
 
         setTimeout(function () {
             $labels.each(function () {
-                app.helper.fitSidebarNavItems($(this), outline);
+                helper.fitSidebarNavItems($(this), outline);
             });
         // $labels.find('.inner').css('width', 'auto');
         }, delay);
@@ -100,10 +103,12 @@ var app = window.app || {};
      *  @private
      */
     function cleanFilter() {
-        if (!templateOpts.sidebar.enabled) return;
+        sbSearch.reset();
+        if (!templateOpts.sidebar.enabled || !$sidebarNodes) return;
 
-        $('.badge-btn').removeClass('active');
-        if ($txtSearch) $txtSearch.val('').focus();
+        setFilterBtnStates();
+
+        if ($txtSearch) $txtSearch.val('');
         $sidebarNodes.removeClass('hidden');
         if ($btnClean) $btnClean.hide();
         $('.toolbar-buttons > span').css('color', '#fff');
@@ -112,18 +117,69 @@ var app = window.app || {};
         // reset outline back to initial value
         setTimeout(function () {
             setSidebarNodesOutline(templateOpts.sidebar.outline);
+            if ($txtSearch) $txtSearch.focus();
         }, 100); // with a little delay
         isFilterActive = false;
     }
+
+    function setFilterBtnStates() {
+        if (!$scopeFilterBtns || !$kindFilterBtns) return;
+
+        $scopeFilterBtns.removeClass('active');
+        sbSearch.scope.forEach(function (s) {
+            $scopeFilters.find('[data-scope="' + s + '"]').addClass('active');
+        });
+
+        $kindFilterBtns.removeClass('active');
+        sbSearch.kind.forEach(function (s) {
+            $kindFilters.find('[data-kind="' + s + '"]').addClass('active');
+        });
+    }
+
+    /**
+     *  Applies the search filter by showing/hiding corresponding nodes in the
+     *  sidebar.
+     *  @private
+     */
+    function applySearch(strSearch) {
+        sbSearch.parse(strSearch);
+        setFilterBtnStates();
+        $sidebarNodes.each(function () {
+            var node = $(this);
+            var show = true;
+            if (sbSearch.scope.length > 0) {
+                show = sbSearch.hasScope(node.attr('data-scope'));
+            }
+            if (show && sbSearch.kind.length > 0) {
+                show = sbSearch.hasKind(node.attr('data-kind'));
+            }
+            if (show && sbSearch.keywords.length > 0) {
+                // get the data keywords to be searched from each node's target
+                // attribute.
+                show = sbSearch.matchesAnyKeyword(node.attr('data-keywords'));
+            }
+            if (show) {
+                node.removeClass('hidden');
+            } else {
+                node.addClass('hidden');
+            }
+        });
+    }
+
+    /**
+     *  Debounced version of `applySearch()`.
+     *  @private
+     */
+    var debounceApplySearch = helper.debounce(applySearch, 100, false);
 
     /**
      *  Filters the symbol nodes in the API sidebar by the given search string.
      *
      *  Prefix `kind:` will filter by symbol kind rather than searching for the
-     *  given text. e.g. `kind: instance-method`. Following kinds can be used:
-     *  `global`, `namespace`, `class`, `method`, `instance-method`,
-     *  `static-method`, `property`, `instance-property`, `static-property`,
-     *  `enum`.
+     *  given text. e.g. `kind:method` or `kind:method,class`.
+     *
+     *  Additionally, prefix `scope:` will filter by symbol scope rather than
+     *  searching for the given text. e.g. `scope:inner` or `scope:static,inner`.
      *  @private
      *
      *  @param {*} strSearch - String to be searched for.
@@ -131,8 +187,8 @@ var app = window.app || {};
     function filterSidebarNodes(strSearch) {
         if (!templateOpts.sidebar.enabled) return;
 
-        var search = (strSearch || '').trim().toLowerCase();
-        if (search === '') {
+        strSearch = (strSearch || '').trim().toLowerCase();
+        if (!strSearch) {
             cleanFilter();
             return;
         }
@@ -151,26 +207,7 @@ var app = window.app || {};
         // look weird.
         setSidebarNodesOutline('flat');
 
-        // e.g. search filter » "kind: instance-method"
-        var reSym = /^\s*kind\s*:\s*/i;
-        var filterByKind = reSym.test(search)
-            ? search.replace(reSym, '').replace(/[ \t]+/g, '-')
-            : null;
-
-        $('.badge-btn').removeClass('active');
-
-        var data;
-        var attr = filterByKind ? 'data-kind' : 'data-keywords';
-        var find = filterByKind ? filterByKind : search;
-        $sidebarNodes.each(function () {
-            // get the data to be searched from each node's target attribute.
-            data = $(this).attr(attr);
-            if (data.indexOf(find) < 0) {
-                $(this).addClass('hidden');
-            } else {
-                $(this).removeClass('hidden');
-            }
-        });
+        debounceApplySearch(strSearch);
 
         $('.toolbar-buttons > span').css('color', '#3f4450'); // '#7b8395'
     }
@@ -453,40 +490,94 @@ var app = window.app || {};
         // API-ROUTE-ONLY SECTION
         // ----------------------------
 
-        function searchEvent() {
+        function searchHandler() {
             if (!$txtSearch) return;
             // filter nodes for matched items
             filterSidebarNodes($txtSearch.val());
         }
 
-        // CAUTION: if modifying this, also update less vars in sidebar.less
-        var sidebarHeaderHeight = templateOpts.sidebar.search ? 130 : app.NAVBAR_HEIGHT;
-        if (templateOpts.sidebar.toolbar) sidebarHeaderHeight += app.TOOLBAR_HEIGHT;
-        $('.sidebar-nav-container').css('top', sidebarHeaderHeight);
-        $('.sidebar-header').css('height', sidebarHeaderHeight);
+        var debounceSearchHandler = helper.debounce(searchHandler, 200);
 
-        if (templateOpts.sidebar.search) {
-            $btnClean = $('.sidebar-search-clean');
-            $txtSearch = $('#txt-search');
+        // gets a click event handler for either scope filter buttons or kind
+        // filter buttons.
+        function getFilterClickHandler(filter) {
+            var isKind = filter === 'kind';
+            var has = isKind ? sbSearch.hasKind : sbSearch.hasScope;
+            var add = isKind ? sbSearch.addKind : sbSearch.addScope;
+            var remove = isKind ? sbSearch.removeKind : sbSearch.removeScope;
 
-            if ($btnClean) {
-                $btnClean.hide();
-                $btnClean.on('click', cleanFilter);
-            }
+            return function (event) {
+                var btn = $(this);
+                // get scope or kind value from the data- attribute.
+                // e.g. data-scope="instance" or data-kind="method"
+                var value = (btn.attr('data-' + filter) || '*').toLowerCase();
 
-            if ($txtSearch) {
-                $txtSearch.on('keyup', searchEvent);
-                $txtSearch.on('change', searchEvent);
-                $('.sidebar-search-icon').on('click', function () {
-                    $txtSearch.focus();
-                });
-            }
+                // if we already have this filter, we'll remove it
+                if (has.call(sbSearch, value)) {
+                    remove.call(sbSearch, value);
+                } else if (event.shiftKey) {
+                    // if shift is pressed, we'll add it (multiple filters, no
+                    // duplicates)
+                    add.call(sbSearch, value);
+                } else {
+                    // otherwise, we'll set it as the only filter (replace with
+                    // previous)
+                    sbSearch[filter] = [value];
+                }
 
-        } else {
-            $('.sidebar-nav').css('top', '0px');
+                var strSearch;
+                if ($txtSearch) {
+                    sbSearch.parseKeywords($txtSearch.val());
+                    strSearch = sbSearch.toString();
+                    $txtSearch.val(strSearch).focus();
+                    if ($btnClean) $btnClean.show();
+                } else {
+                    sbSearch.keywords = [];
+                    strSearch = sbSearch.toString();
+                }
+                filterSidebarNodes(strSearch);
+            };
         }
 
         if (templateOpts.sidebar.enabled) {
+
+            // CAUTION: if modifying this, also update less vars in sidebar.less
+            var sidebarHeaderHeight;
+            if (templateOpts.sidebar.search) {
+                sidebarHeaderHeight = 130;
+                if (templateOpts.sidebar.toolbar) sidebarHeaderHeight += app.TOOLBAR_HEIGHT;
+            } else {
+                sidebarHeaderHeight = app.NAVBAR_HEIGHT;
+                if (templateOpts.sidebar.toolbar) sidebarHeaderHeight += (app.TOOLBAR_HEIGHT + 10);
+            }
+
+            $('.sidebar-nav-container').css('top', sidebarHeaderHeight);
+            $('.sidebar-header').css('height', sidebarHeaderHeight);
+
+            if (templateOpts.sidebar.search) {
+                $btnClean = $('.sidebar-search-clean');
+                $txtSearch = $('#txt-search');
+
+                if ($btnClean) {
+                    $btnClean.hide();
+                    $btnClean.on('mousedown', cleanFilter);
+                }
+
+                if ($txtSearch) {
+                    $txtSearch.on('keyup', debounceSearchHandler);
+                    $txtSearch.on('change', searchHandler);
+                    $('.sidebar-search-icon').on('click', function () {
+                        $txtSearch.focus();
+                    });
+                    if (templateOpts.sidebar.animations) {
+                        $txtSearch.addClass('trans-all-ease');
+                    }
+                }
+
+            } else {
+                $('.sidebar-nav').css('top', '0px');
+            }
+
             $sidebarNodes = $('ul.sidebar-nav .sidebar-item');
 
             if (templateOpts.sidebar.animations) {
@@ -516,34 +607,29 @@ var app = window.app || {};
 
             if (templateOpts.sidebar.toolbar) {
 
-                var filterButtons = helper.getSymbolInfo('global', true).badge
-                    + helper.getSymbolInfo('namespace', true).badge
-                    + helper.getSymbolInfo('class', true).badge
-                    + helper.getSymbolInfo('instance-method', true).badge
-                    + helper.getSymbolInfo('static-method', true).badge
-                    + helper.getSymbolInfo('instance-property', true).badge
-                    + helper.getSymbolInfo('static-property', true).badge
-                    + helper.getSymbolInfo('enum', true).badge;
-                    // + helper.getSymbolInfo('inner', true).badge;
+                var kindButtons = // helper.getSymbolInfo('constant', null, true).badge +
+                    helper.getSymbolInfo('namespace', null, true).badge
+                    + helper.getSymbolInfo('module', null, true).badge
+                    + helper.getSymbolInfo('typedef', null, true).badge
+                    + helper.getSymbolInfo('class', null, true).badge
+                    + helper.getSymbolInfo('method', null, true).badge
+                    + helper.getSymbolInfo('property', null, true).badge
+                    + helper.getSymbolInfo('enum', null, true).badge
+                    + helper.getSymbolInfo('event', null, true).badge;
 
-                $('.toolbar-filters')
-                    .html(filterButtons)
-                    .find('.badge-btn')
-                    .on('click', function () {
-                        var btn = $(this);
-                        if (btn.hasClass('active')) {
-                            cleanFilter();
-                            return;
-                        }
-                        var strSearch = ($(this).attr('title') || '').toLowerCase().replace(/[ ]+/g, '-');
-                        strSearch = 'kind: ' + strSearch;
-                        if ($txtSearch) {
-                            $txtSearch.val(strSearch).focus();
-                            if ($btnClean) $btnClean.show();
-                        }
-                        filterSidebarNodes(strSearch);
-                        btn.addClass('active');
-                    });
+                $kindFilters = $('.toolbar-kind-filters').html(kindButtons);
+                $kindFilterBtns = $kindFilters.find('.badge-btn')
+                    .on('click', getFilterClickHandler('kind'));
+
+                var scopeButtons =
+                    helper.getScopeInfo('global').badge
+                    + helper.getScopeInfo('static').badge
+                    + helper.getScopeInfo('instance').badge
+                    + helper.getScopeInfo('inner').badge;
+
+                $scopeFilters = $('.toolbar-scope-filters').html(scopeButtons);
+                $scopeFilterBtns = $scopeFilters.find('.badge-scope-btn')
+                    .on('click', getFilterClickHandler('scope'));
 
                 $btnSwitchFold.on('click', function () {
                     console.log('clicked');
@@ -591,6 +677,16 @@ var app = window.app || {};
             $wrapper.removeClass('toggled');
             $sidebarToggle.removeClass('toggled');
         }
+
+        tippy('[title]', {
+            placement: 'bottom',
+            animation: 'scale',
+            duration: 200,
+            arrow: true,
+            appendTo: document.body,
+            zIndex: 9999999,
+            theme: 'zebra'
+        });
 
     });
 
