@@ -1,18 +1,18 @@
 # Zebra — Template for Docma
-<img align="left" width="200" height="200" style="margin-right:30px" src="https://raw.github.com/onury/docma/v2/templates/zebra/zebra-logo.png" />
+<img align="right" width="200" height="200" style="margin-right:30px" src="https://raw.github.com/onury/docma/v2/templates/zebra/zebra-logo.png" />
 
-This is the default template for [Docma][docma]; with a side-bar symbols menu, search and navigation features; and a beautiful layout.
+This is the default template for [Docma][docma-repo]; with a side-bar symbols menu, search and navigation features; and a beautiful layout.
 
-Although Zebra is installed together with Docma, you can still install/update via NPM:
-```sh
-npm i docma-template-zebra -g
-```
+## Usage
 
-Using Zebra template is straight-forward. Just set `template.path` to `"default"` or `"zebra"` or omit it in your build configuration (docma.json).
+1. Make sure you have the latest [Docma][docma-repo] installed.
+2. Although Zebra is installed together with Docma, you can still install/update this template globally via **npm**: `npm i docma-template-zebra -g`
+3. Set `template.path` to `"default"` or `"zebra"` or omit it in your build configuration (docma.json).
+4. Configure and set `template.options` as described below.
 
 ## Template Options
 
-Template specific options that can be used when building your documentation with Zebra.
+Template specific options that can be used when building your documentation with **Zebra**.
 
 <table>
     <thead>
@@ -230,7 +230,7 @@ Template specific options that can be used when building your documentation with
             <td>↳&nbsp;<code>navbar<b>.menu</b></code></td>
             <td><code>Array</code></td>
             <td>
-                List of navigation menu items that builds the navbar and submenu items. See <a href="#Navigation-Menu">Navigation Menu</a> below. Default: <code>[]</code>
+                List of navigation menu items that builds the navbar and submenu items. See <a href="#navigation-menu">Navigation Menu</a> below. Default: <code>[]</code>
             </td>
         </tr>
     </tbody>
@@ -400,4 +400,4 @@ docma -c path/to/docma.json
 
 
 
-[docma]:https://github.com/onury/docma
+[docma-repo]:https://github.com/onury/docma
