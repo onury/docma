@@ -1,12 +1,19 @@
-<p align="center"><img width="200" height="200" src="https://raw.github.com/onury/docma/v2/docma-logo.png" /></p>
+<h1 align="center">
+    <a href="https://github.com/onury/docma"><img width="200" height="200" src="https://raw.github.com/onury/docma/v2/docma-logo.png" alt="Docma" /></a>
+</h1>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-[![npm](http://img.shields.io/npm/v/docma.svg)](https://www.npmjs.com/package/docma)
-[![release](https://img.shields.io/github/release/onury/docma.svg)](https://github.com/onury/docma)
-[![license](http://img.shields.io/npm/l/docma.svg)](https://github.com/onury/docma/blob/master/LICENSE)
-[![downloads](https://img.shields.io/npm/dt/docma.svg)](https://www.npmjs.com/package/docma)
-[![dependencies](https://david-dm.org/onury/docma.svg)](https://david-dm.org/onury/docma)
-[![maintained](https://img.shields.io/maintenance/yes/2017.svg)](https://github.com/onury/docma/graphs/commit-activity)  
+<p align="center">
+    <a href="https://www.npmjs.com/package/docma"><img src="http://img.shields.io/npm/v/docma.svg?style=flat-square" alt="npm" /></a>
+    <a href="https://github.com/onury/docma"><img src="https://img.shields.io/github/release/onury/docma.svg?style=flat-square" alt="release" /></a>
+    <a href="https://github.com/onury/docma/blob/master/LICENSE"><img src="http://img.shields.io/npm/l/docma.svg?style=flat-square" alt="license" /></a>
+    <a href="https://www.npmjs.com/package/docma"><img src="https://img.shields.io/npm/dt/docma.svg?style=flat-square" alt="downloads" /></a>
+    <a href="https://david-dm.org/onury/docma"><img src="https://david-dm.org/onury/docma.svg?style=flat-square" alt="dependencies" /></a>
+    <a href="https://github.com/onury/docma/graphs/commit-activity"><img src="https://img.shields.io/maintenance/yes/2017.svg?style=flat-square" alt="maintained" /></a>
+    <a href="https://onury.io/docma"><img src="https://img.shields.io/badge/documentation-click_to_read-c27cf4.svg?documentation=click_to_read&style=flat-square" alt="documentation" /></a>
+    <br />
+    <sub>© 2018, Onur Yıldırım (<b><a href="https://github.com/onury">@onury</a></b>).</sub>
+</p>
+
 
 ---
 
@@ -28,8 +35,8 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 - Build a cool **SPA** (Single Page Application) from parsed files.
 - Generate multiple/separate API documentations by **grouping** JS files.
 - Path or Query-string based app routing.
-- Non-opinionated engine, **built-in** template with cool opinions. :sunglasses:
-- Supports custom templates.
+- Non-opinionated engine, **built-in** template with [cool opinions][zebra]. :sunglasses:
+- Supports custom templates, comes with template authoring tools.
 - Works great with **GitHub Pages**, Amazon **S3**, Nginx, Apache, etc...
 - Build via **API** or **CLI**.
 - Extremely configurable and debuggable.
