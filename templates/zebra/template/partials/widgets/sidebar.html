@@ -17,7 +17,7 @@
         <div class="sidebar-search-icon">
             <i class="fas fa-md fa-search"></i>
         </div>
-        <input id="txt-search" type="search" class="form-control trans-all-ease" placeholder="Search..." autocorrect="off" autocapitalize="off" spellcheck="false" />
+        <input id="txt-search" type="search" placeholder="Search..." autocorrect="off" autocapitalize="off" spellcheck="false" />
         <div class="sidebar-search-clean">
             <i class="fas fa-lg fa-times-circle"></i>
         </div>
@@ -26,8 +26,9 @@
 
     {?template.options.sidebar.toolbar}
     <div class="sidebar-toolbar">
-        <div class="toolbar-filters inline-block"></div>
-        <div class="toolbar-buttons inline-block">
+        <div class="toolbar-scope-filters"></div>
+        <div class="toolbar-kind-filters"></div>
+        <div class="toolbar-buttons">
             <span class="btn-switch-fold inline-block" title="Fold Symbols">
                 {@eq key=template.options.sidebar.itemsFolded type="boolean" value="true"}
                 <i class="far fa-lg fa-caret-square-right"></i>
