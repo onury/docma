@@ -41,15 +41,17 @@
 #### Changed
 - Default template finally has a name :) - Zebra.
 - **BREAKING**: You need Docma v2+ for latest Zebra template to work.
-- **DEPRECATED**: The template options object structure is changed and a couple of options are renamed. Old structure is still supported and it won't break anything but this support will be removed in future versions. See documentation for the new & improved structure.
 - Improved symbol listing styles and performance. Using CSS transitions instead of JS manipulation. Also; when search is active, outline is temporarily set to `"flat"` so that you see the parent of the symbol. When search box is cleaned, it's set back to the initial template setting. (e.g. `"tree"` if set).
 - Improved `@example` outputs. If there are multiple examples for a symbol, they will be numbered now.
 - Improved nested bullet list spacing, for better readability.
-- Improved UI and responsive layout. On small screens, sidebar auto-collapses; top navbar turns into hamburger menu. Also, truely printable.
+- Improved UI and responsive layout. On small screens, sidebar auto-collapses; top navbar turns into hamburger menu. Also, truly printable.
 - Improved template option `.badges` (default: `true`) to also accept a string value for custom bullets instead of badges.
 - Improved template option `.title` to also accept an object `{ label:String, href:String }` so you can link it.
 - Various other improvements and clean up.
 
+#### Deprecated
+- The template options object structure is changed and a couple of options are renamed. Old structure is still supported and it won't break anything but this support will be removed in future versions. See documentation for the new & improved structure.
+
 #### Removed
 - **BREAKING**: icomoon selection of icons (and `ico-` CSS prefix) in favor of FontAwsome (v5) and SVG icons support.
-- Bootstrap and its dependencies (css and js) which dramatically reduces the size of the generated SPA. Also, cleaned up all unused styles.
+- Bootstrap and its dependencies (css and js). Also, cleaned up all unused styles.
