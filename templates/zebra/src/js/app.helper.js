@@ -1,5 +1,5 @@
 /* global docma, DocmaWeb, dust, $ */
-/* eslint camelcase:0, no-nested-ternary:0, max-depth:0, no-var:0, prefer-template:0, prefer-arrow-callback:0, prefer-spread:0, object-shorthand:0 */
+/* eslint camelcase:0, no-nested-ternary:0, max-depth:0, no-var:0, prefer-template:0, prefer-arrow-callback:0, prefer-spread:0, object-shorthand:0, complexity:0, max-params:0 */
 
 /**
  *  @license
@@ -13,12 +13,12 @@ var app = window.app || {};
 
     app.NODE_MIN_FONT_SIZE = 9;
     app.NODE_MAX_FONT_SIZE = 13; // this should match .item-label span font-size in CSS
-    app.NODE_LABEL_MAX_WIDTH = 190; // this should match .item-label max-width in CSS
+    app.NODE_LABEL_MAX_WIDTH = 210; // this should match .item-label max-width in CSS
     app.RE_EXAMPLE_CAPTION = /^\s*<caption>(.*?)<\/caption>\s*/gi;
     // CAUTION: if modifying these constants, also update less vars in
     // sidebar.less
     app.NAVBAR_HEIGHT = 50;
-    app.SIDEBAR_WIDTH = 280; // change @sidebar-width in less if modified
+    app.SIDEBAR_WIDTH = 300; // change @sidebar-width in less if modified
     app.SIDEBAR_NODE_HEIGHT = 36;
     app.TOOLBAR_HEIGHT = 30;
     app.TREE_NODE_WIDTH = 25;
@@ -27,7 +27,7 @@ var app = window.app || {};
      *  Helper utilities for Zebra Template/App
      *  @private
      */
-    app.helper = {};
+    var helper = {};
 
     var templateOpts = docma.template.options;
 
@@ -35,18 +35,34 @@ var app = window.app || {};
     // HELPER METHODS
     // ---------------------------
 
-    app.helper.toggleBodyScroll = function (enable) {
+    helper.toggleBodyScroll = function (enable) {
         var overflow = enable ? 'auto' : 'hidden';
         $('body').css({
             'overflow': overflow
         });
     };
 
+    helper.capitalize = function (str) {
+        return str.split(/[ \t]+/g).map(function (word) {
+            return word.charAt(0).toUpperCase() + word.slice(1);
+        }).join(' ');
+    };
+
+    helper.removeFromArray = function (arr, value) {
+        var index = arr.indexOf(value);
+        if (index !== -1) arr.splice(index, 1);
+    };
+
+    helper.addToArray = function (arr, value) {
+        var index = arr.indexOf(value);
+        if (index === -1) arr.push(value); // no duplicates
+    };
+
     // Returns a function, that, as long as it continues to be invoked, will not
     // be triggered. The function will be called after it stops being called for
     // N milliseconds. If `immediate` is passed, trigger the function on the
     // leading edge, instead of the trailing.
-    app.helper.debounce = function (func, wait, immediate) {
+    helper.debounce = function (func, wait, immediate) {
         var timeout;
         return function () {
             var context = this;
@@ -62,17 +78,17 @@ var app = window.app || {};
         };
     };
 
-    app.helper.getCssNumVal = function ($elem, styleName) {
+    helper.getCssNumVal = function ($elem, styleName) {
         return parseInt($elem.css(styleName), 10) || 0;
     };
 
-    app.helper.getScrollWidth = function ($elem) {
+    helper.getScrollWidth = function ($elem) {
         return $elem.get(0).scrollWidth || $elem.outerWidth() || 0;
     };
 
     // Adjusts font-size of each sidebar node's label so that they are not
     // cropped.
-    app.helper.fitSidebarNavItems = function ($el, outline) {
+    helper.fitSidebarNavItems = function ($el, outline) {
         outline = outline || templateOpts.sidebar.outline;
 
         var cropToFit = templateOpts.sidebar.itemsOverflow === 'crop';
@@ -89,7 +105,7 @@ var app = window.app || {};
             if (!savedMargin) {
                 // round this so we don't trigger transition for tiny
                 // differences.
-                var marginLeft = Math.round(app.NODE_LABEL_MAX_WIDTH - app.helper.getScrollWidth($inner));
+                var marginLeft = Math.round(app.NODE_LABEL_MAX_WIDTH - helper.getScrollWidth($inner));
                 if (marginLeft >= 0) marginLeft = 0;
                 // this value will be used to set margin-left on hover via JS.
                 $inner.attr(dMarginLeft, marginLeft + 'px');
@@ -129,96 +145,151 @@ var app = window.app || {};
         }, delay);
     };
 
-    app.helper.colorOperators = function (str) {
+    helper.colorOperators = function (str) {
         return str.replace(/[.#~]/g, '<span class="color-blue">$&</span>')
             .replace(/:/g, '<span class="color-gray-dark">$&</span>');
     };
 
-    app.helper.hasChildren = function (symbol) {
+    helper.hasChildren = function (symbol) {
         return symbol.$members && !symbol.isEnum;
     };
 
-    app.helper.getSymbolInfo = function (symbolKind, asButton) {
-        var badge, char;
-        var cls = asButton ? 'badge-btn' : '';
-
-        switch (symbolKind) {
-            case 'class':
-                char = 'C';
-                badge = app.svg.diamond(char, 'Class', 'green', cls);
-                break;
-            case 'constructor':
-                char = 'C';
-                badge = app.svg.circle(char, 'Constructor', 'green-pale', cls);
-                break;
-            case 'namespace':
-                char = 'N';
-                badge = app.svg.pentagonDown(char, 'Namespace', 'pink', cls);
-                break;
-            case 'module':
-                char = 'M';
-                badge = app.svg.diamond(char, 'Module', 'purple-dark', cls);
-                break;
-            case 'enum':
-                char = 'E';
-                badge = app.svg.pentagonUp(char, 'Enum', 'purple-pale', cls);
-                break;
-            case 'event':
-                char = 'E';
-                badge = app.svg.octagon(char, 'Event', 'blue-pale', cls);
-                break;
+    helper.getScopeInfo = function (scope) {
+        var o = {};
+        var top = 0;
+        var left = 0;
+        var m = 12; // should match badge-scope-btn size + some margin
+        switch (scope) {
             case 'global':
-                char = 'G';
-                badge = app.svg.hexagonV(char, 'Global', 'red', cls);
+                o.color = 'purple';
                 break;
-            case 'global-object':
-                char = 'G';
-                badge = app.svg.hexagonV(char, 'Global Object', 'red', cls);
+            case 'static':
+                o.color = 'accent';
+                top = m;
                 break;
-            case 'global-function':
-                char = 'G';
-                badge = app.svg.hexagonV(char, 'Global Function', 'blue', cls);
+            case 'instance':
+                o.color = 'green';
+                left = m;
                 break;
             case 'inner':
-                char = 'I';
-                badge = app.svg.circle(char, 'Inner', 'gray-dark', cls);
-                break;
-            case 'inner-method':
-                char = 'M';
-                badge = app.svg.square(char, 'Inner Method', 'gray-dark', cls);
-                break;
-            case 'inner-property':
-                char = 'M';
-                badge = app.svg.circle(char, 'Inner Property', 'gray-dark', cls);
-                break;
-            case 'static-property':
-                char = 'P';
-                badge = app.svg.square(char, 'Static Property', 'orange', cls);
-                break;
-            case 'static-method':
-                char = 'M';
-                badge = app.svg.square(char, 'Static Method', 'accent', cls);
-                break;
-            case 'instance-property':
-                char = 'P';
-                badge = app.svg.circle(char, 'Instance Property', 'yellow', cls);
-                break;
-            case 'instance-method':
-                char = 'M';
-                badge = app.svg.circle(char, 'Instance Method', 'cyan', cls);
-                break;
-            case 'function':
-                char = 'F';
-                badge = app.svg.square(char, 'Function', 'accent', cls);
+                o.color = 'gray-light';
+                top = m;
+                left = m;
                 break;
             default:
-                char = '•';
-                badge = app.svg.circle(char, '', 'black', cls);
+                o.color = null;
         }
+        var margin = top + 'px 0 0 ' + left + 'px';
+        o.title = scope || '';
+        o.badge = '<div class="badge-scope-btn bg-' + o.color + '" style="margin:' + margin + '" title="' + scope + '" data-scope="' + scope + '"></div>';
+        return o;
+    };
+
+    helper.getSymbolInfo = function (kind, scope, asButton) {
+        var title = scope || '';
+        title += ' ' + kind.replace('typedef', 'type');
+        title = DocmaWeb.Utils.trimLeft(helper.capitalize(title));
+        var svgOpts = {
+            title: title,
+            addClass: asButton ? 'badge-btn' : '',
+            circleColor: helper.getScopeInfo(scope).color,
+            kind: kind,
+            scope: scope
+        };
+
+        switch (kind) {
+            case 'class':
+                svgOpts.char = 'C';
+                svgOpts.color = 'green';
+                svgOpts.shape = 'diamond';
+                break;
+            case 'constructor':
+                svgOpts.char = 'c';
+                svgOpts.color = 'green-pale';
+                svgOpts.shape = 'circle';
+                break;
+            case 'namespace':
+                svgOpts.char = 'N';
+                svgOpts.color = 'pink';
+                svgOpts.shape = 'pentagonDown';
+                break;
+            case 'module':
+                svgOpts.char = 'M';
+                svgOpts.color = 'red';
+                svgOpts.shape = 'hexagonH';
+                break;
+
+            case 'constant':
+                svgOpts.char = 'c';
+                svgOpts.color = 'brown';
+                svgOpts.shape = 'hexagonV';
+                break;
+            case 'typedef':
+                svgOpts.char = 'T';
+                svgOpts.color = 'purple-dark';
+                svgOpts.shape = 'hexagonV';
+                break;
+
+            case 'global':
+                svgOpts.char = 'G';
+                svgOpts.color = 'purple-dark';
+                svgOpts.shape = 'hexagonV';
+                break;
+            case 'global-object':
+                svgOpts.char = 'G';
+                svgOpts.color = 'purple-dark';
+                svgOpts.shape = 'hexagonV';
+                break;
+
+            case 'global-function':
+                svgOpts.char = 'F';
+                svgOpts.color = 'accent';
+                svgOpts.shape = 'circle';
+                break;
+            case 'function':
+                svgOpts.char = 'F';
+                svgOpts.color = 'accent';
+                svgOpts.shape = 'circle';
+                break;
+            case 'method':
+                svgOpts.char = 'M';
+                svgOpts.color = 'cyan';
+                svgOpts.shape = 'circle';
+                break;
+            case 'property':
+                svgOpts.char = 'P';
+                svgOpts.color = 'yellow';
+                svgOpts.shape = 'square';
+                break;
+            case 'enum':
+                svgOpts.char = 'e';
+                svgOpts.color = 'orange';
+                svgOpts.shape = 'pentagonUp';
+                break;
+
+            case 'event':
+                svgOpts.char = 'E';
+                svgOpts.color = 'blue-pale';
+                svgOpts.shape = 'octagon';
+                break;
+            case 'member':
+                svgOpts.char = 'm';
+                svgOpts.color = 'ice-blue';
+                svgOpts.shape = 'square';
+                break;
+
+            default:
+                svgOpts.title = '';
+                svgOpts.char = '•';
+                svgOpts.color = 'black';
+                svgOpts.shape = 'square';
+        }
+
         return {
-            kind: symbolKind,
-            char: char,
-            badge: badge
+            kind: kind,
+            scope: scope || '',
+            char: svgOpts.char,
+            badge: app.svg.shape(svgOpts)
         };
     };
 
@@ -231,30 +302,31 @@ var app = window.app || {};
             };
         }
 
-        if (DocmaWeb.Utils.isClass(symbol)) return app.helper.getSymbolInfo('class');
-        if (DocmaWeb.Utils.isConstructor(symbol)) return app.helper.getSymbolInfo('constructor');
-        if (DocmaWeb.Utils.isNamespace(symbol)) return app.helper.getSymbolInfo('namespace');
-        if (DocmaWeb.Utils.isModule(symbol)) return app.helper.getSymbolInfo('module');
-        if (DocmaWeb.Utils.isEnum(symbol)) return app.helper.getSymbolInfo('enum');
-        if (DocmaWeb.Utils.isEvent(symbol)) return app.helper.getSymbolInfo('event');
-        if (DocmaWeb.Utils.isGlobal(symbol)) {
-            return DocmaWeb.Utils.isMethod(symbol)
-                ? app.helper.getSymbolInfo('global-function')
-                : app.helper.getSymbolInfo('global-object');
+        if (DocmaWeb.Utils.isClass(symbol)) return helper.getSymbolInfo('class', symbol.scope);
+        if (DocmaWeb.Utils.isTypeDef(symbol)) return helper.getSymbolInfo('typedef', symbol.scope);
+        if (DocmaWeb.Utils.isConstructor(symbol)) return helper.getSymbolInfo('constructor', symbol.scope);
+        if (DocmaWeb.Utils.isNamespace(symbol)) return helper.getSymbolInfo('namespace', symbol.scope);
+        if (DocmaWeb.Utils.isModule(symbol)) return helper.getSymbolInfo('module', symbol.scope);
+        if (DocmaWeb.Utils.isEnum(symbol)) return helper.getSymbolInfo('enum', symbol.scope);
+        if (DocmaWeb.Utils.isEvent(symbol)) return helper.getSymbolInfo('event', symbol.scope);
+
+        if (DocmaWeb.Utils.isProperty(symbol)) return helper.getSymbolInfo('property', symbol.scope);
+        if (DocmaWeb.Utils.isMethod(symbol)) return helper.getSymbolInfo('method', symbol.scope);
+
+        // if (DocmaWeb.Utils.isGlobal(symbol)) {
+        //     return DocmaWeb.Utils.isMethod(symbol)
+        //         ? helper.getSymbolInfo('global-function', symbol.scope)
+        //         : helper.getSymbolInfo('global-object', symbol.scope);
+        // }
+
+        if (symbol.kind === 'member') {
+            return helper.getSymbolInfo('member', symbol.scope);
         }
-        if (DocmaWeb.Utils.isInner(symbol)) {
-            return DocmaWeb.Utils.isMethod(symbol)
-                ? app.helper.getSymbolInfo('inner-method')
-                : app.helper.getSymbolInfo('inner');
-        }
-        if (DocmaWeb.Utils.isStaticProperty(symbol)) return app.helper.getSymbolInfo('static-property');
-        if (DocmaWeb.Utils.isInstanceProperty(symbol)) return app.helper.getSymbolInfo('instance-property');
-        if (DocmaWeb.Utils.isStaticMethod(symbol)) return app.helper.getSymbolInfo('static-method');
-        if (DocmaWeb.Utils.isInstanceMethod(symbol)) return app.helper.getSymbolInfo('instance-method');
+
         if (DocmaWeb.Utils.isMethod(symbol)) {
-            return app.helper.getSymbolInfo('function');
+            return helper.getSymbolInfo('function', symbol.scope);
         }
-        return app.helper.getSymbolInfo();
+        return helper.getSymbolInfo();
         // return none;
     }
 
@@ -266,7 +338,7 @@ var app = window.app || {};
     }
 
     // treeNode: 'first'/'parent', 'last' or 'node' (or 'deep' which is calculated)
-    function getTreeLineImgs(levels, treeNode, hasChildren) {
+    function getTreeLineImgs(levels, treeNode, hasChildren, parentIsLast) {
         // this will be checked and src might be changed to img/tree-last.png if
         // this is the last item of a tree node.
 
@@ -288,13 +360,15 @@ var app = window.app || {};
         if (levels > 2) {
             var i;
             for (i = 2; i < levels; i++) {
-                imgs.unshift(getTreeLine('deep'));
+                // if parent symbol is the last in tree, we add space instead of
+                // a deeper tree line.
+                imgs.unshift(getTreeLine(parentIsLast ? 'space' : 'deep'));
             }
         }
         return imgs.join('');
     }
 
-    function getSidebarNavItemInner(badge, symbolName, treeNode, hasChildren) {
+    function getSidebarNavItemInner(badge, symbolName, treeNode, hasChildren, parentIsLast) {
         var levels = DocmaWeb.Utils.getLevels(symbolName);
 
         var badgeIsStr = typeof templateOpts.sidebar.badges === 'string';
@@ -329,7 +403,7 @@ var app = window.app || {};
         //     }
         // } else {
 
-        treeImages = getTreeLineImgs(levels, treeNode, hasChildren);
+        treeImages = getTreeLineImgs(levels, treeNode, hasChildren, parentIsLast);
         if (noBadge) {
             badge = '';
             labelMargin = 7;
@@ -353,9 +427,9 @@ var app = window.app || {};
             + '</div>';
     }
 
-    function getSidebarNavItem(symbol, parentSymbol, isLast) {
+    function getSidebarNavItem(symbol, parentSymbol, isLast, parentIsLast) {
         var treeNode = parentSymbol
-            ? isLast ? 'last' : 'node'
+            ? (isLast ? 'last' : 'node')
             : 'first';
         var id = dust.filters.$id(symbol);
         var keywords = DocmaWeb.Utils.getKeywords(symbol);
@@ -364,31 +438,162 @@ var app = window.app || {};
         var badge = templateOpts.sidebar.badges === true
             ? symbolData.badge || ''
             : (typeof templateOpts.sidebar.badges === 'string' ? templateOpts.sidebar.badges : '&nbsp;•&nbsp;');
-        var hasChildren = app.helper.hasChildren(symbol);
-        var innerHTML = getSidebarNavItemInner(badge, symbol.$longname, treeNode, hasChildren);
+        var hasChildren = helper.hasChildren(symbol);
+        var innerHTML = getSidebarNavItemInner(badge, symbol.$longname, treeNode, hasChildren, parentIsLast);
         var chevron = '';
         if (hasChildren) {
             chevron = '<div class="chevron"><i class="fas fa-lg fa-angle-right"></i></div>';
         }
-        return chevron + '<a href="#' + id + '" class="sidebar-item" data-keywords="' + keywords + '" data-kind="' + symbolData.kind + '">'
+        return chevron + '<a href="#' + id + '" class="sidebar-item" data-keywords="' + keywords + '" data-kind="' + symbolData.kind + '" data-scope="' + symbolData.scope + '">'
             + innerHTML + '</a>';
     }
 
-    app.helper.buildSidebarNodes = function (symbolNames, symbols, parentSymbol) {
+    helper.buildSidebarNodes = function (symbolNames, symbols, parentSymbol, parentIsLast) {
         symbols = symbols || docma.documentation;
         var items = [];
         symbols.forEach(function (symbol, index) {
             // don't add nav item if symbol is not in symbolNames list
             if (symbolNames.indexOf(symbol.$longname) === -1) return;
+            // don't add nav item if symbol has hideconstructor = true and this
+            // is a constructor
+            if (DocmaWeb.Utils.isConstructor(symbol) && symbol.hideconstructor === true) {
+                return;
+            }
 
-            var navItem = getSidebarNavItem(symbol, parentSymbol, index === symbols.length - 1);
+            var isLast = index === symbols.length - 1;
+            var navItem = getSidebarNavItem(symbol, parentSymbol, isLast, parentIsLast);
             var members = '';
-            if (app.helper.hasChildren(symbol)) {
-                members = '<ul class="item-members trans-all-ease">' + app.helper.buildSidebarNodes(symbolNames, symbol.$members, symbol).join('') + '</ul>';
+            if (helper.hasChildren(symbol)) {
+                members = '<ul class="item-members trans-all-ease">' + helper.buildSidebarNodes(symbolNames, symbol.$members, symbol, isLast).join('') + '</ul>';
             }
             items.push('<li>' + navItem + members + '</li>');
         });
         return items;
     };
+
+    // --------------------------------
+    // SIDEBAR SEARCH CLASS
+    // --------------------------------
+
+    // filter regexps
+    // kind:method or kind:method,property etc.. or kind:*
+    var RE_KIND = /(?:\bkind:\s*)([^, ]+(?:\s*,\s*[^, ]+)*)?/gi;
+    // same for scope:..
+    var RE_SCOPE = /(?:\bscope:\s*)([^, ]+(?:\s*,\s*[^, ]+)*)?/gi;
+
+    function SidebarSearch() {
+        this.reset();
+    }
+
+    SidebarSearch.prototype.reset = function () {
+        this.scope = [];
+        this.kind = [];
+        this.keywords = [];
+    };
+
+    SidebarSearch.prototype.parseKeywords = function (string) {
+        // remove kind:.. and scope:.. and get the rest in separate words.
+        var kw = (string || '')
+            .replace(RE_KIND, '')
+            .replace(RE_SCOPE, '')
+            .trim()
+            .replace(/\s+/, ' ');
+        this.keywords = kw ? kw.split(' ') : [];
+        return this;
+    };
+
+    /**
+     *  Parses the search text into `{ kind:Array, scope:Array, keywords:Array }`.
+     */
+    SidebarSearch.prototype.parse = function (string) {
+        if (!string) {
+            this.kind = [];
+            this.scope = [];
+            this.keywords = [];
+            return this;
+        }
+
+        var m = RE_KIND.exec(string);
+        // `kind:*` means all kinds. It's redundant.
+        if (!m || m.length < 2 || !m[1] || m.indexOf('*') >= 0) {
+            this.kind = [];
+        } else {
+            this.kind = m[1].split(',').map(function (k) {
+                return k.toLocaleLowerCase().trim();
+            });
+        }
+
+        m = RE_SCOPE.exec(string);
+        // `scope:*` means all scopes. It's redundant.
+        if (!m || m.length < 2 || !m[1] || m.indexOf('*') >= 0) {
+            this.scope = [];
+        } else {
+            this.scope = m[1].split(',').map(function (s) {
+                return s.toLocaleLowerCase().trim();
+            });
+        }
+
+        // reset after .exec called
+        RE_KIND.lastIndex = 0;
+        RE_SCOPE.lastIndex = 0;
+
+        this.parseKeywords(string);
+        return this;
+    };
+
+    SidebarSearch.prototype.hasScope = function (scope) {
+        return this.scope.indexOf(scope) >= 0;
+    };
+
+    SidebarSearch.prototype.removeScope = function (scope) {
+        helper.removeFromArray(this.scope, scope);
+    };
+
+    SidebarSearch.prototype.addScope = function (scope) {
+        helper.addToArray(this.scope, scope); // no duplicates
+    };
+
+    SidebarSearch.prototype.hasKind = function (kind) {
+        return this.kind.indexOf(kind) >= 0;
+    };
+
+    SidebarSearch.prototype.removeKind = function (kind) {
+        helper.removeFromArray(this.kind, kind);
+    };
+
+    SidebarSearch.prototype.addKind = function (kind) {
+        helper.addToArray(this.kind, kind); // no duplicates
+    };
+
+    SidebarSearch.prototype.matchesAnyKeyword = function (keywords) {
+        return this.keywords.some(function (kw) {
+            return keywords.indexOf(kw.toLocaleLowerCase()) >= 0;
+        });
+    };
+
+    SidebarSearch.prototype.toObject = function () {
+        return {
+            scope: this.scope,
+            kind: this.kind,
+            keywords: this.keywords
+        };
+    };
+
+    SidebarSearch.prototype.toString = function () {
+        var s = '';
+        if (Array.isArray(this.keywords) && this.keywords.length > 0) {
+            s = this.keywords.join(' ') + ' ';
+        }
+        if (Array.isArray(this.scope) && this.scope.length > 0) {
+            s += 'scope:' + this.scope.join(',') + ' ';
+        }
+        if (Array.isArray(this.kind) && this.kind.length > 0) {
+            s += 'kind:' + this.kind.join(',');
+        }
+        return s.trim();
+    };
+
+    app.SidebarSearch = SidebarSearch;
+    app.helper = helper;
 
 })();
