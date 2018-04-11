@@ -30,20 +30,25 @@ var app = window.app || {};
     shapes.pentagon = shapes.pentagonUp;
     shapes.hexagon = shapes.hexagonV;
 
-    function getHtml(svgName, char, title, color, addClass) {
-        var svg = shapes[svgName];
-        var cls = 'badge-' + svgName;
-        cls += ' svg-fill-' + (color || 'black');
-        if (addClass) cls += ' ' + addClass;
+    app.svg.shape = function (options) {
+        var opts = options || {};
+        var shape = opts.shape || 'square';
+        var svg = shapes[shape];
+        var cls = 'badge-' + shape;
+        cls += ' svg-fill-' + (opts.color || 'black');
+        if (opts.addClass) cls += ' ' + opts.addClass;
         svg = '<svg xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 60 60">' + svg + '</svg>';
-        return '<div class="symbol-badge ' + cls + '" title="' + (title || '') + '"><span>' + (char || '-') + '</span>' + svg + '</div>';
-    }
-
-    Object.keys(shapes).forEach(function (name) {
-        app.svg[name] = function (char, title, color, addClass) {
-            return getHtml(name, char, title, color, addClass);
-        };
-    });
+        var scopeCircle = opts.circleColor
+            ? '<div class="badge-scope-circle bg-' + opts.circleColor + '"></div>'
+            : '';
+        // only add data-kind attr if this is a badge button.
+        // badge buttons don't have circleColor (scope circle).
+        var dataKind = !opts.circleColor
+            ? ' data-kind="' + opts.kind + '"'
+            : '';
+        var title = (opts.title || '').toLowerCase();
+        return '<div class="symbol-badge ' + cls + '" title="' + title + '"' + dataKind + '>' + scopeCircle + '<span>' + (opts.char || '-') + '</span>' + svg + '</div>';
+    };
 
     function getFaHtml(title, color) {
         return '<div class="symbol-badge svg-fill-' + color + '" title="' + title + '"><span></span>'
