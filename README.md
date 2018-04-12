@@ -8,7 +8,7 @@
     <a href="https://github.com/onury/docma/blob/master/LICENSE"><img src="http://img.shields.io/npm/l/docma.svg?style=flat-square" alt="license" /></a>
     <a href="https://www.npmjs.com/package/docma"><img src="https://img.shields.io/npm/dt/docma.svg?style=flat-square" alt="downloads" /></a>
     <a href="https://david-dm.org/onury/docma"><img src="https://david-dm.org/onury/docma.svg?style=flat-square" alt="dependencies" /></a>
-    <a href="https://github.com/onury/docma/graphs/commit-activity"><img src="https://img.shields.io/maintenance/yes/2017.svg?style=flat-square" alt="maintained" /></a>
+    <a href="https://github.com/onury/docma/graphs/commit-activity"><img src="https://img.shields.io/maintenance/yes/2018.svg?style=flat-square" alt="maintained" /></a>
     <a href="https://onury.io/docma"><img src="https://img.shields.io/badge/documentation-click_to_read-c27cf4.svg?documentation=click_to_read&style=flat-square" alt="documentation" /></a>
     <br />
     <sub>© 2018, Onur Yıldırım (<b><a href="https://github.com/onury">@onury</a></b>).</sub>
