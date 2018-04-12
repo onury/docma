@@ -140,6 +140,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - A parser issue where carriage return (CR) of Windows newlines (CRLF) were removed. Fixes [#28](https://github.com/onury/docma/issues/28).
 
 <br />
+
 ## [1.5.2](https://github.com/onury/docma/compare/v1.5.1...v1.5.2) (2017-12-09)
 
 ### Docma Web Core
@@ -151,6 +152,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 > _**Note**: For this release, some dependencies (such as `jsdoc-x`, `jsdom`) are NOT updated on purpose 'cause they introduce breaking changes. In **v2** (WIP, to be released) these will be updated and many things will be improved._
 
 <br />
+
 ## [1.5.1](https://github.com/onury/docma/compare/v1.5.0...v1.5.1) (2017-03-11)
 
 ### Docma Web Core
@@ -159,6 +161,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - `slice` error for non-string default value.
 
 <br />
+
 ## [1.5.0](https://github.com/onury/docma/compare/v1.4.7...v1.5.0) (2017-03-10)
 
 ### Docma (Builder)
@@ -188,6 +191,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - Default string values are now represented in quotes.
 
 <br />
+
 ## [1.4.7](https://github.com/onury/docma/compare/v1.4.5...v1.4.7) (2017-03-09)
 
 ### Docma (Builder)
@@ -197,6 +201,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - An issue where sorting would change when `config.jsdoc.hierarchy` option is enabled.
 
 <br />
+
 ## [1.4.5](https://github.com/onury/docma/compare/v1.4.0...v1.4.5) (2017-03-05)
 
 ### Docma (Builder)
@@ -206,6 +211,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - [JSDoc plugin](http://usejsdoc.org/about-plugins.html) support via the new `config.jsdoc.plugins` option (`jsdoc-x` feature).
 
 <br />
+
 ## [1.4.0](https://github.com/onury/docma/compare/v1.3.0...v1.4.0) (2017-02-13)
 
 ### Docma (Builder)
@@ -238,6 +244,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - If `config.template.title` is omitted, `config.app.title` is used. (Defaults to `"Documentation"` if not set).
 
 <br />
+
 ## [1.3.0](https://github.com/onury/docma/compare/v1.2.0...v1.3.0) (2016-11-23)
 
 ### Docma (Builder)
@@ -265,6 +272,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - An issue where boolean symbol parameters' default values would not be parsed properly. Fixes [issue #5](https://github.com/onury/docma/issues/5).
 
 <br />
+
 ## [1.2.0](https://github.com/onury/docma/compare/v1.1.1...v1.2.0) (2016-10-31)
 
 ### Docma CLI
@@ -278,6 +286,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - Updated (one-dark) highlighting styles.
 
 <br />
+
 ## [1.1.1](https://github.com/onury/docma/compare/v1.1.1...v1.2.0) (2016-08-13)
 
 ### Default Template
@@ -286,6 +295,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - An anchor/linking issue which prevented some browsers (such as Safari) to navigate properly.
 
 <br />
+
 ## [1.1.0](https://github.com/onury/docma/compare/v1.1.0...v1.1.1) (2016-08-12)
 
 ### Docma (Builder)
@@ -307,6 +317,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
     + Clean up.
 
 <br />
+
 ## [1.0.3](https://github.com/onury/docma/compare/v1.0.1...v1.0.3) (2016-06-27)
 
 ### Docma (Builder)
@@ -320,6 +331,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - Removed YAML syntax highlighting support because of incorrect auto-detection. Opened an issue [here](https://github.com/isagalaev/highlight.js/issues/1213).
 
 <br />
+
 ## [1.0.1](https://github.com/onury/docma/compare/v1.0.0...v1.0.1) (2016-06-11)
 
 ### Docma Web Core
@@ -330,6 +342,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - Missing web components.
 
 <br />
+
 ## [1.0.0](https://github.com/onury/docma/compare/v0.5.4...v1.0.0) (2016-06-11)
 
 ### Docma (Builder)
@@ -396,9 +409,11 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - Improved Docma source code documentation.
 
 <br />
+
 ## Pre-Releases
 
 <br />
+
 ## 0.5.4 (2016-05-22)
 
 #### Added
@@ -408,12 +423,14 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - `docma.template.json` is no more copied over to the output.
 
 <br />
+
 ## 0.5.3 (2016-05-22)
 
 #### Fixed
 - Docma Web file paths.
 
 <br />
+
 ## 0.5.2 (2016-05-20)
 
 #### Changed
@@ -422,6 +439,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 - Clean-up.
 
 <br />
+
 ## 0.5.0 (2016-05-11)
 
 - Initial (pre) release.
