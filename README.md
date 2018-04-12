@@ -1,8 +1,3 @@
-<p align="center">
-Note: Docma v2 is here. It will be released shortly after final repo configurations.
-<br />
-</p>
-
 <h1 align="center">
     <a href="https://github.com/onury/docma"><img width="200" height="200" src="https://raw.github.com/onury/docma/v2/docma-logo.png" alt="Docma" /></a>
 </h1>
