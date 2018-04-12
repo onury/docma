@@ -33,6 +33,8 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 
 <p align="center">
     <a href="https://onury.io/docma"><img width="650" height="304" src="https://raw.github.com/onury/docma/v2/docma-screen.gif" alt="Docma screen" /></a>
+    <br />
+    <a href="https://onury.io/docma">click to view live</a>
 </p>
 
 ### Installation
