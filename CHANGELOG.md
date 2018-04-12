@@ -3,9 +3,8 @@
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
 ## [2.0.0](https://github.com/onury/docma/compare/v1.5.3...v2.0.0) (2018-04-12)
-<blockquote>
-This is a big release with some breaking changes. Please read this changelog thoroughly before updating your Docma configuration.
-</blockquote>
+> _This is a big release with some breaking changes._
+> _Please read this changelog thoroughly before updating your Docma configuration._
 
 ### Docma (Builder)
 
