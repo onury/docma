@@ -58,7 +58,7 @@
                 "badges": true,             // true | false | <string-value>
                 "search": true,
                 "animations": true
-                },
+            },
             "symbols": {
                 "autoLink": true,           // "internal" | "external" | true (both)
                 "params": "list",           // "list" | "table"
