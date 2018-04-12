@@ -45,8 +45,7 @@
       "/design/",
       "/doc/",
       "/templates/"
-    ],
-    "mapCoverage": false
+    ]
   },
   "keywords": [
     "doc",
