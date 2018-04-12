@@ -189,7 +189,7 @@ describe('build', () => {
 
     // beforeAll(function () {});
 
-    test.only('build with query-routing', async () => {
+    test('build with query-routing', async () => {
         config.app.routing = 'query';
         config.template.options.navbar.menu = getNavItems(config.app.routing);
         config.dest = 'test/output/query-routing';
@@ -205,12 +205,12 @@ describe('build', () => {
             });
     });
 
-    test('build with path-routing (for GitHub)', () => {
+    test.only('build with path-routing (for GitHub)', () => {
         config.app.routing = 'path';
         config.app.server = 'github';
-        config.template.options.navItems = getNavItems(config.app.routing);
+        config.template.options.navbar.menu = getNavItems(config.app.routing);
         config.dest = 'test/output/path-routing';
-        config.app.base = '/javascript/docma/' + config.dest;
+        config.app.base = '/'; // '/javascript/docma/' + config.dest;
         return Docma.create()
             .build(config)
             .then(function (success) {
