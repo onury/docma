@@ -31,7 +31,7 @@ module.exports = (spaPath, options) => {
     const docmaPath = path.join(__dirname, '..', '..');
     const pathIsSet = Boolean(spaPath);
     let servePath = pathIsSet
-        ? path.resolve(docmaPath, spaPath)
+        ? path.resolve(spaPath)
         : process.cwd();
 
     if (!fs.pathExistsSync(servePath)) {
