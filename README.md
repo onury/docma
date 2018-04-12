@@ -14,19 +14,6 @@
     <sub>© 2018, Onur Yıldırım (<b><a href="https://github.com/onury">@onury</a></b>).</sub>
 </p>
 
-
----
-
-## v2 Branch — W.I.P.
-
-_This is v2 branch, a work in progress. You can download/clone and use this version for experimental purposes until this becomes the master. See [CHANGELOG](CHANGELOG.md) for current progress._
-
-_For latest stable version (v1.5.x), use the [current master branch](https://github.com/onury/docma)._
-
----
-
-> © 2018, Onur Yıldırım ([@onury](https://github.com/onury)). MIT License.
-
 A powerful tool to easily generate beautiful HTML documentation from Javascript ([JSDoc][jsdoc]), [Markdown][markdown] and HTML files.
 
 ### Features
@@ -44,7 +31,9 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 
 ...like this:
 
-[![Docma Screenshot][screenshot]][docma-docs]
+<p align="center">
+    <a href="https://onury.io/docma"><img width="650" height="304" src="https://raw.github.com/onury/docma/v2/docma-screen.gif" alt="Docma screen" /></a>
+</p>
 
 ### Installation
 
@@ -127,6 +116,7 @@ Emoji shortcuts used in source markdown files are parsed into [twemoji][twemoji]
 [license]:https://github.com/onury/docma/blob/master/LICENSE
 [changelog]:https://github.com/onury/docma/blob/master/CHANGELOG.md
 [screenshot]:https://raw.github.com/onury/docma/master/docma-screen.jpg
+[screen-gif]:https://raw.github.com/onury/docma/master/docma-screen.gif
 [docma-docs]:https://onury.io/docma
 [docma-api]:https://onury.io/docma/?api=docma
 [docma-cli]:https://onury.io/docma/?content=docma-cli
