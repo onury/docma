@@ -1,0 +1,126 @@
+/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
+
+// ==========================================================================
+// Print styles.
+// Inlined to avoid the additional HTTP request: h5bp.com/r
+// ==========================================================================
+
+@media print {
+    *,
+    *:before,
+    *:after {
+        background: transparent !important;
+        color: #000 !important; // Black prints faster: h5bp.com/s
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; // h5bp.com/t
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    // // show the href value next to an anchor when printing.
+    // a[href]:after {
+    //     // content: " (" attr(href) ")";
+    //     content: none !important; // or hide it
+    // }
+
+    // abbr[title]:after {
+    //     // content: " (" attr(title) ")";
+    //     content: none !important; // hide
+    // }
+
+    // Don't show links that are fragment identifiers,
+    // or use the `javascript:` pseudo protocol
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
+    }
+
+    // ---------------------------
+    // Docma-specific Changes
+    // ---------------------------
+
+    .btn,
+    .dropup > .btn {
+        > .caret {
+            border-top-color: #000 !important;
+        }
+    }
+    .label {
+        border: 1px solid #000;
+    }
+
+    .table {
+        border-collapse: collapse !important;
+
+        td,
+        th {
+            background-color: #fff !important;
+        }
+    }
+    .table-bordered {
+        th,
+        td {
+            border: 1px solid #ddd !important;
+        }
+    }
+
+    // hide navbar
+    .navbar {
+        display: none;
+    }
+    // don't show link icons next to symbols
+    .symbol > a > svg.fa-link {
+        display: none;
+    }
+    // remove bg-colors of badges/boxes
+    .boxed {
+        background-color: transparent !important;
+        color: @gray-dark !important;
+        border: 1px solid @gray-light;
+    }
+    // make symbol names darker and left-align with the content.
+    code.symbol-name {
+        padding-left: 0 !important;
+        color: #000 !important;
+        background-color: transparent !important;
+    }
+}
+
+
+@media print {
+
+}

@@ -1,0 +1,549 @@
+@navbar-height:                 50px;
+@navbar-padding-base:           @padding-base;
+@navbar-inner-height:           @navbar-height - (@navbar-padding-base * 2);
+@navbar-submenu-item-height:    30px; // auto
+@navbar-border-radius:          @border-radius-base;
+@navbar-menu-res-height:        300px; // responsive height
+// also used in sidebar.less
+// Fira Sans font is a bit high from the baseline
+@navbar-baseline-fix:           4px;
+@navbar-border-bottom:          2px;
+
+@navbar-gray:                   @gray-base;
+
+// Light Navbar Colors
+@navbar-bg-color:               #fff;
+@navbar-text-color:             lighten(@navbar-gray, 25%);
+@navbar-hover-text-color:       darken(@navbar-gray, 10%);
+@navbar-hover-bg-color:         lighten(@navbar-gray, 86%);
+
+// Dark Navbar Colors
+@navbar-d-bgcolor:              #282c35;
+@navbar-d-text-color:           #8890a2;
+@navbar-d-hover-text-color:     #fff;
+@navbar-d-hover-bg-color:       lighten(@navbar-d-bgcolor, 10%);
+
+// Dark/Light Common Colors
+@navbar-border-color:           fade(@navbar-d-bgcolor, 10%); // darken(@navbar-bg-color, 5%);
+
+
+body {
+    // space for the fixed navbar
+    // padding-top: @navbar-height !important;
+
+    &.static-navbar {
+        padding-top: 0 !important;
+        & .navbar {
+            position: relative;
+        }
+    }
+}
+
+// only rendered if navbar.fixed = true
+.nav-spacer {
+    display: block;
+    position: relative;
+    height: @navbar-height;
+    visibility: hidden;
+}
+
+// .nav-icon {}
+
+.nav-arrow  {
+    margin-left: 6px;
+}
+
+.nav-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    background-color: fade(@navbar-gray, 50%);
+    z-index: -1;
+    opacity: 0;
+    .transition(~"opacity .2s, z-index 0s");
+
+    &.toggled {
+        z-index: 999997;
+        opacity: 1;
+    }
+}
+
+.navbar {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: @navbar-bg-color;
+    z-index: 999998;
+    user-select: none;
+
+    // box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .1);
+    // height: @navbar-height;
+
+    box-shadow: 0px 1px 30px 10px rgba(0,0,0,.02);                  // acts like gradient transition to page body
+    border-bottom: @navbar-border-bottom solid rgba(0,0,0,0.05);    // acts like shadow
+    height: @navbar-height + @navbar-border-bottom;                   // +2px for border-bottom
+
+    & > .navbar-inner {
+        display: block;
+        position: relative;
+        white-space: nowrap;
+    }
+
+    a, a:hover, a:focus {
+        text-decoration: none !important;
+    }
+}
+.navbar-brand {
+    display: inline-table;
+    position: absolute;
+    float: left;
+    margin: 0 (@navbar-padding-base * 4) 0 0; // (@navbar-height + 5);
+    z-index: 9;
+    height: 100% !important;
+    // width: 100%;
+
+    & .navbar-logo {
+        display: table-cell;
+        position: relative;
+        height: @navbar-inner-height;
+        padding: 0;
+        margin: @navbar-padding-base (@navbar-padding-base * 1.5) 0 0;
+        width: auto;
+    }
+
+    & .navbar-title {
+        display: table-cell;
+        position: relative;
+        margin: 0;
+        margin-top: auto;
+        // width: 100%;
+        height: @navbar-height;
+        line-height: 1em;
+        // white-space: nowrap;
+        vertical-align: middle;
+        font-family: @font-family-base;
+        font-weight: 700;
+        font-size: @font-size-medium;
+        letter-spacing: 0.03em;
+
+        & a {
+            display: inline-block;
+            white-space: normal !important;
+            max-width: @brand-title-width;
+            padding-top: 4px;
+            text-decoration: none;
+            color: @navbar-text-color;
+            &:hover {
+                color: @navbar-gray;
+            }
+        }
+    }
+}
+.navbar-menu {
+    display: inline-table;
+    position: relative;
+    float: right;
+    height: @navbar-height;
+    overflow-y: visible;
+    max-width: 100%;
+    // margin-right: @page-padding-horizontal;
+    z-index: 8;
+}
+.navbar-list {
+    display: block;
+    position: relative;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none;
+    white-space: nowrap;
+}
+.navbar-list > li {
+    // float: left;
+    display: inline-table;
+    position: relative;
+    font-family: @font-family-base;
+    height: @navbar-height;
+    background-color: @navbar-bg-color;
+
+    &:hover > a {
+        background-color: @navbar-hover-bg-color;
+        color: @navbar-hover-text-color;
+    }
+
+    & > a {
+        display: table-cell;
+        position: relative;
+        padding: 0 (@navbar-padding-base * 3.5);
+        padding-top: @navbar-baseline-fix;
+        height: @navbar-height;
+        text-decoration: none;
+        white-space: nowrap;
+        color: @navbar-text-color;
+        border-right: 1px dashed @navbar-border-color;
+        vertical-align: middle;
+        font-weight: 500;
+        cursor: pointer;
+        z-index: 3;
+
+        span.nav-label {
+            margin-left: 6px;
+        }
+    }
+    &:last-child > a {
+        border-right: 0 none !important;
+    }
+
+    &.dropdown {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        // overflow: hidden;
+        height: @navbar-height;
+
+        &:hover {
+            overflow: visible;
+
+            & > ul {
+                display: block;
+                margin-top: @navbar-height;
+                opacity: 1;
+                height: auto;
+                .transition(~"margin-top .2s ease-out, opacity .2s ease-out");
+
+                & > li {
+                    height: @navbar-submenu-item-height;
+                    opacity: 1;
+                }
+                & > li.divider {
+                    height: 1px;
+                    margin: 11px 0 !important;
+                    opacity: 1;
+                }
+            }
+        }
+
+        & > ul {
+            z-index: 1;
+            display: block;
+            position: absolute;
+            width: auto;
+            top: 0;
+            // height: 0px;
+            left: 0px;
+            list-style: none;
+            line-height: 1.6em;
+            padding: @navbar-padding-base * 2;
+            margin: 1px 0 0 0;
+            background-color: #fff;
+            // box-shadow: 1px 4px 3px 0px rgba(0, 0, 0, .12);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+            .background-clip-padding;
+            border-bottom-left-radius: @navbar-border-radius + 1;
+            border-bottom-right-radius: @navbar-border-radius + 1;
+            border: 1px solid darken(@navbar-border-color, 3%);
+
+            opacity: 0;
+            .transition(~"opacity .15s ease-out, top .2 ease-in");
+
+            & > li {
+                border-radius: @navbar-border-radius;
+                height: 0px;
+                opacity: 0;
+                .transition(~"height .1s ease-out");
+
+                & > a {
+                    display: inline-block;
+                    width: 100%;
+                    padding: (@navbar-padding-base / 2) (@navbar-padding-base) * 2;
+                    text-decoration: none;
+                    white-space: nowrap;
+                    color: @navbar-text-color;
+                    cursor: pointer;
+                }
+                &:hover {
+                    background-color: @navbar-hover-bg-color;
+                    & > a {
+                        color: @navbar-hover-text-color;
+                    }
+                }
+            }
+
+            & > li.divider {
+                height: 0;
+                margin: 0 0 !important;
+                border-radius: 0 !important;
+                background-color: darken(@navbar-border-color, 2%) !important;
+                cursor: default !important;
+            }
+        }
+
+    }
+}
+
+li.dropdown > ul > li > a > code {
+    background-color: @navbar-hover-bg-color !important;
+}
+
+// ---------------------------------
+// NAVBAR (HAMBURGER) MENU BUTTON
+// ---------------------------------
+
+.navbar-menu-btn {
+    display: none;
+    position: absolute;
+    top: @navbar-padding-base;
+    right: @page-padding-horizontal;
+    height: @navbar-inner-height;
+    width: @navbar-inner-height;
+    border-radius: @navbar-inner-height;
+    cursor: pointer;
+    .transition(~"all .2s ease");
+    &:hover {
+        background-color: @navbar-hover-bg-color;
+    }
+    &:focus, &:active {
+        outline: 0 none;
+        // background-color: @navbar-gray;
+    }
+    & svg.fa-bars {
+        display: block;
+        position: absolute;
+        color: @navbar-gray;
+        margin: 8px 0 0 9px;
+        opacity: 1;
+    }
+    & svg.fa-times {
+        display: block;
+        position: absolute;
+        color: #fff;
+        margin: 11px 0 0 13px;
+        opacity: 0;
+    }
+}
+.navbar-menu-btn.toggled {
+    background-color: @navbar-gray !important;
+    & svg.fa-bars {
+        color: #fff;
+        opacity: 0;
+    }
+    & svg.fa-times {
+        opacity: 1;
+    }
+}
+
+// ---------------------------------
+// RESPONSIVE
+// ---------------------------------
+
+.navbar-menu.toggled {
+    height: @navbar-menu-res-height !important;
+    opacity: 1 !important;
+    overflow-y: scroll !important;
+    & .navbar-list {
+        margin-top: 0 !important;
+    }
+}
+
+.hide-navbar-menu {
+    height: 0;
+    opacity: 0;
+    overflow-y: hidden;
+    & .navbar-list {
+        margin-top: -(@navbar-menu-res-height + @navbar-height);
+    }
+}
+
+
+// ---------------------------------
+// NAVBAR BREAK (POINT)
+// ---------------------------------
+
+// We watch for the navbar menu (element) width (depending on the nav items set
+// by user). So this (break point) is applied via JS instead of media queries;
+// which only watches for the screen size.
+
+.navbar-menu-btn.break {
+    display: block;
+}
+.navbar-menu.break {
+    display: block;
+    position: absolute;
+    left: @page-padding-horizontal;
+    right: @page-padding-horizontal;
+    top: @navbar-height;
+    margin-right: 0 !important;
+    max-width: 100%;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    .background-clip-padding;
+    background-color: #fff;
+    .transition(~"all .2s ease-out");
+    .hide-navbar-menu;
+    border-bottom-left-radius: @navbar-border-radius * 2;
+    border-bottom-right-radius: @navbar-border-radius * 2;
+}
+
+ul.navbar-list.break {
+    display: block;
+    position: relative;
+    margin-bottom: 0 !important;
+    .transition(~"all .2s ease-out");
+
+    & > li {
+        display: table;
+        float: none;
+        width: 100%;
+        border-bottom: 1px solid lighten(@navbar-border-color, 3%);
+        height: auto !important;
+
+        & > a {
+            display: table-cell;
+            border-right: none;
+            padding: 0 (@navbar-padding-base * 5);
+            background-color: @light-default;
+        }
+
+        &.dropdown {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            height: auto !important;
+
+            & > a {
+                display: block;
+                line-height: @navbar-height;
+                border-bottom: 1px solid lighten(@navbar-border-color, 3%);
+            }
+
+            &:hover {
+                overflow: visible;
+                & > ul {
+                    display: block;
+                    margin-top: 0;
+                    opacity: 1;
+                    height: auto;
+                    & > li {
+                        height: auto;
+                        opacity: 1;
+                    }
+                }
+            }
+
+            & > ul {
+                display: block;
+                position: relative;
+                width: auto;
+                margin: 0 0 0 (@navbar-padding-base * 5) !important;
+                box-shadow: 0 0 0;
+                border-radius: 0;
+                border: 0 none;
+                border-left: 1px dashed @navbar-border-color;
+                opacity: 1;
+                .transition(none);
+                & > li {
+                    height: auto;
+                    opacity: 1;
+                }
+                & > li.divider {
+                    height: 1px;
+                    margin: 11px 0 !important;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+// ---------------------------------
+// NAVBAR DARK
+// ---------------------------------
+
+.navbar.dark {
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+    border-bottom: 0 none;
+    height: @navbar-height;
+
+    background-color: @navbar-d-bgcolor;
+    color: @navbar-d-text-color;
+
+    & .navbar-title a {
+        color: @over-dark-light;
+        &:hover {
+            color: @navbar-d-hover-text-color;
+        }
+    }
+
+    & .navbar-list > li {
+        background-color: @navbar-d-bgcolor;
+        color: @navbar-d-text-color;
+        & > a {
+            color: @navbar-d-text-color;
+            border-right: 1px dashed rgba(104, 110, 123, 0.1);
+        }
+        &:hover {
+            background-color: @navbar-d-hover-bg-color;
+            color: @navbar-d-hover-text-color;
+            & > a {
+                background-color: @navbar-d-hover-bg-color;
+                color: @navbar-d-hover-text-color;
+            }
+        }
+        // keep dropdown lists same
+        &.dropdown {
+            & > ul {
+                color: @navbar-text-color;
+            }
+        }
+    }
+
+    & .navbar-menu-btn {
+        &:hover {
+            background-color: @navbar-d-hover-bg-color;
+            & svg.fa-bars {
+                color: #fff;
+            }
+        }
+        & svg.fa-bars {
+            color: @navbar-d-text-color;
+        }
+        & svg.fa-times {
+            color: #fff;
+        }
+    }
+    .navbar-menu-btn.toggled {
+        background-color: @navbar-gray !important;
+        & svg.fa-bars {
+            color: #fff;
+        }
+        // & svg.fa-times {}
+    }
+}
+
+.navbar.dark {
+    .navbar-menu.break {
+        background-color: #fff;
+    }
+
+    ul.navbar-list.break {
+
+        & > li {
+            background-color: @navbar-bg-color;
+
+            &:hover > a {
+                background-color: @navbar-hover-bg-color;
+                color: @navbar-hover-text-color;
+            }
+
+            & > a {
+                background-color: @light-default;
+            }
+        }
+    }
+}

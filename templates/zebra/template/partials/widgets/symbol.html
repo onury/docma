@@ -1,0 +1,172 @@
+{^symbol.$hide}
+
+<div id="{symbol|$id}" class="symbol-container">
+
+    <div class="symbol-heading">
+        <div class="symbol">
+            <a href="#{symbol|$id}">
+                <i class="fas fa-link color-gray-light" aria-hidden="true"></i>
+            </a>
+            <code class="symbol-name">{symbol|s|$longname_params}</code>
+            <span class="symbol-sep">{symbol|$type_sep}</span>
+            <code class="symbol-type">{symbol|s|$type}</code>
+
+            {symbol|s|$tags}
+        </div>
+    </div>
+
+    <div class="symbol-definition">
+
+        <div class="symbol-info">
+            {?symbol.alias}
+                <!-- JSDoc bug: sometimes constructor is marked as alias of class. -->
+                <!-- So if this is not the "$constructor" element, display alias. -->
+                {^$constructor}
+                    <p><b class="caption">Alias:</b> <code>{symbol.alias|s|$dot_prop}</code></p>
+                {/$constructor}
+            {/symbol.alias}
+
+            {?symbol.augments}
+                <p><b class="caption">Extends:</b> {symbol|s|$extends}</p>
+            {/symbol.augments}
+
+            {?symbol.version}
+            <p><b class="caption">Version:</b>&nbsp;{symbol.version|s}</p>
+            {/symbol.version}
+
+            {?symbol.since}
+            <p><b class="caption">Since:</b>&nbsp;{symbol.since|s}</p>
+            {/symbol.since}
+
+            {?symbol.copyright}
+            <p><b class="caption">Copyright:</b>&nbsp;{symbol.copyright|s}</p>
+            {/symbol.copyright}
+
+            {?symbol.author}
+            <p><b class="caption">Author:</b>&nbsp;{symbol.author|s|$author}</p>
+            {/symbol.author}
+
+            {?symbol.license}
+            <p><b class="caption">License:</b>&nbsp;{symbol.license|s}</p>
+            {/symbol.license}
+        </div>
+
+        {symbol|s|$desc}
+
+        {?symbol.see}
+        <p class="no-margin">
+            <b>See</b>
+            {@gt key=symbol.see.length value=1}
+                <ul>
+                {#symbol.see}<li>{.|s|$pl}</li>{/symbol.see}
+                </ul>
+            {:else}
+                {#symbol.see}&nbsp;{.|s|$pl}{/symbol.see}
+            {/gt}
+        </p>
+        {/symbol.see}
+
+        <!--  don't list params for class declarations since we already list
+        constructor and its params separately, if this is a class declaration.  -->
+        {@ne key=symbol.meta.code.type value="ClassDeclaration"}
+            {>"params":symbol template=template /} <!-- passing the template object to partial -->
+            {?symbol.isEnum}{:else}
+                {>"properties":symbol template=template /} <!-- passing the template object to partial -->
+            {/symbol.isEnum}
+        {/ne}
+
+        {?symbol.fires}
+            {@gt key=symbol.fires.length value="0" type="number"}
+                <p>
+                    <b class="caption">Emits:</b>&nbsp;&nbsp;{symbol|s|$emits}
+                </p>
+            {/gt}
+        {/symbol.fires}
+
+        {?symbol.returns}
+            {@gt key=symbol.returns.length value="1" type="number"}
+                <b class="caption">Returns:</b>
+                <p class="pad-left">
+                    {symbol|s|$returns}
+                </p>
+            {:else}
+                <p>
+                    <b class="caption">Returns:</b>&nbsp;&nbsp;{symbol|s|$returns}
+                </p>
+            {/gt}
+        {/symbol.returns}
+
+        {?symbol.generator}
+            {?symbol.yields}
+                 {@gt key=symbol.yields.length value="1" type="number"}
+                    <b class="caption">Yields:</b>
+                    <p class="pad-left">
+                        {symbol|s|$yields}
+                    </p>
+                    {:else}
+                    <p>
+                        <b class="caption">Yields:</b>&nbsp;&nbsp;{symbol|s|$yields}
+                    </p>
+                {/gt}
+            {/symbol.yields}
+        {/symbol.generator}
+
+        {?symbol.exceptions}
+            {@gt key=symbol.exceptions.length value="1" type="number"}
+                <b class="caption">Throws:</b>
+                <p class="pad-left">
+                    {symbol|s|$exceptions}
+                </p>
+            {:else}
+                <p>
+                    <b class="caption">Throws:</b>&nbsp;&nbsp;{symbol|s|$exceptions}
+                </p>
+            {/gt}
+        {/symbol.exceptions}
+
+        <!-- if this is an enumeration symbol, list the members in a table -->
+        {?symbol.isEnum}
+            {>"enums":symbol template=template /} <!-- passing the template object to partial -->
+        {/symbol.isEnum}
+
+        {?symbol.examples}
+            {#symbol.examples}
+                <p><b>Example
+                {@gt key=symbol.examples.length value=1}
+                    &nbsp;#{@math key=$idx method="add" operand="1"/}
+                {/gt}
+                </b>{.|$get_caption|s}</p>
+                <pre><code>{.|$nt|$tnl|$remove_caption}</code></pre>
+            {/symbol.examples}
+        {/symbol.examples}
+
+        {?template.options.symbols.meta}
+        {?symbol.meta.lineno}
+        <p class="symbol-meta">
+            {?symbol.meta.filename}<b>File:</b> {symbol.meta.filename}&nbsp;&nbsp;{/symbol.meta.filename}
+            {?symbol.meta.lineno}<b>Line:</b> {symbol.meta.lineno}&nbsp;&nbsp;{/symbol.meta.lineno}
+        </p>
+        {/symbol.meta.lineno}
+        {/template.options.symbols.meta}
+
+    </div>
+
+</div>
+<hr />
+
+{?symbol.$constructor}
+    {@ne key=symbol.hideconstructor type="boolean" value="true"}
+        {>"symbol" symbol=symbol.$constructor template=template/}
+    {/ne}
+{/symbol.$constructor}
+
+<!-- if not an enumeration symbol -->
+{^symbol.isEnum}
+    <!-- recurse as symbol section -->
+    {#symbol.$members}
+        {>"symbol" symbol=. template=template/}
+    {/symbol.$members}
+{/symbol.isEnum}
+
+
+{/symbol.$hide}

@@ -1,0 +1,304 @@
+@symbol-name-font-size: ceil(@font-size-base * 1.2);
+@symbol-base-font-size: ceil(@font-size-base * 0.95);
+@symbol-info-font-size: ceil(@font-size-base * 0.88);
+@symbol-meta-font-size: ceil(@font-size-base * 0.78);
+@symbol-badge-size: 25px;
+@symbol-badge-btn-size: 22px;
+// when fontawesome SVGs used for badges
+@symbol-badge-fa-size: (@symbol-badge-size / 1.19);
+// for the space around badge SVG shapes we need to go -2 to the left to snap
+// tree line to shape. this needs to be set both for .item-tree-line and
+// .symbol-badge.
+@symbol-badge-tree-fix: -2px; // margin-left
+
+.symbol {
+    font-size: @symbol-name-font-size;
+    & a {
+        #bookmark-icon(1em);
+    }
+}
+code.symbol-name {
+    font-size: 85.4%;
+    font-weight: 700;
+    color: darken(@code-color, 8%);
+    & .def-val {
+        color: @gray-light;
+        font-weight: normal;
+    }
+}
+span.symbol-sep {
+    background-color: transparent;
+    color: @gray-light;
+    font-size: @symbol-name-font-size;
+    padding-left: 5px;
+    font-weight: normal;
+    // font-size: 0.8em;
+}
+code.symbol-type {
+    color: @gray;
+    font-size: @font-size-base;
+    font-weight: normal;
+    background-color: transparent;
+    & a:hover, & a:focus {
+        text-decoration: @link-hover-decoration;
+    }
+}
+
+.symbol-meta {
+    font-size: @symbol-meta-font-size !important;
+    font-style: italic;
+    text-align: right;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    color: @gray;
+}
+
+.symbol-container {
+    // when a bookmark is clicked, the symbol title will be hidden under the top
+    // nav-bar. this will prevent that.
+    padding-top: @navbar-height;
+    margin-top: -@navbar-height;
+    font-size: @symbol-base-font-size;
+
+    & .symbol-heading {
+        & .symbol {
+            padding: 10px 0;
+        }
+    }
+
+    & .symbol-definition {
+        padding: 5px 0;
+
+        & .symbol-info {
+            & > p {
+                margin: 0;
+                &:last-of-type {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        & > p {
+            margin: 0 0 15px; // (@line-height-computed / 2);
+        }
+
+        // add a bit more space when a table comes right after a paragraph.
+        & p + table {
+            margin-top: 20px;
+        }
+
+        & .table {
+            & td:first-child {
+                white-space: nowrap;
+            }
+            & td:last-child {
+                width: auto;
+            }
+        }
+
+        & .caption {
+            display: inline-block !important;
+            min-width: 80px;
+        }
+    }
+}
+
+.boxed {
+    display: inline-block;
+    font-size: @font-size-xsmall;
+    letter-spacing: 0.04em;
+    color: #fff;
+    padding: 2px 6px 0px;
+    border-radius: @border-radius-small;
+    margin: -2px 3px 0 0;
+    vertical-align: middle;
+    background-color: darken(@gray-lighter, 5%);
+}
+
+
+// --------------------------
+
+ul.param-list {
+    margin-bottom: 25px !important;
+
+    & > li {
+        padding-top: 5px;
+        margin-bottom: 15px;
+
+        & .param-meta {
+            & > span > code {
+                // param name
+                &:first-child {
+                    font-size: 97%;
+                }
+                // param type
+                &:last-child {
+                    padding: 3px 5px;
+                }
+            }
+            & .param-info-box {
+                float: right;
+            }
+        }
+
+        & .param-desc {
+            margin-top: 10px;
+            margin-left: -20px;
+            padding: 10px 20px 7px; // 10px 12px 9px 12px;
+            border-top: 1px solid #eef0f5!important;
+            background: #fbfbfb; // @light-default
+            border-bottom-left-radius: @border-radius-base;
+            border-bottom-right-radius: @border-radius-base;
+
+            & p:last-of-type {
+                margin: 0 !important;
+            }
+        }
+    }
+}
+
+.param-info {
+    font-style: italic;
+    .user-select(none);
+    cursor: default;
+
+    &.required {
+        background: @red;
+        margin-right: 7px;
+    }
+    &.optional {
+        background: @gray-light;
+        margin-right: 7px;
+    }
+    &.default,
+    &.value {
+        // background: #b8c2da; // #94a2c3;
+        background: transparent !important;
+        color: @gray !important;
+        font-size: @symbol-info-font-size;
+
+        & + code {
+            margin: 0 12px 0 3px;
+            // color: @gray-darker;
+        }
+    }
+}
+
+// --------------------------
+
+// SYMBOL BADGES
+
+.symbol-badge {
+    display: inline-block;
+    position: relative;
+    width: @symbol-badge-size;
+    height: @symbol-badge-size;
+    opacity: 0.65;
+    margin-left: -2px;
+
+    & > span {
+        position: absolute;
+        display: block;
+        font-family: Arial, sans-serif;
+        font-size: 9.5px;
+        color: #fff;
+        width: 100%;
+        line-height: @symbol-badge-size;
+        text-indent: 0 !important;
+        text-align: center;
+        left: 0;
+        top: 0;
+        z-index: 2;
+    }
+    & > svg {
+        position: absolute;
+        display: block;
+        width: @symbol-badge-size !important;
+        height: @symbol-badge-size !important;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        fill: black; // default
+        // margin-left: -0.5px;
+
+        // we use our own svgs for badges but for errors, we use fontawsome svg,
+        // which should be a bit smaller.
+        &.svg-inline--fa {
+            width: @symbol-badge-fa-size !important;
+            height: @symbol-badge-fa-size !important;
+            margin: 1px 0 0 2px;
+            padding: 0;
+        }
+    }
+
+    & > div.badge-scope-circle {
+        position: absolute;
+        top: -2px;
+        left: -1px;
+        #circle(10px);
+        border: 2px solid @dark !important;
+        background-color: @red;
+        z-index: 2;
+    }
+
+    // STRING BADGES
+    &.badge-str {
+        & > span {
+            font-weight: bold;
+            font-size: 18px !important;
+            line-height: 25px !important;
+        }
+    }
+}
+
+.badge-scope-btn {
+    position: absolute;
+    #circle(11px);
+    border: 1px solid @dark !important;
+    background-color: @red;
+    z-index: 2;
+    .user-select(none);
+    cursor: pointer;
+    opacity: 0.3;
+
+    &.active,
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.symbol-badge.badge-btn {
+    display: inline-block;
+    position: relative;
+    width: @symbol-badge-btn-size !important;
+    height: @symbol-badge-btn-size !important;
+    margin-right: 3px;
+    white-space: nowrap;
+    .user-select(none);
+    cursor: pointer;
+    opacity: 0.3;
+
+    & > span {
+        width: @symbol-badge-btn-size !important;
+        height: @symbol-badge-btn-size !important;
+        font-size: 9px !important;
+        line-height: @symbol-badge-btn-size !important;
+        margin-left: -0.5px;
+    }
+    & > svg {
+        width: @symbol-badge-btn-size !important;
+        height: @symbol-badge-btn-size !important;
+    }
+
+    &.active,
+    &:hover {
+        opacity: 1;
+    }
+}
+
+img.item-tree-line {
+    .no-pointer-events;
+    .user-select(none);
+    vertical-align: top;
+    margin-left: @symbol-badge-tree-fix - 0.2;
+}

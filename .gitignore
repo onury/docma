@@ -11,4 +11,6 @@ test/output/
 test/issue-*/
 npm-debug.log
 TODO.md
+NOTES.md
 .DS_Store
+.vscode

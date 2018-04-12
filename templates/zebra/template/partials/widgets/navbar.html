@@ -1,0 +1,51 @@
+{?template.options.navbar.enabled}
+    <nav class="navbar {?template.options.navbar.dark}dark{/template.options.navbar.dark}">
+        <div class="navbar-inner {?boxed}container container-boxed{/boxed}">
+            <div class="navbar-brand">
+                {?template.options.logo.dark}
+                    {?template.options.navbar.dark}
+                    <img src="{template.options.logo.light}" alt="logo" class="navbar-logo" />
+                    {:else}
+                    <img src="{template.options.logo.dark}" alt="logo" class="navbar-logo" />
+                    {/template.options.navbar.dark}
+                {/template.options.logo.dark}
+                <span class="navbar-title">
+                    <a href="{template.options.title.href}">
+                        {template.options.title.label}
+                    </a>
+                </span>
+            </div>
+
+            {@gt key=template.options.navbar.menu.length value=0}
+                <div class="navbar-menu-btn" tabindex="0">
+                    <i class="fas fa-lg fa-bars trans-all-ease"></i>
+                    <i class="fas fa-md fa-times trans-all-ease"></i>
+                </div>
+                <div class="navbar-menu">
+                    <ul class="navbar-list">
+                    {#template.options.navbar.menu}
+                        {?items}
+                            <li class="dropdown">
+                                <a href="{?href}{href}{:else}#{/href}" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="nav-icon {iconClass}" aria-hidden="true"></i>{?label}<span class="nav-label">{label}</span>{/label}{?chevron}<i class="nav-arrow fas fa-sm fa-angle-down"></i>{/chevron}
+                                </a>
+                                <ul>
+                                {#items} {>"navitem":./} {/items}
+                                </ul>
+                            </li>
+                        {:else}
+                            {>"navitem":./}
+                        {/items}
+                    {/template.options.navbar.menu}
+                    </ul>
+                </div>
+            {/gt}
+        </div>
+    </nav>
+
+    {?template.options.navbar.fixed}
+    <div class="nav-spacer"></div>
+    {/template.options.navbar.fixed}
+
+    <div class="nav-overlay"></div>
+{/template.options.navbar.enabled}

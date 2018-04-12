@@ -1,0 +1,91 @@
+@code-color:                  @gray-base;
+@code-bg:                     #f9f2f4;
+
+@kbd-color:                   #fff;
+@kbd-bg:                      #333;
+
+// @pre-bg:                      red;
+@pre-color:                   @gray-dark;
+@pre-border-color:            @border-color;
+@pre-scrollable-max-height:   340px;
+
+//
+// Code (inline and block)
+// --------------------------------------------------
+
+
+// Inline and block code styles
+code,
+kbd,
+pre,
+samp {
+  font-family: @font-family-monospace;
+  font-size: @font-size-mono-base;
+}
+
+// Inline code
+code {
+  padding: 2px 5px 3px;
+  font-size: 90%;
+  color: inherit; // @code-color;
+  background-color: fade(@light-base, 74%); // @code-bg;
+  border-radius: @border-radius-base;
+}
+
+// Blocks of code
+pre {
+    display: block;
+    padding: 0;
+    margin: 0 0 15px; // (@line-height-computed / 2);
+    font-size: @font-size-mono-base;
+    line-height: @line-height-base;
+    word-break: keep-all; //  break-all;
+    word-wrap: inherit; // break-word;
+    color: @pre-color;
+    background-color: transparent;
+    border: 0 none; // 1px solid @pre-border-color;
+    border-radius: @border-radius-large;
+    overflow: auto;
+    overflow-x: scroll;
+
+    // Account for some code outputs that place code tags in pre tags
+    code {
+        padding: 15px 25px !important; // 0;
+        font-size: 85.4%;
+        color: inherit;
+        white-space: unset;
+        background-color: transparent;
+        border-radius: 0;
+        &.options {
+            padding: 15px 25px 0 25px !important;
+        }
+    }
+}
+
+// special class for code delimeter (e.g. pipe |)
+.code-delim {
+    color: #cfd3de; // @gray-light;
+}
+
+// Enable scrollable blocks of code
+.pre-scrollable {
+    max-height: @pre-scrollable-max-height;
+    overflow-y: scroll;
+}
+
+// User input typically entered via keyboard
+kbd {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: @kbd-color;
+    background-color: @kbd-bg;
+    border-radius: @border-radius-small;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.25);
+
+    kbd {
+        padding: 0;
+        font-size: 100%;
+        font-weight: bold;
+        box-shadow: none;
+    }
+}

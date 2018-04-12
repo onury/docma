@@ -1,0 +1,179 @@
+// -------------------------------
+// Typography
+// -------------------------------
+
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans:400,500,700,400italic");
+// @import url("https://fonts.googleapis.com/css?family=Fira+Mono:400,500,700");
+@import url("https://fonts.googleapis.com/css?family=Overpass+Mono:400,600,700");
+
+@font-family-sans-serif:  "Fira Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-serif:       "Fira Sans", Cambria, Georgia, Times, serif;
+@font-family-monospace:   "Overpass Mono", Menlo, Monaco, Consolas, monospace, "Courier New";
+@font-family-base:        @font-family-sans-serif;
+
+@font-size-base:          16px;
+@font-size-medium:        ceil((@font-size-base * 1.1));
+@font-size-large:         ceil((@font-size-base * 1.25));
+@font-size-small:         ceil((@font-size-base * 0.85));
+@font-size-xsmall:        ceil((@font-size-base * 0.70));
+
+@font-size-mono-base:     15.5px;
+
+@font-size-h1:            floor((@font-size-base * 2.25));  // 36px
+@font-size-h2:            floor((@font-size-base * 2));     // 32px
+@font-size-h3:            ceil((@font-size-base * 1.62));   // 26px
+@font-size-h4:            ceil((@font-size-base * 1.3));    // ~21px
+@font-size-h5:            @font-size-base;                  // 16px
+@font-size-h6:            ceil((@font-size-base * 0.80));   // ~13px
+
+//** Unit-less `line-height` for use in components like buttons.
+@line-height-base:        1.5;
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+@line-height-computed:    floor((@font-size-base * @line-height-base));
+
+//** By default, this inherits from the `<body>`.
+@headings-font-family:    inherit;
+@headings-font-weight:    500;
+@headings-line-height:    1.1;
+@headings-color:          inherit;
+
+// -------------------------------
+// Colors
+// -------------------------------
+
+@gray-base:              #17191e;
+@gray-darkest:           lighten(@gray-base, 8%);
+@gray-darker:            lighten(@gray-base, 15%);
+@gray-dark:              lighten(@gray-base, 30%);
+@gray:                   lighten(@gray-base, 45%);
+@gray-light:             lighten(@gray-base, 60%);
+@gray-lighter:           lighten(@gray-base, 80%);
+
+@blue:                  #5ca1eb; // fade(#4d9cee, 80%);
+@blue-pale:             #4f5e84;
+@green:                 #52af52; // fade(#5cb85c, 80%);
+@green-pale:            #34793c;
+@cyan:                  #5bc0de; // fade(#5bc0de, 80%);
+@yellow:                #f0b563; // fade(#f0ad4e, 92%);
+@red:                   #e07470; // fade(#d9534f, 80%);
+@accent:                #3875ee;
+@purple:                #996599;
+@purple-pale:           #7f58ab;
+@purple-dark:           rgb(103, 54, 160);
+@pink:                  #ff6fbc;
+@orange:                #dc881f;
+@ice:                   #9cbed3;
+@ice-mid:               #9aaec3;
+@ice-dark:              #788EA3;
+@ice-blue:              #465c84;
+@brown:                 #8a4c42;
+@brown-pale:            #734e48;
+
+@dark-softer:           lighten(@dark-soft, 3%);
+@dark-soft:             #242730;
+@dark:                  #1e2128;
+@darker:                #1b1f25; // darken(@dark, 3%);
+@darkest:               darken(@dark, 5%);
+@deep-dark:             #191c20;
+@over-dark:             #8b93a6;
+@over-dark-light:       #D6DBE7;
+
+@light-default:         #f9f9f9;
+@light-base:            #eef0f4;
+@light:                 darken(@light-base, 2%);
+@light-dark:            darken(@light-base, 4%);
+@light-darker:          darken(@light-base, 6%);
+@light-darkest:         darken(@light-base, 9%);
+
+@border-color:          #e1e7ea;
+
+//** Background color for `<body>`.
+@body-bg:               #fff;
+//** Global text color on `<body>`.
+@text-color:            @gray-darkest;
+
+//** Global textual link color.
+@link-color:            darken(@blue, 10%);
+@link-hover-color:      darken(@blue, 20%);; // darken(@link-color, 20%);
+@link-decoration-color: darken(@link-hover-color, 10%);
+@link-hover-decoration: underline;
+
+// -------------------------------
+// Spacings
+// -------------------------------
+
+@padding-base:              6px;
+@padding-base-vertical:     @padding-base;
+@padding-base-horizontal:   @padding-base * 2;
+
+@page-padding-horizontal:   55px;
+
+// -------------------------------
+// Borders
+// -------------------------------
+
+@border-radius-base:        3px;
+@border-radius-large:       4px;
+@border-radius-small:       2px;
+
+// -------------------------------
+// Buttons
+// -------------------------------
+
+@btn-font-weight:                normal;
+
+@btn-default-color:              #333;
+@btn-default-bg:                 #fff;
+@btn-default-border:             @border-color;
+
+@btn-primary-color:              #fff;
+@btn-primary-bg:                 @blue;
+@btn-primary-border:             darken(@btn-primary-bg, 5%);
+
+@btn-success-color:              #fff;
+@btn-success-bg:                 @green;
+@btn-success-border:             darken(@btn-success-bg, 5%);
+
+@btn-info-color:                 #fff;
+@btn-info-bg:                    @cyan;
+@btn-info-border:                darken(@btn-info-bg, 5%);
+
+@btn-warning-color:              #fff;
+@btn-warning-bg:                 @yellow;
+@btn-warning-border:             darken(@btn-warning-bg, 5%);
+
+@btn-danger-color:               #fff;
+@btn-danger-bg:                  @red;
+@btn-danger-border:              darken(@btn-danger-bg, 5%);
+
+@btn-link-disabled-color:        @gray-light;
+
+// Allows for customizing button radius independently from global border radius
+@btn-border-radius-base:         @border-radius-base;
+@btn-border-radius-large:        @border-radius-large;
+@btn-border-radius-small:        @border-radius-small;
+
+// -------------------------------
+// Screen Breakpoints
+// -------------------------------
+
+@screen-sm-max:               768px;
+@screen-lg-max:               1050px;
+
+// -------------------------------
+
+@grid-gutter-width:           30px;
+@text-muted:                  @gray-light;
+
+@input-height-base:           (@line-height-computed + (@padding-base-vertical * 2) + 2);
+
+@blockquote-small-color:      @gray-light;
+//** Blockquote font size
+@blockquote-font-size:        (@font-size-base * 1.25);
+//** Blockquote border color
+@blockquote-border-color:     @yellow; // #efc52c; // @gray-lighter;
+
+// -------------------------------
+
+@brand-title-width: 180px;
+

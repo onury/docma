@@ -1,0 +1,166 @@
+{
+    "debug": 5,
+    "jsdoc": {
+        "encoding": "utf8",
+        "recurse": false,
+        "pedantic": false,
+        "access": null,
+        "package": null,
+        "module": true,
+        "undocumented": false,
+        "undescribed": false,
+        "ignored": false,
+        "hierarchy": true,
+        "sort": "alphabetic",
+        "relativePath": null,
+        "filter": null,
+        "allowUnknownTags": true,
+        "plugins": []
+    },
+    "markdown": {
+        "gfm": true,
+        "tables": true,
+        "breaks": false,
+        "pedantic": false,
+        "sanitize": false,
+        "smartLists": true,
+        "smartypants": false,
+        "xhtml": false,
+        "tasks": true,
+        "emoji": true
+    },
+    "app": {
+        "title": "Docma Documentation",
+        "meta": null,
+        "base": "/docma",
+        "entrance": "content:home",
+        "routing": "query",
+        "server": "github"
+    },
+    "template": {
+        "path": "zebra",
+        "options": {
+            "title": {
+                "label": "Docma",
+                "href": "/docma/?"
+            },
+            "logo": {                       // URL String or { dark: String, light: String }
+                "dark": "img/docma-logo-dark.png",
+                "light": "img/docma-logo-light.png"
+            },
+            "sidebar": {
+                "enabled": true,
+                "outline": "tree",          // "flat" | "tree"
+                "collapsed": false,
+                "toolbar": true,
+                "itemsFolded": false,
+                "itemsOverflow": "crop",    // "crop" | "shrink"
+                "badges": true,             // true | false | <string-value>
+                "search": true,
+                "animations": true
+                },
+            "symbols": {
+                "autoLink": true,           // "internal" | "external" | true (both)
+                "params": "list",           // "list" | "table"
+                "enums": "list",            // "list" | "table"
+                "props": "list",            // "list" | "table"
+                "meta": false
+            },
+            "contentView": {
+                "bookmarks": "h1,h2,h3"
+            },
+            "navbar": {
+                "enabled": true,
+                "fixed": true,
+                "dark": false,
+                "animations": true,
+                "menu": [
+                    {
+                        // "iconClass": "fas fa-book",
+                        "label": "Building Docs",
+                        "items": [
+                            { "label": "Guide", "href": "./" },
+                            { "separator": true },
+                            { "label": "Docma (Builder) API", "href": "?api=docma" },
+                            { "label": "Build Configuration", "href": "?api=docma#Docma~BuildConfiguration" },
+                            { "separator": true },
+                            { "label": "Docma CLI", "href": "?content=docma-cli" }
+                        ]
+                    },
+                    {
+                        "iconClass": "fas fa-puzzle-piece",
+                        "label": "Templates",
+                        "items": [
+                            { "label": "Default Template - Zebra", "href": "?content=zebra-template" },
+                            { "separator": true },
+                            { "label": "Creating Docma Templates", "href": "?content=creating-templates" },
+                            { "label": "Docma Template API", "href": "?api=docma#Docma.Template" },
+                            { "separator": true },
+                            { "label": "Docma Web API", "href": "?api=docma-web" },
+                            { "label": "Docma Filters", "href": "?content=docma-filters" }
+                        ]
+                    },
+                    {
+                        // "iconClass": "fas fa-cloud-download-alt",
+                        "label": "Download",
+                        "items": [
+                            {
+                                "label": "<code>npm i docma -g</code>",
+                                "href": "https://www.npmjs.com/package/docma",
+                                "target": "_blank"
+                            },
+                            {
+                                "label": "Docma Releases",
+                                "href": "https://github.com/onury/docma/releases",
+                                "target": "_blank"
+                            },
+                            { "separator": true },
+                            {
+                                "label": "Change Log",
+                                "href": "?content=changelog"
+                            }
+                        ]
+                    },
+                    {
+                        "iconClass": "fab fa-lg fa-github",
+                        "label": "",
+                        "href": "https://github.com/onury/docma",
+                        "target": "_blank"
+                    }
+                ]
+            }
+        }
+    },
+    "src": [
+        // API sources
+        // grouped JS API documentation
+        {
+            "docma": [
+                "./lib/Docma.js",
+                "./lib/Template.js",
+                "./lib/TemplateDoctor.js"
+            ],
+            "docma-web": [
+                "./lib/web/DocmaWeb.js",
+                "./lib/web/DocmaWeb.Route.js"
+            ],
+            "docma-web-utils": "./lib/web/DocmaWeb.Utils.js"
+        },
+        // Content sources
+        // markdown
+        "./CHANGELOG.md",
+        "./doc/**/*.md",
+        {
+            // renamed markdown
+            "guide": "./doc/readme-modified.md",
+            "zebra-template": "./templates/zebra/README.md",
+            // html files
+            "home": "./doc/front.html"
+        }
+    ],
+    "assets": {
+        "/img": ["./doc/img/*.*"]
+    },
+    "dest": "../onury.github.io/docma",
+    "clean": true
+}

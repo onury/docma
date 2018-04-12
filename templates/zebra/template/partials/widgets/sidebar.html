@@ -1,0 +1,55 @@
+<div class="sidebar-header">
+    <div id="sidebar-toggle">
+        <i class="fas fa-lg fa-bars trans-all-ease"></i>
+    </div>
+    <div class="sidebar-brand">
+        {?template.options.logo.light}
+            <img src="{template.options.logo.light}" alt="logo" class="sidebar-logo" />
+        {/template.options.logo.light}
+        <span class="sidebar-title">
+            <a href="{template.options.title.href}">
+            {template.options.title.label}
+            </a>
+        </span>
+    </div>
+    {?template.options.sidebar.search}
+    <div class="sidebar-search">
+        <div class="sidebar-search-icon">
+            <i class="fas fa-md fa-search"></i>
+        </div>
+        <input id="txt-search" type="search" placeholder="Search..." autocorrect="off" autocapitalize="off" spellcheck="false" />
+        <div class="sidebar-search-clean">
+            <i class="fas fa-lg fa-times-circle"></i>
+        </div>
+    </div>
+    {/template.options.sidebar.search}
+
+    {?template.options.sidebar.toolbar}
+    <div class="sidebar-toolbar">
+        <div class="toolbar-scope-filters"></div>
+        <div class="toolbar-kind-filters"></div>
+        <div class="toolbar-buttons">
+            <span class="btn-switch-fold inline-block" title="Fold Symbols">
+                {@eq key=template.options.sidebar.itemsFolded type="boolean" value="true"}
+                <i class="far fa-lg fa-caret-square-right"></i>
+                {:else}
+                <i class="far fa-lg fa-caret-square-down"></i>
+                {/eq}
+            </span>
+            <span class="btn-switch-outline inline-block space-left-xs" title="Toggle Outline">
+                {@eq key=template.options.sidebar.outline type="string" value="tree"}
+                <i class="fas fa-lg fa-indent"></i>
+                {:else}
+                <i class="fas fa-lg fa-outdent"></i>
+                {/eq}
+            </span>
+        </div>
+    </div>
+    {/template.options.sidebar.toolbar}
+</div>
+
+<div class="sidebar-nav-container">
+    <ul class="sidebar-nav">
+        {symbols|s|$navnodes}
+    </ul>
+</div>

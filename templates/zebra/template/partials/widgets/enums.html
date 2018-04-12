@@ -1,0 +1,51 @@
+{?$members}
+
+    {@eq key=template.options.symbols.enums value="table"}
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Enumeration</th>
+                <th>Type</th>
+                <th>Value</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {#$members}
+                <tr>
+                    <td><code>{.|$longname|s|$dot_prop}</code></td>
+                    <td><code>{.|s|$type}</code></td>
+                    <td><code>{.|$val}</code></td>
+                    <td>{.|s|$desc}</td>
+                </tr>
+            {/$members}
+        </tbody>
+    </table>
+
+    {:else}
+
+    <div class="space-top-sm space-bottom-xs fw-bold">Enumeration</div>
+    <ul class="param-list">
+        {#$members}
+            <li>
+                <div class="param-meta clearfix">
+                    <span class="inline-block space-right-sm">
+                        <code>{.|$longname|s|$dot_prop}</code>
+                        &nbsp;:&nbsp;<code>{.|s|$type}</code>
+                    </span>
+                    <span class="param-info-box">
+                        <span class="param-info value">Value:&nbsp;</span>
+                        <code>{.|$val}</code>
+                    </span>
+                </div>
+
+                <div class="param-desc">
+                    {.|s|$desc}
+                </div>
+            </li>
+        {/$members}
+    </ul>
+
+    {/eq}
+
+{/$members}

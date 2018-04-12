@@ -1,0 +1,212 @@
+@import "variables.less";
+@import "mixins.less";
+@import "normalize.less";
+@import "table.less";
+@import "code.less";
+@import "layout.less";
+@import "navbar.less"; // must come before sidebar
+@import "symbol.less"; // must come before sidebar
+@import "sidebar.less";
+@import "tooltip.less";
+@import "highlight-one-dark.less";
+@import "print.less";
+
+html {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+body, html {
+    font-family: @font-family-sans-serif;
+    font-size: @font-size-base;
+    line-height: @line-height-base;
+    background-color: @body-bg !important;
+    color: @text-color;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    min-height: 100%;
+}
+
+* {
+    .box-sizing(border-box);
+    outline: 0 none !important;
+}
+*:before,
+*:after {
+    .box-sizing(border-box);
+}
+
+button {
+    outline: 0 none !important;
+    font-size: @font-size-base !important;
+    &::-moz-focus-inner {
+        border: 0 !important;
+    }
+
+    &.btn-block {
+        letter-spacing: 0.03em;
+        font-size: @font-size-medium !important;
+        // text-transform: uppercase;
+    }
+
+    &.btn {
+        border: 0 none;
+    }
+}
+
+select {
+    -webkit-appearance: menulist-button;
+    /*background: none !important;*/
+    background: #fff !important;
+    /*border: 0 none !important;*/
+    outline: none !important;
+}
+
+// Links
+
+a {
+    position: relative; // !!!
+    color: @link-color;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        .underline-skip;
+        color: @link-hover-color;
+        text-decoration: @link-hover-decoration;
+        text-decoration-color: @link-decoration-color !important;
+    }
+
+    &:focus {
+        .tab-focus();
+    }
+}
+
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    margin: 10px 0 20px 0;
+}
+// h1 + hr,
+// h2 + hr {
+//     margin: 0 !important;
+// }
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: @headings-font-family;
+    font-weight: @headings-font-weight;
+    line-height: @headings-line-height;
+    color: @headings-color;
+    .background-clip-padding;
+    // required for preventing headings overlapping on other content such as
+    // paragraphs.
+    z-index: 0;
+
+    small,
+    .small {
+        font-size: 70%;
+        font-weight: normal;
+        line-height: 1;
+        color: @gray-light;
+    }
+}
+
+h1, .h1 { #heading-size(@font-size-h1); }
+h2, .h2 { #heading-size(@font-size-h2); }
+h3, .h3 { #heading-size(@font-size-h3); }
+h4, .h4 { #heading-size(@font-size-h4); }
+h5, .h5 { #heading-size(@font-size-h5); }
+h6, .h6 { #heading-size(@font-size-h6); }
+
+
+p {
+    margin: 0 0 15px;
+    // below is required to prevent anchor links within paragraphs from being
+    // overlapped by header margins. (h margins are used for navbar space)
+    position: relative;
+    z-index: 1;
+}
+
+a, p, ul, ol, table {
+    // required for preventing headings overlapping on other content such as
+    // paragraphs, lists, etc...
+    z-index: 1;
+}
+
+// nested list fixes
+ul, ol > li > p {
+    margin: 5px 0;
+}
+ul, ol > li > ul, ol {
+    // margin-bottom: 12px !important;
+}
+
+td > p {
+    margin: 0;
+}
+
+div {
+    border: 0 none !important;
+}
+
+img {
+    vertical-align: middle;
+    border: 0 none !important;
+}
+
+// Blockquotes
+blockquote {
+    padding: 10px 12px; // (@line-height-computed / 2) @line-height-computed;
+    margin: 0 0 17px 0;
+    font-size: 1em; // @blockquote-font-size;
+    font-style: italic;
+    border-left: 5px solid @blockquote-border-color;
+    color: #576075;
+    background-color: #f9f9f9;
+    border-top-right-radius: @border-radius-base;
+    border-bottom-right-radius: @border-radius-base;
+
+    & > p:last-of-type {
+        margin-bottom: 0;
+    }
+}
+
+.well {
+    background-color: #f9f9f9;
+    border-radius: 3px;
+    padding: 20px;
+
+    & > p:last-of-type {
+        margin-bottom: 0;
+    }
+}
+
+// --------------------------
+
+.zebra-bookmark {
+    #bookmark-icon(0.7em);
+    &:before {
+        content: " ";
+        display: block;
+        visibility: hidden;
+        height: @navbar-height; /* fixed header height*/
+        margin-top: -(@navbar-height); /* negative fixed header height */
+    }
+}
+
+.docma-info {
+    display: inline-block;
+    font-size: @font-size-xsmall;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    margin-bottom: 25px;
+    z-index: 2;
+}
+
+#docma-content {
+    margin-top: 17px;
+}
