@@ -66,7 +66,7 @@
         "sanitize": true,
         "smartLists": true,
         "smartypants": false,
-        "bookmarks": true,
+        "xhtml": false,
         "tasks": true,
         "emoji": true
     },
