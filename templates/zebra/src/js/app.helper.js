@@ -500,7 +500,6 @@ var app = window.app || {};
             var isLast = index === symbols.length - 1;
             var navItem = getSidebarNavItem(symbol, parentSymbol, isLast, lastNodeLevels);
             var currentLastLevel = isLast ? DocmaWeb.Utils.getLevels(symbol) : lastNodeLevels;
-            console.log(symbol.$longname, currentLastLevel);
             var members = '';
             if (helper.hasChildren(symbol)) {
                 members = '<ul class="item-members trans-all-ease">' + helper.buildSidebarNodes(symbolNames, symbol.$members, symbol, currentLastLevel).join('') + '</ul>';
