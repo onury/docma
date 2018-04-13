@@ -330,6 +330,21 @@ var app = window.app || {};
         // return none;
     }
 
+    // --------------------------------
+    // TREE OUTLINE
+    // --------------------------------
+
+    // We get the number of levels for each symbol. (e.g. `DocmaWeb.Utils.DOM`
+    // has 3 levels.) With each iteration, we keep track of the levels of the
+    // latest node which is the "last" in its own branch. This allows us to
+    // determine how many "deep" (│) nodes or "space" holders we need to set in
+    // front of the corresponding symbols badge & name.
+
+    //  ＊ (first / parent, levels: 1)
+    //  ├─＊ (node / parent, levels: 2)
+    //  │ └─＊ (last in its own branch, levels: 3)
+    //  └─＊  (last, levels: 2)
+
     function getTreeLine(treeNode, addClass) {
         var cls = 'item-tree-line';
         if (addClass) cls += ' ' + addClass;
@@ -337,8 +352,22 @@ var app = window.app || {};
         return '<img class="' + cls + '" src="img/tree-' + treeNode + '.png" width="' + app.TREE_NODE_WIDTH + '" height="' + app.SIDEBAR_NODE_HEIGHT + '" />';
     }
 
-    // treeNode: 'first'/'parent', 'last' or 'node' (or 'deep' which is calculated)
-    function getTreeLineImgs(levels, treeNode, hasChildren, parentIsLast) {
+    /**
+     *  Gets an array of image tags with tree-line images.
+     *  This is added in front of the symbol badge and name in the symbols menu.
+     *  @private
+     *
+     *  @param {Number} levels - Number of levels for the current node.
+     *  @param {String} treeNode - Kind of tree node. (i.e. 'first'/'parent',
+     *  'last' or 'node' (or 'deep' or 'space' which are calculated)).
+     *  @param {Boolean} hasChildren - Whether this node has child nodes. (has
+     *  its own branch).
+     *  @param {Number} lastNodeLevels - The number of levels that the latest node
+     *  that was "last" (└─*) in its own tree branch.
+     *
+     *  @returns {String} - HTML string.
+     */
+    function getTreeLineImgs(levels, treeNode, hasChildren, lastNodeLevels) {
         // this will be checked and src might be changed to img/tree-last.png if
         // this is the last item of a tree node.
 
@@ -357,18 +386,25 @@ var app = window.app || {};
         }
 
         // deeper levels, if any...
+        var deeps = [];
         if (levels > 2) {
             var i;
             for (i = 2; i < levels; i++) {
                 // if parent symbol is the last in tree, we add space instead of
                 // a deeper tree line.
-                imgs.unshift(getTreeLine(parentIsLast ? 'space' : 'deep'));
+                if (i <= lastNodeLevels) {
+                    // add spaces to most-left with unshift
+                    deeps.unshift(getTreeLine('space'));
+                } else {
+                    deeps.push(getTreeLine('deep'));
+                }
             }
         }
+        imgs = deeps.concat(imgs);
         return imgs.join('');
     }
 
-    function getSidebarNavItemInner(badge, symbolName, treeNode, hasChildren, parentIsLast) {
+    function getSidebarNavItemInner(badge, symbolName, treeNode, hasChildren, lastNodeLevels) {
         var levels = DocmaWeb.Utils.getLevels(symbolName);
 
         var badgeIsStr = typeof templateOpts.sidebar.badges === 'string';
@@ -403,7 +439,7 @@ var app = window.app || {};
         //     }
         // } else {
 
-        treeImages = getTreeLineImgs(levels, treeNode, hasChildren, parentIsLast);
+        treeImages = getTreeLineImgs(levels, treeNode, hasChildren, lastNodeLevels);
         if (noBadge) {
             badge = '';
             labelMargin = 7;
@@ -427,7 +463,7 @@ var app = window.app || {};
             + '</div>';
     }
 
-    function getSidebarNavItem(symbol, parentSymbol, isLast, parentIsLast) {
+    function getSidebarNavItem(symbol, parentSymbol, isLast, lastNodeLevels) {
         var treeNode = parentSymbol
             ? (isLast ? 'last' : 'node')
             : 'first';
@@ -439,7 +475,7 @@ var app = window.app || {};
             ? symbolData.badge || ''
             : (typeof templateOpts.sidebar.badges === 'string' ? templateOpts.sidebar.badges : '&nbsp;•&nbsp;');
         var hasChildren = helper.hasChildren(symbol);
-        var innerHTML = getSidebarNavItemInner(badge, symbol.$longname, treeNode, hasChildren, parentIsLast);
+        var innerHTML = getSidebarNavItemInner(badge, symbol.$longname, treeNode, hasChildren, lastNodeLevels);
         var chevron = '';
         if (hasChildren) {
             chevron = '<div class="chevron"><i class="fas fa-lg fa-angle-right"></i></div>';
@@ -448,7 +484,8 @@ var app = window.app || {};
             + innerHTML + '</a>';
     }
 
-    helper.buildSidebarNodes = function (symbolNames, symbols, parentSymbol, parentIsLast) {
+    helper.buildSidebarNodes = function (symbolNames, symbols, parentSymbol, lastNodeLevels) {
+        lastNodeLevels = lastNodeLevels || 0;
         symbols = symbols || docma.documentation;
         var items = [];
         symbols.forEach(function (symbol, index) {
@@ -461,10 +498,12 @@ var app = window.app || {};
             }
 
             var isLast = index === symbols.length - 1;
-            var navItem = getSidebarNavItem(symbol, parentSymbol, isLast, parentIsLast);
+            var navItem = getSidebarNavItem(symbol, parentSymbol, isLast, lastNodeLevels);
+            var currentLastLevel = isLast ? DocmaWeb.Utils.getLevels(symbol) : lastNodeLevels;
+            console.log(symbol.$longname, currentLastLevel);
             var members = '';
             if (helper.hasChildren(symbol)) {
-                members = '<ul class="item-members trans-all-ease">' + helper.buildSidebarNodes(symbolNames, symbol.$members, symbol, isLast).join('') + '</ul>';
+                members = '<ul class="item-members trans-all-ease">' + helper.buildSidebarNodes(symbolNames, symbol.$members, symbol, currentLastLevel).join('') + '</ul>';
             }
             items.push('<li>' + navItem + members + '</li>');
         });
