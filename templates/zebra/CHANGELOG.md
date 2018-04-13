@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## 2.0.1 (2018-04-13) [Unreleased]
+
+#### Fixed
+- An issue where deeper levels of tree nodes were not properly aligned, when `sidebar.outline` is set to `"tree"`.
+
 ## 2.0.0 (2018-04-12)
 > _This is a big release with some breaking changes._  
 > _Please read this changelog thoroughly before updating your template configuration._
