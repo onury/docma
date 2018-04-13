@@ -38,7 +38,7 @@
         "server": "github"
     },
     "template": {
-        "path": "zebra",
+        "path": "./templates/zebra",        // set to "zebra" (this path is for this repo only)
         "options": {
             "title": {
                 "label": "Docma",
