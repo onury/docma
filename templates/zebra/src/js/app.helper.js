@@ -459,7 +459,10 @@ var app = window.app || {};
         return '<div class="item-inner" data-levels="' + levels + '" data-tree="' + treeNode + '" style="margin-left:0px">'
             + treeImages
             + badge
-            + '<div class="item-label"' + itemTitle + labelStyle + '><div class="inner">' + name + '</div></div>'
+            + '<div class="item-label"' + itemTitle + labelStyle + '>'
+            + '<div class="edge-shadow"></div>'
+            + '<div class="inner">' + name + '</div>'
+            + '</div>'
             + '</div>';
     }
 
