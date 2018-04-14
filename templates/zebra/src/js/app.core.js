@@ -636,7 +636,6 @@ var app = window.app || {};
                     .on('click', getFilterClickHandler('scope'));
 
                 $btnSwitchFold.on('click', function () {
-                    console.log('clicked');
                     // disable if search is active
                     if (isFilterActive) return;
                     setFoldState(!isItemsFolded);
