@@ -405,17 +405,17 @@ Docma.create()
 docma -c path/to/docma.json
 ```
 
-### Change-log
+## Changelog
 
 See [**CHANGELOG**][changelog].  
 _Note: If you're upgrading from Zebra v1.x to v2.x, there are some [**breaking changes**][changelog]._
 
-### License
+## License
 
-[**MIT**][license]. You don't have to include any copyright notice in your documentation output or templates but I'd appreciate if you let people know about this tool so we can read better documentations.
-
-Emoji shortcuts used in source markdown files are parsed into [twemoji][twemoji]. Graphics and icons licensed under [CC-BY 4.0][cc-by-4].
+[**MIT**][license]. Emoji shortcuts used in source markdown files are parsed into [twemoji][twemoji]. Graphics and icons licensed under [CC-BY 4.0][cc-by-4].
 
 [docma-repo]:https://github.com/onury/docma
 [license]:https://github.com/onury/docma/blob/master/templates/zebra/LICENSE
 [changelog]:https://github.com/onury/docma/blob/master/templates/zebra/CHANGELOG.md
+[twemoji]:https://github.com/twitter/twemoji
+[cc-by-4]:https://creativecommons.org/licenses/by/4.0

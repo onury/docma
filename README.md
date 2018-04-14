@@ -16,7 +16,7 @@
 
 A powerful tool to easily generate beautiful HTML documentation from Javascript ([JSDoc][jsdoc]), [Markdown][markdown] and HTML files.
 
-### Features
+## Features
 
 - Parse **JSDoc** documentation, **Markdown** and **HTML** files.
 - Build a cool **SPA** (Single Page Application) from parsed files.
@@ -39,13 +39,13 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
     <a href="https://onury.io/docma">click to view live</a>
 </p>
 
-### Installation
+## Installation
 
 ```sh
 npm i docma -g
 ```
 
-### Building Documentation with CLI
+## Building Documentation with CLI
 
 You can use Docma CLI to build documentations directly from your console. Once you create the configuration (JSON) file, it's quite simple.
 
@@ -61,7 +61,7 @@ See
  - [Docma CLI Reference][docma-cli]
  - [Build Configuration][docma-config]
 
-### Building Documentation Programmatically
+## Building Documentation Programmatically
 
 If you need to build documentation from within your code, use the API.
 
@@ -90,27 +90,27 @@ Docma.create()
 ```
 See [Docma API Reference][docma-api].
 
-### Parsed Output
+## Parsed Output
 
 To investigate the parsed JSDoc output, enable the `debug` option that will create a JSON output(s) within the root of the destination directory. If you have a problem with the parsed documentation data, open an issue @ [jsdoc-x][jsdoc-x]. _(I'm the author.)_
 
 For markdown output issues (that are not related with style), you can open an issue @ [marked][marked].
 
-### Change-log
+## Changelog
 
 See [**CHANGELOG**][changelog].  
 _Note: If you're upgrading from Docma v1.x to v2.x, there are some [**breaking changes**][changelog]._
 
-### Documentation
+## Documentation
 Read [Docma documentation][docma-docs], built with Docma, for a Docma demo... :eyes:
 
-### License
+## License
 
 [**MIT**][license]. You don't have to include any copyright notice in your documentation output or templates but I'd appreciate if you let people know about this tool so we can read better documentations.
 
 Emoji shortcuts used in source markdown files are parsed into [twemoji][twemoji]. Graphics and icons licensed under [CC-BY 4.0][cc-by-4].
 
-### Related Modules
+## Related Modules
 
 - [jsdoc-x][jsdoc-x] — Parser for outputting a Javascript object from documented code via JSDoc's explain (-X) command.
 - [marked][marked] — A full-featured markdown parser and compiler, written in JavaScript. Built for speed.
