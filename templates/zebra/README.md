@@ -1,7 +1,13 @@
 # Zebra — Template for Docma
-<img align="right" width="200" height="200" style="margin-right:30px" src="https://raw.github.com/onury/docma/v2/templates/zebra/zebra-logo.png" />
+<img align="right" width="150" height="150" style="margin-right:30px;margin-top:-50px" src="https://raw.github.com/onury/docma/v2/templates/zebra/zebra-logo.png" />
 
 This is the default template for [Docma][docma-repo]; with a side-bar symbols menu, search and navigation features; and a beautiful layout.
+
+<p align="center">
+<a href="https://onury.io/docma"><img width="100%" src="https://raw.github.com/onury/docma/v2/docma-screen.jpg" alt="Built with Docma using Zebra Template" /></a>
+<br />
+<a href="https://onury.io/docma">click to view live</a>
+</p>
 
 ## Usage
 
@@ -398,6 +404,17 @@ Docma.create()
 docma -c path/to/docma.json
 ```
 
+### Change-log
 
+See [**CHANGELOG**][changelog].  
+_Note: If you're upgrading from Zebra v1.x to v2.x, there are some [**breaking changes**][changelog]._
+
+### License
+
+[**MIT**][license]. You don't have to include any copyright notice in your documentation output or templates but I'd appreciate if you let people know about this tool so we can read better documentations.
+
+Emoji shortcuts used in source markdown files are parsed into [twemoji][twemoji]. Graphics and icons licensed under [CC-BY 4.0][cc-by-4].
 
 [docma-repo]:https://github.com/onury/docma
+[license]:https://github.com/onury/docma/blob/master/templates/zebra/LICENSE
+[changelog]:https://github.com/onury/docma/blob/master/templates/zebra/CHANGELOG.md
