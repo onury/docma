@@ -75,7 +75,7 @@ var app = window.app || {};
         var delay = templateOpts.sidebar.animations
             // we won't delay if it's "shrink" bec. transitions are not smooth
             // otherwise.
-            ? templateOpts.sidebar.itemsOverflow === 'shrink' ? 0 : 210
+            ? templateOpts.sidebar.itemsOverflow === 'shrink' ? 0 : 240
             : 0;
 
         setTimeout(function () {
@@ -92,9 +92,13 @@ var app = window.app || {};
             // below is a hacky fix to refresh the ellipsis on Chrome
             var $inners = $labels.find('.inner');
             $inners.css('text-overflow', 'clip');
-            setTimeout(function () {
-                $inners.css('text-overflow', 'ellipsis');
-            }, 130);
+
+            // Firefox crops too much when ellipsis is enabled. Chrome does it
+            // best but for cross-browser compat. disabling this.
+
+            // setTimeout(function () {
+            //     $inners.css('text-overflow', 'ellipsis');
+            // }, 130);
         }
     }
 
