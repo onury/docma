@@ -18,7 +18,7 @@ const fs = require('fs-extra');
 const chalk = require('chalk');
 
 // own modules
-const Docma = require('../lib/docma');
+const Docma = require('../lib/Docma');
 const serve = require('./commands/serve');
 const doctor = require('./commands/template.doctor');
 const init = require('./commands/template.init');
@@ -130,7 +130,7 @@ const argv = yargs
         global: false
     })
     .option('q', {
-        alias: 'quite',
+        alias: 'quiet',
         type: 'boolean',
         description: '(Debug) Disable build logs for the Node console.',
         global: false
@@ -146,7 +146,7 @@ const argv = yargs
                     global: false
                 },
                 q: {
-                    alias: 'quite',
+                    alias: 'quiet',
                     type: 'boolean',
                     description: 'Disable request logs for the Node console.',
                     global: false
@@ -225,7 +225,7 @@ function updateConfig(config) {
             : (typeof config.debug === 'number' ? config.debug : 1);
     }
 
-    if (argv.quite) {
+    if (argv.quiet) {
         config.debug &= ~1; // unset node logs
     } else {
         if (config.debug & 1 === 0) config.debug = 1;
@@ -272,14 +272,14 @@ const cmds = argv._ || [];
 if (cmds.indexOf('serve') >= 0) {
     serve(argv.path, {
         port: argv.port,
-        quite: argv.quite
+        quiet: argv.quiet
     });
 } else if (cmds.indexOf('template') >= 0) {
     if (cmds.indexOf('init') >= 0) {
         init(argv.path);
     } else if (cmds.indexOf('doctor') >= 0) {
         doctor(argv.path, {
-            quite: argv.quite,
+            quiet: argv.quiet,
             stopOnFirstFailure: argv.first
         });
     }

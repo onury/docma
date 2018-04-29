@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## Unreleased
+
+### Docma CLI
+
+#### Added
+- `serve` command takes `conf.app.base` parameter into consideration, and will redirect `http://localhost:9000/` to it
+
+#### Fixed
+- `serve` command can handle `conf.app.dest` relative path, and resolves them against current working directory. 
+
+#### Changed
+- **BREAKING**: Renamed the ` --quite` option to `--quiet`
+
 ## [2.0.0](https://github.com/onury/docma/compare/v1.5.3...v2.0.0) (2018-04-12)
 > _This is a big release with some breaking changes._  
 > _Please read this changelog thoroughly before updating your Docma configuration._
