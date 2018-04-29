@@ -69,7 +69,7 @@
   ],
   "dependencies": {
     "bluebird": "^3.5.0",
-    "chalk": "^2.3.2",
+    "chalk": "^2.4.1",
     "docma-template-zebra": "^2.0.0",
     "dustjs-linkedin": "^2.7.5",
     "easy-table": "^1.1.1",
@@ -79,21 +79,21 @@
     "gzip-size": "^4.1.0",
     "inquirer": "^5.2.0",
     "jsdoc-x": "^3.0.0",
-    "jsdom": "^11.7.0",
-    "less": "^3.0.1",
+    "jsdom": "^11.9.0",
+    "less": "^3.0.2",
     "less-plugin-clean-css": "^1.5.1",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.10",
     "marked": "^0.3.19",
     "npm-name": "^3.2.0",
     "semver": "^5.5.0",
     "serve-static": "^1.13.2",
     "strip-json-comments": "^2.0.1",
-    "uglify-js": "^3.3.20",
+    "uglify-js": "^3.3.23",
     "yargs": "^11.0.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
-    "eslint-config-xo": "^0.20.1",
+    "eslint-config-xo": "^0.22.0",
     "jest-cli": "^22.4.3"
   }
 }

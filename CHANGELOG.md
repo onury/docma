@@ -2,18 +2,33 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
-## Unreleased
+## [2.1.0](https://github.com/onury/docma/compare/v2.0.0...v2.1.0) (2018-04-29)
 
 ### Docma CLI
+> Thanks to [@feugy](https://github.com/feugy) for this PR.
 
 #### Added
-- `serve` command takes `conf.app.base` parameter into consideration, and will redirect `http://localhost:9000/` to it
+- `serve` command now takes `conf.app.base` parameter into consideration, and will redirect `http://localhost:9000/` to it.
 
 #### Fixed
 - `serve` command can handle `conf.app.dest` relative path, and resolves them against current working directory. 
+- A file name issue that produces `cannot find module` error in case-sensitive systems. Fixes [#38](https://github.com/onury/docma/issues/38).
 
 #### Changed
-- **BREAKING**: Renamed the ` --quite` option to `--quiet`
+- Renamed the `--quite` option to `--quiet`. Alias `-q` remains the same.
+
+### Default Template - Zebra `v2.1.0`
+
+#### Added
+- Partial support for TypeScript-style type notation. e.g. `Promise<Number>` or `Number[]`, etc...
+
+#### Fixed
+- An issue where deeper levels of tree nodes were not properly aligned, when `sidebar.outline` is set to `"tree"`.
+- An issue where some symbol names were unnecessarily scroll-animated on hover. Firefox was affected.
+- An issue where multiple return types were listed out of style.
+
+#### Changed
+- When `sidebar.itemsOverflow` is set to `"crop"` (default); symbol names are faded-out on their edges, instead of using ellipsis (which behaves differently on browsers).
 
 ## [2.0.0](https://github.com/onury/docma/compare/v1.5.3...v2.0.0) (2018-04-12)
 > _This is a big release with some breaking changes._  
@@ -238,7 +253,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 ### Docma CLI
 
 #### Changed
-- Respecting debug option in config file. If no debug options are set in the command-line arguments (such as `--debug`, `--quite`, `--nomin`, `--jd-out`, `--verbose`, `--web-logs`); the bitwise debug value from the config file is used, if set.
+- Respecting debug option in config file. If no debug options are set in the command-line arguments (such as `--debug`, `--quiet`, `--nomin`, `--jd-out`, `--verbose`, `--web-logs`); the bitwise debug value from the config file is used, if set.
 
 ### Docma Web Core
 
