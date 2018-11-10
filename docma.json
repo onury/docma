@@ -1,5 +1,5 @@
 {
-    "debug": 5,
+    "debug": 31,
     "jsdoc": {
         "encoding": "utf8",
         "recurse": false,
@@ -150,11 +150,12 @@
         // markdown
         "./CHANGELOG.md",
         "./doc/**/*.md",
+        "./LICENSE:md",
         {
             // renamed markdown
             "guide": "./doc/readme-modified.md",
             "zebra-template": "./templates/zebra/README.md",
-            // html files
+            // renamed html file
             "home": "./doc/front.html"
         }
     ],
