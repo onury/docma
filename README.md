@@ -96,6 +96,8 @@ To investigate the parsed JSDoc output, enable the `debug` option that will crea
 
 For markdown output issues (that are not related with style), you can open an issue @ [marked][marked].
 
+Sometimes, the issue is with invalid JSDoc comments. [See this](https://github.com/onury/docma/issues/55#issuecomment-437599192) for linting/validating your JSDoc while you type and within a build process.
+
 ## Changelog
 
 See [**CHANGELOG**][changelog].  
