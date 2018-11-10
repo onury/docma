@@ -70,7 +70,7 @@ module.exports = rootDirPath => {
                 // parse content with ${key} placeholders
                 _.each(answers, (value, key) => {
                     const reKey = new RegExp('\\$\\{' + key + '\\}', 'gi');
-                    content = content.replace(reKey, String(value));
+                    content = (content || '').replace(reKey, String(value));
                 });
                 return fs.outputFile(dest, content, 'utf8');
             });
