@@ -142,6 +142,7 @@
                 openPurple = '<span class="boxed vertical-middle bg-purple color-white opacity-full">',
                 openRed = '<span class="boxed vertical-middle bg-red color-white opacity-full">',
                 openPink = '<span class="boxed vertical-middle bg-pink color-white opacity-full">',
+                openBrown = '<span class="boxed vertical-middle bg-brown color-white opacity-full">',
                 close = '</span>',
                 tagBoxes = [];
 
@@ -180,6 +181,9 @@
             }
             if (DocmaWeb.Utils.isReadOnly(symbol)) {
                 tagBoxes.push(openIceDark + 'readonly' + close);
+            }
+            if (DocmaWeb.Utils.isConstant(symbol)) {
+                tagBoxes.push(openBrown + 'constant' + close);
             }
 
             var tags = Array.isArray(symbol) ? symbol : symbol.tags || [];
