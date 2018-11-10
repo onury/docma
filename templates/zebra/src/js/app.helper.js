@@ -187,7 +187,7 @@ var app = window.app || {};
 
     helper.getSymbolInfo = function (kind, scope, asButton) {
         var title = scope || '';
-        title += ' ' + kind.replace('typedef', 'type');
+        title += ' ' + (kind || '').replace('typedef', 'type');
         title = DocmaWeb.Utils.trimLeft(helper.capitalize(title));
         var svgOpts = {
             title: title,
@@ -303,31 +303,18 @@ var app = window.app || {};
         }
 
         if (DocmaWeb.Utils.isClass(symbol)) return helper.getSymbolInfo('class', symbol.scope);
+        if (DocmaWeb.Utils.isConstant(symbol)) return helper.getSymbolInfo('constant', symbol.scope);
         if (DocmaWeb.Utils.isTypeDef(symbol)) return helper.getSymbolInfo('typedef', symbol.scope);
         if (DocmaWeb.Utils.isConstructor(symbol)) return helper.getSymbolInfo('constructor', symbol.scope);
         if (DocmaWeb.Utils.isNamespace(symbol)) return helper.getSymbolInfo('namespace', symbol.scope);
         if (DocmaWeb.Utils.isModule(symbol)) return helper.getSymbolInfo('module', symbol.scope);
         if (DocmaWeb.Utils.isEnum(symbol)) return helper.getSymbolInfo('enum', symbol.scope);
         if (DocmaWeb.Utils.isEvent(symbol)) return helper.getSymbolInfo('event', symbol.scope);
-
         if (DocmaWeb.Utils.isProperty(symbol)) return helper.getSymbolInfo('property', symbol.scope);
         if (DocmaWeb.Utils.isMethod(symbol)) return helper.getSymbolInfo('method', symbol.scope);
+        if (symbol.kind === 'member') return helper.getSymbolInfo('member', symbol.scope);
 
-        // if (DocmaWeb.Utils.isGlobal(symbol)) {
-        //     return DocmaWeb.Utils.isMethod(symbol)
-        //         ? helper.getSymbolInfo('global-function', symbol.scope)
-        //         : helper.getSymbolInfo('global-object', symbol.scope);
-        // }
-
-        if (symbol.kind === 'member') {
-            return helper.getSymbolInfo('member', symbol.scope);
-        }
-
-        if (DocmaWeb.Utils.isMethod(symbol)) {
-            return helper.getSymbolInfo('function', symbol.scope);
-        }
         return helper.getSymbolInfo();
-        // return none;
     }
 
     // --------------------------------
