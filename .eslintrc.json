@@ -39,6 +39,7 @@
         "no-prototype-builtins": 0,
         "capitalized-comments": 0,
         "no-multi-spaces": 0,
+        "semi": [2, "always"],
 
         // embrace ES2015
 
