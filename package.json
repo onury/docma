@@ -24,7 +24,9 @@
   "scripts": {
     "docs": "node bin/docma",
     "zebra": "cd ./templates/zebra && npm run build",
-    "zebra-then-docs": "cd ./templates/zebra && npm run build && cd ../.. && npm run docs",
+    "start": "docma serve -p 9000",
+    "docs:zebra": "npm run zebra && npm run docs",
+    "docs:start": "npm run docs:zebra && npm start",
     "test": "jest --verbose --no-cache"
   },
   "jest": {
