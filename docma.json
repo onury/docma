@@ -33,16 +33,17 @@
         "title": "Docma Documentation",
         "meta": null,
         "base": "/docma",
-        "entrance": "content:home",
-        "routing": "query",
-        "server": "github"
+        "entrance": "content:home",         // use "api:your-lib" to set the entrance to a JSAPI page
+        "routing": "path",
+        "server": "github",
+        "favicon": "./doc/favicon.ico"      // local path of favicon to be copied
     },
     "template": {
         "path": "./templates/zebra",        // set to "zebra" (this path is for this repo only)
         "options": {
             "title": {
                 "label": "Docma",
-                "href": "/docma/?"
+                "href": "."
             },
             "logo": {                       // URL String or { dark: String, light: String }
                 "dark": "img/docma-logo-dark.png",
@@ -67,7 +68,8 @@
                 "meta": false
             },
             "contentView": {
-                "bookmarks": "h1,h2,h3"
+                "bookmarks": "h1,h2,h3",
+                "expandDetails": true
             },
             "navbar": {
                 "enabled": true,
@@ -79,25 +81,29 @@
                         // "iconClass": "fas fa-book",
                         "label": "Building Docs",
                         "items": [
-                            { "label": "Guide", "href": "./" },
+                            { "label": "Guide", "href": "." },
                             { "separator": true },
-                            { "label": "Docma (Builder) API", "href": "?api=docma" },
-                            { "label": "Build Configuration", "href": "?api=docma#Docma~BuildConfiguration" },
+                            { "label": "Docma (Builder) API", "href": "api" },
+                            { "label": "Build Configuration", "href": "api/#Docma~BuildConfiguration" },
                             { "separator": true },
-                            { "label": "Docma CLI", "href": "?content=docma-cli" }
+                            { "label": "Docma CLI", "href": "cli" }
                         ]
+                    },
+                    {
+                        "label": "F.A.Q.",
+                        "href": "faq/"
                     },
                     {
                         "iconClass": "fas fa-puzzle-piece",
                         "label": "Templates",
                         "items": [
-                            { "label": "Default Template - Zebra", "href": "?content=zebra-template" },
+                            { "label": "Default Template - Zebra", "href": "zebra-template" },
                             { "separator": true },
-                            { "label": "Creating Docma Templates", "href": "?content=creating-templates" },
-                            { "label": "Docma Template API", "href": "?api=docma#Docma.Template" },
+                            { "label": "Creating Docma Templates", "href": "creating-templates" },
+                            { "label": "Docma Template API", "href": "api/#Docma.Template" },
                             { "separator": true },
-                            { "label": "Docma Web API", "href": "?api=docma-web" },
-                            { "label": "Docma Filters", "href": "?content=docma-filters" }
+                            { "label": "Docma Web API", "href": "api/web" },
+                            { "label": "Docma Filters", "href": "docma-filters" }
                         ]
                     },
                     {
@@ -105,7 +111,7 @@
                         "label": "Download",
                         "items": [
                             {
-                                "label": "<code>npm i docma -g</code>",
+                                "label": "<code>npm i docma -D</code>",
                                 "href": "https://www.npmjs.com/package/docma",
                                 "target": "_blank"
                             },
@@ -117,7 +123,7 @@
                             { "separator": true },
                             {
                                 "label": "Change Log",
-                                "href": "?content=changelog"
+                                "href": "changelog"
                             }
                         ]
                     },
@@ -133,18 +139,20 @@
     },
     "src": [
         // API sources
+        // default group (docma)
+        // route @ api/
+        "./lib/Docma.js",
+        "./lib/Template.js",
+        "./lib/TemplateDoctor.js",
         // grouped JS API documentation
         {
-            "docma": [
-                "./lib/Docma.js",
-                "./lib/Template.js",
-                "./lib/TemplateDoctor.js"
-            ],
-            "docma-web": [
+            // route @ api/web/
+            "web": [
                 "./lib/web/DocmaWeb.js",
                 "./lib/web/DocmaWeb.Route.js"
             ],
-            "docma-web-utils": "./lib/web/DocmaWeb.Utils.js"
+            // route @ api/web-utils/
+            "web/utils": "./lib/web/DocmaWeb.Utils.js"
         },
         // Content sources
         // markdown
@@ -153,7 +161,6 @@
         "./LICENSE:md",
         {
             // renamed markdown
-            "guide": "./doc/readme-modified.md",
             "zebra-template": "./templates/zebra/README.md",
             // renamed html file
             "home": "./doc/front.html"
