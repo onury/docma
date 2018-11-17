@@ -356,13 +356,19 @@ var app = window.app || {};
     });
 
     docma.on('navigate', function (currentRoute) { // eslint-disable-line
-        isApiRoute = currentRoute && currentRoute.type === 'api';
+        // isApiRoute = currentRoute && currentRoute.type === 'api';
         // when navigated to a #hash / bookmark, make sure navbar does not overlap.
         // if (templateOpts.navbar.enabled && !isApiRoute) {
         //     setTimeout(function () {
         //         $window.scrollTop($window.scrollTop() - (app.NAVBAR_HEIGHT + 20));
         //     }, 30);
         // }
+
+        // open details element if navigated to its ID.
+        if (docma.location.hash) {
+            var elem = $('details#' + docma.location.hash);
+            if (elem && elem[0]) elem.attr('open', '');
+        }
     });
 
     docma.on('render', function (currentRoute) {
