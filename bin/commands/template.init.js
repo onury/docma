@@ -28,7 +28,7 @@ module.exports = rootDirPath => {
 
     if (!rootDirPath) {
         rootDirPath = process.cwd();
-        console.log(chalk.cyan(`No path is specified. Using current working directory...\n`));
+        console.log(chalk.cyan('No path is specified. Using current working directory...\n'));
     } else {
         rootDirPath = path.resolve(rootDirPath);
         console.log(chalk.cyan(`Template will be initialized in directory '${rootDirPath}'...\n`));
