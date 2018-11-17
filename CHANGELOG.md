@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [3.0.0](https://github.com/onury/docma/compare/v2.1.0...v3.0.0) (UNRELEASED)
+
+#### Changed
+- **BREAKING**: Dropped support for Node.js versions 6 & 7. Requires Node.js v8 and later. This change is due to updates to the core dependencies such as `fs-extra` and `jsdom`.
+- Improved path/query routing & linking.
+
+#### Added
+- Ability to force parser type on defined files/paths; by appending a suffix. For Markdown, append `:md` or `:markdown`. For HTML, append `:htm` or `html`. For example, `LICENSE:md` will force-parse `LICENSE` file to markdown. `file.partial:html` will force-parse `file.partial` to HTML. For forcing JSDoc on JavaScript files without a proper extension you can use `:js` or `:jsx` but this is not recommended. Use `jsdoc.includePattern` of your build configuration instead.
+- Support for favicon. Set `app.favicon` to your ICO file's local path.
+- Support for collapsable markdown (i.e. with `<details>` and `<summary>` tags). This is great for generating styled collapsable lists (such as F.A.Q.) from your markdown files. If a bookmark (id) is passed in the location hash, that item will auto-expand. See [Docma F.A.Q.][faq] for an example. *Note that Edge [does not support](https://developer.microsoft.com/en-us/microsoft-edge/platform/status/detailssummary/) details/summary tags yet. All other modern browsers has support.*
+- Ability to hide or remove specific, partial content from Docma output. For example if you want some **part** of your README to be visible in GitHub repo but not in your Docma generated documentation... See [this](https://onury.io/docma/faq#hide-remove) for details.
+- Added new CLI option (`-b` or `--base`) to override/set the base path from command line.
+
+#### Fixed
+- An issue where documentation build would fail due to a symbol name being a non-string value. Fixes [#54](https://github.com/onury/docma/issues/54).
+- An issue where the web app would throw `Uncaught TypeError` when invalid JSDoc type specified for `@returns`. Fixes [#55](https://github.com/onury/docma/issues/55).
+- Fixed ["Reverse Tabnabbing" vulnerability][tabnabbing] with generated documentation links.
+- An issue where `base` tag would not be added to the head of main document.
+- An issue where Docma would not set default `app.base` path to `/` as expected. Fixes [#59](https://github.com/onury/docma/issues/59).
+- An issue where symbol link would be parsed as absolute path rather than relative. Fixes [#50](https://github.com/onury/docma/issues/50).
+
+### Default Template - Zebra `v2.2.0`
+_This version of Zebra template still supports Docma `2.0.0` and later._
+
+#### Added
+- Support for collapsable markdown (i.e. with `<details>` and `<summary>` tags).
+
+#### Changed
+- Improved support for constants.
+
+#### Fixed
+- Fixed ["Reverse Tabnabbing" vulnerability][tabnabbing] with parsed documentation links.
+
 ## [2.1.0](https://github.com/onury/docma/compare/v2.0.0...v2.1.0) (2018-04-29)
 
 ### Docma CLI
@@ -39,7 +72,7 @@ All notable changes to this project will be documented in this file. The format 
 #### Added
 - Support for documenting code with **ES2015** syntax. (JSDoc and jsdoc-x dep. update.) Fixes [#18](https://github.com/onury/docma/issues/18) and [#21](https://github.com/onury/docma/issues/21).
 - `assets` build configuration which provides ability to copy defined asset files/directories to build directory; so you can use/link to non-source, static asset files (such as images, PDFs, etc). See [build configuration][build-config]. Fixes [#29](https://github.com/onury/docma/issues/29).
-- Pre-build and post-build process support for Docma templates. See [Docma Templates documentation](https://onury.io/docma/?content=creating-templates).
+- Pre-build and post-build process support for Docma templates. See [Docma Templates documentation](https://onury.io/docma/creating-templates).
 - `markdown.xhtml` option for build configuration.
 - Docma version compatibility check for Docma templates.
 - `clean` option that specifies whether to empty destination directory before the build. Default is `false`.
@@ -63,7 +96,7 @@ All notable changes to this project will be documented in this file. The format 
 
 #### Removed
 - **For template authors only**: 
-    + **BREAKING**: `docma.template.json` file that defines the template build and configuration options is dropped in favor of template module main (JS) file or `package.json`. There are several other improvements. See updated documentation on [Creating Docma Templates](http://onury.io/docma/?content=creating-templates).
+    + **BREAKING**: `docma.template.json` file that defines the template build and configuration options is dropped in favor of template module main (JS) file or `package.json`. There are several other improvements. See updated documentation on [Creating Docma Templates](http://onury.io/docma/creating-templates).
     + **BREAKING**: `compile` property of template configuration is removed. Now, scripts or less/sass files of the template should be pre-compiled. This is logical and speeds up the documentation build process of Docma.
 
 ### Docma CLI
@@ -79,7 +112,7 @@ All notable changes to this project will be documented in this file. The format 
 - CLI will now auto-check for a `docma.json` (or `.docma.json`) file in the current working directory if `-c` option is omitted.
 - Options `-v` (lowercase) and `-V` (uppercase) are swapped. `-v` gets the Docma version now (alias `--version`). And `-V` is `--verbose`.
 
-See [CLI documentation][docma-cli] for detailed information on updated CLI.
+See [CLI documentation][cli] for detailed information on updated CLI.
 
 ### Docma Web Core
 
@@ -105,7 +138,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 ### Docma Template API
 
 #### Changed
-- Docma templates are now node modules. This is the initial Template API. See updated documentation on [Creating Docma Templates](http://onury.io/docma/?content=creating-templates).
+- Docma templates are now node modules. This is the initial Template API. See updated documentation on [Creating Docma Templates](http://onury.io/docma/creating-templates).
 
 ### Default Template - Zebra `v2.0.0`
 
@@ -208,7 +241,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 ### Default Template
 
 #### Added
-- Template option `outline`, which determines the outline style of the sidebar symbols list. (`"flat"` or `"tree"`). See [documentation](https://onury.github.io/docma/?content=default-template) and [this example](https://onury.github.io/accesscontrol/?api=ac) for `outline` set to `"tree"`.
+- Template option `outline`, which determines the outline style of the sidebar symbols list. (`"flat"` or `"tree"`). See [documentation](https://onury.github.io/docma/zebra-template) and [this example](https://onury.github.io/accesscontrol/?api=ac) for `outline` set to `"tree"`.
 - Template option `symbolMeta` which specifies whether to add meta information at the end of each symbol documentation such as code file name and line number. Default is `false`.
 - `static` badge for static members, `deprecated` badge for deprecated symbols.
 
@@ -395,7 +428,7 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 ### Docma Web Core
 
 #### Added
-- Client-side routing support for the SPA with paths (e.g. `/api`) or query-strings (e.g. `?content=api`). Configured via `.app.routing:String` option. Set to `"path"` or `"query"`. Uses page.js internally.
+- Client-side routing support for the SPA with paths (e.g. `/api/mylib`) or query-strings (e.g. `?api=mylib`). Configured via `.app.routing:String` option. Set to `"path"` or `"query"`. Uses page.js internally.
 - Implemented `EventEmitter`.
 - New methods to `docma.utils` such as `getCodeName(symbol)`, `getFullName(symbol)`, etc...
 
@@ -474,6 +507,8 @@ See [CLI documentation][docma-cli] for detailed information on updated CLI.
 [jsdoc-x]:https://github.com/onury/jsdoc-x
 [marked]:https://github.com/chjj/marked
 [docma-david]:https://david-dm.org/onury/docma
-[docma-cli]:https://onury.io/docma/?content=docma-cli
-[build-config]:https://onury.io/docma/?api=docma#Docma~BuildConfiguration
+[cli]:https://onury.io/docma/cli
+[faq]:https://onury.io/docma/faq
+[build-config]:https://onury.io/docma/api/#Docma~BuildConfiguration
 [david]:https://david-dm.org
+[tabnabbing]:https://www.owasp.org/index.php/Reverse_Tabnabbing
