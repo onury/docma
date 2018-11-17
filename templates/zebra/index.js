@@ -75,7 +75,7 @@ module.exports = (template, modules) => {
             const optsDeprecated =
                 'Zebra Template options structure is changed in v2.0.0. ' +
                 'Please update your template options.\n' +
-                'See documentation @ https://onury.io/docma/?content=zebra-template#Template-Options';
+                'See documentation @ https://onury.io/docma/zebra-template/#Template-Options';
             template.debug.log(); // empty line
             template.debug.warn(optsDeprecated);
         }
