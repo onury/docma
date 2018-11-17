@@ -23,10 +23,13 @@
   },
   "scripts": {
     "docs": "node bin/docma",
+    "docs:query": "node bin/docma -c ./docma.query.json",
+    "docs:debug": "node bin/docma --debug",
     "zebra": "cd ./templates/zebra && npm run build",
-    "start": "docma serve -p 9000",
-    "docs:zebra": "npm run zebra && npm run docs",
-    "docs:start": "npm run docs:zebra && npm start",
+    "serve": "node bin/docma serve -p 9000",
+    "start": "npm run zebra && npm run docs && npm run serve",
+    "start:query": "npm run zebra && npm run docs:query && npm run serve",
+    "start:debug": "npm run zebra && npm run docs:debug && npm run serve",
     "test": "jest --verbose --no-cache"
   },
   "jest": {
