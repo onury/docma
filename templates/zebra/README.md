@@ -13,7 +13,7 @@ This is the default **template** for [Docma][docma-repo]; with a side-bar symbol
 ## Usage
 
 1. Make sure you have the latest [Docma][docma-repo] installed.
-2. Although Zebra is installed together with Docma, you can still install/update this template globally via **npm**: `npm i docma-template-zebra -g`
+2. Although Zebra is installed together with Docma, you can still install/update this template via **npm**: `npm i docma-template-zebra -D`
 3. Set `template.path` to `"default"` or `"zebra"` or omit it in your build configuration (docma.json).
 4. Configure and set `template.options` as described below.
 
@@ -281,7 +281,7 @@ Linked labels that build the navigation menu on the top bar of the document. Eac
             <td><code><b>iconClass</b></code></td>
             <td><code>String</code></td>
             <td>
-                One of FontAwsome (v5) Free icon CSS classes. e.g. <code>"fab fa-github"</code>. You can combine this with a class that define the size of the icon such as <code>"fab fa-github fa-w-16"</code>. See <a target="_blank" href="https://fontawesome.com/how-to-use/svg-with-js">this</a> on how to use FontAwsome v5 icons for details. Default: <code>undefined</code>
+                One of FontAwsome (v5) Free icon CSS classes. e.g. <code>"fab fa-github"</code>. You can combine this with a class that define the size of the icon such as <code>"fab fa-github fa-w-16"</code>. See <a target="_blank" rel="noopener noreferrer" href="https://fontawesome.com/how-to-use/svg-with-js">this</a> on how to use FontAwsome v5 icons for details. Default: <code>undefined</code>
             </td>
         </tr>
         <tr>
@@ -303,7 +303,7 @@ Linked labels that build the navigation menu on the top bar of the document. Eac
 
 ## Usage with Docma
 
-Template options are defined within the [build configuration](?api=docma#Docma~BuildConfiguration). i.e. in a `docma.json` file.
+Template options are defined within the [build configuration][build-conf]. i.e. in a `docma.json` file.
 
 ```js
 {
@@ -415,6 +415,7 @@ _Note: If you're upgrading from Zebra v1.x to v2.x, there are some [**breaking c
 [**MIT**][license]. Emoji shortcuts used in source markdown files are parsed into [twemoji][twemoji]. Graphics and icons licensed under [CC-BY 4.0][cc-by-4].
 
 [docma-repo]:https://github.com/onury/docma
+[build-conf]:https://onury.io/docma/api/#Docma~BuildConfiguration
 [license]:https://github.com/onury/docma/blob/master/templates/zebra/LICENSE
 [changelog]:https://github.com/onury/docma/blob/master/templates/zebra/CHANGELOG.md
 [twemoji]:https://github.com/twitter/twemoji
