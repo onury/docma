@@ -69,7 +69,7 @@ const info = '\n\n'
     + '\n'
     + chalk.yellow('Docma Docs ') + '@ ' + chalk.blue('https://onury.io/docma')
     + '\n'
-    + chalk.yellow('Docma CLI ') + ' @ ' + chalk.blue('https://onury.io/docma/?content=docma-cli');
+    + chalk.yellow('Docma CLI ') + ' @ ' + chalk.blue('https://onury.io/docma/cli');
 
 console.log();
 
@@ -143,6 +143,13 @@ const argv = yargs
                     describe: 'Port number to bind the mock-server on.',
                     type: 'number',
                     default: 9000,
+                    global: false
+                },
+                b: {
+                    alias: 'base',
+                    describe: 'Base path for the application.',
+                    type: 'string',
+                    default: null,
                     global: false
                 },
                 q: {
@@ -252,12 +259,12 @@ function getConfigFileSync() {
     // if `docma` is run with no options/commands,
     // we'll display help.
     if (!process.argv.slice(2).length) {
-        console.log(chalk.yellow(`No source or destination is specified.\n`));
+        console.log(chalk.yellow('No source or destination is specified.\n'));
         yargs.showHelp();
         process.exit(0);
     }
     // otherwise we'll use empty config
-    console.log(chalk.blue(`No configuration file specified. Using default configuration.`));
+    console.log(chalk.blue('No configuration file specified. Using default configuration.'));
     return null;
 }
 
@@ -272,6 +279,7 @@ const cmds = argv._ || [];
 if (cmds.indexOf('serve') >= 0) {
     serve(argv.path, {
         port: argv.port,
+        base: argv.base,
         quiet: argv.quiet
     });
 } else if (cmds.indexOf('template') >= 0) {
