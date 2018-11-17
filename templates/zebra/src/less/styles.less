@@ -141,9 +141,9 @@ a, p, ul, ol, table {
 ul, ol > li > p {
     margin: 5px 0;
 }
-ul, ol > li > ul, ol {
-    // margin-bottom: 12px !important;
-}
+// ul, ol > li > ul, ol {
+//     margin-bottom: 12px !important;
+// }
 
 td > p {
     margin: 0;
@@ -182,6 +182,32 @@ blockquote {
 
     & > p:last-of-type {
         margin-bottom: 0;
+    }
+}
+
+// support for collapsable markup styles
+details {
+    // hack to prevent bookmarked content to scroll under the top navbar.
+    padding-top: 70px;
+    margin-top: -70px;
+
+    & > summary {
+        cursor: pointer;
+        user-select: none;
+        margin-bottom: 10px;
+    }
+    & .details-content {
+        background-color: @light-default;
+        padding: 12px 20px;
+        border-radius: @border-radius-base;
+        border-top: 3px solid #dadce2 !important;
+        & p:last-of-type { margin: 0; }
+        margin-bottom: 20px;
+        & pre, & table { margin-top: 10px; }
+        & thead { background-color: #fff; }
+        & blockquote {
+            background-color: darken(@light-default, 2%);
+        }
     }
 }
 
