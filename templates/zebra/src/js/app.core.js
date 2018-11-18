@@ -271,7 +271,7 @@ var app = window.app || {};
     /**
      *  Toggles the hamburger menu for the navbar list.
      *  @private
-     *  @param {Boolean} show
+     *  @param {Boolean} show -
      */
     function toggleHamMenu(show) {
         if (!$nbmBtn) return;
@@ -337,6 +337,18 @@ var app = window.app || {};
         }
     }
 
+    /**
+     *  If location hash is set and we have <details/> element with a matching
+     *  ID, we'll open/expand that node.
+     *  @private
+     */
+    function checkOpenDetails() {
+        if (docma.location.hash) {
+            var elem = $('details#' + docma.location.hash);
+            if (elem && elem[0]) elem.attr('open', '');
+        }
+    }
+
     // ---------------------------
     // INITIALIZATION
     // ---------------------------
@@ -353,22 +365,6 @@ var app = window.app || {};
 
     docma.once('ready', function () {
         setTitleSize();
-    });
-
-    docma.on('navigate', function (currentRoute) { // eslint-disable-line
-        // isApiRoute = currentRoute && currentRoute.type === 'api';
-        // when navigated to a #hash / bookmark, make sure navbar does not overlap.
-        // if (templateOpts.navbar.enabled && !isApiRoute) {
-        //     setTimeout(function () {
-        //         $window.scrollTop($window.scrollTop() - (app.NAVBAR_HEIGHT + 20));
-        //     }, 30);
-        // }
-
-        // open details element if navigated to its ID.
-        if (docma.location.hash) {
-            var elem = $('details#' + docma.location.hash);
-            if (elem && elem[0]) elem.attr('open', '');
-        }
     });
 
     docma.on('render', function (currentRoute) {
@@ -448,6 +444,8 @@ var app = window.app || {};
         examples.each(function (i, block) {
             hljs.highlightBlock(block);
         });
+
+        checkOpenDetails();
 
         if (isApiRoute === false) {
 
