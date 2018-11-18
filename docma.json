@@ -1,5 +1,5 @@
 {
-    "debug": 5,
+    "debug": 31,
     "jsdoc": {
         "encoding": "utf8",
         "recurse": false,
@@ -97,13 +97,13 @@
                         "iconClass": "fas fa-puzzle-piece",
                         "label": "Templates",
                         "items": [
-                            { "label": "Default Template - Zebra", "href": "zebra-template" },
+                            { "label": "Default Template - Zebra", "href": "templates/zebra" },
                             { "separator": true },
-                            { "label": "Creating Docma Templates", "href": "creating-templates" },
+                            { "label": "Creating Docma Templates", "href": "templates/guide" },
                             { "label": "Docma Template API", "href": "api/#Docma.Template" },
                             { "separator": true },
                             { "label": "Docma Web API", "href": "api/web" },
-                            { "label": "Docma Filters", "href": "docma-filters" }
+                            { "label": "Docma Filters", "href": "templates/filters" }
                         ]
                     },
                     {
@@ -157,11 +157,13 @@
         // Content sources
         // markdown
         "./CHANGELOG.md",
-        "./doc/**/*.md",
-        "./LICENSE:md",
+        "./doc/*.md",
+        // "./LICENSE:md",
         {
-            // renamed markdown
-            "zebra-template": "./templates/zebra/README.md",
+            // renamed markdown (deep routes)
+            "templates/guide": "./doc/templates/guide.md",
+            "templates/filters": "./doc/templates/filters.md",
+            "templates/zebra": "./templates/zebra/README.md",
             // renamed html file
             "home": "./doc/front.html"
         }
