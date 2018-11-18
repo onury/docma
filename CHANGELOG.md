@@ -74,7 +74,7 @@ _This version of Zebra template still supports Docma `2.0.0` and later._
 #### Added
 - Support for documenting code with **ES2015** syntax. (JSDoc and jsdoc-x dep. update.) Fixes [#18](https://github.com/onury/docma/issues/18) and [#21](https://github.com/onury/docma/issues/21).
 - `assets` build configuration which provides ability to copy defined asset files/directories to build directory; so you can use/link to non-source, static asset files (such as images, PDFs, etc). See [build configuration][build-config]. Fixes [#29](https://github.com/onury/docma/issues/29).
-- Pre-build and post-build process support for Docma templates. See [Docma Templates documentation](https://onury.io/docma/creating-templates).
+- Pre-build and post-build process support for Docma templates. See [Docma Templates documentation](https://onury.io/docma/templates/guide).
 - `markdown.xhtml` option for build configuration.
 - Docma version compatibility check for Docma templates.
 - `clean` option that specifies whether to empty destination directory before the build. Default is `false`.
@@ -98,7 +98,7 @@ _This version of Zebra template still supports Docma `2.0.0` and later._
 
 #### Removed
 - **For template authors only**: 
-    + **BREAKING**: `docma.template.json` file that defines the template build and configuration options is dropped in favor of template module main (JS) file or `package.json`. There are several other improvements. See updated documentation on [Creating Docma Templates](http://onury.io/docma/creating-templates).
+    + **BREAKING**: `docma.template.json` file that defines the template build and configuration options is dropped in favor of template module main (JS) file or `package.json`. There are several other improvements. See updated documentation on [Creating Docma Templates](http://onury.io/docma/templates/guide).
     + **BREAKING**: `compile` property of template configuration is removed. Now, scripts or less/sass files of the template should be pre-compiled. This is logical and speeds up the documentation build process of Docma.
 
 ### Docma CLI
@@ -140,7 +140,7 @@ See [CLI documentation][cli] for detailed information on updated CLI.
 ### Docma Template API
 
 #### Changed
-- Docma templates are now node modules. This is the initial Template API. See updated documentation on [Creating Docma Templates](http://onury.io/docma/creating-templates).
+- Docma templates are now node modules. This is the initial Template API. See updated documentation on [Creating Docma Templates](http://onury.io/docma/templates/guide).
 
 ### Default Template - Zebra `v2.0.0`
 
@@ -243,7 +243,7 @@ See [CLI documentation][cli] for detailed information on updated CLI.
 ### Default Template
 
 #### Added
-- Template option `outline`, which determines the outline style of the sidebar symbols list. (`"flat"` or `"tree"`). See [documentation](https://onury.github.io/docma/zebra-template) and [this example](https://onury.github.io/accesscontrol/?api=ac) for `outline` set to `"tree"`.
+- Template option `outline`, which determines the outline style of the sidebar symbols list. (`"flat"` or `"tree"`). See [documentation](https://onury.github.io/docma/templates/zebra) and [this example](https://onury.github.io/accesscontrol/?api=ac) for `outline` set to `"tree"`.
 - Template option `symbolMeta` which specifies whether to add meta information at the end of each symbol documentation such as code file name and line number. Default is `false`.
 - `static` badge for static members, `deprecated` badge for deprecated symbols.
 
