@@ -33,7 +33,7 @@ function getNavItems(routing) {
                 { separator: true },
                 { label: 'Creating Docma Templates', href: route('templates') },
                 { label: 'Docma Web Core', href: route('web') },
-                { label: 'Docma Filters', href: route('docma-filters') },
+                { label: 'Docma Filters', href: route('filters') },
                 { separator: true },
                 { label: 'HTML Page', href: route('page') },
                 { label: 'iFrame Page', href: route('iframe') }
