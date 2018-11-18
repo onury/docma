@@ -85,3 +85,6 @@ _This version of Zebra template still supports Docma `2.0.0` and later._
 #### Removed
 - **BREAKING**: icomoon selection of icons (and `ico-` CSS prefix) in favor of FontAwsome (v5) and SVG icons support.
 - Bootstrap and its dependencies (css and js). Also, cleaned up all unused styles.
+
+
+[tabnabbing]:https://www.owasp.org/index.php/Reverse_Tabnabbing
