@@ -204,6 +204,9 @@ details {
         & p:last-of-type { margin: 0; }
         margin-bottom: 20px;
         & pre, & table { margin-top: 10px; }
+        & :not(pre) > code {
+            background-color: #e8ebee;
+        }
         & thead { background-color: #fff; }
         & blockquote {
             background-color: darken(@light-default, 2%);
