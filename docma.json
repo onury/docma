@@ -91,7 +91,7 @@
                     },
                     {
                         "label": "F.A.Q.",
-                        "href": "faq/"
+                        "href": "faq"
                     },
                     {
                         "iconClass": "fas fa-puzzle-piece",
@@ -151,7 +151,7 @@
                 "./lib/web/DocmaWeb.js",
                 "./lib/web/DocmaWeb.Route.js"
             ],
-            // route @ api/web-utils/
+            // route @ api/web/utils/
             "web/utils": "./lib/web/DocmaWeb.Utils.js"
         },
         // Content sources
