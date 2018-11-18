@@ -1,4 +1,4 @@
-# Docma Markdown Test
+# Docma + Zebra Markdown Test
 
 ## How is this rendered to HTML?
 
@@ -150,35 +150,28 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 
 Colons can be used to align columns.
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| Tables are cool | Left aligned column | Right Aligned  |
+| --------------- | ------------------- | -----:|
+| Column 1        | Column 2            | $1600 |
+| This is the     | second row...       |   $12 |
+| Zebra stripes   | are neat!           |    $1 |
 
 #### Horizontal Rule
 
-Three or more...
-
 ---
 
-Hyphens
+Can use hyphens, asterisks or underscores...
 
-***
 
-Asterisks
+#### Images & YouTube Videos
 
-___
+YouTube videos can't be added directly but you can add an image with a link to the video like this:
 
-Underscores
-
-#### YouTube Videos
-
-They can't be added directly but you can add an image with a link to the video like this:
-
+<p>
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=oksphy2zJqQ">
 <img src="http://img.youtube.com/vi/oksphy2zJqQ/0.jpg" alt="Dire Straits rules!" width="240" height="180" border="10" />
 </a>
+</p>
 
 Or, in pure Markdown, but losing the image sizing and border:
 

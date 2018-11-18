@@ -16,22 +16,39 @@ describe('build', () => {
 
     test('build with query-routing', async () => {
         const config = {
+            debug: 30,
             src: [
                 'test/input/*.js',
                 {
                     'group': 'test/input/src/**.js',
-                    'html-route': 'test/input/html-test.html'
+                    'html/route': 'test/input/html-test.html'
                 },
                 'test/input/md-test.md'
             ],
             dest: 'test/output/query-routing',
+            markdown: {
+                gfm: true,
+                tables: true,
+                breaks: false,
+                pedantic: false,
+                sanitize: false,
+                smartLists: true,
+                smartypants: false,
+                xhtml: false,
+                tasks: true,
+                emoji: true
+            },
             app: {
+                title: 'Docs',
                 entrance: 'api:group',
                 routing: 'query',
                 base: '/'
             },
             template: {
-                path: 'zebra'
+                path: './templates/zebra',
+                options: {
+                    title: ''
+                }
             }
         };
         try {
