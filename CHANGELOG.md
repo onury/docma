@@ -10,12 +10,12 @@ All notable changes to this project will be documented in this file. The format 
 - **BREAKING**: Linking logic has [some changes](https://onury.io/docma/faq/#linking).
 
 #### Added
-- Ability to force parser type on defined files/paths; by appending a suffix. For Markdown, append `:md` or `:markdown`. For HTML, append `:htm` or `html`. For example, `LICENSE:md` will force-parse `LICENSE` file to markdown. `file.partial:html` will force-parse `file.partial` to HTML. For forcing JSDoc on JavaScript files without a proper extension you can use `:js` or `:jsx` but this is not recommended. Use `jsdoc.includePattern` of your build configuration instead.
+- Ability to force parser type on defined files/paths; by appending a suffix. For Markdown, append `:md` or `:markdown`. For HTML, append `:htm` or `html`. For example, `LICENSE:md` will force-parse `LICENSE` file to markdown. `file.partial:html` will force-parse `file.partial` to HTML. 
 - Ability to create deeper paths for named groups/routes. e.g. `mylib/latest`
 - Support for favicon. Set `app.favicon` to your ICO file's local path.
-- Support for collapsable markdown (i.e. with `<details>` and `<summary>` tags). This is great for generating styled collapsable lists (such as F.A.Q.) from your markdown files. If a bookmark (id) is passed in the location hash, that item will auto-expand. See [Docma F.A.Q.][faq] for an example. *Note that Edge [does not support](https://developer.microsoft.com/en-us/microsoft-edge/platform/status/detailssummary/) details/summary tags yet. All other modern browsers has support.*
+- Support for collapsable markdown (i.e. with `<details>` and `<summary>` tags). This is great for generating styled collapsable lists (such as F.A.Q.) from your markdown files. If a bookmark (id) is passed in the location hash, that item will auto-expand. See [Docma F.A.Q.][faq] for an example. *Note that Edge [does not support](https://developer.microsoft.com/en-us/microsoft-edge/platform/status/detailssummary/) details/summary tags yet. All other modern browsers have support.*
 - Ability to hide or remove specific, partial content from Docma output. For example if you want some **part** of your README to be visible in GitHub repo but not in your Docma generated documentation... See [this](https://onury.io/docma/faq#hide-remove) for details.
-- Added new CLI option (`-b` or `--base`) to override/set the base path from command line.
+- New CLI option (`-b` or `--base`) for `docma serve` command to override/set the base path.
 
 #### Fixed
 - An issue where documentation build would fail due to a symbol name being a non-string value. Fixes [#54](https://github.com/onury/docma/issues/54).
@@ -32,7 +32,7 @@ _This version of Zebra template still supports Docma `2.0.0` and later._
 - Support for collapsable markdown (i.e. with `<details>` and `<summary>` tags).
 
 #### Changed
-- Improved support for constants.
+- Improved support for constant symbols.
 
 #### Fixed
 - Fixed ["Reverse Tabnabbing" vulnerability][tabnabbing] with parsed documentation links.
