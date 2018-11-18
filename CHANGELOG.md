@@ -6,7 +6,8 @@ All notable changes to this project will be documented in this file. The format 
 
 #### Changed
 - **BREAKING**: Dropped support for Node.js versions 6 & 7. Requires Node.js v8 and later. This change is due to updates to the core dependencies such as `fs-extra`, `jsdoc-x` and `jsdom`.
-- Improved path/query routing & linking.
+- Improved path/query routing.
+- **BREAKING**: Linking logic has [some changes](https://onury.io/docma/faq/#linking).
 
 #### Added
 - Ability to force parser type on defined files/paths; by appending a suffix. For Markdown, append `:md` or `:markdown`. For HTML, append `:htm` or `html`. For example, `LICENSE:md` will force-parse `LICENSE` file to markdown. `file.partial:html` will force-parse `file.partial` to HTML. For forcing JSDoc on JavaScript files without a proper extension you can use `:js` or `:jsx` but this is not recommended. Use `jsdoc.includePattern` of your build configuration instead.
