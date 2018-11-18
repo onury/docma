@@ -1,4 +1,2 @@
-import utils from './lib/utils';
-// export default utils;
-// http://stackoverflow.com/a/33683495/112731
-module.exports = utils;
+/** @const {String} DEFAULT_SOCKET_NAME sets a default socket name */
+const DEFAULT_SOCKET_NAME = 'uci-sock'
