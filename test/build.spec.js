@@ -32,7 +32,7 @@ function getNavItems(routing) {
                 { label: 'Docma Default Template', href: route('default-template') },
                 { separator: true },
                 { label: 'Creating Docma Templates', href: route('templates') },
-                { label: 'Docma Web Core', href: route('docma-web') },
+                { label: 'Docma Web Core', href: route('web') },
                 { label: 'Docma Filters', href: route('docma-filters') },
                 { separator: true },
                 { label: 'HTML Page', href: route('page') },
@@ -44,8 +44,8 @@ function getNavItems(routing) {
             label: 'API Reference',
             items: [
                 { label: 'Docma (Builder) API', href: route('docma', 'api') },
-                { label: 'Docma (Web) API', href: route('docma-web', 'api') },
-                { label: 'Docma Web Utils', href: route('docma-web-utils', 'api') },
+                { label: 'Docma (Web) API', href: route('web', 'api') },
+                { label: 'Docma Web Utils', href: route('web-utils', 'api') },
                 { label: 'Test (src)', href: route('src', 'api') },
                 { separator: true },
                 { label: 'Test (re)', href: route('re', 'api') },
@@ -165,11 +165,11 @@ describe('build', () => {
                     "./lib/Template.js",
                     "./lib/TemplateDoctor.js"
                 ],
-                "docma-web": [
+                "web": [
                     "./lib/web/DocmaWeb.js",
                     "./lib/web/DocmaWeb.Route.js"
                 ],
-                "docma-web-utils": "./lib/web/DocmaWeb.Utils.js"
+                "web-utils": "./lib/web/DocmaWeb.Utils.js"
             },
             {
                 'src': [
