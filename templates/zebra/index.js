@@ -19,7 +19,7 @@ module.exports = (template, modules) => {
 
     // Template default options.
     template.defaultOptions = {
-        title: '',                  // String or { label:String, href:String }
+        title: 'Documentation',     // String or { label:String, href:String }
         logo: null,                 // URL String or { dark:String, light:String }
         sidebar: {
             enabled: true,

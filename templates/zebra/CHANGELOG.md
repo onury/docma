@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+### 2.2.0 (2018-11-18)
+_This version of Zebra template still supports Docma `2.0.0` and later._
+
+#### Added
+- Support for collapsable markdown (i.e. with `<details>` and `<summary>` tags).
+
+#### Changed
+- Improved support for constant symbols.
+- Default template title is now `"Documentation"`. Set `template.options.title` to empty string to remove.
+
+#### Fixed
+- An issue where tags such as `@constant` and `@module` would cause an `Uncaught TypeError`. Fixes [#41](https://github.com/onury/docma/issues/50) and [#45](https://github.com/onury/docma/issues/45).
+- Fixed ["Reverse Tabnabbing" vulnerability][tabnabbing] with parsed documentation links.
+
 ## 2.1.0 (2018-04-14)
 
 #### Added

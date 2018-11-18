@@ -187,7 +187,7 @@ var app = window.app || {};
 
     helper.getSymbolInfo = function (kind, scope, asButton) {
         var title = scope || '';
-        title += ' ' + (kind || '').replace('typedef', 'type');
+        title += ' ' + String(kind || '').replace('typedef', 'type');
         title = DocmaWeb.Utils.trimLeft(helper.capitalize(title));
         var svgOpts = {
             title: title,
