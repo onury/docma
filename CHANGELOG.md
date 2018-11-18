@@ -2,14 +2,15 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
-## [3.0.0](https://github.com/onury/docma/compare/v2.1.0...v3.0.0) (UNRELEASED)
+## [3.0.0](https://github.com/onury/docma/compare/v2.1.0...v3.0.0) (2018-11-18)
 
 #### Changed
-- **BREAKING**: Dropped support for Node.js versions 6 & 7. Requires Node.js v8 and later. This change is due to updates to the core dependencies such as `fs-extra` and `jsdom`.
+- **BREAKING**: Dropped support for Node.js versions 6 & 7. Requires Node.js v8 and later. This change is due to updates to the core dependencies such as `fs-extra`, `jsdoc-x` and `jsdom`.
 - Improved path/query routing & linking.
 
 #### Added
 - Ability to force parser type on defined files/paths; by appending a suffix. For Markdown, append `:md` or `:markdown`. For HTML, append `:htm` or `html`. For example, `LICENSE:md` will force-parse `LICENSE` file to markdown. `file.partial:html` will force-parse `file.partial` to HTML. For forcing JSDoc on JavaScript files without a proper extension you can use `:js` or `:jsx` but this is not recommended. Use `jsdoc.includePattern` of your build configuration instead.
+- Ability to create deeper paths for named groups/routes. e.g. `mylib/latest`
 - Support for favicon. Set `app.favicon` to your ICO file's local path.
 - Support for collapsable markdown (i.e. with `<details>` and `<summary>` tags). This is great for generating styled collapsable lists (such as F.A.Q.) from your markdown files. If a bookmark (id) is passed in the location hash, that item will auto-expand. See [Docma F.A.Q.][faq] for an example. *Note that Edge [does not support](https://developer.microsoft.com/en-us/microsoft-edge/platform/status/detailssummary/) details/summary tags yet. All other modern browsers has support.*
 - Ability to hide or remove specific, partial content from Docma output. For example if you want some **part** of your README to be visible in GitHub repo but not in your Docma generated documentation... See [this](https://onury.io/docma/faq#hide-remove) for details.
