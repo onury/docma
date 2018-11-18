@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file. The format 
 - (Zebra template) Improved support for constant symbols.
 
 #### Added
-- Ability to force parser type on defined files/paths; by appending a suffix. For Markdown, append `:md` or `:markdown`. For HTML, append `:htm` or `html`. For example, `LICENSE:md` will force-parse `LICENSE` file to markdown. `file.partial:html` will force-parse `file.partial` to HTML. 
+- Ability to force parser type on defined files/paths; by appending a suffix. For Markdown, append `:md` or `:markdown`. For HTML, append `:htm` or `html`. For example, `LICENSE:md` will force-parse `LICENSE` file as markdown. `file.partial:html` will force-parse `file.partial` as HTML. 
 - Ability to create deeper paths for named groups/routes. e.g. `mylib/latest`
 - Support for favicon. Set `app.favicon` to your ICO file's local path.
 - Support for collapsable markdown (i.e. with `<details>` and `<summary>` tags). This is great for generating styled collapsable lists (such as F.A.Q.) from your markdown files. If a bookmark (id) is passed in the location hash, that item will auto-expand. See [Docma F.A.Q.][faq] for an example. *Note that Edge [does not support](https://developer.microsoft.com/en-us/microsoft-edge/platform/status/detailssummary/) details/summary tags yet. All other modern browsers have support.*
