@@ -1,5 +1,5 @@
 <h1 align="center">
-    <a href="https://github.com/onury/docma"><img width="200" height="200" src="https://raw.github.com/onury/docma/v2/docma-logo.png" alt="Docma" /></a>
+    <a href="https://onury.io/docma"><img width="200" height="200" src="https://raw.github.com/onury/docma/v2/docma-logo.png" alt="Docma" /></a>
 </h1>
 
 <p align="center">
