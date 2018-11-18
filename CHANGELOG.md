@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file. The format 
 - **BREAKING**: Dropped support for Node.js versions 6 & 7. Requires Node.js v8 and later. This change is due to updates to the core dependencies such as `fs-extra`, `jsdoc-x` and `jsdom`.
 - Improved path/query routing.
 - **BREAKING**: Linking logic has [some changes](https://onury.io/docma/faq/#linking).
+- (Zebra template) Improved support for constant symbols.
 
 #### Added
 - Ability to force parser type on defined files/paths; by appending a suffix. For Markdown, append `:md` or `:markdown`. For HTML, append `:htm` or `html`. For example, `LICENSE:md` will force-parse `LICENSE` file to markdown. `file.partial:html` will force-parse `file.partial` to HTML. 
@@ -16,26 +17,17 @@ All notable changes to this project will be documented in this file. The format 
 - Support for collapsable markdown (i.e. with `<details>` and `<summary>` tags). This is great for generating styled collapsable lists (such as F.A.Q.) from your markdown files. If a bookmark (id) is passed in the location hash, that item will auto-expand. See [Docma F.A.Q.][faq] for an example. *Note that Edge [does not support](https://developer.microsoft.com/en-us/microsoft-edge/platform/status/detailssummary/) details/summary tags yet. All other modern browsers have support.*
 - Ability to hide or remove specific, partial content from Docma output. For example if you want some **part** of your README to be visible in GitHub repo but not in your Docma generated documentation... See [this](https://onury.io/docma/faq#hide-remove) for details.
 - New CLI option (`-b` or `--base`) for `docma serve` command to override/set the base path.
+- (Zebra Template) Added support for collapsable markdown (i.e. with `<details>` and `<summary>` tags).
 
 #### Fixed
 - An issue where documentation build would fail due to a symbol name being a non-string value. Fixes [#54](https://github.com/onury/docma/issues/54).
 - An issue where the web app would throw `Uncaught TypeError` when invalid JSDoc type specified for `@returns`. Fixes [#55](https://github.com/onury/docma/issues/55).
-- Fixed ["Reverse Tabnabbing" vulnerability][tabnabbing] with generated documentation links.
+- Fixed ["Reverse Tabnabbing" vulnerability][tabnabbing] with generated documentation links. (This is also fixed for Zebra template.)
 - An issue where `base` tag would not be added to the head of main document.
 - An issue where Docma would not set default `app.base` path to `/` as expected. Fixes [#59](https://github.com/onury/docma/issues/59).
 - An issue where symbol link would be parsed as absolute path rather than relative. Fixes [#50](https://github.com/onury/docma/issues/50).
+- (Zebra template) Fixed an issue where tags such as `@constant` and `@module` would cause an `Uncaught TypeError`. Fixes [#41](https://github.com/onury/docma/issues/50) and [#45](https://github.com/onury/docma/issues/45).
 
-### Default Template - Zebra `v2.2.0`
-_This version of Zebra template still supports Docma `2.0.0` and later._
-
-#### Added
-- Support for collapsable markdown (i.e. with `<details>` and `<summary>` tags).
-
-#### Changed
-- Improved support for constant symbols.
-
-#### Fixed
-- Fixed ["Reverse Tabnabbing" vulnerability][tabnabbing] with parsed documentation links.
 
 ## [2.1.0](https://github.com/onury/docma/compare/v2.0.0...v2.1.0) (2018-04-29)
 

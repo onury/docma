@@ -9,7 +9,7 @@
     <a href="https://www.npmjs.com/package/docma"><img src="https://img.shields.io/npm/dt/docma.svg?style=flat-square" alt="downloads" /></a>
     <a href="https://david-dm.org/onury/docma"><img src="https://david-dm.org/onury/docma.svg?style=flat-square" alt="dependencies" /></a>
     <a href="https://github.com/onury/docma/graphs/commit-activity"><img src="https://img.shields.io/maintenance/yes/2018.svg?style=flat-square" alt="maintained" /></a>
-    <a href="https://onury.io/docma"><img src="https://img.shields.io/badge/documentation-click_to_read-c27cf4.svg?documentation=click_to_read&style=flat-square" alt="documentation" /></a>
+    <a href="https://onury.io/docma"><img src="https://img.shields.io/badge/docs_by-docma-c27cf4.svg?docs_by=docma&style=flat-square" alt="documentation" /></a>
     <br />
     <sub>© 2018, Onur Yıldırım (<b><a href="https://github.com/onury">@onury</a></b>).</sub>
 </p>
@@ -25,7 +25,7 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 - Non-opinionated engine, **built-in** template with [cool opinions][zebra]. :sunglasses:
 - Supports custom templates, comes with template authoring tools.
 - Works great with **GitHub Pages**, Amazon **S3**, Nginx, Apache, etc...
-- Build via **API** or **CLI**.
+- Build via [**API**][docma-api] or [**CLI**][docma-cli].
 - Extremely configurable and debuggable.
 - Well documented. :point_up:
 
@@ -41,25 +41,27 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 
 ## Installation
 
-```sh
-npm i docma -g
+```console
+npm i docma -D
 ```
 
 ## Building Documentation with CLI
 
-You can use Docma CLI to build documentations directly from your console. Once you create the configuration (JSON) file, it's quite simple.
+You can use Docma CLI to build documentations directly from your console. 
+Once you create the configuration file `docma.json` in your project root, it's quite simple.
 
-```sh
-docma -c path/to/docma.json
+```console
+docma
 ```
 You can even serve the docs locally and test.
-```sh
-docma serve path/to/docs
+```console
+docma serve
 ```
 
 See 
  - [Docma CLI Reference][docma-cli]
  - [Build Configuration][docma-config]
+ - [F.A.Q.][docma-faq]
 
 ## Building Documentation Programmatically
 
@@ -92,19 +94,27 @@ See [Docma API Reference][docma-api].
 
 ## Parsed Output
 
+Sometimes, the issue is with invalid JSDoc comments. [See this](https://github.com/onury/docma/issues/55#issuecomment-437599192) for linting/validating your JSDoc while you type and within a build process.
+
 To investigate the parsed JSDoc output, enable the `debug` option that will create a JSON output(s) within the root of the destination directory. If you have a problem with the parsed documentation data, open an issue @ [jsdoc-x][jsdoc-x]. _(I'm the author.)_
 
 For markdown output issues (that are not related with style), you can open an issue @ [marked][marked].
 
-Sometimes, the issue is with invalid JSDoc comments. [See this](https://github.com/onury/docma/issues/55#issuecomment-437599192) for linting/validating your JSDoc while you type and within a build process.
-
 ## Changelog
 
 See [**CHANGELOG**][changelog].  
-_Note: If you're upgrading from Docma v1.x to v2.x, there are some [**breaking changes**][changelog]._
 
-## Documentation
-Read [Docma documentation][docma-docs], built with Docma, for a Docma demo... :eyes:
+#### Compatibility Table
+
+| Docma version | Node version |
+|---------------|--------------|
+| [v3.0.0](https://github.com/onury/docma/blob/master/CHANGELOG.md#300-2018-11-18)   | **v8+** |
+| [v2.0.0](https://github.com/onury/docma/blob/master/CHANGELOG.md#200-2018-04-12)   | **v6+** |
+| [v1.0.0](https://github.com/onury/docma/blob/master/CHANGELOG.md#100-2016-06-11)   | **v4+** |
+
+ ## Documentation
+Read [**Docma documentation**][docma-docs], built with Docma, for a Docma demo... :eyes:  
+Also see the [**F.A.Q.**][docma-faq] section.
 
 ## License
 
@@ -124,11 +134,11 @@ Emoji shortcuts used in source markdown files are parsed into [twemoji][twemoji]
 [screenshot]:https://raw.github.com/onury/docma/master/docma-screen.jpg
 [screen-gif]:https://raw.github.com/onury/docma/master/docma-screen.gif
 [docma-docs]:https://onury.io/docma
-[docma-api]:https://onury.io/docma/?api=docma
-[docma-cli]:https://onury.io/docma/?content=docma-cli
-[docma-config]:https://onury.io/docma/?api=docma#Docma~BuildConfiguration
-[docma-web-api]:https://github.com/onury/docma/blob/master/doc/docma.web.md
-[zebra]:https://onury.io/docma/?content=zebra-template
+[docma-api]:https://onury.io/docma/api
+[docma-cli]:https://onury.io/docma/cli
+[docma-config]:https://onury.io/docma/api/#Docma~BuildConfiguration
+[docma-faq]:https://onury.io/docma/faq
+[zebra]:https://onury.io/docma/templates/zebra
 [jsdoc]:http://usejsdoc.org
 [jsdoc-x]:https://github.com/onury/jsdoc-x
 [marked]:https://github.com/chjj/marked
