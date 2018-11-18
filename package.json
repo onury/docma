@@ -76,7 +76,7 @@
   "dependencies": {
     "bluebird": "^3.5.3",
     "chalk": "^2.4.1",
-    "docma-template-zebra": "^2.1.0",
+    "docma-template-zebra": "^2.2.0",
     "dustjs-linkedin": "^2.7.5",
     "easy-table": "^1.1.1",
     "express": "^4.16.4",
