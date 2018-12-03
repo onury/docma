@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [3.1.0](https://github.com/onury/docma/compare/v3.0.0...v3.1.0) (2018-12-04)
+
+### Fixed
+- An issue with `"path"` routing which led to 404 page, occurred when a (deep) route was refreshed or loaded directly. (Due to a bug in core dependency.) Fixes [#62](https://github.com/onury/docma/issues/62).
+- An issue where a (harmless) `TypeError` was thrown when `debug` is enabled.
+- An issue with `$docmaLink` due to missing trailing slash, when routing method is `"path"`.
+
+### Added
+- (Zebra Template) Added JSDoc `@default` tag support for symbols. Fixes [#60](https://github.com/onury/docma/issues/60).
+- (Zebra Template) Added option `contentView.faLibs` that defines FontAwesome libraries to be included, such as `solid`, `regular`, `brands`. Set to `null` to completely exclude FontAwesome from the output. See Zebra documentation. Fixes [#63](https://github.com/onury/docma/issues/63).
+- (Zebra Template) Added option `contentView.faVersion` that defines FontAwesome icon library version to be included. 
+
+### Changed
+- Updated dependencies to latest versions.
+
 ## [3.0.0](https://github.com/onury/docma/compare/v2.1.0...v3.0.0) (2018-11-18)
 
 #### Changed
