@@ -69,7 +69,7 @@
             },
             "contentView": {
                 "bookmarks": "h1,h2,h3",
-                "expandDetails": true
+                "faLibs": "all"             // "all" or "solid"|"regular"|"brands" or comma-separated or null
             },
             "navbar": {
                 "enabled": true,
