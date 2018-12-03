@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
-### 2.5.0 (2018-12-04)
+### 2.3.0 (2018-12-04)
 
 #### Added
 - JSDoc `@default` tag support for symbols. Fixes [#60](https://github.com/onury/docma/issues/60).
@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file. The format 
 
 #### Changed
 - Minor style revisions.
+- Updated dependencies to latest versions.
 
 ### 2.2.0 (2018-11-18)
 _This version of Zebra template still supports Docma `2.0.0` and later._
