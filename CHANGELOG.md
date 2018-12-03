@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file. The format 
 - (Zebra Template) Added option `contentView.faVersion` that defines FontAwesome icon library version to be included. 
 
 ### Changed
+- Improved SPA route handling.
 - Updated dependencies to latest versions.
 
 ## [3.0.0](https://github.com/onury/docma/compare/v2.1.0...v3.0.0) (2018-11-18)
