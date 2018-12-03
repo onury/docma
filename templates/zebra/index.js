@@ -10,7 +10,7 @@
 module.exports = (template, modules) => {
 
     // modules: _, Promise, fs, dust, HtmlParser, utils
-    // const { _ } = modules;
+    const { HtmlParser, utils } = modules;
 
     const helper = require('./helper')(template, modules);
 
@@ -40,7 +40,9 @@ module.exports = (template, modules) => {
             meta: false
         },
         contentView: {
-            bookmarks: false        // Boolean | String (e.g. 'h1,h2,h3')
+            bookmarks: false,       // Boolean | String (e.g. 'h1,h2,h3')
+            faVersion: '5.5.0',
+            faLibs: 'all'           // "all" | one or multiple of "solid"|"regular"|"brands" comma separated
         },
         navbar: {
             enabled: true,
@@ -69,7 +71,7 @@ module.exports = (template, modules) => {
         helper.configNavMenu();
     });
 
-    template.postBuild(() => {
+    function logOptsDeprecated() {
         // Display deprecated message at the end if needed
         if (helper.isOldStructureOptions) {
             const optsDeprecated =
@@ -79,5 +81,61 @@ module.exports = (template, modules) => {
             template.debug.log(); // empty line
             template.debug.warn(optsDeprecated);
         }
+    }
+
+    function getFontAwsomeList() {
+        const defaults = template.defaultOptions.contentView;
+        let version = defaults.faVersion;
+        let libs = defaults.faLibs;
+        const cv = template.options.contentView;
+        if (utils.type(cv) === 'object') {
+            version = (cv.faVersion || version).trim().replace(/^v/, '');
+            libs = cv.faLibs || libs;
+        } else if (cv.icons !== true) {
+            return null;
+        } // else defaults...
+
+        const base = `//use.fontawesome.com/releases/v${version}/js/`;
+        const getScriptObj = name => ({ src: base + name + '.js', defer: 'defer' });
+
+        libs = Array.isArray(libs)
+            ? libs.map(lib => String(lib).trim().toLowerCase())
+            : (String(libs) || '').toLowerCase().split(/\s*,\s*/g);
+
+        if (libs.indexOf('all') >= 0) return [getScriptObj('all')];
+
+        const list = [];
+        if (libs.indexOf('solid') >= 0) list.push(getScriptObj('solid'));
+        if (libs.indexOf('regular') >= 0) list.push(getScriptObj('regular'));
+        if (libs.indexOf('brands') >= 0) list.push(getScriptObj('brands'));
+        if (list.length <= 0) return null;
+        if (list.length === 3) return [getScriptObj('all')];
+        list.push(getScriptObj('fontawesome')); // include core if not "all"
+        return list.reverse();
+    }
+
+    template.postBuild(() => {
+        const list = getFontAwsomeList();
+        if (list && list.length > 0) {
+            const destMainHTML = template.getDestPath(template.mainHTML);
+            // <script defer src="//use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
+            return HtmlParser.fromFile(destMainHTML)
+                .then(parser => {
+                    return parser.edit((window, $) => {
+                        // const head = $('head');
+                        const DOM = HtmlParser.DOM;
+                        // prepend scripts before any javascript file
+                        list.forEach(attrs => {
+                            DOM.insertAsFirst(window, 'script', attrs);
+                        });
+                    });
+                })
+                .then(parser => {
+                    return parser.beautify().writeFile(destMainHTML);
+                })
+                .then(logOptsDeprecated);
+        }
+        // else
+        logOptsDeprecated();
     });
 };
