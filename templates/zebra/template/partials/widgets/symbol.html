@@ -12,6 +12,8 @@
             <code class="symbol-type">{symbol|s|$type}</code>
 
             {symbol|s|$tags}
+
+
         </div>
     </div>
 
@@ -50,6 +52,10 @@
             <p><b class="caption">License:</b>&nbsp;{symbol.license|s}</p>
             {/symbol.license}
         </div>
+
+        {?symbol.defaultvalue}
+        <p class="symbol-def-val"><b class="caption"><i>Value:</i></b>&nbsp;<code>{symbol|$def}</code></p>
+        {/symbol.defaultvalue}
 
         {symbol|s|$desc}
 
