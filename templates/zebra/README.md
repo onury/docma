@@ -199,6 +199,20 @@ Template specific options that can be used when building your documentation with
             </td>
         </tr>
         <tr>
+            <td>↳&nbsp;<code>contentView<b>.faLibs</b></code></td>
+            <td><code>String|Array</code></td>
+            <td>
+                <a href="https://fontawesome.com" target="_blank" rel="noopener noreferrer">FontAwesome</a> icon libraries to be included with the generated output. Set to <code>"all"</code> to include all libraries. To include an individual library; set to <code>"solid"</code>, <code>"regular"</code> or <code>"brands"</code>. Or you can set to a combination of libraries. e.g. <code>"solid,brands"</code>. Set to <code>null</code> to exclude FontAwesome from the output. Default: <code>"all"</code>
+            </td>
+        </tr>
+        <tr>
+            <td>↳&nbsp;<code>contentView<b>.faVersion</b></code></td>
+            <td><code>String</code></td>
+            <td>
+                FontAwesome icon library version to be used. Default: <code>"5.5.0"</code>
+            </td>
+        </tr>
+        <tr>
             <td><code><b>navbar</b></code></td>
             <td><code>Object|Boolean</code></td>
             <td>
@@ -340,7 +354,8 @@ Template options are defined within the [build configuration][build-conf]. i.e. 
                 "meta": false
             },
             "contentView": {
-                "bookmarks": true
+                "bookmarks": "h1,h2,h3",
+                "faLibs": "solid,regular,brands"
             },
             "navbar": {
                 "enabled": true,
@@ -412,7 +427,9 @@ _Note: If you're upgrading from Zebra v1.x to v2.x, there are some [**breaking c
 
 ## License
 
-[**MIT**][license]. Emoji shortcuts used in source markdown files are parsed into [twemoji][twemoji]. Graphics and icons licensed under [CC-BY 4.0][cc-by-4].
+[**MIT**][license]. 
+
+Emoji shortcuts used in source markdown files are parsed into [twemoji][twemoji]. Graphics and icons licensed under [CC-BY 4.0][cc-by-4]. See FontAwesome [license][fa-license].
 
 [docma-repo]:https://github.com/onury/docma
 [build-conf]:https://onury.io/docma/api/#Docma~BuildConfiguration
@@ -420,3 +437,4 @@ _Note: If you're upgrading from Zebra v1.x to v2.x, there are some [**breaking c
 [changelog]:https://github.com/onury/docma/blob/master/templates/zebra/CHANGELOG.md
 [twemoji]:https://github.com/twitter/twemoji
 [cc-by-4]:https://creativecommons.org/licenses/by/4.0
+[fa-license]:https://github.com/FortAwesome/Font-Awesome/blob/master/LICENSE.txt
