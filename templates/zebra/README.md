@@ -1,11 +1,11 @@
 <h1 align="center">
-    <a href="https://github.com/onury/docma"><img width="200" height="200" src="https://raw.github.com/onury/docma/v2/templates/zebra/zebra-logo.png" alt="Zebra — Template for Docma" /></a>
+    <a href="https://github.com/onury/docma"><img width="200" height="200" src="https://raw.github.com/onury/docma/templates/zebra/zebra-logo.png" alt="Zebra — Template for Docma" /></a>
 </h1>
 
 This is the default **template** for [Docma][docma-repo]; with a side-bar symbols menu, search and navigation features; and a beautiful layout.
 <br /><br />
 <p align="center">
-<a href="https://onury.io/docma"><img width="100%" src="https://raw.github.com/onury/docma/v2/docma-screen.jpg" alt="Built with Docma using Zebra Template" /></a>
+<a href="https://onury.io/docma"><img width="100%" src="https://raw.github.com/onury/docma/docma-screen.jpg" alt="Built with Docma using Zebra Template" /></a>
 <br />
 <a href="https://onury.io/docma">click to view live</a>
 </p>

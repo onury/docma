@@ -1,5 +1,5 @@
 <h1 align="center">
-    <a href="https://onury.io/docma"><img width="200" height="200" src="https://raw.github.com/onury/docma/v2/docma-logo.png" alt="Docma" /></a>
+    <a href="https://onury.io/docma"><img width="200" height="200" src="https://raw.github.com/onury/docma/docma-logo.png" alt="Docma" /></a>
 </h1>
 
 <p align="center">
@@ -32,7 +32,7 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 ...like this:
 
 <p align="center">
-    <a href="https://onury.io/docma"><img width="650" height="385" src="https://raw.github.com/onury/docma/v2/docma-screen.gif" alt="Docma screen" /></a>
+    <a href="https://onury.io/docma"><img width="650" height="385" src="https://raw.github.com/onury/docma/docma-screen.gif" alt="Docma screen" /></a>
     <br />
     <br />
     <sub>This is generated with the built-in template, Zebra.</sub><br />
