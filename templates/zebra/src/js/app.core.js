@@ -344,6 +344,9 @@ var app = window.app || {};
      */
     function checkOpenDetails() {
         if (docma.location.hash) {
+            // jQuery tried to do specific things for some special characters, which we don't want, so escape everything
+            // that is not a simple alphanumeric character.
+            var escapedHash = docma.location.hash.replace(/(\W)/g, '\\$1');
             var elem = $('details#' + docma.location.hash);
             if (elem && elem[0]) elem.attr('open', '');
         }
