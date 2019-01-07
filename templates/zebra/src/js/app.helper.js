@@ -532,6 +532,8 @@ var app = window.app || {};
 
     /**
      *  Parses the search text into `{ kind:Array, scope:Array, keywords:Array }`.
+     *  @param {String} string - String to be parsed.
+     *  @returns {SidebarSearch} -
      */
     SidebarSearch.prototype.parse = function (string) {
         if (!string) {

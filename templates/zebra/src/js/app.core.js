@@ -144,6 +144,7 @@ var app = window.app || {};
      *  Applies the search filter by showing/hiding corresponding nodes in the
      *  sidebar.
      *  @private
+     *  @param {String} strSearch - String to search.
      */
     function applySearch(strSearch) {
         sbSearch.parse(strSearch);
