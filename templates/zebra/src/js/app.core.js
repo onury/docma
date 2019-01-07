@@ -344,7 +344,7 @@ var app = window.app || {};
      */
     function checkOpenDetails() {
         if (docma.location.hash) {
-            var elem = $('details#' + docma.location.hash);
+            var elem = $('details#' + $.escapeSelector(docma.location.hash));
             if (elem && elem[0]) elem.attr('open', '');
         }
     }
