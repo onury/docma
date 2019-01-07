@@ -3,7 +3,7 @@
 /**
  *  @license
  *  Zebra Template for Docma - app.js
- *  Copyright © 2018, Onur Yıldırım
+ *  Copyright © 2019, Onur Yıldırım
  *  SVG shapes: CC-BY 4.0
  */
 var app = window.app || {};

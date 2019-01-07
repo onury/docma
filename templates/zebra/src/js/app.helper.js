@@ -4,7 +4,7 @@
 /**
  *  @license
  *  Zebra Template for Docma - app.js
- *  Copyright © 2018, Onur Yıldırım
+ *  Copyright © 2019, Onur Yıldırım
  */
 var app = window.app || {};
 
