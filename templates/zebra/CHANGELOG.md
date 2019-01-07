@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+### 2.3.1 (2019-01-08)
+
+#### Fixed
+- An issue where some special characters within the location hash would cause an error.
+
 ### 2.3.0 (2018-12-04)
 
 #### Added
