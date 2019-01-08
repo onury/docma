@@ -163,7 +163,7 @@ const argv = yargs
     })
     .command('template <cmd>', 'Execute template related commands.', yargs => {
         yargs
-            .command('init [path]', 'Initialize a new Docma template module.', yargs => {
+            .command('init [path]', 'Initialize a new Docma template module.', () => {
                 // yargs.options();
             })
             .command('doctor [path]', 'Diagnose a Docma template.', yargs => {
