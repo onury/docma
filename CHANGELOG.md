@@ -2,13 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
-## [3.2.1](https://github.com/onury/docma/compare/v3.1.0...v3.2.1) (2019-01-08)
+## [3.2.2](https://github.com/onury/docma/compare/v3.1.0...v3.2.2) (2019-01-08)
 
 ### Fixed
 - An issue where enumeration value would be incorrectly displayed as `undefined` in docs parsed from ES5 code.
 - An issue where `jsdoc.predicate` (or `jsdoc.filter`) option would not be taken into account.
 - An issue where favicon would not be copied over to the output dir.
 - (Zebra Template) An issue where some special characters within the location hash would cause an error.
+- `Invalid assignment` error due to ES2015 syntax.
 
 ### Added
 - Support for handling notation with multiple sub-types. e.g. `Map<String, Object>`. (PR [#65](https://github.com/onury/docma/pull/65) by [@MaienM](https://github.com/MaienM))
