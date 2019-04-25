@@ -34,6 +34,8 @@ const examples = 'Examples:\n'
     + chalk.white('      docma -c path/to/docma.json')
     + '\n  * If a docma.json exists in the current directory, simply:\n'
     + chalk.white('      docma')
+    + '\n  * Overwrite the base path of the generated app:\n'
+    + chalk.white('      docma -b /docs/view/')
     + '\n  * Output to a different directory:\n'
     + chalk.white('      docma -c path/to/docma.json -d path/to/docs')
     + '\n  * Re-define source files (ignore the ones defined in the config file):\n'
@@ -97,6 +99,12 @@ const argv = yargs
         description: '<path>   Destination output directory path.',
         global: false,
         normalize: true
+    })
+    .option('b', {
+        alias: 'base',
+        type: 'string',
+        description: '<url-path>   Overwrites base path of the generated app.',
+        global: false
     })
     .option('clean', {
         type: 'boolean',
@@ -210,6 +218,11 @@ function updateConfig(config) {
 
     if (argv.dest) config.dest = argv.dest;
     if (argv.clean) config.clean = Boolean(argv.clean);
+
+    if (argv.base) {
+        config.app = config.app || {};
+        config.app.base = argv.base;
+    }
 
     // DEBUG OPTIONS
 
