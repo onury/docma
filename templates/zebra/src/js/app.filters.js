@@ -16,9 +16,9 @@
         if (!match) return '<span class="fw-bold">' + name + '</span>';
         if (forSidebar) {
             var cls = templateOpts.sidebar.animations ? ' trans-all-ease-fast' : '';
-            return '<span class="color-gray symbol-memberof' + cls + '">' + app.helper.colorOperators(match[1]) + '</span><span>' + app.helper.colorOperators(match[2]) + '</span>';
+            return '<span class="color-gray symbol-memberof' + cls + '">' + app.helper.colorOperators(match[1]) + '</span><span>' + app.helper.colorOperators(name.split(match[1])[1]) + '</span>';
         }
-        return '<span class="color-gray">' + app.helper.colorOperators(match[1]) + '</span><span class="fw-bold">' + app.helper.colorOperators(match[2]) + '</span>';
+        return '<span class="color-gray">' + app.helper.colorOperators(match[1]) + '</span><span class="fw-bold">' + app.helper.colorOperators(name.split(match[1])[1]) + '</span>';
     }
 
     docma
