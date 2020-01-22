@@ -103,7 +103,7 @@ const argv = yargs
     .option('b', {
         alias: 'base',
         type: 'string',
-        description: '<url-path>   Overwrites base path of the generated app.',
+        description: '<path>   Overwrites base path of the generated app.',
         global: false
     })
     .option('clean', {
