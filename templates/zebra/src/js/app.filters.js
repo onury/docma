@@ -11,7 +11,7 @@
     // ---------------------------
 
     function dotProp(name, forSidebar) {
-        var re = /(.*)([.#~][\w:]+)/g,
+        var re = /(.*?)([.#~].+)/g,
             match = re.exec(name);
         if (!match) return '<span class="fw-bold">' + name + '</span>';
         if (forSidebar) {
