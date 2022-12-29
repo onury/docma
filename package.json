@@ -100,6 +100,6 @@
   "devDependencies": {
     "eslint": "^5.12.0",
     "eslint-config-xo": "^0.25.1",
-    "jest-cli": "^23.6.0"
+    "jest-cli": "^29.3.1"
   }
 }
